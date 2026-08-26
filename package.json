@@ -63,20 +63,20 @@
     "prepublishOnly": "npm test && npm run check:pack && npm run check:site"
   },
   "dependencies": {
-    "@itslil/remark-parse": "file:../remark-parselil",
-    "@itslil/remark-rehype": "file:../remark-rehypelil",
-    "@itslil/unified": "file:../unifiedlil"
+    "@itslil/remark-parse": "11.0.1",
+    "@itslil/remark-rehype": "11.1.3",
+    "@itslil/unified": "11.0.6"
   },
   "peerDependencies": {
     "@types/react": ">=18",
     "react": ">=18"
   },
   "devDependencies": {
-    "@itslil/katex": "file:../katexlil",
-    "@itslil/rehype-katex": "file:../rehype-katexlil",
-    "@itslil/remark-breaks": "file:../remark-breakslil",
-    "@itslil/remark-gfm": "file:../remark-gfmlil",
-    "@itslil/remark-math": "file:../remark-mathlil",
+    "@itslil/katex": "0.16.23",
+    "@itslil/rehype-katex": "7.0.2",
+    "@itslil/remark-breaks": "4.0.1",
+    "@itslil/remark-gfm": "4.0.2",
+    "@itslil/remark-math": "6.0.1",
     "@testing-library/react": "^16.0.0",
     "concat-stream": "^2.0.0",
     "esbuild": "0.28.1",

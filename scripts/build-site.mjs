@@ -3,7 +3,6 @@ import { existsSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { spawnSync } from "node:child_process"
-import { build as esbuild } from "esbuild"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const output = join(root, "_site")
@@ -76,6 +75,7 @@ if (index.length) {
 const playground = join(root, "site", "playground-entry.js")
 const siblingsReady = existsSync(join(home, "unifiedlil/dist/unified.esm.js"))
 if (existsSync(playground) && siblingsReady) {
+  const { build: esbuild } = await import("esbuild")
   await esbuild({
     absWorkingDir: root,
     entryPoints: [playground],
