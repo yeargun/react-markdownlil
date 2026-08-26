@@ -1,0 +1,1169 @@
+{
+  "packages": [
+    {
+      "id": "unified",
+      "dir": "unifiedlil",
+      "package": "@itslil/unified",
+      "pin": "unified@11.0.5",
+      "spec": {
+        "total": 206,
+        "pass": 206,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official unified@11.0.5 graph",
+          "raw": 55620,
+          "gzip9": 11900,
+          "brotli11": 10434,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 13377,
+          "gzip9": 4786,
+          "brotli11": 4337,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 20512,
+          "gzip9": 5970,
+          "brotli11": 5431,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 13779,
+          "gzip9": 5034,
+          "brotli11": 4612,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/unified · library",
+          "raw": 9555,
+          "gzip9": 3676,
+          "brotli11": 3303,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/unified · closed",
+          "raw": 9478,
+          "gzip9": 3620,
+          "brotli11": 3254,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "unified@11.0.5",
+          "documentMs": 0.0721250000000282
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/unified",
+          "documentMs": 0.031207999999992353
+        }
+      ],
+      "site": "https://yeargun.github.io/unifiedlil/",
+      "npm": "https://www.npmjs.com/package/@itslil/unified"
+    },
+    {
+      "id": "micromark",
+      "dir": "micromarklil",
+      "package": "@itslil/micromark",
+      "pin": "micromark@4.0.2",
+      "spec": {
+        "total": 1927,
+        "pass": 1927,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official micromark@4.0.2 graph",
+          "raw": 177687,
+          "gzip9": 36130,
+          "brotli11": 30386,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 81191,
+          "gzip9": 26278,
+          "brotli11": 22696,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 115509,
+          "gzip9": 29677,
+          "brotli11": 25709,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 89438,
+          "gzip9": 27365,
+          "brotli11": 23718,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/micromark · library",
+          "raw": 126220,
+          "gzip9": 39156,
+          "brotli11": 32819,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/micromark · closed",
+          "raw": 126140,
+          "gzip9": 39081,
+          "brotli11": 32703,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "micromark@4.0.2",
+          "documentMs": 8.048125000000027
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/micromark",
+          "documentMs": 1.523040999999921
+        }
+      ],
+      "site": "https://yeargun.github.io/micromarklil/",
+      "npm": "https://www.npmjs.com/package/@itslil/micromark"
+    },
+    {
+      "id": "from-markdown",
+      "dir": "mdast-util-from-markdownlil",
+      "package": "@itslil/mdast-util-from-markdown",
+      "pin": "mdast-util-from-markdown@2.0.3",
+      "spec": {
+        "total": 740,
+        "pass": 740,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official mdast-util-from-markdown@2.0.3 graph",
+          "raw": 182161,
+          "gzip9": 36822,
+          "brotli11": 30953,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 84154,
+          "gzip9": 26849,
+          "brotli11": 23151,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 118623,
+          "gzip9": 30282,
+          "brotli11": 26196,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 92538,
+          "gzip9": 28038,
+          "brotli11": 24220,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/mdast-util-from-markdown · library",
+          "raw": 121888,
+          "gzip9": 37770,
+          "brotli11": 31522,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/mdast-util-from-markdown · closed",
+          "raw": 121778,
+          "gzip9": 37695,
+          "brotli11": 31437,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "mdast-util-from-markdown@2.0.3",
+          "documentMs": 9.847999999999956
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/mdast-util-from-markdown",
+          "documentMs": 2.6662089999999807
+        }
+      ],
+      "site": "https://yeargun.github.io/mdast-util-from-markdownlil/",
+      "npm": "https://www.npmjs.com/package/@itslil/mdast-util-from-markdown"
+    },
+    {
+      "id": "to-hast",
+      "dir": "mdast-util-to-hastlil",
+      "package": "@itslil/mdast-util-to-hast",
+      "pin": "mdast-util-to-hast@13.2.1",
+      "spec": {
+        "total": 148,
+        "pass": 148,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official mdast-util-to-hast@13.2.1 graph",
+          "raw": 39281,
+          "gzip9": 8715,
+          "brotli11": 7797,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 16715,
+          "gzip9": 5388,
+          "brotli11": 4862,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 24632,
+          "gzip9": 6491,
+          "brotli11": 5883,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 17289,
+          "gzip9": 5765,
+          "brotli11": 5245,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/mdast-util-to-hast · library",
+          "raw": 16518,
+          "gzip9": 5932,
+          "brotli11": 5315,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/mdast-util-to-hast · closed",
+          "raw": 16419,
+          "gzip9": 5860,
+          "brotli11": 5255,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "mdast-util-to-hast@13.2.1",
+          "documentMs": 0.0990420000002814
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/mdast-util-to-hast",
+          "documentMs": 0.023791999999957625
+        }
+      ],
+      "site": "https://yeargun.github.io/mdast-util-to-hastlil/",
+      "npm": "https://www.npmjs.com/package/@itslil/mdast-util-to-hast"
+    },
+    {
+      "id": "to-html",
+      "dir": "hast-util-to-htmllil",
+      "package": "@itslil/hast-util-to-html",
+      "pin": "hast-util-to-html@9.0.5",
+      "spec": {
+        "total": 389,
+        "pass": 389,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official hast-util-to-html@9.0.5 graph",
+          "raw": 58318,
+          "gzip9": 14569,
+          "brotli11": 12817,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 31835,
+          "gzip9": 11221,
+          "brotli11": 9833,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 39665,
+          "gzip9": 12304,
+          "brotli11": 10796,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 32747,
+          "gzip9": 11217,
+          "brotli11": 10008,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/hast-util-to-html · library",
+          "raw": 31452,
+          "gzip9": 10326,
+          "brotli11": 8981,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/hast-util-to-html · closed",
+          "raw": 31356,
+          "gzip9": 10260,
+          "brotli11": 8924,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "hast-util-to-html@9.0.5",
+          "documentMs": 0.04966699999931734
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/hast-util-to-html",
+          "documentMs": 0.01912499999980355
+        }
+      ],
+      "site": "https://yeargun.github.io/hast-util-to-htmllil/",
+      "npm": "https://www.npmjs.com/package/@itslil/hast-util-to-html"
+    },
+    {
+      "id": "remark-parse",
+      "dir": "remark-parselil",
+      "package": "@itslil/remark-parse",
+      "pin": "remark-parse@11.0.0",
+      "spec": {
+        "total": 12,
+        "pass": 12,
+        "label": "official + package tests"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official remark-parse@11.0.0 graph",
+          "raw": 182690,
+          "gzip9": 37011,
+          "brotli11": 31096,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 84339,
+          "gzip9": 26914,
+          "brotli11": 23171,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 118873,
+          "gzip9": 30362,
+          "brotli11": 26304,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 92727,
+          "gzip9": 28102,
+          "brotli11": 24279,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-parse · library",
+          "raw": 122180,
+          "gzip9": 37801,
+          "brotli11": 31605,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/remark-parse · closed",
+          "raw": 122093,
+          "gzip9": 37734,
+          "brotli11": 31539,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "remark-parse@11.0.0",
+          "documentMs": 22.20341600000029
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-parse",
+          "documentMs": 3.3477499999999054
+        }
+      ],
+      "site": "https://yeargun.github.io/remark-parselil/",
+      "npm": "https://www.npmjs.com/package/@itslil/remark-parse"
+    },
+    {
+      "id": "remark-rehype",
+      "dir": "remark-rehypelil",
+      "package": "@itslil/remark-rehype",
+      "pin": "remark-rehype@11.1.2",
+      "spec": {
+        "total": 16,
+        "pass": 16,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official remark-rehype@11.1.2 graph",
+          "raw": 39783,
+          "gzip9": 8849,
+          "brotli11": 7919,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 16861,
+          "gzip9": 5445,
+          "brotli11": 4910,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 24924,
+          "gzip9": 6587,
+          "brotli11": 5979,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 17438,
+          "gzip9": 5824,
+          "brotli11": 5287,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-rehype · library",
+          "raw": 16951,
+          "gzip9": 6077,
+          "brotli11": 5455,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/remark-rehype · closed",
+          "raw": 16862,
+          "gzip9": 6012,
+          "brotli11": 5391,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "remark-rehype@11.1.2",
+          "documentMs": 0.24295800000072632
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-rehype",
+          "documentMs": 0.03254099999958271
+        }
+      ],
+      "site": "https://yeargun.github.io/remark-rehypelil/",
+      "npm": "https://www.npmjs.com/package/@itslil/remark-rehype"
+    },
+    {
+      "id": "rehype-stringify",
+      "dir": "rehype-stringifylil",
+      "package": "@itslil/rehype-stringify",
+      "pin": "rehype-stringify@10.0.1",
+      "spec": {
+        "total": 7,
+        "pass": 7,
+        "label": "package tests"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official rehype-stringify@10.0.1 graph",
+          "raw": 58600,
+          "gzip9": 14649,
+          "brotli11": 12904,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 31928,
+          "gzip9": 11255,
+          "brotli11": 9875,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 39818,
+          "gzip9": 12352,
+          "brotli11": 10833,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 32850,
+          "gzip9": 11260,
+          "brotli11": 10073,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/rehype-stringify · library",
+          "raw": 31772,
+          "gzip9": 10442,
+          "brotli11": 9087,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/rehype-stringify · closed",
+          "raw": 31677,
+          "gzip9": 10381,
+          "brotli11": 9039,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "rehype-stringify@10.0.1",
+          "documentMs": 0.11058300000058807
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/rehype-stringify",
+          "documentMs": 0.04070899999987887
+        }
+      ],
+      "site": "https://yeargun.github.io/rehype-stringifylil/",
+      "npm": "https://www.npmjs.com/package/@itslil/rehype-stringify"
+    },
+    {
+      "id": "remark",
+      "dir": "remarklil",
+      "package": "@itslil/remark",
+      "pin": "remark@15.0.1",
+      "spec": {
+        "total": 494,
+        "pass": 494,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official remark@15.0.1 graph",
+          "raw": 290887,
+          "gzip9": 59037,
+          "brotli11": 50022,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 118936,
+          "gzip9": 37029,
+          "brotli11": 32279,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 171504,
+          "gzip9": 42812,
+          "brotli11": 37481,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 128104,
+          "gzip9": 38923,
+          "brotli11": 34113,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark · library",
+          "raw": 157486,
+          "gzip9": 49385,
+          "brotli11": 41503,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/remark · closed",
+          "raw": 157411,
+          "gzip9": 49324,
+          "brotli11": 41379,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "remark@15.0.1",
+          "documentMs": 11.039792000001398
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark",
+          "documentMs": 1.6736669999991136
+        }
+      ],
+      "site": "https://yeargun.github.io/remarklil/",
+      "npm": "https://www.npmjs.com/package/@itslil/remark"
+    },
+    {
+      "id": "rehype",
+      "dir": "rehypelil",
+      "package": "@itslil/rehype",
+      "pin": "rehype@13.0.2",
+      "spec": {
+        "total": 136,
+        "pass": 136,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official rehype@13.0.2 graph",
+          "raw": 438508,
+          "gzip9": 91765,
+          "brotli11": 74480,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 221169,
+          "gzip9": 67624,
+          "brotli11": 54928,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 275488,
+          "gzip9": 73685,
+          "brotli11": 60222,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 242664,
+          "gzip9": 69082,
+          "brotli11": 57077,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/rehype · library",
+          "raw": 369327,
+          "gzip9": 78587,
+          "brotli11": 64165,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/rehype · closed",
+          "raw": 369328,
+          "gzip9": 78585,
+          "brotli11": 64199,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "rehype@13.0.2",
+          "documentMs": 2.5199999999986176
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/rehype",
+          "documentMs": 0.213832999999795
+        }
+      ],
+      "site": "https://yeargun.github.io/rehypelil/",
+      "npm": "https://www.npmjs.com/package/@itslil/rehype"
+    },
+    {
+      "id": "remark-gfm",
+      "dir": "remark-gfmlil",
+      "package": "@itslil/remark-gfm",
+      "pin": "remark-gfm@4.0.1",
+      "spec": {
+        "total": 18,
+        "pass": 18,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official remark-gfm@4.0.1 graph",
+          "raw": 104355,
+          "gzip9": 20873,
+          "brotli11": 18227,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 42094,
+          "gzip9": 12387,
+          "brotli11": 11149,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 66946,
+          "gzip9": 14996,
+          "brotli11": 13621,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 42980,
+          "gzip9": 13119,
+          "brotli11": 11830,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-gfm · library",
+          "raw": 42804,
+          "gzip9": 14576,
+          "brotli11": 12921,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/remark-gfm · closed",
+          "raw": 42722,
+          "gzip9": 14513,
+          "brotli11": 12835,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "remark-gfm@4.0.1",
+          "documentMs": 1.7309999999997672
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-gfm",
+          "documentMs": 0.008042000001296401
+        }
+      ],
+      "site": "https://yeargun.github.io/remark-gfmlil/",
+      "npm": "https://www.npmjs.com/package/@itslil/remark-gfm"
+    },
+    {
+      "id": "remark-breaks",
+      "dir": "remark-breakslil",
+      "package": "@itslil/remark-breaks",
+      "pin": "remark-breaks@4.0.0",
+      "spec": {
+        "total": 21,
+        "pass": 21,
+        "label": "official fixtures"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official remark-breaks@4.0.0 graph",
+          "raw": 8981,
+          "gzip9": 2647,
+          "brotli11": 2335,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 2988,
+          "gzip9": 1284,
+          "brotli11": 1173,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 4633,
+          "gzip9": 1627,
+          "brotli11": 1456,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 3085,
+          "gzip9": 1375,
+          "brotli11": 1261,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-breaks · library",
+          "raw": 3123,
+          "gzip9": 1521,
+          "brotli11": 1362,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/remark-breaks · closed",
+          "raw": 3035,
+          "gzip9": 1459,
+          "brotli11": 1308,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "remark-breaks@4.0.0",
+          "documentMs": 0.20466699999997218
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-breaks",
+          "documentMs": 0.0946669999993901
+        }
+      ],
+      "site": "https://yeargun.github.io/remark-breakslil/",
+      "npm": "https://www.npmjs.com/package/@itslil/remark-breaks"
+    },
+    {
+      "id": "remark-math",
+      "dir": "remark-mathlil",
+      "package": "@itslil/remark-math",
+      "pin": "remark-math@6.0.0",
+      "spec": {
+        "total": 59,
+        "pass": 59,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official remark-math@6.0.0 graph",
+          "raw": 15294,
+          "gzip9": 3745,
+          "brotli11": 3315,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 6350,
+          "gzip9": 2324,
+          "brotli11": 2097,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 9585,
+          "gzip9": 2727,
+          "brotli11": 2468,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 6559,
+          "gzip9": 2546,
+          "brotli11": 2308,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-math · library",
+          "raw": 9242,
+          "gzip9": 3651,
+          "brotli11": 3281,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/remark-math · closed",
+          "raw": 9158,
+          "gzip9": 3592,
+          "brotli11": 3234,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "itslil",
+          "name": "@itslil/remark-math",
+          "documentMs": 0
+        }
+      ],
+      "site": "https://yeargun.github.io/remark-mathlil/",
+      "npm": "https://www.npmjs.com/package/@itslil/remark-math"
+    },
+    {
+      "id": "katex",
+      "dir": "katexlil",
+      "package": "@itslil/katex",
+      "pin": "katex@0.16.22",
+      "spec": {
+        "total": 1013,
+        "pass": 1013,
+        "label": "official jest suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official katex@0.16.22 graph",
+          "raw": 495869,
+          "gzip9": 103308,
+          "brotli11": 83118,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 267050,
+          "gzip9": 76480,
+          "brotli11": 63044,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 342634,
+          "gzip9": 84775,
+          "brotli11": 69566,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 271781,
+          "gzip9": 76693,
+          "brotli11": 63767,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/katex · library",
+          "raw": 564801,
+          "gzip9": 107944,
+          "brotli11": 86283,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/katex · closed",
+          "raw": 539234,
+          "gzip9": 108047,
+          "brotli11": 86829,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "katex@0.16.22",
+          "documentMs": 3.971540999998979
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/katex",
+          "documentMs": 0.315416000001278
+        }
+      ],
+      "site": "https://yeargun.github.io/katexlil/",
+      "npm": "https://www.npmjs.com/package/@itslil/katex"
+    },
+    {
+      "id": "rehype-katex",
+      "dir": "rehype-katexlil",
+      "package": "@itslil/rehype-katex",
+      "pin": "rehype-katex@7.0.1",
+      "spec": {
+        "total": 16,
+        "pass": 16,
+        "label": "official suite"
+      },
+      "size": [
+        {
+          "id": "official",
+          "name": "Official rehype-katex@7.0.1 graph",
+          "raw": 898046,
+          "gzip9": 185933,
+          "brotli11": 149397,
+          "note": "esbuild bundle of the published package plus runtime deps",
+          "diagnostic": false
+        },
+        {
+          "id": "official-terser-mangle",
+          "name": "Official · Terser mangle on",
+          "raw": 472894,
+          "gzip9": 138629,
+          "brotli11": 112879,
+          "note": "Terser compress of that graph, mangle: true",
+          "baseline": true
+        },
+        {
+          "id": "official-terser-nomangle",
+          "name": "Official · Terser mangle off",
+          "raw": 597433,
+          "gzip9": 152265,
+          "brotli11": 124102,
+          "note": "Terser compress of that graph, mangle: false"
+        },
+        {
+          "id": "official-esbuild",
+          "name": "Official · esbuild minify",
+          "raw": 499499,
+          "gzip9": 140614,
+          "brotli11": 115929,
+          "note": "esbuild minify of that graph"
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/rehype-katex · library",
+          "raw": 960082,
+          "gzip9": 189973,
+          "brotli11": 151761,
+          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "primary": true
+        },
+        {
+          "id": "itslil-closed",
+          "name": "@itslil/rehype-katex · closed",
+          "raw": 960083,
+          "gzip9": 189973,
+          "brotli11": 151713,
+          "note": "Same source, extern_fields false"
+        }
+      ],
+      "throughput": [
+        {
+          "id": "official",
+          "name": "rehype-katex@7.0.1",
+          "documentMs": 3.862375000000611
+        },
+        {
+          "id": "itslil",
+          "name": "@itslil/rehype-katex",
+          "documentMs": 0.10804099999950267
+        }
+      ],
+      "site": "https://yeargun.github.io/rehype-katexlil/",
+      "npm": "https://www.npmjs.com/package/@itslil/rehype-katex"
+    }
+  ]
+}

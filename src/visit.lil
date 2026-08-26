@@ -1,0 +1,171 @@
+import { isFn, isNullish } from "./host.lil";
+
+extern JsValue Array;
+
+export JsValue CONTINUE = true;
+export JsValue EXIT = false;
+export JsValue SKIP = "skip";
+
+JsValue emptyResult = JS.array();
+
+JsValue toResult(JsValue value) {
+  if (JS.isArray(value)) {
+    return value;
+  }
+  if (JS.typeOf(value) == "number") {
+    JsValue tuple = JS.array();
+    JS.push(tuple, CONTINUE);
+    JS.push(tuple, value);
+    return tuple;
+  }
+  if (JS.isUndefined(value) || JS.isNullish(value)) {
+    return emptyResult;
+  }
+  JsValue tuple = JS.array();
+  JS.push(tuple, value);
+  return tuple;
+}
+
+JsValue walk(JsValue node, JsValue visitor, JsValue parents, int step) {
+  JsValue result = emptyResult;
+  JsValue applied = JS.call(visitor, JS.undefined(), node, parents);
+  result = toResult(applied);
+  if (JS.strictEqual(result[0], EXIT)) {
+    return result;
+  }
+  if (!JS.isNullish(node) && JS.typeOf(node) == "object" && JS.in("children", node)) {
+    JsValue kids = JS.get(node, "children");
+    if (JS.isArray(kids) && !JS.strictEqual(result[0], SKIP)) {
+      int offset = -1;
+      if (step < 0) {
+        offset = kids.length.toInt() + step;
+      } else {
+        offset = -1 + step;
+      }
+      JsValue grandparents = JS.invoke(parents, "concat", node);
+      while (offset > -1 && offset < kids.length.toInt()) {
+        JsValue child = kids[offset];
+        JsValue subresult = walk(child, visitor, grandparents, step);
+        if (JS.strictEqual(subresult[0], EXIT)) {
+          return subresult;
+        }
+        if (subresult.length.toInt() > 1 && JS.typeOf(subresult[1]) == "number") {
+          offset = JS.number(subresult[1]).toInt();
+        } else {
+          offset = offset + step;
+        }
+      }
+    }
+  }
+  return result;
+}
+
+JsValue argAt(JsValue args, int index) {
+  if (args.length.toInt() > index) {
+    return args[index];
+  }
+  return JS.undefined();
+}
+
+JsValue visitParentsCall(JsValue _self, JsValue args) {
+  JsValue tree = argAt(args, 0);
+  JsValue testOrVisitor = argAt(args, 1);
+  JsValue visitorOrReverse = argAt(args, 2);
+  JsValue maybeReverse = argAt(args, 3);
+  JsValue visitor = testOrVisitor;
+  int step = 1;
+  if (isFn(testOrVisitor) && !isFn(visitorOrReverse)) {
+    visitor = testOrVisitor;
+    if (visitorOrReverse.truthy()) {
+      step = -1;
+    }
+  } else {
+    visitor = visitorOrReverse;
+    if (maybeReverse.truthy()) {
+      step = -1;
+    }
+  }
+  walk(tree, visitor, JS.array(), step);
+  return JS.undefined();
+}
+
+JsValue visitCall(JsValue _self, JsValue args) {
+  JsValue tree = argAt(args, 0);
+  JsValue testOrVisitor = argAt(args, 1);
+  JsValue visitorOrReverse = argAt(args, 2);
+  JsValue maybeReverse = argAt(args, 3);
+  JsValue test = JS.undefined();
+  JsValue visitor = testOrVisitor;
+  JsValue reverse = visitorOrReverse;
+  if (isFn(testOrVisitor) && !isFn(visitorOrReverse)) {
+    test = JS.undefined();
+    visitor = testOrVisitor;
+    reverse = visitorOrReverse;
+  } else {
+    test = testOrVisitor;
+    visitor = visitorOrReverse;
+    reverse = maybeReverse;
+  }
+  JsValue overload = JS.method2((JsValue _s, JsValue node, JsValue parents) => {
+    JsValue parent = JS.undefined();
+    JsValue index = JS.undefined();
+    int n = parents.length.toInt();
+    if (n > 0) {
+      parent = parents[n - 1];
+      index = JS.invoke(JS.get(parent, "children"), "indexOf", node);
+    }
+    return JS.call(visitor, JS.undefined(), node, index, parent);
+  });
+  if (isFn(test)) {
+    JsValue wrapped = visitor;
+    overload = JS.method2((JsValue _s, JsValue node, JsValue parents) => {
+      JsValue parent = JS.undefined();
+      JsValue index = JS.undefined();
+      int n = parents.length.toInt();
+      if (n > 0) {
+        parent = parents[n - 1];
+        index = JS.invoke(JS.get(parent, "children"), "indexOf", node);
+      }
+      bool ok = true;
+      if (JS.typeOf(test) == "string") {
+        ok = JS.strictEqual(JS.get(node, "type"), test);
+      } else if (isFn(test)) {
+        ok = JS.call(test, JS.undefined(), node, index, parent).truthy();
+      }
+      if (!ok) {
+        return JS.undefined();
+      }
+      return JS.call(wrapped, JS.undefined(), node, index, parent);
+    });
+  } else if (!(JS.isUndefined(test) || JS.isNullish(test)) && JS.typeOf(test) == "string") {
+    JsValue wrapped = visitor;
+    string want = "";
+    if (test is string) {
+      want = test;
+    } else {
+      want = JS.string(test);
+    }
+    overload = JS.method2((JsValue _s, JsValue node, JsValue parents) => {
+      JsValue parent = JS.undefined();
+      JsValue index = JS.undefined();
+      int n = parents.length.toInt();
+      if (n > 0) {
+        parent = parents[n - 1];
+        index = JS.invoke(JS.get(parent, "children"), "indexOf", node);
+      }
+      if (JS.string(JS.get(node, "type")) != want) {
+        return JS.undefined();
+      }
+      return JS.call(wrapped, JS.undefined(), node, index, parent);
+    });
+  }
+  int step = 1;
+  if (reverse.truthy()) {
+    step = -1;
+  }
+  walk(tree, overload, JS.array(), step);
+  return JS.undefined();
+}
+
+export JsValue visit = JS.methodRest(visitCall);
+export JsValue visitParents = JS.methodRest(visitParentsCall);

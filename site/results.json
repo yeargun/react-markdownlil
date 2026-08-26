@@ -1,0 +1,86 @@
+{
+  "pin": "react-markdown@10.1.0",
+  "package": "@itslil/react-markdown",
+  "file": "react-markdown",
+  "lilExport": "default",
+  "officialExport": "default",
+  "node": "v22.21.1",
+  "codec": "lilscript-codec gzip-9 / brotli-11",
+  "runtime": "Node v22.21.1",
+  "warmupDiscard": 3,
+  "comparison": "Official rows are an esbuild bundle of react-markdown@10.1.0 plus its runtime graph (react external), then Terser or esbuild. LilScript is the compiled npm file. Closed is extern_fields=false. The processor stack is imported from @itslil/unified, @itslil/remark-parse, and @itslil/remark-rehype.",
+  "spec": {
+    "total": 87,
+    "pass": 87,
+    "label": "official tests"
+  },
+  "play": {
+    "kind": "react-markdown",
+    "sample": "# Lab\n"
+  },
+  "size": [
+    {
+      "id": "official",
+      "name": "Official react-markdown@10.1.0 graph",
+      "raw": 331933,
+      "gzip9": 70133,
+      "brotli11": 59222,
+      "note": "esbuild bundle of the published package plus runtime deps, react external",
+      "diagnostic": false
+    },
+    {
+      "id": "official-terser-mangle",
+      "name": "Official · Terser mangle on",
+      "raw": 158087,
+      "gzip9": 48564,
+      "brotli11": 42118,
+      "note": "Terser compress of that graph, mangle: true",
+      "baseline": true
+    },
+    {
+      "id": "official-terser-nomangle",
+      "name": "Official · Terser mangle off",
+      "raw": 206958,
+      "gzip9": 54540,
+      "brotli11": 47339,
+      "note": "Terser compress of that graph, mangle: false"
+    },
+    {
+      "id": "official-esbuild",
+      "name": "Official · esbuild minify",
+      "raw": 152137,
+      "gzip9": 47978,
+      "brotli11": 41873,
+      "note": "esbuild minify of that graph"
+    },
+    {
+      "id": "itslil",
+      "name": "@itslil/react-markdown · library",
+      "raw": 34770,
+      "gzip9": 11989,
+      "brotli11": 10543,
+      "note": "LilScript js-module, extern_fields true. The npm ESM. Imports @itslil/unified, remark-parse, remark-rehype, and react.",
+      "primary": true
+    },
+    {
+      "id": "itslil-closed",
+      "name": "@itslil/react-markdown · closed",
+      "raw": 34770,
+      "gzip9": 11989,
+      "brotli11": 10543,
+      "note": "Same source, extern_fields false, plus the same import preamble"
+    }
+  ],
+  "throughput": [
+    {
+      "id": "official",
+      "name": "react-markdown@10.1.0",
+      "documentMs": 2.1
+    },
+    {
+      "id": "itslil",
+      "name": "@itslil/react-markdown",
+      "documentMs": 1.85
+    }
+  ]
+}

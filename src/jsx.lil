@@ -1,0 +1,413 @@
+import { Error, Number, Object, isFn, isNullish, objectHasOwn, throwType } from "./host.lil";
+import { find, reactPropertyName } from "./schema.lil";
+import { parseStyle } from "./style.lil";
+
+extern JsValue String;
+
+string docs = "https://github.com/syntax-tree/hast-util-to-jsx-runtime";
+
+bool isTableElement(string tag) {
+  return tag == "table" || tag == "tbody" || tag == "thead" || tag == "tfoot" || tag == "tr";
+}
+
+bool isTableCell(string tag) {
+  return tag == "td" || tag == "th";
+}
+
+bool isAsciiWhitespace(string value) {
+  int i = 0;
+  int n = value.length;
+  while (i < n) {
+    int c = value.charCodeAt(i);
+    if (c != 9 && c != 10 && c != 12 && c != 13 && c != 32) {
+      return false;
+    }
+    i = i + 1;
+  }
+  return true;
+}
+
+JsValue stringifyList(JsValue value, bool comma) {
+  string out = "";
+  int n = value.length.toInt();
+  int i = 0;
+  while (i < n) {
+    if (i > 0) {
+      if (comma) {
+        out = out + ", ";
+      } else {
+        out = out + " ";
+      }
+    }
+    out = out + JS.string(value[i]);
+    i = i + 1;
+  }
+  return out;
+}
+
+void addNode(JsValue state, JsValue props, JsValue type, JsValue node) {
+  if (JS.typeOf(type) != "string" && !JS.strictEqual(type, JS.get(state, "Fragment")) && JS.get(state, "passNode").truthy()) {
+    props["node"] = node;
+  }
+}
+
+void addChildren(JsValue props, JsValue children) {
+  int n = children.length.toInt();
+  if (n > 0) {
+    JsValue value = children[0];
+    if (n > 1) {
+      value = children;
+    }
+    if (value.truthy()) {
+      props["children"] = value;
+    }
+  }
+}
+
+JsValue productionCreate(JsValue _filePath, JsValue jsxFn, JsValue jsxsFn) {
+  return JS.methodRest((JsValue _s, JsValue args) => {
+    JsValue type = args[1];
+    JsValue props = args[2];
+    JsValue key = JS.undefined();
+    if (args.length.toInt() > 3) {
+      key = args[3];
+    }
+    bool isStatic = JS.isArray(JS.get(props, "children"));
+    JsValue fn = jsxFn;
+    if (isStatic) {
+      fn = jsxsFn;
+    }
+    if (key.truthy()) {
+      return JS.call(fn, JS.undefined(), type, props, key);
+    }
+    return JS.call(fn, JS.undefined(), type, props);
+  });
+}
+
+void crashEstree(JsValue state, JsValue place) {
+  JsValue message = JS.construct(Error, "Cannot handle MDX estrees without `createEvaluater`");
+  message["file"] = JS.get(state, "filePath");
+  message["url"] = docs + "#cannot-handle-mdx-estrees-without-createevaluater";
+  message["ruleId"] = "mdx-estree";
+  throw message;
+}
+
+JsValue findComponentFromName(JsValue state, string name, bool allowExpression) {
+  JsValue components = JS.get(state, "components");
+  if (objectHasOwn(components, name)) {
+    return JS.get(components, name);
+  }
+  return name;
+}
+
+JsValue createProperty(JsValue state, string prop, JsValue value) {
+  string space = JS.string(JS.get(state, "schema"));
+  JsValue info = find(space, prop);
+  if (JS.isNullish(value) || JS.isUndefined(value)) {
+    return JS.undefined();
+  }
+  if (JS.typeOf(value) == "number" && JS.call(JS.get(Number, "isNaN"), JS.undefined(), value).truthy()) {
+    return JS.undefined();
+  }
+  JsValue next = value;
+  if (JS.isArray(value)) {
+    bool comma = JS.get(info, "commaSeparated").truthy();
+    next = stringifyList(value, comma);
+  }
+  if (JS.string(JS.get(info, "propName")) == "style") {
+    JsValue styleObject = next;
+    if (JS.typeOf(next) != "object" || JS.isNullish(next) || JS.isArray(next)) {
+      styleObject = parseStyle(JS.string(next), JS.get(state, "ignoreInvalidStyle").truthy());
+    }
+    if (JS.string(JS.get(state, "stylePropertyNameCase")) == "css") {
+      JsValue css = JS.object();
+      for (string from in styleObject) {
+        if (objectHasOwn(styleObject, from)) {
+          css[cssCasing(from)] = JS.get(styleObject, from);
+        }
+      }
+      styleObject = css;
+    }
+    JsValue field = JS.array();
+    JS.push(field, "style");
+    JS.push(field, styleObject);
+    return field;
+  }
+  JsValue key = JS.get(info, "attrName");
+  if (JS.string(JS.get(state, "elementAttributeNameCase")) == "react" && JS.string(JS.get(info, "space")).length > 0) {
+    key = reactPropertyName(info);
+  }
+  JsValue field = JS.array();
+  JS.push(field, key);
+  JS.push(field, next);
+  return field;
+}
+
+string cssCasing(string from) {
+  string to = "";
+  int i = 0;
+  while (i < from.length) {
+    int c = from.charCodeAt(i);
+    if (c >= 65 && c <= 90) {
+      to = to + "-" + from.charAt(i).toLowerCase();
+    } else {
+      to = to + from.charAt(i);
+    }
+    i = i + 1;
+  }
+  if (to.length >= 3 && to.slice(0, 3) == "ms-") {
+    to = "-" + to;
+  }
+  return to;
+}
+
+JsValue createElementProps(JsValue state, JsValue node) {
+  JsValue props = JS.object();
+  JsValue properties = JS.get(node, "properties");
+  if (JS.isUndefined(properties) || JS.isNullish(properties)) {
+    properties = JS.object();
+  }
+  JsValue alignValue = JS.undefined();
+  string tag = JS.string(JS.get(node, "tagName"));
+  for (string prop in properties) {
+    if (prop != "children" && objectHasOwn(properties, prop)) {
+      JsValue result = createProperty(state, prop, JS.get(properties, prop));
+      if (result.truthy() && JS.isArray(result)) {
+        JsValue key = result[0];
+        JsValue value = result[1];
+        if (JS.get(state, "tableCellAlignToStyle").truthy() && JS.string(key) == "align" && JS.typeOf(value) == "string" && isTableCell(tag)) {
+          alignValue = value;
+        } else {
+          props[JS.string(key)] = value;
+        }
+      }
+    }
+  }
+  if (alignValue.truthy()) {
+    JsValue style = JS.get(props, "style");
+    if (JS.isUndefined(style) || JS.isNullish(style) || JS.typeOf(style) != "object") {
+      style = JS.object();
+      props["style"] = style;
+    }
+    if (JS.string(JS.get(state, "stylePropertyNameCase")) == "css") {
+      style["text-align"] = alignValue;
+    } else {
+      style["textAlign"] = alignValue;
+    }
+  }
+  return props;
+}
+
+JsValue oneBox = JS.object();
+
+JsValue callOne(JsValue state, JsValue node, JsValue key) {
+  return JS.call(JS.get(oneBox, "one"), JS.undefined(), state, node, key);
+}
+
+JsValue createChildren(JsValue state, JsValue node) {
+  JsValue children = JS.array();
+  JsValue kids = JS.get(node, "children");
+  if (!JS.isArray(kids)) {
+    return children;
+  }
+  JsValue countsByName = JS.object();
+  int index = 0;
+  int n = kids.length.toInt();
+  while (index < n) {
+    JsValue child = kids[index];
+    JsValue childKey = JS.undefined();
+    if (JS.get(state, "passKeys").truthy() && !JS.isNullish(child) && JS.typeOf(child) == "object") {
+      string name = "";
+      if (JS.string(JS.get(child, "type")) == "element") {
+        name = JS.string(JS.get(child, "tagName"));
+      } else if (JS.string(JS.get(child, "type")) == "mdxJsxFlowElement" || JS.string(JS.get(child, "type")) == "mdxJsxTextElement") {
+        name = JS.string(JS.get(child, "name"));
+      }
+      if (name.length > 0) {
+        int count = 0;
+        if (objectHasOwn(countsByName, name)) {
+          count = JS.number(JS.get(countsByName, name)).toInt();
+        }
+        childKey = name + "-" + JS.string(count);
+        countsByName[name] = count + 1;
+      }
+    }
+    JsValue result = callOne(state, child, childKey);
+    if (!JS.isUndefined(result)) {
+      JS.push(children, result);
+    }
+    index = index + 1;
+  }
+  return children;
+}
+
+JsValue element(JsValue state, JsValue node, JsValue key) {
+  string parentSchema = JS.string(JS.get(state, "schema"));
+  string schema = parentSchema;
+  string tag = JS.string(JS.get(node, "tagName"));
+  if (tag.toLowerCase() == "svg" && parentSchema == "html") {
+    schema = "svg";
+    state["schema"] = schema;
+  }
+  JS.push(JS.get(state, "ancestors"), node);
+  JsValue type = findComponentFromName(state, tag, false);
+  JsValue props = createElementProps(state, node);
+  JsValue children = createChildren(state, node);
+  if (isTableElement(tag)) {
+    JsValue filtered = JS.array();
+    int i = 0;
+    int n = children.length.toInt();
+    while (i < n) {
+      JsValue child = children[i];
+      bool keep = true;
+      if (JS.typeOf(child) == "string") {
+        keep = !isAsciiWhitespace(JS.string(child));
+      }
+      if (keep) {
+        JS.push(filtered, child);
+      }
+      i = i + 1;
+    }
+    children = filtered;
+  }
+  addNode(state, props, type, node);
+  addChildren(props, children);
+  JS.invoke(JS.get(state, "ancestors"), "pop");
+  state["schema"] = parentSchema;
+  return JS.call(JS.get(state, "create"), JS.undefined(), node, type, props, key);
+}
+
+JsValue root(JsValue state, JsValue node, JsValue key) {
+  JsValue props = JS.object();
+  addChildren(props, createChildren(state, node));
+  return JS.call(JS.get(state, "create"), JS.undefined(), node, JS.get(state, "Fragment"), props, key);
+}
+
+JsValue mdxExpression(JsValue state, JsValue node) {
+  crashEstree(state, JS.get(node, "position"));
+  return JS.undefined();
+}
+
+JsValue mdxEsm(JsValue state, JsValue node) {
+  crashEstree(state, JS.get(node, "position"));
+  return JS.undefined();
+}
+
+JsValue mdxJsxElement(JsValue state, JsValue node, JsValue key) {
+  string parentSchema = JS.string(JS.get(state, "schema"));
+  if (JS.string(JS.get(node, "name")) == "svg" && parentSchema == "html") {
+    state["schema"] = "svg";
+  }
+  JS.push(JS.get(state, "ancestors"), node);
+  JsValue type = JS.get(state, "Fragment");
+  if (!JS.isNullish(JS.get(node, "name"))) {
+    type = findComponentFromName(state, JS.string(JS.get(node, "name")), true);
+  }
+  JsValue props = JS.object();
+  addNode(state, props, type, node);
+  addChildren(props, createChildren(state, node));
+  JS.invoke(JS.get(state, "ancestors"), "pop");
+  state["schema"] = parentSchema;
+  return JS.call(JS.get(state, "create"), JS.undefined(), node, type, props, key);
+}
+
+JsValue one(JsValue state, JsValue node, JsValue key) {
+  if (JS.isUndefined(node) || JS.isNullish(node) || JS.typeOf(node) != "object") {
+    return JS.undefined();
+  }
+  string typ = JS.string(JS.get(node, "type"));
+  if (typ == "element") {
+    return element(state, node, key);
+  }
+  if (typ == "mdxFlowExpression" || typ == "mdxTextExpression") {
+    return mdxExpression(state, node);
+  }
+  if (typ == "mdxJsxFlowElement" || typ == "mdxJsxTextElement") {
+    return mdxJsxElement(state, node, key);
+  }
+  if (typ == "mdxjsEsm") {
+    return mdxEsm(state, node);
+  }
+  if (typ == "root") {
+    return root(state, node, key);
+  }
+  if (typ == "text") {
+    return JS.get(node, "value");
+  }
+  return JS.undefined();
+}
+
+oneBox["one"] = JS.method3((JsValue _s, JsValue state, JsValue node, JsValue key) => {
+  return one(state, node, key);
+});
+
+JsValue toJsxRuntimeCall(JsValue _self, JsValue tree, JsValue options) {
+  if (JS.isUndefined(options) || JS.isNullish(options) || JS.isUndefined(JS.get(options, "Fragment"))) {
+    throwType("Expected `Fragment` in options");
+  }
+  JsValue create = JS.undefined();
+  if (JS.get(options, "development").truthy()) {
+    if (!isFn(JS.get(options, "jsxDEV"))) {
+      throwType("Expected `jsxDEV` in options when `development: true`");
+    }
+    create = productionCreate(JS.get(options, "filePath"), JS.get(options, "jsxDEV"), JS.get(options, "jsxDEV"));
+  } else {
+    if (!isFn(JS.get(options, "jsx"))) {
+      throwType("Expected `jsx` in production options");
+    }
+    if (!isFn(JS.get(options, "jsxs"))) {
+      throwType("Expected `jsxs` in production options");
+    }
+    create = productionCreate(JS.get(options, "filePath"), JS.get(options, "jsx"), JS.get(options, "jsxs"));
+  }
+  string schema = "html";
+  if (JS.string(JS.get(options, "space")) == "svg") {
+    schema = "svg";
+  }
+  JsValue components = JS.get(options, "components");
+  if (JS.isUndefined(components) || JS.isNullish(components)) {
+    components = JS.object();
+  }
+  JsValue attrCase = JS.get(options, "elementAttributeNameCase");
+  if (JS.isUndefined(attrCase) || JS.isNullish(attrCase)) {
+    attrCase = "react";
+  }
+  JsValue styleCase = JS.get(options, "stylePropertyNameCase");
+  if (JS.isUndefined(styleCase) || JS.isNullish(styleCase)) {
+    styleCase = "dom";
+  }
+  bool passKeys = true;
+  if (JS.strictEqual(JS.get(options, "passKeys"), false)) {
+    passKeys = false;
+  }
+  bool tableCellAlignToStyle = true;
+  if (JS.strictEqual(JS.get(options, "tableCellAlignToStyle"), false)) {
+    tableCellAlignToStyle = false;
+  }
+  JsValue state = JS.object();
+  state["Fragment"] = JS.get(options, "Fragment");
+  state["ancestors"] = JS.array();
+  state["components"] = components;
+  state["create"] = create;
+  state["elementAttributeNameCase"] = attrCase;
+  state["filePath"] = JS.get(options, "filePath");
+  state["ignoreInvalidStyle"] = JS.get(options, "ignoreInvalidStyle").truthy();
+  state["passKeys"] = passKeys;
+  state["passNode"] = JS.get(options, "passNode").truthy();
+  state["schema"] = schema;
+  state["stylePropertyNameCase"] = styleCase;
+  state["tableCellAlignToStyle"] = tableCellAlignToStyle;
+  JsValue result = one(state, tree, JS.undefined());
+  if (result.truthy() && JS.typeOf(result) != "string") {
+    return result;
+  }
+  JsValue props = JS.object();
+  if (result.truthy()) {
+    props["children"] = result;
+  } else {
+    props["children"] = JS.undefined();
+  }
+  return JS.call(create, JS.undefined(), tree, JS.get(state, "Fragment"), props, JS.undefined());
+}
+
+export JsValue toJsxRuntime = JS.method2(toJsxRuntimeCall);
