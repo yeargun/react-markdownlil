@@ -56,18 +56,18 @@
     {
       "id": "itslil",
       "name": "@itslil/react-markdown · library",
-      "raw": 34770,
-      "gzip9": 11989,
-      "brotli11": 10543,
+      "raw": 32615,
+      "gzip9": 11261,
+      "brotli11": 9966,
       "note": "LilScript js-module, extern_fields true. The npm ESM. Imports @itslil/unified, remark-parse, remark-rehype, and react.",
       "primary": true
     },
     {
       "id": "itslil-closed",
       "name": "@itslil/react-markdown · closed",
-      "raw": 34770,
-      "gzip9": 11989,
-      "brotli11": 10543,
+      "raw": 32631,
+      "gzip9": 11274,
+      "brotli11": 9976,
       "note": "Same source, extern_fields false, plus the same import preamble"
     }
   ],
