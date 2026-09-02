@@ -5,7 +5,7 @@
     {
       "id": "unified",
       "package": "@itslil/unified@11.0.6",
-      "siblingRevision": "d079f798f5ebf5deab2784ac55f11488d0b02dd2",
+      "siblingRevision": "80a4812a33a80b5626521451e130e1ddbf36a091",
       "sourceSha256": "0a5260db8b9719da1c15e85b05aac82fe85c2ca4e50faac5a97b10c7ceb68529",
       "graphSha256": "0c8a1f8180612cada2c3eeeddcd42033c0cb737d80c07245d85541ab642bff5e",
       "upstream": {
@@ -99,8 +99,8 @@
     },
     {
       "id": "remark-parse",
-      "package": "@itslil/remark-parse@11.0.1",
-      "siblingRevision": "c82cc5e6d0f3b4e6410d0f9b22d3e41b2a564a74",
+      "package": "@itslil/remark-parse@11.0.2",
+      "siblingRevision": "986f3242941155ce865b036d03ba2dc9381416bc",
       "sourceSha256": "635c3bdd8c716b379fe1013611ae27c95824f823220cd0c41744fdd313a86a2f",
       "graphSha256": "1b24f0714810323819c482ec89f8741af897e045ed308bcaeb3ab3ea39143c98",
       "upstream": {
@@ -810,8 +810,8 @@
     },
     {
       "id": "remark-rehype",
-      "package": "@itslil/remark-rehype@11.1.3",
-      "siblingRevision": "24cb3041e8fbf0aaa40b66369222323295051bac",
+      "package": "@itslil/remark-rehype@11.1.4",
+      "siblingRevision": "dccf1c2b3c900efa91d9021d7ee76a6748bf312c",
       "sourceSha256": "cca4c2779b67e727743e4b6d9b2f6225df3f653451c9f59f2290e510fd65946a",
       "graphSha256": "acbb0cf4396fb2271e2c070a11f250e8287f27dbebdec641815333c1b0f2f8fa",
       "upstream": {

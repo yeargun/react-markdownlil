@@ -38,7 +38,7 @@ const definitions = [
     env: "REMARK_PARSELIL_ROOT",
     sibling: "../remark-parselil",
     packageName: "@itslil/remark-parse",
-    packageVersion: "11.0.1",
+    packageVersion: "11.0.2",
     upstream: {
       repository: "https://github.com/remarkjs/remark.git",
       tag: "remark-parse@11.0.0",
@@ -51,7 +51,7 @@ const definitions = [
     env: "REMARK_REHYPELIL_ROOT",
     sibling: "../remark-rehypelil",
     packageName: "@itslil/remark-rehype",
-    packageVersion: "11.1.3",
+    packageVersion: "11.1.4",
     upstream: {
       repository: "https://github.com/remarkjs/remark-rehype.git",
       tag: "11.1.2",
