@@ -6,8 +6,8 @@
       "package": "@itslil/unified",
       "pin": "unified@11.0.5",
       "spec": {
-        "total": 206,
-        "pass": 206,
+        "total": 195,
+        "pass": 195,
         "label": "official suite"
       },
       "size": [
@@ -15,7 +15,7 @@
           "id": "official",
           "name": "Official unified@11.0.5 graph",
           "raw": 55620,
-          "gzip9": 11900,
+          "gzip9": 11945,
           "brotli11": 10434,
           "note": "esbuild bundle of the published package plus runtime deps",
           "diagnostic": false
@@ -23,44 +23,44 @@
         {
           "id": "official-terser-mangle",
           "name": "Official · Terser mangle on",
-          "raw": 13377,
-          "gzip9": 4786,
-          "brotli11": 4337,
-          "note": "Terser compress of that graph, mangle: true",
+          "raw": 13579,
+          "gzip9": 4883,
+          "brotli11": 4425,
+          "note": "Terser 5.51.2 compress of that graph, module: true, mangle: true",
           "baseline": true
         },
         {
           "id": "official-terser-nomangle",
           "name": "Official · Terser mangle off",
-          "raw": 20512,
-          "gzip9": 5970,
-          "brotli11": 5431,
-          "note": "Terser compress of that graph, mangle: false"
+          "raw": 20753,
+          "gzip9": 6120,
+          "brotli11": 5507,
+          "note": "Terser 5.51.2 compress of that graph, module: true, mangle: false"
         },
         {
           "id": "official-esbuild",
           "name": "Official · esbuild minify",
-          "raw": 13779,
-          "gzip9": 5034,
-          "brotli11": 4612,
+          "raw": 13653,
+          "gzip9": 5007,
+          "brotli11": 4561,
           "note": "esbuild minify of that graph"
         },
         {
           "id": "itslil",
           "name": "@itslil/unified · library",
-          "raw": 9555,
-          "gzip9": 3676,
-          "brotli11": 3303,
-          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "raw": 14647,
+          "gzip9": 5167,
+          "brotli11": 4666,
+          "note": "Single-file browser graph with the directly composed pure-Lil VFile, without post-minification.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/unified · closed",
-          "raw": 9478,
-          "gzip9": 3620,
-          "brotli11": 3254,
-          "note": "Same source, extern_fields false"
+          "raw": 14653,
+          "gzip9": 5169,
+          "brotli11": 4670,
+          "note": "Single-file browser graph, extern_fields false, without post-minification"
         }
       ],
       "throughput": [
@@ -126,18 +126,18 @@
         {
           "id": "itslil",
           "name": "@itslil/micromark · library",
-          "raw": 126220,
-          "gzip9": 39156,
-          "brotli11": 32819,
-          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "raw": 87117,
+          "gzip9": 30931,
+          "brotli11": 26097,
+          "note": "LilScript js-module, extern_fields true, with an esbuild export filter. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/micromark · closed",
-          "raw": 126140,
-          "gzip9": 39081,
-          "brotli11": 32703,
+          "raw": 93773,
+          "gzip9": 33040,
+          "brotli11": 27720,
           "note": "Same source, extern_fields false"
         }
       ],
@@ -162,8 +162,8 @@
       "package": "@itslil/mdast-util-from-markdown",
       "pin": "mdast-util-from-markdown@2.0.3",
       "spec": {
-        "total": 740,
-        "pass": 740,
+        "total": 724,
+        "pass": 724,
         "label": "official suite"
       },
       "size": [
@@ -204,18 +204,18 @@
         {
           "id": "itslil",
           "name": "@itslil/mdast-util-from-markdown · library",
-          "raw": 121888,
-          "gzip9": 37770,
-          "brotli11": 31522,
+          "raw": 88325,
+          "gzip9": 31225,
+          "brotli11": 26103,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/mdast-util-from-markdown · closed",
-          "raw": 121778,
-          "gzip9": 37695,
-          "brotli11": 31437,
+          "raw": 88215,
+          "gzip9": 31133,
+          "brotli11": 26114,
           "note": "Same source, extern_fields false"
         }
       ],
@@ -282,19 +282,19 @@
         {
           "id": "itslil",
           "name": "@itslil/mdast-util-to-hast · library",
-          "raw": 16518,
-          "gzip9": 5932,
-          "brotli11": 5315,
+          "raw": 14246,
+          "gzip9": 4709,
+          "brotli11": 4262,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/mdast-util-to-hast · closed",
-          "raw": 16419,
-          "gzip9": 5860,
-          "brotli11": 5255,
-          "note": "Same source, extern_fields false"
+          "raw": 14939,
+          "gzip9": 5367,
+          "brotli11": 4845,
+          "note": "Same source, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -318,9 +318,9 @@
       "package": "@itslil/hast-util-to-html",
       "pin": "hast-util-to-html@9.0.5",
       "spec": {
-        "total": 389,
-        "pass": 389,
-        "label": "official suite"
+        "total": 455,
+        "pass": 455,
+        "label": "official and package suites"
       },
       "size": [
         {
@@ -360,19 +360,19 @@
         {
           "id": "itslil",
           "name": "@itslil/hast-util-to-html · library",
-          "raw": 31452,
-          "gzip9": 10326,
-          "brotli11": 8981,
+          "raw": 30291,
+          "gzip9": 10082,
+          "brotli11": 8825,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/hast-util-to-html · closed",
-          "raw": 31356,
-          "gzip9": 10260,
-          "brotli11": 8924,
-          "note": "Same source, extern_fields false"
+          "raw": 29875,
+          "gzip9": 9914,
+          "brotli11": 8664,
+          "note": "Same source, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -396,9 +396,9 @@
       "package": "@itslil/remark-parse",
       "pin": "remark-parse@11.0.0",
       "spec": {
-        "total": 12,
-        "pass": 12,
-        "label": "official + package tests"
+        "total": 3,
+        "pass": 3,
+        "label": "official remark-parse subtests"
       },
       "size": [
         {
@@ -438,18 +438,18 @@
         {
           "id": "itslil",
           "name": "@itslil/remark-parse · library",
-          "raw": 122180,
-          "gzip9": 37801,
-          "brotli11": 31605,
+          "raw": 89641,
+          "gzip9": 31330,
+          "brotli11": 26205,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/remark-parse · closed",
-          "raw": 122093,
-          "gzip9": 37734,
-          "brotli11": 31539,
+          "raw": 89554,
+          "gzip9": 31249,
+          "brotli11": 26127,
           "note": "Same source, extern_fields false"
         }
       ],
@@ -474,9 +474,9 @@
       "package": "@itslil/remark-rehype",
       "pin": "remark-rehype@11.1.2",
       "spec": {
-        "total": 16,
-        "pass": 16,
-        "label": "official suite"
+        "total": 17,
+        "pass": 17,
+        "label": "upstream and package suites"
       },
       "size": [
         {
@@ -516,19 +516,19 @@
         {
           "id": "itslil",
           "name": "@itslil/remark-rehype · library",
-          "raw": 16951,
-          "gzip9": 6077,
-          "brotli11": 5455,
+          "raw": 13669,
+          "gzip9": 4888,
+          "brotli11": 4374,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/remark-rehype · closed",
-          "raw": 16862,
-          "gzip9": 6012,
-          "brotli11": 5391,
-          "note": "Same source, extern_fields false"
+          "raw": 15307,
+          "gzip9": 5475,
+          "brotli11": 4939,
+          "note": "Same source, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -552,9 +552,9 @@
       "package": "@itslil/rehype-stringify",
       "pin": "rehype-stringify@10.0.1",
       "spec": {
-        "total": 7,
-        "pass": 7,
-        "label": "package tests"
+        "total": 10,
+        "pass": 10,
+        "label": "API and parity tests"
       },
       "size": [
         {
@@ -594,19 +594,19 @@
         {
           "id": "itslil",
           "name": "@itslil/rehype-stringify · library",
-          "raw": 31772,
-          "gzip9": 10442,
-          "brotli11": 9087,
+          "raw": 30604,
+          "gzip9": 10388,
+          "brotli11": 9092,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/rehype-stringify · closed",
-          "raw": 31677,
-          "gzip9": 10381,
-          "brotli11": 9039,
-          "note": "Same source, extern_fields false"
+          "raw": 30179,
+          "gzip9": 10215,
+          "brotli11": 8932,
+          "note": "Same source, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -638,53 +638,53 @@
         {
           "id": "official",
           "name": "Official remark@15.0.1 graph",
-          "raw": 290887,
-          "gzip9": 59037,
-          "brotli11": 50022,
+          "raw": 246812,
+          "gzip9": 46819,
+          "brotli11": 39826,
           "note": "esbuild bundle of the published package plus runtime deps",
           "diagnostic": false
         },
         {
           "id": "official-terser-mangle",
           "name": "Official · Terser mangle on",
-          "raw": 118936,
-          "gzip9": 37029,
-          "brotli11": 32279,
-          "note": "Terser compress of that graph, mangle: true",
+          "raw": 91243,
+          "gzip9": 25536,
+          "brotli11": 22770,
+          "note": "Terser 5.51.2 compress of that graph, module: true, mangle: true",
           "baseline": true
         },
         {
           "id": "official-terser-nomangle",
           "name": "Official · Terser mangle off",
-          "raw": 171504,
-          "gzip9": 42812,
-          "brotli11": 37481,
-          "note": "Terser compress of that graph, mangle: false"
+          "raw": 145578,
+          "gzip9": 31675,
+          "brotli11": 28123,
+          "note": "Terser 5.51.2 compress of that graph, module: true, mangle: false"
         },
         {
           "id": "official-esbuild",
           "name": "Official · esbuild minify",
-          "raw": 128104,
-          "gzip9": 38923,
-          "brotli11": 34113,
+          "raw": 91528,
+          "gzip9": 26856,
+          "brotli11": 23944,
           "note": "esbuild minify of that graph"
         },
         {
           "id": "itslil",
           "name": "@itslil/remark · library",
-          "raw": 157486,
-          "gzip9": 49385,
-          "brotli11": 41503,
-          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "raw": 128983,
+          "gzip9": 44120,
+          "brotli11": 37239,
+          "note": "Single-file browser graph with the directly composed pure-Lil VFile, without post-minification.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/remark · closed",
-          "raw": 157411,
-          "gzip9": 49324,
-          "brotli11": 41379,
-          "note": "Same source, extern_fields false"
+          "raw": 128983,
+          "gzip9": 44120,
+          "brotli11": 37239,
+          "note": "Single-file browser graph, extern_fields false, without post-minification"
         }
       ],
       "throughput": [
@@ -708,61 +708,61 @@
       "package": "@itslil/rehype",
       "pin": "rehype@13.0.2",
       "spec": {
-        "total": 136,
-        "pass": 136,
-        "label": "official suite"
+        "total": 146,
+        "pass": 146,
+        "label": "ported upstream tests"
       },
       "size": [
         {
           "id": "official",
           "name": "Official rehype@13.0.2 graph",
-          "raw": 438508,
-          "gzip9": 91765,
-          "brotli11": 74480,
+          "raw": 415899,
+          "gzip9": 90181,
+          "brotli11": 73110,
           "note": "esbuild bundle of the published package plus runtime deps",
           "diagnostic": false
         },
         {
           "id": "official-terser-mangle",
           "name": "Official · Terser mangle on",
-          "raw": 221169,
-          "gzip9": 67624,
-          "brotli11": 54928,
+          "raw": 220821,
+          "gzip9": 68462,
+          "brotli11": 55030,
           "note": "Terser compress of that graph, mangle: true",
           "baseline": true
         },
         {
           "id": "official-terser-nomangle",
           "name": "Official · Terser mangle off",
-          "raw": 275488,
-          "gzip9": 73685,
-          "brotli11": 60222,
+          "raw": 275162,
+          "gzip9": 74516,
+          "brotli11": 60291,
           "note": "Terser compress of that graph, mangle: false"
         },
         {
           "id": "official-esbuild",
           "name": "Official · esbuild minify",
-          "raw": 242664,
-          "gzip9": 69082,
-          "brotli11": 57077,
+          "raw": 242089,
+          "gzip9": 69759,
+          "brotli11": 56957,
           "note": "esbuild minify of that graph"
         },
         {
           "id": "itslil",
           "name": "@itslil/rehype · library",
-          "raw": 369327,
-          "gzip9": 78587,
-          "brotli11": 64165,
+          "raw": 173322,
+          "gzip9": 62185,
+          "brotli11": 51696,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/rehype · closed",
-          "raw": 369328,
-          "gzip9": 78585,
-          "brotli11": 64199,
-          "note": "Same source, extern_fields false"
+          "raw": 173146,
+          "gzip9": 62119,
+          "brotli11": 51726,
+          "note": "Same source, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -786,9 +786,9 @@
       "package": "@itslil/remark-gfm",
       "pin": "remark-gfm@4.0.1",
       "spec": {
-        "total": 18,
-        "pass": 18,
-        "label": "official suite"
+        "total": 19,
+        "pass": 19,
+        "label": "tests passing"
       },
       "size": [
         {
@@ -828,19 +828,19 @@
         {
           "id": "itslil",
           "name": "@itslil/remark-gfm · library",
-          "raw": 42804,
-          "gzip9": 14576,
-          "brotli11": 12921,
+          "raw": 32996,
+          "gzip9": 11850,
+          "brotli11": 10559,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/remark-gfm · closed",
-          "raw": 42722,
-          "gzip9": 14513,
-          "brotli11": 12835,
-          "note": "Same source, extern_fields false"
+          "raw": 34779,
+          "gzip9": 12930,
+          "brotli11": 11509,
+          "note": "Same source, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -864,9 +864,9 @@
       "package": "@itslil/remark-breaks",
       "pin": "remark-breaks@4.0.0",
       "spec": {
-        "total": 21,
-        "pass": 21,
-        "label": "official fixtures"
+        "total": 20,
+        "pass": 20,
+        "label": "tests passing"
       },
       "size": [
         {
@@ -906,19 +906,19 @@
         {
           "id": "itslil",
           "name": "@itslil/remark-breaks · library",
-          "raw": 3123,
-          "gzip9": 1521,
-          "brotli11": 1362,
+          "raw": 2746,
+          "gzip9": 1261,
+          "brotli11": 1131,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/remark-breaks · closed",
-          "raw": 3035,
-          "gzip9": 1459,
-          "brotli11": 1308,
-          "note": "Same source, extern_fields false"
+          "raw": 3039,
+          "gzip9": 1386,
+          "brotli11": 1241,
+          "note": "Same source, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -942,9 +942,9 @@
       "package": "@itslil/remark-math",
       "pin": "remark-math@6.0.0",
       "spec": {
-        "total": 59,
-        "pass": 59,
-        "label": "official suite"
+        "total": 60,
+        "pass": 60,
+        "label": "tests passing"
       },
       "size": [
         {
@@ -984,19 +984,19 @@
         {
           "id": "itslil",
           "name": "@itslil/remark-math · library",
-          "raw": 9242,
-          "gzip9": 3651,
-          "brotli11": 3281,
+          "raw": 6372,
+          "gzip9": 2522,
+          "brotli11": 2287,
           "note": "LilScript js-module, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/remark-math · closed",
-          "raw": 9158,
-          "gzip9": 3592,
-          "brotli11": 3234,
-          "note": "Same source, extern_fields false"
+          "raw": 6697,
+          "gzip9": 2793,
+          "brotli11": 2541,
+          "note": "Same source, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -1015,9 +1015,9 @@
       "package": "@itslil/katex",
       "pin": "katex@0.16.22",
       "spec": {
-        "total": 1013,
-        "pass": 1013,
-        "label": "official jest suite"
+        "total": 1230,
+        "pass": 1230,
+        "label": "official core + screenshot-data + contrib Jest suites"
       },
       "size": [
         {
@@ -1057,19 +1057,19 @@
         {
           "id": "itslil",
           "name": "@itslil/katex · library",
-          "raw": 564801,
-          "gzip9": 107944,
-          "brotli11": 86283,
-          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "raw": 293173,
+          "gzip9": 84126,
+          "brotli11": 68937,
+          "note": "Direct LilScript js-module output, extern_fields true. The npm ESM.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/katex · closed",
-          "raw": 539234,
-          "gzip9": 108047,
-          "brotli11": 86829,
-          "note": "Same source, extern_fields false"
+          "raw": 305460,
+          "gzip9": 90101,
+          "brotli11": 73230,
+          "note": "Direct LilScript js-module output, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [
@@ -1093,16 +1093,16 @@
       "package": "@itslil/rehype-katex",
       "pin": "rehype-katex@7.0.1",
       "spec": {
-        "total": 16,
-        "pass": 16,
-        "label": "official suite"
+        "total": 63,
+        "pass": 63,
+        "label": "official + parity suite"
       },
       "size": [
         {
           "id": "official",
           "name": "Official rehype-katex@7.0.1 graph",
           "raw": 898046,
-          "gzip9": 185933,
+          "gzip9": 186731,
           "brotli11": 149397,
           "note": "esbuild bundle of the published package plus runtime deps",
           "diagnostic": false
@@ -1110,44 +1110,44 @@
         {
           "id": "official-terser-mangle",
           "name": "Official · Terser mangle on",
-          "raw": 472894,
-          "gzip9": 138629,
-          "brotli11": 112879,
+          "raw": 474237,
+          "gzip9": 139471,
+          "brotli11": 113063,
           "note": "Terser compress of that graph, mangle: true",
           "baseline": true
         },
         {
           "id": "official-terser-nomangle",
           "name": "Official · Terser mangle off",
-          "raw": 597433,
-          "gzip9": 152265,
-          "brotli11": 124102,
+          "raw": 599298,
+          "gzip9": 153279,
+          "brotli11": 124308,
           "note": "Terser compress of that graph, mangle: false"
         },
         {
           "id": "official-esbuild",
           "name": "Official · esbuild minify",
-          "raw": 499499,
-          "gzip9": 140614,
-          "brotli11": 115929,
+          "raw": 498860,
+          "gzip9": 141322,
+          "brotli11": 115830,
           "note": "esbuild minify of that graph"
         },
         {
           "id": "itslil",
           "name": "@itslil/rehype-katex · library",
-          "raw": 960082,
-          "gzip9": 189973,
-          "brotli11": 151761,
-          "note": "LilScript js-module, extern_fields true. The npm ESM.",
+          "raw": 2363,
+          "gzip9": 1067,
+          "brotli11": 936,
+          "note": "Browser ESM graph including the shared KaTeX and HAST runtimes.",
           "primary": true
         },
         {
           "id": "itslil-closed",
           "name": "@itslil/rehype-katex · closed",
-          "raw": 960083,
-          "gzip9": 189973,
-          "brotli11": 151713,
-          "note": "Same source, extern_fields false"
+          "raw": 2364,
+          "gzip9": 1068,
+          "brotli11": 950,
+          "note": "Same runtime graph, extern_fields false; diagnostic only"
         }
       ],
       "throughput": [

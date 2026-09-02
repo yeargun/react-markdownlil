@@ -1,0 +1,42 @@
+bool EXIT = false;
+string SKIP = "skip";
+JsValue[] emptyResult = [];
+
+JsValue toResult(JsValue value) {
+  if (JS.isArray(value)) return value;
+  if (JS.typeOf(value) == "number") return JS.array(true, value);
+  if (JS.isNullish(value) || JS.isUndefined(value)) return emptyResult;
+  return JS.array(value);
+}
+
+JsValue walk(JsValue node, JsValue visitor, JsValue[] parents) {
+  JsValue parent = JS.undefined();
+  JsValue index = JS.undefined();
+  int parentCount = parents.length;
+  if (parentCount > 0) {
+    parent = parents[parentCount - 1];
+    index = JS.invoke(JS.get(parent, "children"), "indexOf", node);
+  }
+  JsValue result = toResult(JS.call(visitor, JS.undefined(), node, index, parent));
+  if (JS.strictEqual(result[0], EXIT)) return result;
+  if (JS.in("children", node) && JS.get(node, "children").truthy() && !JS.strictEqual(result[0], SKIP)) {
+    JsValue children = JS.get(node, "children");
+    JsValue[] grandparents = parents.slice();
+    grandparents.push(node);
+    int offset = 0;
+    while (offset < children.length.toInt()) {
+      JsValue subresult = walk(children[offset], visitor, grandparents);
+      if (JS.strictEqual(subresult[0], EXIT)) return subresult;
+      if (subresult.length.toInt() > 1 && JS.typeOf(subresult[1]) == "number") {
+        offset = JS.number(subresult[1]).toInt();
+      } else {
+        offset = offset + 1;
+      }
+    }
+  }
+  return result;
+}
+
+export void visit(JsValue tree, JsValue visitor) {
+  walk(tree, visitor, []);
+}

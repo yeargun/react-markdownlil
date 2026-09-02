@@ -1,10 +1,10 @@
 import {
   accessSync,
   constants,
-  copyFileSync,
   existsSync,
   mkdirSync,
   readFileSync,
+  unlinkSync,
   writeFileSync,
 } from "node:fs"
 import { dirname, resolve } from "node:path"
@@ -17,19 +17,13 @@ const lilscriptRoot = process.env.LILSCRIPT_ROOT ?? resolve(root, "..", "lilscri
 const dist = resolve(root, "dist")
 const file = "react-markdown"
 const banner = "/*! @itslil/react-markdown 10.1.0 | LilScript reimplementation of react-markdown | MIT */\n"
-const preamble = `import {unified} from '@itslil/unified';
-import remarkParse from '@itslil/remark-parse';
-import remarkRehype from '@itslil/remark-rehype';
-import {Fragment, jsx, jsxs} from 'react/jsx-runtime';
-import {useEffect, useMemo, useState} from 'react';
+const imports = `import {Fragment, jsx, jsxs} from 'react/jsx-runtime';
+import {useEffect, useState} from 'react';
 `
 
 const externals = [
   "react",
   "react/jsx-runtime",
-  "@itslil/unified",
-  "@itslil/remark-parse",
-  "@itslil/remark-rehype",
 ]
 
 function compilerPath() {
@@ -54,7 +48,7 @@ function run(cmd, args) {
 
 function compileLil(compiler, configName, outputName) {
   run(compiler, [
-    resolve(root, "src", "entry.lil"),
+    resolve(root, "src", "index.lil"),
     "--target",
     "js-module",
     "--config",
@@ -72,9 +66,10 @@ function compileIfRequested() {
   if (!compiler) {
     throw new Error("LilScript compiler not found. Set LILSCRIPT_COMPILER or build lilscript.")
   }
+  run(process.execPath, [resolve(root, "scripts", "source-graph.mjs"), "--require-siblings"])
   mkdirSync(dist, { recursive: true })
   compileLil(compiler, "lilscript.toml", `${file}.raw.js`)
-  compileLil(compiler, "lilscript.closed.toml", `${file}.closed.js`)
+  compileLil(compiler, "lilscript.closed.toml", `${file}.closed.raw.js`)
 }
 
 compileIfRequested()
@@ -85,49 +80,34 @@ if (!existsSync(rawPath)) {
   throw new Error(`dist/${file}.raw.js is missing. Run with --compile after building LilScript.`)
 }
 
-writeFileSync(resolve(dist, `${file}.esm.js`), `${banner}${preamble}${readFileSync(rawPath, "utf8").trimEnd()}\n`)
-const closedPath = resolve(dist, `${file}.closed.js`)
-if (existsSync(closedPath)) {
-  const closed = readFileSync(closedPath, "utf8")
-  if (!closed.includes("@itslil/unified")) {
-    writeFileSync(closedPath, `${banner}${preamble}${closed.trimEnd()}\n`)
-  }
+const raw = readFileSync(rawPath, "utf8").trimEnd()
+writeFileSync(resolve(dist, `${file}.esm.js`), `${banner}${imports}const development=false;\n${raw}\n`)
+writeFileSync(resolve(dist, `${file}.development.js`), `${banner}${imports}const development=true;\n${raw}\n`)
+const closedRawPath = resolve(dist, `${file}.closed.raw.js`)
+if (existsSync(closedRawPath)) {
+  const closed = readFileSync(closedRawPath, "utf8")
+  writeFileSync(resolve(dist, `${file}.closed.js`), `${banner}${imports}const development=false;\n${closed.trimEnd()}\n`)
+  unlinkSync(closedRawPath)
 }
 
-await esbuild({
-  absWorkingDir: dist,
-  entryPoints: [resolve(dist, `${file}.esm.js`)],
-  outfile: resolve(dist, `${file}.cjs`),
-  bundle: true,
-  format: "cjs",
-  platform: "neutral",
-  external: externals,
-  legalComments: "none",
-  minifyWhitespace: true,
-  minifyIdentifiers: false,
-  minifySyntax: false,
-  banner: { js: banner },
-  logLevel: "error",
-})
+async function buildCommonJs(entryName, outputName) {
+  await esbuild({
+    absWorkingDir: dist,
+    entryPoints: [resolve(dist, entryName)],
+    outfile: resolve(dist, outputName),
+    bundle: true,
+    format: "cjs",
+    platform: "node",
+    external: externals,
+    legalComments: "none",
+    banner: { js: banner },
+    logLevel: "error",
+  })
+}
 
-await esbuild({
-  absWorkingDir: dist,
-  entryPoints: [resolve(dist, `${file}.esm.js`)],
-  outfile: resolve(dist, `${file}.umd.js`),
-  bundle: true,
-  format: "iife",
-  globalName: "ReactMarkdownLil",
-  external: externals,
-  footer: {
-    js: `globalThis.ReactMarkdown=ReactMarkdownLil.default||ReactMarkdownLil.Markdown||ReactMarkdownLil;`,
-  },
-  legalComments: "none",
-  minifyWhitespace: true,
-  minifyIdentifiers: false,
-  minifySyntax: false,
-  banner: { js: banner },
-  logLevel: "error",
-})
+await buildCommonJs(`${file}.esm.js`, `${file}.cjs`)
+await buildCommonJs(`${file}.development.js`, `${file}.development.cjs`)
 
-copyFileSync(resolve(root, "types", `${file}.d.ts`), resolve(dist, `${file}.d.ts`))
-console.log(`wrote dist/${file}.esm.js, dist/${file}.cjs, dist/${file}.umd.js, dist/${file}.closed.js`)
+console.log(
+  `wrote dist/${file}.esm.js, dist/${file}.development.js, dist/${file}.cjs, dist/${file}.development.cjs, dist/${file}.closed.js`,
+)

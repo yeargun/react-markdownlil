@@ -1,0 +1,31 @@
+import { call1, objGet, undef } from "./host.lil";
+import { markdownSpace } from "./util-character.lil";
+
+export JsValue factorySpace(JsValue effects, JsValue ok, string typ, float max) {
+  float limit = 1.0 / 0.0;
+  if (max != 0.0) {
+    limit = max - 1.0;
+  }
+  float size = 0.0;
+  JsValue prefix = undef();
+
+  prefix = JS.method1((JsValue _self, JsValue code) => {
+    if (markdownSpace(code) && size < limit) {
+      size = size + 1.0;
+      call1(objGet(effects, "consume"), effects, code);
+      return prefix;
+    }
+    call1(objGet(effects, "exit"), effects, typ);
+    return call1(ok, JS.undefined(), code);
+  });
+
+  JsValue start = JS.method1((JsValue _self, JsValue code) => {
+    if (markdownSpace(code)) {
+      call1(objGet(effects, "enter"), effects, typ);
+      return call1(prefix, JS.undefined(), code);
+    }
+    return call1(ok, JS.undefined(), code);
+  });
+
+  return start;
+}

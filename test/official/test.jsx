@@ -24,7 +24,7 @@ import {render, waitFor} from '@testing-library/react'
 import concatStream from 'concat-stream'
 import {Component} from 'react'
 import {renderToPipeableStream, renderToStaticMarkup} from 'react-dom/server'
-import Markdown, {MarkdownAsync, MarkdownHooks} from '../../dist/react-markdown.esm.js'
+import Markdown, {MarkdownAsync, MarkdownHooks} from '../../dist/react-markdown.development.js'
 import rehypeRaw from 'rehype-raw'
 import rehypeStarryNight from 'rehype-starry-night'
 import remarkGfm from '@itslil/remark-gfm'
@@ -544,6 +544,7 @@ test('Markdown', async function (t) {
   })
 
   await t.test('should fail on an invalid component', function () {
+    // React 19.2 no longer logs this server-render failure to `console.error`.
     assert.throws(function () {
       renderToStaticMarkup(
         <Markdown

@@ -1,0 +1,457 @@
+import { arrLen, call0, call1, call2, call3, fromCharCode1, includesVal, isEof, makeConstruct, makeNamedConstruct, objGet, undef } from "../host.lil";
+import { asciiAlpha, asciiAlphanumeric, markdownLineEnding, markdownLineEndingOrSpace, markdownSpace } from "../util-character.lil";
+import { htmlBlockNames, htmlRawNames } from "../util-html-tag-name.lil";
+import { cColon, cDash, cDot, cExclamationMark, cGreaterThan, cLeftSquareBracket, cLessThan, cQuestionMark, cRightSquareBracket, cSlash, cUnderscore, codeEq, codeInt } from "../symbol/codes.lil";
+import { cApostrophe, cEqualsTo, cGraveAccent, cQuotationMark } from "../symbol/codes.lil";
+import { kCdataOpeningString, kHtmlBasic, kHtmlCdata, kHtmlComment, kHtmlComplete, kHtmlDeclaration, kHtmlInstruction, kHtmlRaw, kHtmlRawSizeMax } from "../symbol/constants.lil";
+import { tHtmlFlow, tHtmlFlowData, tLineEnding, tLinePrefix } from "../symbol/types.lil";
+import { blankLine } from "./blank-line.lil";
+
+JsValue resolveToHtmlFlow = JS.method2((JsValue _self, JsValue events, JsValue _context) => {
+  int index = arrLen(events);
+  while (true) {
+    index = index - 1;
+    if (index < 0) {
+      break;
+    }
+    if (events[index][0] == "enter" && objGet(events[index][1], "type") == tHtmlFlow) {
+      break;
+    }
+  }
+  if (index > 1 && objGet(events[index - 2][1], "type") == tLinePrefix) {
+    JS.set(events[index][1], "start", objGet(events[index - 2][1], "start"));
+    JS.set(events[index + 1][1], "start", objGet(events[index - 2][1], "start"));
+    JS.call(JS.get(events, "splice"), events, index - 2, 2);
+  }
+  return events;
+});
+
+JsValue tokenizeNonLazyContinuationStart = JS.method3((JsValue self, JsValue effects, JsValue ok, JsValue nok) => {
+  JsValue after = JS.method1((JsValue _s, JsValue code) => {
+    if (objGet(objGet(self, "parser"), "lazy")[objGet(call0(objGet(self, "now"), self), "line")].truthy()) {
+      return call1(nok, undef(), code);
+    }
+    return call1(ok, undef(), code);
+  });
+  JsValue start = JS.method1((JsValue _s, JsValue code) => {
+    if (markdownLineEnding(code)) {
+      call1(objGet(effects, "enter"), effects, tLineEnding);
+      call1(objGet(effects, "consume"), effects, code);
+      call1(objGet(effects, "exit"), effects, tLineEnding);
+      return after;
+    }
+    return call1(nok, undef(), code);
+  });
+  return start;
+});
+
+JsValue nonLazyContinuationStart = makeConstruct(tokenizeNonLazyContinuationStart);
+JS.set(nonLazyContinuationStart, "partial", true);
+
+JsValue tokenizeBlankLineBefore = JS.method3((JsValue _self, JsValue effects, JsValue ok, JsValue nok) => {
+  JsValue start = JS.method1((JsValue _s, JsValue code) => {
+    call1(objGet(effects, "enter"), effects, tLineEnding);
+    call1(objGet(effects, "consume"), effects, code);
+    call1(objGet(effects, "exit"), effects, tLineEnding);
+    return call3(objGet(effects, "attempt"), effects, blankLine, ok, nok);
+  });
+  return start;
+});
+
+JsValue blankLineBefore = makeConstruct(tokenizeBlankLineBefore);
+JS.set(blankLineBefore, "partial", true);
+
+JsValue tokenizeHtmlFlow = JS.method3((JsValue self, JsValue effects, JsValue ok, JsValue nok) => {
+  int marker = 0;
+  bool closingTag = false;
+  string buffer = "";
+  int index = 0;
+  int markerB = 0;
+  JsValue continuationAfter = undef();
+  JsValue continuationStart = undef();
+  JsValue continuationBefore = undef();
+  JsValue continuationCommentInside = undef();
+  JsValue continuationRawTagOpen = undef();
+  JsValue continuationCdataInside = undef();
+  JsValue continuationDeclarationInside = undef();
+  JsValue completeAttributeNameBefore = undef();
+  JsValue completeAttributeNameAfter = undef();
+
+  JsValue consume = JS.method1((JsValue _s, JsValue code) => {
+    call1(objGet(effects, "consume"), effects, code);
+    return undef();
+  });
+
+  continuationAfter = JS.method1((JsValue _s, JsValue code) => {
+    call1(objGet(effects, "exit"), effects, tHtmlFlow);
+    return call1(ok, undef(), code);
+  });
+
+  JsValue continuationClose = JS.method1((JsValue _s, JsValue code) => {
+    if (isEof(code) || markdownLineEnding(code)) {
+      call1(objGet(effects, "exit"), effects, tHtmlFlowData);
+      return call1(continuationAfter, undef(), code);
+    }
+    call1(consume, undef(), code);
+    return continuationClose;
+  });
+
+  JsValue continuation = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cDash) && marker == kHtmlComment) {
+      call1(consume, undef(), code);
+      return continuationCommentInside;
+    }
+    if (codeEq(code, cLessThan) && marker == kHtmlRaw) {
+      call1(consume, undef(), code);
+      return continuationRawTagOpen;
+    }
+    if (codeEq(code, cGreaterThan) && marker == kHtmlDeclaration) {
+      call1(consume, undef(), code);
+      return continuationClose;
+    }
+    if (codeEq(code, cQuestionMark) && marker == kHtmlInstruction) {
+      call1(consume, undef(), code);
+      return continuationDeclarationInside;
+    }
+    if (codeEq(code, cRightSquareBracket) && marker == kHtmlCdata) {
+      call1(consume, undef(), code);
+      return continuationCdataInside;
+    }
+    if (markdownLineEnding(code) && (marker == kHtmlBasic || marker == kHtmlComplete)) {
+      call1(objGet(effects, "exit"), effects, tHtmlFlowData);
+      return call1(call3(objGet(effects, "check"), effects, blankLineBefore, continuationAfter, continuationStart), undef(), code);
+    }
+    if (isEof(code) || markdownLineEnding(code)) {
+      call1(objGet(effects, "exit"), effects, tHtmlFlowData);
+      return call1(continuationStart, undef(), code);
+    }
+    call1(consume, undef(), code);
+    return continuation;
+  });
+
+  JsValue continuationStartNonLazy = JS.method1((JsValue _s, JsValue code) => {
+    call1(objGet(effects, "enter"), effects, tLineEnding);
+    call1(consume, undef(), code);
+    call1(objGet(effects, "exit"), effects, tLineEnding);
+    return continuationBefore;
+  });
+
+  continuationStart = JS.method1((JsValue _s, JsValue code) => {
+    return call1(call3(objGet(effects, "check"), effects, nonLazyContinuationStart, continuationStartNonLazy, continuationAfter), undef(), code);
+  });
+
+  continuationBefore = JS.method1((JsValue _s, JsValue code) => {
+    if (isEof(code) || markdownLineEnding(code)) {
+      return call1(continuationStart, undef(), code);
+    }
+    call1(objGet(effects, "enter"), effects, tHtmlFlowData);
+    return call1(continuation, undef(), code);
+  });
+
+  continuationCommentInside = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cDash)) {
+      call1(consume, undef(), code);
+      return continuationDeclarationInside;
+    }
+    return call1(continuation, undef(), code);
+  });
+
+  JsValue continuationRawEndTag = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cGreaterThan)) {
+      string name = buffer.toLowerCase();
+      if (includesVal(htmlRawNames, name)) {
+        call1(consume, undef(), code);
+        return continuationClose;
+      }
+      return call1(continuation, undef(), code);
+    }
+    if (asciiAlpha(code) && buffer.length < kHtmlRawSizeMax) {
+      call1(consume, undef(), code);
+      buffer = buffer + fromCharCode1(code);
+      return continuationRawEndTag;
+    }
+    return call1(continuation, undef(), code);
+  });
+
+  continuationRawTagOpen = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cSlash)) {
+      call1(consume, undef(), code);
+      buffer = "";
+      return continuationRawEndTag;
+    }
+    return call1(continuation, undef(), code);
+  });
+
+  continuationCdataInside = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cRightSquareBracket)) {
+      call1(consume, undef(), code);
+      return continuationDeclarationInside;
+    }
+    return call1(continuation, undef(), code);
+  });
+
+  continuationDeclarationInside = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cGreaterThan)) {
+      call1(consume, undef(), code);
+      return continuationClose;
+    }
+    if (codeEq(code, cDash) && marker == kHtmlComment) {
+      call1(consume, undef(), code);
+      return continuationDeclarationInside;
+    }
+    return call1(continuation, undef(), code);
+  });
+
+  JsValue completeAfter = JS.method1((JsValue _s, JsValue code) => {
+    if (isEof(code) || markdownLineEnding(code)) {
+      return call1(continuation, undef(), code);
+    }
+    if (markdownSpace(code)) {
+      call1(consume, undef(), code);
+      return completeAfter;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue completeEnd = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cGreaterThan)) {
+      call1(consume, undef(), code);
+      return completeAfter;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue completeAttributeValueQuotedAfter = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cSlash) || codeEq(code, cGreaterThan) || markdownSpace(code)) {
+      return call1(completeAttributeNameBefore, undef(), code);
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue completeAttributeValueQuoted = JS.method1((JsValue _s, JsValue code) => {
+    if (code == markerB) {
+      call1(consume, undef(), code);
+      markerB = 0;
+      return completeAttributeValueQuotedAfter;
+    }
+    if (isEof(code) || markdownLineEnding(code)) {
+      return call1(nok, undef(), code);
+    }
+    call1(consume, undef(), code);
+    return completeAttributeValueQuoted;
+  });
+
+  JsValue completeAttributeValueUnquoted = JS.method1((JsValue _s, JsValue code) => {
+    if (isEof(code) || codeEq(code, cQuotationMark) || codeEq(code, cApostrophe) || codeEq(code, cSlash) || codeEq(code, cLessThan) || codeEq(code, cEqualsTo) || codeEq(code, cGreaterThan) || codeEq(code, cGraveAccent) || markdownLineEndingOrSpace(code)) {
+      return call1(completeAttributeNameAfter, undef(), code);
+    }
+    call1(consume, undef(), code);
+    return completeAttributeValueUnquoted;
+  });
+
+  JsValue completeAttributeValueBefore = JS.method1((JsValue _s, JsValue code) => {
+    if (isEof(code) || codeEq(code, cLessThan) || codeEq(code, cEqualsTo) || codeEq(code, cGreaterThan) || codeEq(code, cGraveAccent)) {
+      return call1(nok, undef(), code);
+    }
+    if (codeEq(code, cQuotationMark) || codeEq(code, cApostrophe)) {
+      call1(consume, undef(), code);
+      markerB = JS.number(code).toInt();
+      return completeAttributeValueQuoted;
+    }
+    if (markdownSpace(code)) {
+      call1(consume, undef(), code);
+      return completeAttributeValueBefore;
+    }
+    return call1(completeAttributeValueUnquoted, undef(), code);
+  });
+
+  completeAttributeNameAfter = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cEqualsTo)) {
+      call1(consume, undef(), code);
+      return completeAttributeValueBefore;
+    }
+    if (markdownSpace(code)) {
+      call1(consume, undef(), code);
+      return completeAttributeNameAfter;
+    }
+    return call1(completeAttributeNameBefore, undef(), code);
+  });
+
+  JsValue completeAttributeName = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cDash) || codeEq(code, cDot) || codeEq(code, cColon) || codeEq(code, cUnderscore) || asciiAlphanumeric(code)) {
+      call1(consume, undef(), code);
+      return completeAttributeName;
+    }
+    return call1(completeAttributeNameAfter, undef(), code);
+  });
+
+  completeAttributeNameBefore = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cSlash)) {
+      call1(consume, undef(), code);
+      return completeEnd;
+    }
+    if (codeEq(code, cColon) || codeEq(code, cUnderscore) || asciiAlpha(code)) {
+      call1(consume, undef(), code);
+      return completeAttributeName;
+    }
+    if (markdownSpace(code)) {
+      call1(consume, undef(), code);
+      return completeAttributeNameBefore;
+    }
+    return call1(completeEnd, undef(), code);
+  });
+
+  JsValue completeClosingTagAfter = JS.method1((JsValue _s, JsValue code) => {
+    if (markdownSpace(code)) {
+      call1(consume, undef(), code);
+      return completeClosingTagAfter;
+    }
+    return call1(completeEnd, undef(), code);
+  });
+
+  JsValue basicSelfClosing = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cGreaterThan)) {
+      call1(consume, undef(), code);
+      if (objGet(self, "interrupt").truthy()) {
+        return ok;
+      }
+      return continuation;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue tagName = JS.method1((JsValue _s, JsValue code) => {
+    if (isEof(code) || codeEq(code, cSlash) || codeEq(code, cGreaterThan) || markdownLineEndingOrSpace(code)) {
+      bool slash = codeEq(code, cSlash);
+      string name = buffer.toLowerCase();
+      if (!slash && !closingTag && includesVal(htmlRawNames, name)) {
+        marker = kHtmlRaw;
+        if (objGet(self, "interrupt").truthy()) {
+          return call1(ok, undef(), code);
+        }
+        return call1(continuation, undef(), code);
+      }
+      if (includesVal(htmlBlockNames, name)) {
+        marker = kHtmlBasic;
+        if (slash) {
+          call1(consume, undef(), code);
+          return basicSelfClosing;
+        }
+        if (objGet(self, "interrupt").truthy()) {
+          return call1(ok, undef(), code);
+        }
+        return call1(continuation, undef(), code);
+      }
+      marker = kHtmlComplete;
+      if (objGet(self, "interrupt").truthy() && !objGet(objGet(self, "parser"), "lazy")[objGet(call0(objGet(self, "now"), self), "line")].truthy()) {
+        return call1(nok, undef(), code);
+      }
+      if (closingTag) {
+        return call1(completeClosingTagAfter, undef(), code);
+      }
+      return call1(completeAttributeNameBefore, undef(), code);
+    }
+    if (codeEq(code, cDash) || asciiAlphanumeric(code)) {
+      call1(consume, undef(), code);
+      buffer = buffer + fromCharCode1(code);
+      return tagName;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue tagCloseStart = JS.method1((JsValue _s, JsValue code) => {
+    if (asciiAlpha(code)) {
+      call1(consume, undef(), code);
+      buffer = fromCharCode1(code);
+      return tagName;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue cdataOpenInside = JS.method1((JsValue _s, JsValue code) => {
+    int currentIndex = index;
+    index = index + 1;
+    if (!isEof(code) && codeInt(code) == kCdataOpeningString.charCodeAt(currentIndex)) {
+      call1(consume, undef(), code);
+      if (currentIndex + 1 == kCdataOpeningString.length) {
+        if (objGet(self, "interrupt").truthy()) {
+          return ok;
+        }
+        return continuation;
+      }
+      return cdataOpenInside;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue commentOpenInside = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cDash)) {
+      call1(consume, undef(), code);
+      if (objGet(self, "interrupt").truthy()) {
+        return ok;
+      }
+      return continuationDeclarationInside;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue declarationOpen = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cDash)) {
+      call1(consume, undef(), code);
+      marker = kHtmlComment;
+      return commentOpenInside;
+    }
+    if (codeEq(code, cLeftSquareBracket)) {
+      call1(consume, undef(), code);
+      marker = kHtmlCdata;
+      index = 0;
+      return cdataOpenInside;
+    }
+    if (asciiAlpha(code)) {
+      call1(consume, undef(), code);
+      marker = kHtmlDeclaration;
+      if (objGet(self, "interrupt").truthy()) {
+        return ok;
+      }
+      return continuationDeclarationInside;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue open = JS.method1((JsValue _s, JsValue code) => {
+    if (codeEq(code, cExclamationMark)) {
+      call1(consume, undef(), code);
+      return declarationOpen;
+    }
+    if (codeEq(code, cSlash)) {
+      call1(consume, undef(), code);
+      closingTag = true;
+      return tagCloseStart;
+    }
+    if (codeEq(code, cQuestionMark)) {
+      call1(consume, undef(), code);
+      marker = kHtmlInstruction;
+      if (objGet(self, "interrupt").truthy()) {
+        return ok;
+      }
+      return continuationDeclarationInside;
+    }
+    if (asciiAlpha(code)) {
+      call1(consume, undef(), code);
+      buffer = fromCharCode1(code);
+      return tagName;
+    }
+    return call1(nok, undef(), code);
+  });
+
+  JsValue start = JS.method1((JsValue _s, JsValue code) => {
+    call1(objGet(effects, "enter"), effects, tHtmlFlow);
+    call1(objGet(effects, "enter"), effects, tHtmlFlowData);
+    call1(consume, undef(), code);
+    return open;
+  });
+
+  return start;
+});
+
+export JsValue htmlFlow = JS.object("name", "htmlFlow", "tokenize", tokenizeHtmlFlow, "concrete", true, "resolveTo", resolveToHtmlFlow);

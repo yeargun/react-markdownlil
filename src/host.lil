@@ -4,11 +4,22 @@ export extern JsValue TypeError;
 export extern JsValue Number;
 export extern JsValue Symbol;
 export extern JsValue JSON;
+export extern JsValue Reflect;
+export extern JsValue String;
+export extern JsValue TextDecoder;
+export extern JsValue RegExp;
+export extern JsValue globalThis;
+export extern JsValue Map;
+export extern JsValue Array;
+export extern JsValue Math;
 export extern JsValue Promise;
+export extern JsValue encodeURIComponent;
+export extern JsValue structuredClone;
 
 export JsValue NULL = JS.invoke(JSON, "parse", "null");
 export JsValue HAS_OWN = JS.get(JS.get(Object, "prototype"), "hasOwnProperty");
 export JsValue TO_STRING = JS.get(JS.get(Object, "prototype"), "toString");
+export JsValue PROPERTY_IS_ENUMERABLE = JS.get(JS.get(Object, "prototype"), "propertyIsEnumerable");
 
 export JsValue undef() {
   return JS.undefined();
@@ -38,8 +49,8 @@ export int len(JsValue value) {
   return value.length.toInt();
 }
 
-export JsValue copyArray(JsValue list) {
-  JsValue out = JS.array();
+export JsValue[] copyArray(JsValue list) {
+  JsValue[] out = [];
   int n = list.length.toInt();
   int i = 0;
   while (i < n) {
@@ -49,8 +60,8 @@ export JsValue copyArray(JsValue list) {
   return out;
 }
 
-export JsValue sliceArgs(JsValue list, int start) {
-  JsValue out = JS.array();
+export JsValue[] sliceArgs(JsValue list, int start) {
+  JsValue[] out = [];
   int n = list.length.toInt();
   int i = start;
   while (i < n) {
@@ -65,16 +76,7 @@ export bool objectHasOwn(JsValue obj, string key) {
 }
 
 export void setIndex(JsValue arr, int index, JsValue value) {
-  int n = arr.length.toInt();
-  if (index >= n) {
-    while (n < index) {
-      JS.push(arr, JS.undefined());
-      n = n + 1;
-    }
-    JS.push(arr, value);
-    return;
-  }
-  JS.splice(arr, index * 1.0, 1.0, value);
+  JS.set(arr, JS.string(index), value);
 }
 
 export bool isErrorInstance(JsValue value) {

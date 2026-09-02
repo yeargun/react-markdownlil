@@ -1,0 +1,11 @@
+import {
+  MarkdownAsync as markdownAsyncExport,
+  MarkdownHooks as markdownHooksExport,
+  defaultUrlTransform as defaultUrlTransformExport,
+  default as markdownDefault
+} from "./lib/index.lil";
+
+export JsValue MarkdownAsync = markdownAsyncExport;
+export JsValue MarkdownHooks = markdownHooksExport;
+export JsValue defaultUrlTransform = defaultUrlTransformExport;
+export JsValue default = markdownDefault;

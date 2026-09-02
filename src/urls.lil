@@ -1,55 +1,19 @@
-import { NULL } from "./host.lil";
-
-export JsValue urlAttributes = JS.object();
-
-void initUrlAttributes() {
-  JsValue form = JS.array();
-  JS.push(form, "form");
-  urlAttributes["action"] = form;
-  JsValue cite = JS.array();
-  JS.push(cite, "blockquote");
-  JS.push(cite, "del");
-  JS.push(cite, "ins");
-  JS.push(cite, "q");
-  urlAttributes["cite"] = cite;
-  JsValue data = JS.array();
-  JS.push(data, "object");
-  urlAttributes["data"] = data;
-  JsValue formAction = JS.array();
-  JS.push(formAction, "button");
-  JS.push(formAction, "input");
-  urlAttributes["formAction"] = formAction;
-  JsValue href = JS.array();
-  JS.push(href, "a");
-  JS.push(href, "area");
-  JS.push(href, "base");
-  JS.push(href, "link");
-  urlAttributes["href"] = href;
-  JsValue icon = JS.array();
-  JS.push(icon, "menuitem");
-  urlAttributes["icon"] = icon;
-  urlAttributes["itemId"] = NULL;
-  JsValue manifest = JS.array();
-  JS.push(manifest, "html");
-  urlAttributes["manifest"] = manifest;
-  JsValue ping = JS.array();
-  JS.push(ping, "a");
-  JS.push(ping, "area");
-  urlAttributes["ping"] = ping;
-  JsValue poster = JS.array();
-  JS.push(poster, "video");
-  urlAttributes["poster"] = poster;
-  JsValue src = JS.array();
-  JS.push(src, "audio");
-  JS.push(src, "embed");
-  JS.push(src, "iframe");
-  JS.push(src, "img");
-  JS.push(src, "input");
-  JS.push(src, "script");
-  JS.push(src, "source");
-  JS.push(src, "track");
-  JS.push(src, "video");
-  urlAttributes["src"] = src;
+export struct UrlAttribute {
+  string property;
+  string[] elements;
+  bool allElements;
 }
 
-initUrlAttributes();
+export UrlAttribute[] urlAttributes = [
+  UrlAttribute{"action", ["form"], false},
+  UrlAttribute{"cite", ["blockquote", "del", "ins", "q"], false},
+  UrlAttribute{"data", ["object"], false},
+  UrlAttribute{"formAction", ["button", "input"], false},
+  UrlAttribute{"href", ["a", "area", "base", "link"], false},
+  UrlAttribute{"icon", ["menuitem"], false},
+  UrlAttribute{"itemId", [], true},
+  UrlAttribute{"manifest", ["html"], false},
+  UrlAttribute{"ping", ["a", "area"], false},
+  UrlAttribute{"poster", ["video"], false},
+  UrlAttribute{"src", ["audio", "embed", "iframe", "img", "input", "script", "source", "track", "video"], false}
+];

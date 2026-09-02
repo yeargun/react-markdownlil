@@ -1,0 +1,173 @@
+import { commonSchemaBlob, htmlSchemaBlob, svgSchemaBlob } from "./schema-data.lil";
+
+export struct PropertyInfo {
+  string property;
+  string attribute;
+  bool spaceSeparated;
+  bool commaSeparated;
+}
+
+Map<string, PropertyInfo> records = new Map<string, PropertyInfo>();
+bool initialized = false;
+
+string camelToDash(string value) {
+  string output = "";
+  int index = 0;
+  while (index < value.length) {
+    int code = value.charCodeAt(index);
+    if (code >= 65 && code <= 90) {
+      output = output + "-" + value.charAt(index).toLowerCase();
+    } else {
+      output = output + value.charAt(index);
+    }
+    index = index + 1;
+  }
+  return output;
+}
+
+void addRecord(string schema, string property, string attribute, string flags, bool infoSpace) {
+  if (attribute == "~") attribute = property.toLowerCase();
+  if (attribute == "@") attribute = "aria-" + property.slice(4).toLowerCase();
+  if (attribute == "-") attribute = camelToDash(property);
+  if (attribute.length == 0) attribute = property;
+  PropertyInfo info = PropertyInfo{property, attribute, infoSpace, flags.indexOf("c") >= 0};
+  records.set(schema + "|" + property.toLowerCase(), info);
+  records.set(schema + "|" + attribute.toLowerCase(), info);
+}
+
+void addCommonRecord(string property, string attribute, string flags) {
+  bool infoSpace = flags.indexOf("s") >= 0;
+  addRecord("html", property, attribute, flags, infoSpace);
+  addRecord("svg", property, attribute, flags, infoSpace);
+}
+
+void load(string schema, string blob) {
+  int start = 0;
+  int index = 0;
+  while (index <= blob.length) {
+    if (index == blob.length || blob.charAt(index) == "\n") {
+      string line = blob.slice(start, index);
+      int first = line.indexOf("|");
+      int second = line.indexOf("|", first + 1);
+      string property = line;
+      string attribute = "";
+      string flags = "";
+      if (first >= 0) {
+        property = line.slice(0, first);
+        if (second > first) {
+          attribute = line.slice(first + 1, second);
+          flags = line.slice(second + 1);
+        } else {
+          attribute = line.slice(first + 1);
+        }
+      }
+      if (schema.length == 0) {
+        addCommonRecord(property, attribute, flags);
+      } else {
+        addRecord(schema, property, attribute, flags, true);
+      }
+      start = index + 1;
+    }
+    index = index + 1;
+  }
+}
+
+void initialize() {
+  if (!initialized) {
+    initialized = true;
+    load("", commonSchemaBlob);
+    load("html", htmlSchemaBlob);
+    load("svg", svgSchemaBlob);
+  }
+}
+
+string dashToCamel(string value) {
+  string output = "";
+  int index = 0;
+  while (index < value.length) {
+    if (value.charAt(index) == "-" && index + 1 < value.length) {
+      int code = value.charCodeAt(index + 1);
+      if (code >= 97 && code <= 122) {
+        output = output + value.charAt(index + 1).toUpperCase();
+        index = index + 2;
+        continue;
+      }
+    }
+    output = output + value.charAt(index);
+    index = index + 1;
+  }
+  return output;
+}
+
+bool validDataName(string value) {
+  if (value.length < 5 || value.slice(0, 4).toLowerCase() != "data") {
+    return false;
+  }
+  int index = 4;
+  while (index < value.length) {
+    int code = value.charCodeAt(index);
+    if (!(code == 45 || code == 46 || code == 58 || code == 95 || code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122)) {
+      return false;
+    }
+    index = index + 1;
+  }
+  return true;
+}
+
+PropertyInfo unknownInfo(string property, string attribute) {
+  return PropertyInfo{property, attribute, false, false};
+}
+
+export PropertyInfo find(string space, string value) {
+  initialize();
+  string lower = value.toLowerCase();
+  string key = space + "|" + lower;
+  PropertyInfo? known = records.get(key);
+  if (known != null) {
+    return known;
+  }
+  string property = value;
+  string attribute = value;
+  if (lower.length > 4 && lower.slice(0, 4) == "data" && validDataName(value)) {
+    if (value.charAt(4) == "-") {
+      string rest = dashToCamel(value.slice(5));
+      property = "data";
+      if (rest.length > 0) property = "data" + rest.charAt(0).toUpperCase() + rest.slice(1);
+    } else {
+      string rest = value.slice(4);
+      if (rest.indexOf("-") < 0) {
+        string dashed = camelToDash(rest);
+        if (dashed.length == 0 || dashed.charAt(0) != "-") dashed = "-" + dashed;
+        attribute = "data" + dashed;
+      }
+    }
+  }
+  return unknownInfo(property, attribute);
+}
+
+Map<string, string> hastToReact = new Map<string, string>();
+hastToReact.set("classId", "classID");
+hastToReact.set("dataType", "datatype");
+hastToReact.set("itemId", "itemID");
+hastToReact.set("strokeDashArray", "strokeDasharray");
+hastToReact.set("strokeDashOffset", "strokeDashoffset");
+hastToReact.set("strokeLineCap", "strokeLinecap");
+hastToReact.set("strokeLineJoin", "strokeLinejoin");
+hastToReact.set("strokeMiterLimit", "strokeMiterlimit");
+hastToReact.set("typeOf", "typeof");
+hastToReact.set("xLinkActuate", "xlinkActuate");
+hastToReact.set("xLinkArcRole", "xlinkArcrole");
+hastToReact.set("xLinkHref", "xlinkHref");
+hastToReact.set("xLinkRole", "xlinkRole");
+hastToReact.set("xLinkShow", "xlinkShow");
+hastToReact.set("xLinkTitle", "xlinkTitle");
+hastToReact.set("xLinkType", "xlinkType");
+hastToReact.set("xmlnsXLink", "xmlnsXlink");
+
+export string reactPropertyName(string property) {
+  string? mapped = hastToReact.get(property);
+  if (mapped != null) {
+    return mapped;
+  }
+  return property;
+}

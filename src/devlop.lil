@@ -1,0 +1,34 @@
+import { Error, isErrorInstance } from "./host.lil";
+
+extern JsValue development;
+
+void assertion(JsValue message) {
+  if (!development.truthy()) {
+    return;
+  }
+  string text = "Unreachable";
+  bool generated = true;
+  if (message.truthy()) {
+    if (isErrorInstance(message)) {
+      throw message;
+    }
+    text = JS.string(message);
+    generated = false;
+  }
+  JsValue error = JS.construct(Error, text);
+  error["name"] = "Assertion";
+  error["code"] = "ERR_ASSERTION";
+  error["actual"] = false;
+  error["expected"] = true;
+  error["generated"] = generated;
+  error["operator"] = "ok";
+  throw error;
+}
+
+export void ok(JsValue value, JsValue message) {
+  if (!value.truthy()) assertion(message);
+}
+
+export void unreachable(JsValue message) {
+  assertion(message);
+}

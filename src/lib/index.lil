@@ -1,0 +1,330 @@
+import { Object, PROPERTY_IS_ENUMERABLE, Reflect, RegExp, String, objectHasOwn, setIndex } from "../host.lil";
+import { unreachable } from "../devlop.lil";
+import { unified } from "../graph/unified/entry.lil";
+import { default as remarkParse } from "../graph/remark-parse/entry.lil";
+import { default as remarkRehype } from "../graph/remark-rehype/entry.lil";
+import { toJsxRuntime } from "../hast-util-to-jsx-runtime/lib/index.lil";
+import { UrlAttribute, urlAttributes } from "../urls.lil";
+import { visit } from "../unist-util-visit/lib/index.lil";
+import { VFile } from "../vfile/lib/index.lil";
+
+export extern JsValue Fragment;
+export extern JsValue jsx;
+export extern JsValue jsxs;
+export extern JsValue useState;
+export extern JsValue useEffect;
+
+string changelog = "https://github.com/remarkjs/react-markdown/blob/main/changelog.md";
+JsValue[] emptyPlugins = [];
+JsValue emptyRemarkRehypeOptions = JS.object("allowDangerousHtml", true);
+JsValue safeProtocol = JS.construct(RegExp, "^(https?|ircs?|mailto|xmpp)$", "i");
+
+struct Deprecation {
+  string property;
+  string anchor;
+  string replacement;
+}
+
+Deprecation[] deprecations = [
+  Deprecation{"astPlugins", "remove-buggy-html-in-markdown-parser", ""},
+  Deprecation{"allowDangerousHtml", "remove-buggy-html-in-markdown-parser", ""},
+  Deprecation{"allowNode", "replace-allownode-allowedtypes-and-disallowedtypes", "allowElement"},
+  Deprecation{"allowedTypes", "replace-allownode-allowedtypes-and-disallowedtypes", "allowedElements"},
+  Deprecation{"className", "remove-classname", ""},
+  Deprecation{"disallowedTypes", "replace-allownode-allowedtypes-and-disallowedtypes", "disallowedElements"},
+  Deprecation{"escapeHtml", "remove-buggy-html-in-markdown-parser", ""},
+  Deprecation{"includeElementIndex", "#remove-includeelementindex", ""},
+  Deprecation{"includeNodeIndex", "change-includenodeindex-to-includeelementindex", ""},
+  Deprecation{"linkTarget", "remove-linktarget", ""},
+  Deprecation{"plugins", "change-plugins-to-remarkplugins", "remarkPlugins"},
+  Deprecation{"rawSourcePos", "#remove-rawsourcepos", ""},
+  Deprecation{"renderers", "change-renderers-to-components", "components"},
+  Deprecation{"source", "change-source-to-children", "children"},
+  Deprecation{"sourcePos", "#remove-sourcepos", ""},
+  Deprecation{"transformImageUri", "#add-urltransform", "urlTransform"},
+  Deprecation{"transformLinkUri", "#add-urltransform", "urlTransform"}
+];
+
+export JsValue defaultUrlTransform(JsValue raw) {
+  JsValue value = raw;
+  int colon = JS.number(JS.invoke(value, "indexOf", ":")).toInt();
+  int questionMark = JS.number(JS.invoke(value, "indexOf", "?")).toInt();
+  int numberSign = JS.number(JS.invoke(value, "indexOf", "#")).toInt();
+  int slash = JS.number(JS.invoke(value, "indexOf", "/")).toInt();
+  if (colon == -1) {
+    return value;
+  }
+  if (slash != -1 && colon > slash) {
+    return value;
+  }
+  if (questionMark != -1 && colon > questionMark) {
+    return value;
+  }
+  if (numberSign != -1 && colon > numberSign) {
+    return value;
+  }
+  if (JS.invoke(safeProtocol, "test", JS.invoke(value, "slice", 0, colon)).truthy()) {
+    return value;
+  }
+  return "";
+}
+
+void assignOwn(JsValue target, JsValue source) {
+  if (JS.isUndefined(source) || JS.isNullish(source)) {
+    return;
+  }
+  JsValue from = JS.call(Object, JS.undefined(), source);
+  JsValue keys = JS.invoke(Reflect, "ownKeys", from);
+  int i = 0;
+  int n = keys.length.toInt();
+  while (i < n) {
+    JsValue key = keys[i];
+    if (JS.call(PROPERTY_IS_ENUMERABLE, from, key).truthy()) {
+      JsValue descriptor = JS.object(
+        "configurable",
+        true,
+        "enumerable",
+        true,
+        "value",
+        JS.invoke(Reflect, "get", from, key),
+        "writable",
+        true
+      );
+      JS.invoke(Reflect, "defineProperty", target, key, descriptor);
+    }
+    i = i + 1;
+  }
+}
+
+JsValue createProcessor(JsValue options) {
+  JsValue rehypePlugins = JS.get(options, "rehypePlugins");
+  if (!rehypePlugins.truthy()) {
+    rehypePlugins = emptyPlugins;
+  }
+  JsValue remarkPlugins = JS.get(options, "remarkPlugins");
+  if (!remarkPlugins.truthy()) {
+    remarkPlugins = emptyPlugins;
+  }
+  JsValue remarkRehypeOptions = emptyRemarkRehypeOptions;
+  JsValue extra = JS.get(options, "remarkRehypeOptions");
+  if (extra.truthy()) {
+    JsValue merged = JS.object();
+    assignOwn(merged, JS.get(options, "remarkRehypeOptions"));
+    assignOwn(merged, emptyRemarkRehypeOptions);
+    remarkRehypeOptions = merged;
+  }
+  JsValue processor = JS.call(unified, JS.undefined());
+  processor = JS.call(JS.get(processor, "use"), processor, remarkParse);
+  processor = JS.call(JS.get(processor, "use"), processor, remarkPlugins);
+  processor = JS.call(JS.get(processor, "use"), processor, remarkRehype, remarkRehypeOptions);
+  processor = JS.call(JS.get(processor, "use"), processor, rehypePlugins);
+  return processor;
+}
+
+JsValue createFile(JsValue options) {
+  JsValue children = JS.get(options, "children");
+  if (!children.truthy()) {
+    children = "";
+  }
+  JsValue file = JS.construct(VFile);
+  if (JS.typeOf(children) == "string") {
+    file["value"] = children;
+    return file;
+  }
+  JS.call(unreachable, JS.undefined(), "Unexpected value `" + JS.string(children) + "` for `children` prop, expected `string`");
+  return file;
+}
+
+void checkDeprecations(JsValue options) {
+  int i = 0;
+  int n = deprecations.length;
+  while (i < n) {
+    Deprecation deprecation = deprecations[i];
+    string from = deprecation.property;
+    if (objectHasOwn(options, from)) {
+      string hint = "remove it";
+      if (deprecation.replacement.length > 0) {
+        hint = "use `" + deprecation.replacement + "` instead";
+      }
+      JS.call(unreachable, JS.undefined(),
+        "Unexpected `" +
+          from +
+          "` prop, " +
+          hint +
+          " (see <" +
+          changelog +
+          "#" +
+          deprecation.anchor +
+          "> for more info)"
+      );
+    }
+    i = i + 1;
+  }
+}
+
+void spliceRemove(JsValue kids, int index) {
+  JS.invoke(kids, "splice", index, 1);
+}
+
+void spliceUnwrap(JsValue kids, int index, JsValue nodeChildren) {
+  JsValue[] args = [];
+  JS.push(args, index);
+  JS.push(args, 1);
+  if (JS.isArray(nodeChildren)) {
+    int i = 0;
+    int n = nodeChildren.length.toInt();
+    while (i < n) {
+      JS.push(args, nodeChildren[i]);
+      i = i + 1;
+    }
+  }
+  JS.apply(JS.get(kids, "splice"), kids, args);
+}
+
+JsValue post(JsValue tree, JsValue options) {
+  JsValue allowedElements = JS.get(options, "allowedElements");
+  JsValue allowElement = JS.get(options, "allowElement");
+  JsValue components = JS.get(options, "components");
+  JsValue disallowedElements = JS.get(options, "disallowedElements");
+  JsValue skipHtml = JS.get(options, "skipHtml");
+  JsValue unwrapDisallowed = JS.get(options, "unwrapDisallowed");
+  JsValue urlTransform = JS.get(options, "urlTransform");
+  if (!urlTransform.truthy()) {
+    urlTransform = defaultUrlTransform;
+  }
+  checkDeprecations(options);
+  if (allowedElements.truthy() && disallowedElements.truthy()) {
+    JS.call(unreachable, JS.undefined(), "Unexpected combined `allowedElements` and `disallowedElements`, expected one or the other");
+  }
+  JsValue transform = JS.method3((JsValue _s, JsValue node, JsValue index, JsValue parent) => {
+    if (JS.strictEqual(JS.get(node, "type"), "raw") && parent.truthy() && JS.typeOf(index) == "number") {
+      if (skipHtml.truthy()) {
+        spliceRemove(JS.get(parent, "children"), JS.number(index).toInt());
+      } else {
+        JsValue text = JS.object();
+        text["type"] = "text";
+        text["value"] = JS.get(node, "value");
+        setIndex(JS.get(parent, "children"), JS.number(index).toInt(), text);
+      }
+      return index;
+    }
+    if (JS.strictEqual(JS.get(node, "type"), "element")) {
+      int attributeIndex = 0;
+      while (attributeIndex < urlAttributes.length) {
+        UrlAttribute attribute = urlAttributes[attributeIndex];
+        string key = attribute.property;
+        if (objectHasOwn(JS.get(node, "properties"), key)) {
+          JsValue value = JS.get(JS.get(node, "properties"), key);
+          bool applies = attribute.allElements;
+          if (!applies) {
+            string tagName = JS.string(JS.get(node, "tagName"));
+            int elementIndex = 0;
+            while (elementIndex < attribute.elements.length) {
+              if (attribute.elements[elementIndex] == tagName) {
+                applies = true;
+                break;
+              }
+              elementIndex = elementIndex + 1;
+            }
+          }
+          if (applies) {
+            string raw = "";
+            if (value.truthy()) {
+              raw = JS.string(JS.call(String, JS.undefined(), value));
+            }
+            JsValue properties = JS.get(node, "properties");
+            properties[key] = JS.call(urlTransform, JS.undefined(), raw, key, node);
+          }
+        }
+        attributeIndex = attributeIndex + 1;
+      }
+    }
+    if (JS.strictEqual(JS.get(node, "type"), "element")) {
+      bool remove = false;
+      if (allowedElements.truthy()) {
+        remove = !JS.invoke(allowedElements, "includes", JS.get(node, "tagName")).truthy();
+      } else if (disallowedElements.truthy()) {
+        remove = JS.invoke(disallowedElements, "includes", JS.get(node, "tagName")).truthy();
+      }
+      if (!remove && allowElement.truthy() && JS.typeOf(index) == "number") {
+        remove = !JS.call(allowElement, JS.undefined(), node, index, parent).truthy();
+      }
+      if (remove && parent.truthy() && JS.typeOf(index) == "number") {
+        if (unwrapDisallowed.truthy() && JS.get(node, "children").truthy()) {
+          spliceUnwrap(JS.get(parent, "children"), JS.number(index).toInt(), JS.get(node, "children"));
+        } else {
+          spliceRemove(JS.get(parent, "children"), JS.number(index).toInt());
+        }
+        return index;
+      }
+    }
+    return JS.undefined();
+  });
+  visit(tree, transform);
+  return toJsxRuntime(tree, Fragment, components, jsx, jsxs);
+}
+
+export JsValue Markdown(JsValue options) {
+  JsValue processor = createProcessor(options);
+  JsValue file = createFile(options);
+  JsValue parsed = JS.call(JS.get(processor, "parse"), processor, file);
+  JsValue tree = JS.call(JS.get(processor, "runSync"), processor, parsed, file);
+  return post(tree, options);
+}
+
+export async JsValue MarkdownAsync(JsValue options) {
+  JsValue processor = createProcessor(options);
+  JsValue file = createFile(options);
+  JsValue parsed = JS.call(JS.get(processor, "parse"), processor, file);
+  JsValue ran = JS.call(JS.get(processor, "run"), processor, parsed, file);
+  JsValue tree = await Task.resolve(ran);
+  return post(tree, options);
+}
+
+export JsValue MarkdownHooks(JsValue options) {
+  JsValue processor = createProcessor(options);
+  JsValue errorState = JS.call(useState, JS.undefined(), JS.undefined());
+  JsValue setError = errorState[1];
+  JsValue error = errorState[0];
+  JsValue treeState = JS.call(useState, JS.undefined(), JS.undefined());
+  JsValue setTree = treeState[1];
+  JsValue tree = treeState[0];
+  JsValue[] effectDeps = [];
+  JS.push(effectDeps, JS.get(options, "children"));
+  JS.push(effectDeps, JS.get(options, "rehypePlugins"));
+  JS.push(effectDeps, JS.get(options, "remarkPlugins"));
+  JS.push(effectDeps, JS.get(options, "remarkRehypeOptions"));
+  JS.call(useEffect, JS.undefined(), JS.method0((JsValue _e) => {
+    bool cancelled = false;
+    JsValue file = createFile(options);
+    JS.call(JS.get(processor, "run"), processor, JS.call(JS.get(processor, "parse"), processor, file), file, JS.method2((JsValue _s, JsValue nextError, JsValue nextTree) => {
+      if (!cancelled) {
+        JS.call(setError, JS.undefined(), nextError);
+        JS.call(setTree, JS.undefined(), nextTree);
+      }
+      return JS.undefined();
+    }));
+    return JS.method0((JsValue _c) => {
+      cancelled = true;
+      return JS.undefined();
+    });
+  }), effectDeps);
+  if (error.truthy()) {
+    throw error;
+  }
+  if (tree.truthy()) {
+    return post(tree, options);
+  }
+  return JS.get(options, "fallback");
+}
+
+export JsValue default = Markdown;
+
+void setFunctionName(JsValue value, string name) {
+  JS.invoke(Object, "defineProperty", value, "name", JS.object("configurable", true, "value", name));
+}
+
+setFunctionName(Markdown, "Markdown");
+setFunctionName(MarkdownAsync, "MarkdownAsync");
+setFunctionName(MarkdownHooks, "MarkdownHooks");
+setFunctionName(defaultUrlTransform, "defaultUrlTransform");

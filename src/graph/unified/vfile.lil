@@ -1,0 +1,619 @@
+import { Error, JSON, Object, TextDecoder, TypeError, globalThis, isUint8Array } from "./host.lil";
+
+string[] pathFields = "history path basename stem extname dirname".split(" ");
+JsValue messagePrototype = JS.object();
+
+bool includesField(string field) {
+  return pathFields.includes(field);
+}
+
+bool isUrl(JsValue value) {
+  return !JS.isNullish(value) && JS.typeOf(value) == "object" && JS.in("href", value) &&
+    JS.get(value, "href").truthy() && JS.in("protocol", value) && JS.get(value, "protocol").truthy() &&
+    JS.isUndefined(JS.get(value, "auth"));
+}
+
+string cwd() {
+  JsValue processValue = JS.get(globalThis, "process");
+  if (processValue.truthy() && JS.typeOf(JS.get(processValue, "cwd")) == "function") {
+    return JS.string(JS.call(JS.get(processValue, "cwd"), processValue));
+  }
+  return "/";
+}
+
+string pathBasename(string path, string extension) {
+  int start = 0;
+  int end = -1;
+  int index = path.length;
+  bool seenNonSlash = false;
+  if (extension.length == 0 || extension.length > path.length) {
+    while (index > 0) {
+      index = index - 1;
+      if (path.charAt(index) == "/") {
+        if (seenNonSlash) {
+          start = index + 1;
+          break;
+        }
+      } else if (end < 0) {
+        seenNonSlash = true;
+        end = index + 1;
+      }
+    }
+    if (end < 0) return "";
+    return path.slice(start, end);
+  }
+  if (extension == path) return "";
+  int firstNonSlashEnd = -1;
+  int extensionIndex = extension.length - 1;
+  while (index > 0) {
+    index = index - 1;
+    if (path.charAt(index) == "/") {
+      if (seenNonSlash) {
+        start = index + 1;
+        break;
+      }
+    } else {
+      if (firstNonSlashEnd < 0) {
+        seenNonSlash = true;
+        firstNonSlashEnd = index + 1;
+      }
+      if (extensionIndex > -1) {
+        if (path.charAt(index) == extension.charAt(extensionIndex)) {
+          extensionIndex = extensionIndex - 1;
+          if (extensionIndex < 0) end = index;
+        } else {
+          extensionIndex = -1;
+          end = firstNonSlashEnd;
+        }
+      }
+    }
+  }
+  if (start == end) {
+    end = firstNonSlashEnd;
+  } else if (end < 0) {
+    end = path.length;
+  }
+  return path.slice(start, end);
+}
+
+string pathDirname(string path) {
+  if (path.length == 0) return ".";
+  int end = -1;
+  int index = path.length;
+  bool unmatchedSlash = false;
+  while (index > 1) {
+    index = index - 1;
+    if (path.charAt(index) == "/") {
+      if (unmatchedSlash) {
+        end = index;
+        break;
+      }
+    } else if (!unmatchedSlash) {
+      unmatchedSlash = true;
+    }
+  }
+  if (end < 0) {
+    if (path.charAt(0) == "/") return "/";
+    return ".";
+  }
+  if (end == 1 && path.charAt(0) == "/") return "//";
+  return path.slice(0, end);
+}
+
+string pathExtname(string path) {
+  int index = path.length;
+  int end = -1;
+  int startPart = 0;
+  int startDot = -1;
+  int preDotState = 0;
+  bool unmatchedSlash = false;
+  while (index > 0) {
+    index = index - 1;
+    string character = path.charAt(index);
+    if (character == "/") {
+      if (unmatchedSlash) {
+        startPart = index + 1;
+        break;
+      }
+    } else {
+      if (end < 0) {
+        unmatchedSlash = true;
+        end = index + 1;
+      }
+      if (character == ".") {
+        if (startDot < 0) {
+          startDot = index;
+        } else if (preDotState != 1) {
+          preDotState = 1;
+        }
+      } else if (startDot > -1) {
+        preDotState = -1;
+      }
+    }
+  }
+  if (startDot < 0 || end < 0 || preDotState == 0 || preDotState == 1 && startDot == end - 1 && startDot == startPart + 1) {
+    return "";
+  }
+  return path.slice(startDot, end);
+}
+
+string normalizePath(string path, bool allowAboveRoot) {
+  string result = "";
+  int lastSegmentLength = 0;
+  int lastSlash = -1;
+  int dots = 0;
+  int index = 0;
+  while (index <= path.length) {
+    string character = "/";
+    if (index < path.length) character = path.charAt(index);
+    if (character == "/") {
+      if (lastSlash == index - 1 || dots == 1) {
+      } else if (lastSlash != index - 1 && dots == 2) {
+        bool ordinaryParent = result.length < 2 || lastSegmentLength != 2 || result.charAt(result.length - 1) != "." || result.charAt(result.length - 2) != ".";
+        if (ordinaryParent) {
+          if (result.length > 2) {
+            int previousSlash = result.lastIndexOf("/");
+            if (previousSlash != result.length - 1) {
+              if (previousSlash < 0) {
+                result = "";
+                lastSegmentLength = 0;
+              } else {
+                result = result.slice(0, previousSlash);
+                lastSegmentLength = result.length - 1 - result.lastIndexOf("/");
+              }
+              lastSlash = index;
+              dots = 0;
+              index = index + 1;
+              continue;
+            }
+          } else if (result.length > 0) {
+            result = "";
+            lastSegmentLength = 0;
+            lastSlash = index;
+            dots = 0;
+            index = index + 1;
+            continue;
+          }
+        }
+        if (allowAboveRoot) {
+          if (result.length > 0) {
+            result = result + "/..";
+          } else {
+            result = "..";
+          }
+          lastSegmentLength = 2;
+        }
+      } else {
+        string segment = path.slice(lastSlash + 1, index);
+        if (result.length > 0) {
+          result = result + "/" + segment;
+        } else {
+          result = segment;
+        }
+        lastSegmentLength = index - lastSlash - 1;
+      }
+      lastSlash = index;
+      dots = 0;
+    } else if (character == "." && dots > -1) {
+      dots = dots + 1;
+    } else {
+      dots = -1;
+    }
+    index = index + 1;
+  }
+  return result;
+}
+
+string normalize(string path) {
+  bool absolute = path.charAt(0) == "/";
+  string value = normalizePath(path, !absolute);
+  if (value.length == 0 && !absolute) value = ".";
+  if (value.length > 0 && path.charAt(path.length - 1) == "/") value = value + "/";
+  if (absolute) return "/" + value;
+  return value;
+}
+
+void assertPathValue(JsValue value) {
+  if (JS.typeOf(value) != "string") {
+    throw JS.construct(
+      TypeError,
+      "Path must be a string. Received " + JS.string(JS.invoke(JSON, "stringify", value))
+    );
+  }
+}
+
+string pathJoin(JsValue leftValue, JsValue rightValue) {
+  assertPathValue(leftValue);
+  assertPathValue(rightValue);
+  string left = JS.string(leftValue);
+  string right = JS.string(rightValue);
+  string joined = "";
+  if (left.length > 0) joined = left;
+  if (right.length > 0) {
+    if (joined.length > 0) {
+      joined = joined + "/" + right;
+    } else {
+      joined = right;
+    }
+  }
+  if (joined.length == 0) return ".";
+  return normalize(joined);
+}
+
+void assertPart(JsValue part, string name) {
+  if (part.truthy() && JS.invoke(part, "includes", "/").truthy()) {
+    throw JS.construct(Error, "`" + name + "` cannot be a path: did not expect `/`");
+  }
+}
+
+void assertNonEmpty(JsValue part, string name) {
+  if (!part.truthy()) throw JS.construct(Error, "`" + name + "` cannot be empty");
+}
+
+JsValue getPath(JsValue self) {
+  JsValue history = JS.get(self, "history");
+  if (history.length.toInt() == 0) return JS.undefined();
+  return history[history.length.toInt() - 1];
+}
+
+void setPath(JsValue self, JsValue value) {
+  JsValue path = value;
+  if (isUrl(path)) {
+    if (JS.string(JS.get(path, "protocol")) != "file:") {
+      JsValue error = JS.construct(TypeError, "The URL must be of scheme file");
+      error["code"] = "ERR_INVALID_URL_SCHEME";
+      throw error;
+    }
+    if (JS.string(JS.get(path, "hostname")).length > 0) {
+      JsValue error = JS.construct(TypeError, "File URL host must be \"localhost\" or empty on darwin");
+      error["code"] = "ERR_INVALID_FILE_URL_HOST";
+      throw error;
+    }
+    string pathname = JS.string(JS.get(path, "pathname"));
+    int index = 0;
+    while (index < pathname.length) {
+      if (pathname.charAt(index) == "%" && pathname.charAt(index + 1) == "2" &&
+          (pathname.charAt(index + 2) == "F" || pathname.charAt(index + 2) == "f")) {
+        JsValue error = JS.construct(TypeError, "File URL path must not include encoded / characters");
+        error["code"] = "ERR_INVALID_FILE_URL_PATH";
+        throw error;
+      }
+      index = index + 1;
+    }
+    path = JS.invoke(globalThis, "decodeURIComponent", pathname);
+  }
+  assertNonEmpty(path, "path");
+  if (!JS.strictEqual(getPath(self), path)) {
+    JsValue[] history = JS.assume(JS.get(self, "history"));
+    history.push(path);
+  }
+}
+
+JsValue pointFromPlace(JsValue place) {
+  if (place.truthy() && JS.in("start", place)) return JS.get(place, "start");
+  return place;
+}
+
+string stringifyPoint(JsValue point) {
+  if (!point.truthy()) return "1:1";
+  JsValue line = JS.get(point, "line");
+  JsValue column = JS.get(point, "column");
+  string lineText = "1";
+  string columnText = "1";
+  if (JS.typeOf(line) == "number" && line.truthy()) lineText = JS.string(line);
+  if (JS.typeOf(column) == "number" && column.truthy()) columnText = JS.string(column);
+  return lineText + ":" + columnText;
+}
+
+string stringifyPlace(JsValue place) {
+  if (!place.truthy()) return "1:1";
+  if (JS.in("start", place) || JS.in("end", place)) {
+    return stringifyPoint(JS.get(place, "start")) + "-" + stringifyPoint(JS.get(place, "end"));
+  }
+  return stringifyPoint(place);
+}
+
+JsValue createMessage(JsValue causeOrReason, JsValue optionsOrPlace, JsValue origin) {
+  if (JS.typeOf(optionsOrPlace) == "string") {
+    origin = optionsOrPlace;
+    optionsOrPlace = JS.undefined();
+  }
+  JsValue reason = "";
+  JsValue options = JS.object();
+  bool legacyCause = false;
+  if (optionsOrPlace.truthy()) {
+    if (JS.in("line", optionsOrPlace) && JS.in("column", optionsOrPlace)) {
+      options["place"] = optionsOrPlace;
+    } else if (JS.in("start", optionsOrPlace) && JS.in("end", optionsOrPlace)) {
+      options["place"] = optionsOrPlace;
+    } else if (JS.in("type", optionsOrPlace)) {
+      options["ancestors"] = JS.array(optionsOrPlace);
+      options["place"] = JS.get(optionsOrPlace, "position");
+    } else {
+      options = JS.invoke(Object, "assign", options, optionsOrPlace);
+    }
+  }
+  if (JS.typeOf(causeOrReason) == "string") {
+    reason = JS.string(causeOrReason);
+  } else if (!JS.get(options, "cause").truthy() && causeOrReason.truthy()) {
+    legacyCause = true;
+    reason = JS.get(causeOrReason, "message");
+    options["cause"] = causeOrReason;
+  }
+  if (!JS.get(options, "ruleId").truthy() && !JS.get(options, "source").truthy() && JS.typeOf(origin) == "string") {
+    string originText = JS.string(origin);
+    int colon = originText.indexOf(":");
+    if (colon < 0) {
+      options["ruleId"] = originText;
+    } else {
+      options["source"] = originText.slice(0, colon);
+      options["ruleId"] = originText.slice(colon + 1);
+    }
+  }
+  JsValue ancestors = JS.get(options, "ancestors");
+  if (!JS.get(options, "place").truthy() && ancestors.truthy() && ancestors.length.toInt() > 0) {
+    JS.set(options, "place", JS.get(ancestors[ancestors.length.toInt() - 1], "position"));
+  }
+  JsValue place = JS.get(options, "place");
+  JsValue start = place;
+  if (place.truthy() && JS.in("start", place)) start = JS.get(place, "start");
+  JsValue message = JS.construct(Error);
+  JS.invoke(Object, "setPrototypeOf", message, messagePrototype);
+  message["ancestors"] = JS.undefined();
+  if (ancestors.truthy()) message["ancestors"] = ancestors;
+  message["cause"] = JS.undefined();
+  if (JS.get(options, "cause").truthy()) message["cause"] = JS.get(options, "cause");
+  message["column"] = JS.undefined();
+  if (start.truthy()) message["column"] = JS.get(start, "column");
+  message["fatal"] = JS.undefined();
+  message["file"] = "";
+  message["message"] = reason;
+  message["line"] = JS.undefined();
+  if (start.truthy()) message["line"] = JS.get(start, "line");
+  message["name"] = stringifyPlace(place);
+  message["place"] = JS.undefined();
+  if (place.truthy()) message["place"] = place;
+  message["reason"] = reason;
+  message["ruleId"] = JS.undefined();
+  if (JS.get(options, "ruleId").truthy()) message["ruleId"] = JS.get(options, "ruleId");
+  message["source"] = JS.undefined();
+  if (JS.get(options, "source").truthy()) message["source"] = JS.get(options, "source");
+  message["actual"] = JS.undefined();
+  message["expected"] = JS.undefined();
+  message["note"] = JS.undefined();
+  message["url"] = JS.undefined();
+  if (legacyCause && JS.typeOf(JS.get(JS.get(options, "cause"), "stack")) == "string") {
+    message["stack"] = JS.get(JS.get(options, "cause"), "stack");
+  } else {
+    message["stack"] = "";
+  }
+  return message;
+}
+
+JsValue vfileConstruct(JsValue self, JsValue value) {
+  if (JS.isUndefined(self)) {
+    throw JS.construct(TypeError, "Class constructor VFile cannot be invoked without 'new'");
+  }
+  JsValue options = value;
+  if (!value.truthy()) {
+    options = JS.object();
+  } else if (isUrl(value)) {
+    options = JS.object("path", value);
+  } else if (JS.typeOf(value) == "string" || isUint8Array(value)) {
+    options = JS.object("value", value);
+  }
+  string initialCwd = cwd();
+  if (JS.in("cwd", options)) initialCwd = "";
+  JS.set(self, "cwd", initialCwd);
+  JS.set(self, "data", JS.object());
+  JS.set(self, "history", JS.array());
+  JS.set(self, "messages", JS.array());
+  int index = 0;
+  while (index < pathFields.length) {
+    string field = JS.string(pathFields[index]);
+    if (JS.in(field, options) && !JS.isNullish(JS.get(options, field)) && !JS.isUndefined(JS.get(options, field))) {
+      JsValue fieldValue = JS.get(options, field);
+      if (field == "history") fieldValue = JS.invoke(fieldValue, "slice");
+      JS.set(self, field, fieldValue);
+    }
+    index = index + 1;
+  }
+  for (string field in options) {
+    if (!includesField(field)) JS.set(self, field, JS.get(options, field));
+  }
+  return self;
+}
+
+JsValue vfileMessage(JsValue self, JsValue reason, JsValue options, JsValue origin) {
+  JsValue message = createMessage(reason, options, origin);
+  JsValue path = getPath(self);
+  if (path.truthy()) {
+    message["name"] = JS.string(path) + ":" + JS.string(JS.get(message, "name"));
+    message["file"] = path;
+  }
+  message["fatal"] = false;
+  JsValue[] messages = JS.assume(JS.get(self, "messages"));
+  messages.push(message);
+  return message;
+}
+
+JsValue vfileFail(JsValue self, JsValue reason, JsValue options, JsValue origin) {
+  JsValue message = JS.call(JS.get(self, "message"), self, reason, options, origin);
+  message["fatal"] = true;
+  throw message;
+}
+
+JsValue vfileInfo(JsValue self, JsValue reason, JsValue options, JsValue origin) {
+  JsValue message = JS.call(JS.get(self, "message"), self, reason, options, origin);
+  message["fatal"] = JS.undefined();
+  return message;
+}
+
+JsValue vfileToString(JsValue self, JsValue encoding) {
+  JsValue value = JS.get(self, "value");
+  if (JS.isUndefined(value)) return "";
+  if (JS.typeOf(value) == "string") return value;
+  JsValue selectedEncoding = JS.undefined();
+  if (encoding.truthy()) selectedEncoding = encoding;
+  JsValue decoder = JS.construct(TextDecoder, selectedEncoding);
+  return JS.invoke(decoder, "decode", value);
+}
+
+export JsValue createVFileMessage(JsValue reason, JsValue options) {
+  return createMessage(reason, options, JS.undefined());
+}
+
+export JsValue VFileMessage = JS.method3((JsValue self, JsValue reason, JsValue options, JsValue origin) => {
+  if (JS.isUndefined(self)) {
+    throw JS.construct(TypeError, "Class constructor VFileMessage cannot be invoked without 'new'");
+  }
+  return createMessage(reason, options, origin);
+});
+messagePrototype = JS.get(VFileMessage, "prototype");
+JS.invoke(Object, "setPrototypeOf", VFileMessage, Error);
+JS.invoke(Object, "setPrototypeOf", messagePrototype, JS.get(Error, "prototype"));
+JS.invoke(Object, "defineProperty", VFileMessage, "name", JS.object("configurable", true, "value", "VFileMessage"));
+messagePrototype["file"] = "";
+messagePrototype["name"] = "";
+messagePrototype["reason"] = "";
+messagePrototype["message"] = "";
+messagePrototype["stack"] = "";
+messagePrototype["column"] = JS.undefined();
+messagePrototype["line"] = JS.undefined();
+messagePrototype["ancestors"] = JS.undefined();
+messagePrototype["cause"] = JS.undefined();
+messagePrototype["fatal"] = JS.undefined();
+messagePrototype["place"] = JS.undefined();
+messagePrototype["ruleId"] = JS.undefined();
+messagePrototype["source"] = JS.undefined();
+JS.invoke(Object, "defineProperty", VFileMessage, "prototype", JS.object("writable", false));
+
+JsValue prototype = JS.undefined();
+export JsValue VFile = JS.method1(vfileConstruct);
+prototype = JS.get(VFile, "prototype");
+JS.invoke(Object, "setPrototypeOf", prototype, JS.get(Object, "prototype"));
+JS.invoke(Object, "defineProperty", VFile, "name", JS.object("configurable", true, "value", "VFile"));
+
+void defineVFileAccessor(string name, JsValue descriptor) {
+  JS.invoke(Object, "defineProperty", prototype, name, descriptor);
+  JsValue getter = JS.get(descriptor, "get");
+  JsValue setter = JS.get(descriptor, "set");
+  JS.invoke(Object, "defineProperty", getter, "name", JS.object("configurable", true, "value", "get " + name));
+  JS.invoke(Object, "defineProperty", setter, "name", JS.object("configurable", true, "value", "set " + name));
+}
+
+void defineVFileMethod(string name, JsValue method) {
+  JS.invoke(Object, "defineProperty", method, "name", JS.object("configurable", true, "value", name));
+  JS.invoke(
+    Object,
+    "defineProperty",
+    prototype,
+    name,
+    JS.object("configurable", true, "writable", true, "value", method)
+  );
+}
+
+JsValue failMethod = JS.method3(vfileFail);
+JsValue infoMethod = JS.method3(vfileInfo);
+JsValue messageMethod = JS.method3(vfileMessage);
+JsValue toStringMethod = JS.method1(vfileToString);
+defineVFileAccessor("basename", JS.object(
+  "configurable", true,
+  "get", JS.method0((JsValue self) => {
+    JsValue path = getPath(self);
+    if (JS.typeOf(path) == "string") return pathBasename(JS.string(path), "");
+    return JS.undefined();
+  }),
+  "set", JS.method1((JsValue self, JsValue value) => {
+    assertNonEmpty(value, "basename");
+    assertPart(value, "basename");
+    JsValue dirname = JS.get(self, "dirname");
+    JsValue directory = "";
+    if (dirname.truthy()) directory = dirname;
+    setPath(self, pathJoin(directory, value));
+    return JS.undefined();
+  })
+));
+defineVFileAccessor("dirname", JS.object(
+  "configurable", true,
+  "get", JS.method0((JsValue self) => {
+    JsValue path = getPath(self);
+    if (JS.typeOf(path) == "string") return pathDirname(JS.string(path));
+    return JS.undefined();
+  }),
+  "set", JS.method1((JsValue self, JsValue value) => {
+    JsValue basename = JS.get(self, "basename");
+    if (!basename.truthy()) throw JS.construct(Error, "Setting `dirname` requires `path` to be set too");
+    JsValue directory = "";
+    if (value.truthy()) directory = value;
+    setPath(self, pathJoin(directory, basename));
+    return JS.undefined();
+  })
+));
+defineVFileAccessor("extname", JS.object(
+  "configurable", true,
+  "get", JS.method0((JsValue self) => {
+    JsValue path = getPath(self);
+    if (JS.typeOf(path) == "string") return pathExtname(JS.string(path));
+    return JS.undefined();
+  }),
+  "set", JS.method1((JsValue self, JsValue value) => {
+    JsValue extname = value;
+    assertPart(extname, "extname");
+    JsValue dirname = JS.get(self, "dirname");
+    if (!dirname.truthy()) throw JS.construct(Error, "Setting `extname` requires `path` to be set too");
+    if (extname.truthy()) {
+      if (JS.number(JS.invoke(extname, "codePointAt", 0.0)).toInt() != 46) {
+        throw JS.construct(Error, "`extname` must start with `.`");
+      }
+      if (JS.invoke(extname, "includes", ".", 1.0).truthy()) {
+        throw JS.construct(Error, "`extname` cannot contain multiple dots");
+      }
+    }
+    string extension = "";
+    if (extname.truthy()) extension = JS.string(extname);
+    setPath(self, pathJoin(dirname, JS.string(JS.get(self, "stem")) + extension));
+    return JS.undefined();
+  })
+));
+defineVFileAccessor("path", JS.object(
+  "configurable", true,
+  "get", JS.method0((JsValue self) => getPath(self)),
+  "set", JS.method1((JsValue self, JsValue value) => { setPath(self, value); return JS.undefined(); })
+));
+defineVFileAccessor("stem", JS.object(
+  "configurable", true,
+  "get", JS.method0((JsValue self) => {
+    JsValue path = getPath(self);
+    if (JS.typeOf(path) == "string") return pathBasename(JS.string(path), JS.string(JS.get(self, "extname")));
+    return JS.undefined();
+  }),
+  "set", JS.method1((JsValue self, JsValue value) => {
+    assertNonEmpty(value, "stem");
+    assertPart(value, "stem");
+    string stem = JS.string(value);
+    JsValue dirname = JS.get(self, "dirname");
+    string directory = "";
+    if (dirname.truthy()) directory = JS.string(dirname);
+    JsValue extname = JS.get(self, "extname");
+    string extension = "";
+    if (extname.truthy()) extension = JS.string(extname);
+    setPath(self, pathJoin(directory, stem + extension));
+    return JS.undefined();
+  })
+));
+defineVFileMethod("fail", failMethod);
+defineVFileMethod("info", infoMethod);
+defineVFileMethod("message", messageMethod);
+defineVFileMethod("toString", toStringMethod);
+JS.invoke(Object, "defineProperty", VFile, "prototype", JS.object("writable", false));
+
+export bool looksLikeAVFile(JsValue value) {
+  if (!value.truthy() || JS.typeOf(value) != "object") return false;
+  return JS.in("message", value) && JS.in("messages", value);
+}
+
+export JsValue asVFile(JsValue value) {
+  if (looksLikeAVFile(value)) return value;
+  return JS.construct(VFile, value);
+}

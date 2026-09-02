@@ -1,0 +1,209 @@
+import { Error } from "../host.lil";
+
+bool asciiWhitespace(int code) {
+  return code == 9 || code == 10 || code == 12 || code == 13 || code == 32;
+}
+
+string trim(string value) {
+  int start = 0;
+  int end = value.length;
+  while (start < end && asciiWhitespace(value.charCodeAt(start))) {
+    start = start + 1;
+  }
+  while (end > start && asciiWhitespace(value.charCodeAt(end - 1))) {
+    end = end - 1;
+  }
+  return value.slice(start, end);
+}
+
+bool propertyCode(int code) {
+  return code == 42 || code == 45 || code == 35 || code == 47 || code == 92 ||
+    code == 95 || code >= 48 && code <= 57 || code >= 65 && code <= 90 ||
+    code >= 97 && code <= 122;
+}
+
+void fail(string source, int line, int column, string reason) {
+  JsValue error = JS.construct(Error, source + ":" + JS.string(line) + ":" + JS.string(column) + ": " + reason);
+  error["reason"] = reason;
+  error["filename"] = source;
+  error["line"] = line;
+  error["column"] = column;
+  throw error;
+}
+
+int skipSpace(string style, int index) {
+  int n = style.length;
+  while (index < n && asciiWhitespace(style.charCodeAt(index))) {
+    index = index + 1;
+  }
+  return index;
+}
+
+int skipComment(string style, int index) {
+  if (index + 1 >= style.length || style.charAt(index) != "/" || style.charAt(index + 1) != "*") {
+    return index;
+  }
+  int cursor = index + 2;
+  while (cursor + 1 < style.length && !(style.charAt(cursor) == "*" && style.charAt(cursor + 1) == "/")) {
+    cursor = cursor + 1;
+  }
+  if (cursor + 1 >= style.length) {
+    fail("undefined", 1, index + 1, "End of comment missing");
+  }
+  return cursor + 2;
+}
+
+string removeComments(string value) {
+  string output = "";
+  int index = 0;
+  while (index < value.length) {
+    if (index + 1 < value.length && value.charAt(index) == "/" && value.charAt(index + 1) == "*") {
+      int next = skipComment(value, index);
+      index = next;
+    } else {
+      output = output + value.charAt(index);
+      index = index + 1;
+    }
+  }
+  return output;
+}
+
+bool isCustomProperty(string property) {
+  if (property.length < 3 || property.slice(0, 2) != "--") {
+    return false;
+  }
+  int index = 2;
+  while (index < property.length) {
+    int code = property.charCodeAt(index);
+    if (!(code == 45 || code == 95 || code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122)) {
+      return false;
+    }
+    index = index + 1;
+  }
+  return true;
+}
+
+bool hasHyphen(string property) {
+  return property.indexOf("-") >= 0;
+}
+
+string replaceHyphens(string property) {
+  string output = "";
+  int index = 0;
+  while (index < property.length) {
+    if (index + 1 < property.length && property.charAt(index) == "-") {
+      int code = property.charCodeAt(index + 1);
+      if (code >= 97 && code <= 122) {
+        output = output + property.charAt(index + 1).toUpperCase();
+        index = index + 2;
+        continue;
+      }
+    }
+    output = output + property.charAt(index);
+    index = index + 1;
+  }
+  return output;
+}
+
+export string camelCase(string property, bool reactCompat) {
+  if (property.length == 0 || !hasHyphen(property) || isCustomProperty(property)) {
+    return property;
+  }
+  string next = property.toLowerCase();
+  if (reactCompat) {
+    if (next.slice(0, 4) == "-ms-") {
+      next = "ms-" + next.slice(4);
+    }
+  } else {
+    string[] prefixes = ["webkit", "moz", "ms", "o", "khtml"];
+    int i = 0;
+    while (i < prefixes.length) {
+      string prefix = prefixes[i];
+      string marker = "-" + prefix + "-";
+      if (next.slice(0, marker.length) == marker) {
+        next = prefix + "-" + next.slice(marker.length);
+        break;
+      }
+      i = i + 1;
+    }
+  }
+  return replaceHyphens(next);
+}
+
+void addDeclaration(JsValue output, string property, string value, bool reactCompat) {
+  property = trim(removeComments(property));
+  value = trim(removeComments(value));
+  if (property.length > 0 && value.length > 0) {
+    output[camelCase(property, reactCompat)] = value;
+  }
+}
+
+export JsValue styleToJs(string style, bool reactCompat) {
+  JsValue output = JS.object();
+  if (style.length == 0) {
+    return output;
+  }
+  int index = 0;
+  int n = style.length;
+  while (index < n) {
+    index = skipSpace(style, index);
+    while (index + 1 < n && style.charAt(index) == "/" && style.charAt(index + 1) == "*") {
+      index = skipSpace(style, skipComment(style, index));
+    }
+    if (index >= n) {
+      break;
+    }
+    int propertyStart = index;
+    if (style.charAt(index) == "*") {
+      index = index + 1;
+    }
+    while (index < n && propertyCode(style.charCodeAt(index))) {
+      index = index + 1;
+    }
+    if (index == propertyStart || index == propertyStart + 1 && style.charAt(propertyStart) == "*") {
+      break;
+    }
+    string property = style.slice(propertyStart, index);
+    index = skipSpace(style, index);
+    if (index + 1 < n && style.charAt(index) == "/" && style.charAt(index + 1) == "*") {
+      index = skipComment(style, index);
+      index = skipSpace(style, index);
+    }
+    if (index >= n || style.charAt(index) != ":") {
+      fail("undefined", 1, index + 1, "property missing ':'");
+    }
+    index = skipSpace(style, index + 1);
+    int valueStart = index;
+    string quote = "";
+    int parentheses = 0;
+    while (index < n) {
+      string character = style.charAt(index);
+      if (quote.length > 0) {
+        if (character == "\\") {
+          index = index + 2;
+          continue;
+        }
+        if (character == quote) {
+          quote = "";
+        }
+      } else if (character == "'" || character == "\"") {
+        quote = character;
+      } else if (character == "(") {
+        parentheses = parentheses + 1;
+      } else if (character == ")" && parentheses > 0) {
+        parentheses = parentheses - 1;
+      } else if ((character == ";" && parentheses == 0) || character == "}") {
+        break;
+      }
+      index = index + 1;
+    }
+    addDeclaration(output, property, style.slice(valueStart, index), reactCompat);
+    if (index < n && style.charAt(index) == "}") {
+      break;
+    }
+    if (index < n && style.charAt(index) == ";") {
+      index = index + 1;
+    }
+  }
+  return output;
+}

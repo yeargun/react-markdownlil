@@ -87,6 +87,7 @@ if (existsSync(playground) && siblingsReady) {
     legalComments: "none",
     minifyWhitespace: true,
     alias: {
+      "@itslil/unified/vfile": join(home, "unifiedlil/dist/vfile.esm.js"),
       "@itslil/unified": join(home, "unifiedlil/dist/unified.esm.js"),
       "@itslil/remark-parse": join(home, "remark-parselil/dist/remark-parse.esm.js"),
       "@itslil/remark-rehype": join(home, "remark-rehypelil/dist/remark-rehype.esm.js"),

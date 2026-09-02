@@ -1,0 +1,27 @@
+import { fromMarkdownImpl as fromMarkdown } from "./from-markdown.lil";
+import { call1, objectAssign, undef } from "./micromark/host.lil";
+
+JsValue readData(JsValue self, string key) {
+  return call1(JS.get(self, "data"), self, key);
+}
+
+JsValue orEmptyList(JsValue value) {
+  if (value.truthy()) {
+    return value;
+  }
+  return JS.array();
+}
+
+JsValue remarkParseCall(JsValue self, JsValue options) {
+  JS.set(self, "parser", JS.method1((JsValue _parserThis, JsValue document) => {
+    JsValue merged = objectAssign(JS.object(), readData(self, "settings"));
+    objectAssign(merged, options);
+    JS.set(merged, "extensions", orEmptyList(readData(self, "micromarkExtensions")));
+    JS.set(merged, "mdastExtensions", orEmptyList(readData(self, "fromMarkdownExtensions")));
+    return fromMarkdown(document, merged, undef());
+  }));
+  return undef();
+}
+
+JsValue remarkParse = JS.method1(remarkParseCall);
+export JsValue default = remarkParse;
