@@ -1,41 +1,59 @@
 {
-  "schemaVersion": 1,
-  "measuredAt": "2026-09-10T13:59:31Z",
+  "schemaVersion": 2,
+  "measuredAt": "2026-09-10T20:55:31Z",
   "name": "react-markdownlil",
   "compiler": {
-    "commit": "63c2896a71e60cbcca7870fe979f9d6ecaff3452",
-    "sha256": "2319462ef7d858c8e2a5a767260aa4f80d325e0045afa0cc86cc122d1299b059",
-    "profile": "release",
-    "dirty": false
+    "commit": "4dc4e3337d9ffd758d65e3852682d6e13d9331c1",
+    "sha256": "0616048498eb9eb2e4bd75b39e8e6a083733ada647e16108edfee30ad183beeb"
   },
   "upstream": {
     "package": "react-markdown",
-    "version": "10.1.0"
+    "version": "10.1.0",
+    "repository": "https://github.com/remarkjs/react-markdown.git",
+    "commit": "44d2e4a44b37461ab7778d6870c1a9eb36393ad2"
   },
-  "scope": "react-markdown@10.1.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline External on both sides: react, react/jsx-runtime, react-dom.",
-  "compatibility": "Compatibility checks are incomplete.",
+  "scope": "react-markdown@10.1.0 public ESM runtime graph. Original ESM assembled from the pinned Git source build.",
+  "compatibility": "Runtime checks: 120/120 pass. Declaration or package checks fail.",
   "tests": {
     "pass": 120,
     "total": 120
   },
   "buildComplete": true,
   "machine": {
+    "provider": "Azure",
+    "instanceClass": "Standard_D16als_v7",
     "cpu": "AMD EPYC 9V45 96-Core Processor",
     "logicalCpus": 16,
-    "memoryBytes": 33648431104,
+    "memoryBytes": 33648427008,
     "os": "Ubuntu 24.04.4 LTS",
-    "node": "v22.23.2",
-    "rayonThreads": 16,
-    "provider": "Azure",
-    "instanceClass": "Standard_D16als_v7"
+    "kernel": "6.17.0-1022-azure",
+    "node": "v24.11.1",
+    "rayonThreads": 8,
+    "loadAtStart": [
+      1.9189453125,
+      2.3623046875,
+      2.21728515625
+    ],
+    "loadAtEnd": [
+      2.771484375,
+      2.7275390625,
+      2.4814453125
+    ]
   },
   "build": {
-    "compilerSeconds": 67.26646852493286,
-    "packageSeconds": 132.5098924140002,
-    "originalSeconds": 0.5399084660000001,
-    "packageScope": "node scripts/build.mjs --compile --force; 2 successful compiler invocations plus package generation.",
-    "originalScope": "react-markdown@10.1.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline",
-    "protocol": "Same shared worker for both lanes; one fresh LilScript package build; median of three sequential upstream ESM builds (PlayCanvas records one native reference build). Outside compiler jobs were observed in the pool, so contention is not excluded. Dependencies, tests and compression measurement are outside these build times."
+    "compilerSeconds": null,
+    "packageSeconds": 125.14603469999929,
+    "originalSeconds": 2.719430447999912,
+    "originalEsmSeconds": 0.506074147,
+    "packageScope": "node scripts/build.mjs --compile --force",
+    "originalScope": "npm run build",
+    "protocol": {
+      "repetitions": 3,
+      "cleanOutputs": true,
+      "dependencyInstallationTimedSeparately": true,
+      "sourceArchives": "Pinned Git checkouts; original repository package build commands, followed by production ESM assembly.",
+      "workerUse": "Both implementations use the same machine and Node version. This shared build pool also runs unrelated jobs; timings are contextual wall times, with CPU time recorded separately."
+    }
   },
   "esm": {
     "lilscript": {
@@ -46,11 +64,110 @@
       "file": "./esm-comparison/lilscript.js"
     },
     "original": {
-      "raw": 116959,
-      "gzip9": 34672,
-      "brotli11": 30887,
-      "sha256": "74381d0b88e5477d8aa817879747d22dc6e5ab56a4119a217c053043ec9a2bf2",
+      "raw": 117068,
+      "gzip9": 34789,
+      "brotli11": 30950,
+      "sha256": "e20527f2e1b933087a10f22d87f3d101dcd6c4b7c47ff5d96f2a037384b1be65",
       "file": "./esm-comparison/original.js"
     }
+  },
+  "sourceBuild": {
+    "original": {
+      "complete": true,
+      "medianSeconds": 2.719430447999912,
+      "minimumSeconds": 2.7194137610003963,
+      "maximumSeconds": 2.818445920999693,
+      "samples": [
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "wallSeconds": 2.818445920999693,
+          "cpuSeconds": 5.860290000000001,
+          "exitCode": 0,
+          "timedOut": false,
+          "log": "original-build-1.log",
+          "logSha256": "51791ae7f4014016a35f2c15902da9470597bf63d71a9ad1ece3876825e25d20"
+        },
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "wallSeconds": 2.719430447999912,
+          "cpuSeconds": 5.647505000000046,
+          "exitCode": 0,
+          "timedOut": false,
+          "log": "original-build-2.log",
+          "logSha256": "51791ae7f4014016a35f2c15902da9470597bf63d71a9ad1ece3876825e25d20"
+        },
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "wallSeconds": 2.7194137610003963,
+          "cpuSeconds": 5.662166000000086,
+          "exitCode": 0,
+          "timedOut": false,
+          "log": "original-build-3.log",
+          "logSha256": "51791ae7f4014016a35f2c15902da9470597bf63d71a9ad1ece3876825e25d20"
+        }
+      ]
+    },
+    "lilscript": {
+      "complete": true,
+      "medianSeconds": 125.14603469999929,
+      "minimumSeconds": 125.09659663500042,
+      "maximumSeconds": 129.79313330200057,
+      "samples": [
+        {
+          "command": [
+            "bash",
+            "-c",
+            "node scripts/build.mjs --compile --force"
+          ],
+          "wallSeconds": 129.79313330200057,
+          "cpuSeconds": 306.980853,
+          "exitCode": 0,
+          "timedOut": false,
+          "log": "lilscript-build-1.log",
+          "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6"
+        },
+        {
+          "command": [
+            "bash",
+            "-c",
+            "node scripts/build.mjs --compile --force"
+          ],
+          "wallSeconds": 125.14603469999929,
+          "cpuSeconds": 293.16221399999995,
+          "exitCode": 0,
+          "timedOut": false,
+          "log": "lilscript-build-2.log",
+          "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6"
+        },
+        {
+          "command": [
+            "bash",
+            "-c",
+            "node scripts/build.mjs --compile --force"
+          ],
+          "wallSeconds": 125.09659663500042,
+          "cpuSeconds": 293.45673700000003,
+          "exitCode": 0,
+          "timedOut": false,
+          "log": "lilscript-build-3.log",
+          "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6"
+        }
+      ]
+    },
+    "scopeNote": "Both timings cover each repository\u2019s package build command; their output formats and build checks can differ.",
+    "cleanOutputs": true,
+    "installationExcluded": true
   }
 }

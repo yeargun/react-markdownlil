@@ -1,0 +1,50 @@
+{
+  "source": {
+    "repository": "https://github.com/remarkjs/react-markdown.git",
+    "commit": "44d2e4a44b37461ab7778d6870c1a9eb36393ad2",
+    "package": "react-markdown",
+    "version": "10.1.0",
+    "directory": "."
+  },
+  "portSource": {
+    "commit": "a3c0ed56e78974051ec2d2ed503b5ccfb84f9239"
+  },
+  "compilerCommit": "4dc4e3337d9ffd758d65e3852682d6e13d9331c1",
+  "install": [
+    "npm",
+    "install",
+    "--ignore-scripts",
+    "--no-audit",
+    "--no-fund"
+  ],
+  "setup": [
+    [
+      "npm",
+      "install",
+      "--save-dev",
+      "--save-exact",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      "@types/hast@3.0.4",
+      "typescript@5.5.4"
+    ]
+  ],
+  "build": [
+    "npm",
+    "run",
+    "build"
+  ],
+  "clean": [],
+  "entry": "index.js",
+  "defaultExport": true,
+  "external": [
+    "react",
+    "react/jsx-runtime",
+    "react-dom"
+  ],
+  "esmScope": "react-markdown@10.1.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline",
+  "lilscriptBuild": "node scripts/build.mjs --compile --force",
+  "test": "node --conditions development --experimental-loader=./test/load-jsx.js --no-warnings --test test/*.test.mjs test/official/test.jsx && npm run check:types",
+  "prerequisiteAdjustments": "Pin declared development dependencies for release compatibility: @types/hast@3.0.4, typescript@5.5.4"
+}

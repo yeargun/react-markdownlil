@@ -12,7 +12,7 @@
   "spec": {
     "total": 120,
     "pass": 120,
-    "label": "repository checks"
+    "label": "runtime checks"
   },
   "play": {
     "kind": "react-markdown",
@@ -22,44 +22,44 @@
     {
       "id": "official",
       "name": "Official react-markdown@10.1.0 graph",
-      "raw": 295252,
-      "gzip9": 59175,
-      "brotli11": 50482,
+      "raw": 294763,
+      "gzip9": 59287,
+      "brotli11": 50628,
       "note": "esbuild bundle of the published package plus runtime deps, react external",
       "diagnostic": false,
-      "measuredAt": "2026-09-10T13:59:31Z",
-      "artifactSha256": "e0f94625f6ebcea7b8e8e0bbe677fe09d84e82e2b20a79e9aa8a89dbde756812"
+      "measuredAt": "2026-09-10T20:55:31Z",
+      "artifactSha256": "30c56bd1ad9ad2af61773e4dbde71bad6bf30d1f6c0f3630d9f66e7274a8fd58"
     },
     {
       "id": "official-terser-mangle",
       "name": "Official \u00b7 Terser mangle on",
-      "raw": 116959,
-      "gzip9": 34672,
-      "brotli11": 30887,
+      "raw": 117068,
+      "gzip9": 34789,
+      "brotli11": 30950,
       "note": "Terser 5.51.2 compress of that graph, module: true, mangle: true",
       "baseline": true,
-      "measuredAt": "2026-09-10T13:59:31Z",
-      "artifactSha256": "74381d0b88e5477d8aa817879747d22dc6e5ab56a4119a217c053043ec9a2bf2"
+      "measuredAt": "2026-09-10T20:55:31Z",
+      "artifactSha256": "e20527f2e1b933087a10f22d87f3d101dcd6c4b7c47ff5d96f2a037384b1be65"
     },
     {
       "id": "official-terser-nomangle",
       "name": "Official \u00b7 Terser mangle off",
-      "raw": 177625,
-      "gzip9": 42050,
-      "brotli11": 37374,
+      "raw": 178069,
+      "gzip9": 42263,
+      "brotli11": 37574,
       "note": "Terser 5.51.2 compress of that graph, module: true, mangle: false",
-      "measuredAt": "2026-09-10T13:59:31Z",
-      "artifactSha256": "97795a140518587289ba504066e4fde1bcf131baa358cf73ae6a027beab98fd9"
+      "measuredAt": "2026-09-10T20:55:31Z",
+      "artifactSha256": "6f9c3b78e3633c8af242b2c33f746362db53ee1869f5556c77cde76d9bdcb146"
     },
     {
       "id": "official-esbuild",
       "name": "Official \u00b7 esbuild minify",
-      "raw": 119434,
-      "gzip9": 36643,
-      "brotli11": 32733,
+      "raw": 119506,
+      "gzip9": 36700,
+      "brotli11": 32810,
       "note": "esbuild minify of that graph",
-      "measuredAt": "2026-09-10T13:59:31Z",
-      "artifactSha256": "a1ec1e579f8918eac872ec9a1583486f6cdff08d5d6f6c2506582e8e5b0f8bfa"
+      "measuredAt": "2026-09-10T20:55:31Z",
+      "artifactSha256": "44ba1dd1e6d2f135a2f4817c89773c2e653526c9e313cbf44b5e56944645e997"
     },
     {
       "id": "itslil",
@@ -67,9 +67,9 @@
       "raw": 143696,
       "gzip9": 48984,
       "brotli11": 41861,
-      "note": "ESM output from LilScript 63c2896.",
+      "note": "ESM output from LilScript 4dc4e33.",
       "primary": true,
-      "measuredAt": "2026-09-10T13:59:31Z",
+      "measuredAt": "2026-09-10T20:55:31Z",
       "artifactSha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
     },
     {
@@ -78,8 +78,8 @@
       "raw": 143696,
       "gzip9": 48984,
       "brotli11": 41861,
-      "note": "ESM output from LilScript 63c2896.",
-      "measuredAt": "2026-09-10T13:59:31Z",
+      "note": "ESM output from LilScript 4dc4e33.",
+      "measuredAt": "2026-09-10T20:55:31Z",
       "artifactSha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
     }
   ],
@@ -95,5 +95,5 @@
       "documentMs": 1.85
     }
   ],
-  "sizeMeasuredAt": "2026-09-10T13:59:31Z"
+  "sizeMeasuredAt": "2026-09-10T20:55:31Z"
 }

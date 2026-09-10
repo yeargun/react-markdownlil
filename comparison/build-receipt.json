@@ -248,12 +248,38 @@
   "publicationSourceFingerprint": "7182e7bc105e70398cd964a9d3b0c89e32a0cd5fb8ce026ac8858eb570d6ab0c",
   "comparisonArtifacts": [
     {
+      "path": "site/esm-comparison/original.js",
+      "sha256": "e20527f2e1b933087a10f22d87f3d101dcd6c4b7c47ff5d96f2a037384b1be65"
+    },
+    {
       "path": "site/esm-comparison/lilscript.js",
       "sha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
     },
     {
-      "path": "site/esm-comparison/original.js",
-      "sha256": "74381d0b88e5477d8aa817879747d22dc6e5ab56a4119a217c053043ec9a2bf2"
+      "path": "site/source-build.json",
+      "sha256": "14b5fa377987abf9c37bfb8d8f472a1c1e8dd8909954383ed894aff1e1caf497"
+    },
+    {
+      "path": "site/comparison.json",
+      "sha256": "6d6776d43622c104c8baecc43ca92a583f495116e38ad78c0366024663e011df"
     }
-  ]
+  ],
+  "sourceBuildReceipt": "comparison/source-build/result.json",
+  "currentMeasurement": {
+    "compiler": {
+      "commit": "4dc4e3337d9ffd758d65e3852682d6e13d9331c1",
+      "sha256": "0616048498eb9eb2e4bd75b39e8e6a083733ada647e16108edfee30ad183beeb"
+    },
+    "source": {
+      "commit": "a3c0ed56e78974051ec2d2ed503b5ccfb84f9239"
+    },
+    "upstream": {
+      "repository": "https://github.com/remarkjs/react-markdown.git",
+      "commit": "44d2e4a44b37461ab7778d6870c1a9eb36393ad2",
+      "package": "react-markdown",
+      "version": "10.1.0",
+      "directory": "."
+    },
+    "compatibility": "Runtime checks: 120/120 pass. Declaration or package checks fail."
+  }
 }
