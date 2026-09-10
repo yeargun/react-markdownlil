@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "name": "react-markdownlil",
+  "measuredAt": "2026-09-10T13:59:31Z",
+  "status": "blocked",
+  "buildPassed": true,
+  "summary": "The newly measured artifact remains diagnostic until its behavior gate is satisfied; the previously published runtime is retained.",
+  "sourceCommit": "a3c0ed56e78974051ec2d2ed503b5ccfb84f9239",
+  "previousPublicCommit": "2ee2b53f7c6125d85e745cb7420c2677703740eb",
+  "compiler": {
+    "commit": "63c2896a71e60cbcca7870fe979f9d6ecaff3452",
+    "sha256": "2319462ef7d858c8e2a5a767260aa4f80d325e0045afa0cc86cc122d1299b059",
+    "profile": "release",
+    "dirty": false
+  },
+  "machine": {
+    "cpu": "AMD EPYC 9V45 96-Core Processor",
+    "logicalCpus": 16,
+    "affinityCpus": 16,
+    "memoryBytes": 33648431104,
+    "os": "Ubuntu 24.04.4 LTS",
+    "kernel": "6.17.0-1022-azure",
+    "architecture": "x86_64",
+    "node": "v22.23.2",
+    "rayonThreads": 16,
+    "provider": "Azure",
+    "instanceClass": "Standard_D16als_v7",
+    "parallelPortBuildsOnMachine": 1,
+    "loadAtStart": [
+      8.17236328125,
+      5.3642578125,
+      2.56494140625
+    ],
+    "concurrencyNote": "The audit scheduled one port per worker, but this is a shared pool. Outside compiler jobs were observed during the run; timings are contextual wall times, not controlled speedup benchmarks."
+  },
+  "upstream": {
+    "name": "react-markdownlil",
+    "package": "react-markdown",
+    "pinned": "10.1.0",
+    "latest": "10.1.0",
+    "source": "https://www.npmjs.com/package/react-markdown"
+  },
+  "comparisonScope": "react-markdown@10.1.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline External on both sides: react, react/jsx-runtime, react-dom. Sizes use canonical zlib 1.3.1 gzip-9 and Google Brotli 1.1.0 quality 11.",
+  "sizes": {
+    "previous": {
+      "id": "itslil",
+      "name": "@itslil/react-markdown \u00b7 library",
+      "raw": 142205,
+      "gzip9": 49518,
+      "brotli11": 41907,
+      "note": "Consumer graph of the single compiled LilScript artifact, React external, without post-minification.",
+      "primary": true
+    },
+    "current": {
+      "path": "dist/react-markdown.esm.js",
+      "raw": 143696,
+      "gzip9": 48984,
+      "brotli11": 41861,
+      "sha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
+    },
+    "upstream": {
+      "path": ".page-audit/upstream/official.esm.js",
+      "raw": 116959,
+      "gzip9": 34672,
+      "brotli11": 30887,
+      "sha256": "74381d0b88e5477d8aa817879747d22dc6e5ab56a4119a217c053043ec9a2bf2"
+    }
+  },
+  "officialArtifacts": [
+    {
+      "path": ".page-audit/upstream/official.terser-nomangle.js",
+      "raw": 177625,
+      "gzip9": 42050,
+      "brotli11": 37374,
+      "sha256": "97795a140518587289ba504066e4fde1bcf131baa358cf73ae6a027beab98fd9"
+    },
+    {
+      "path": ".page-audit/upstream/official.esm.js",
+      "raw": 116959,
+      "gzip9": 34672,
+      "brotli11": 30887,
+      "sha256": "74381d0b88e5477d8aa817879747d22dc6e5ab56a4119a217c053043ec9a2bf2"
+    },
+    {
+      "path": ".page-audit/upstream/official.unminified.js",
+      "raw": 295252,
+      "gzip9": 59175,
+      "brotli11": 50482,
+      "sha256": "e0f94625f6ebcea7b8e8e0bbe677fe09d84e82e2b20a79e9aa8a89dbde756812"
+    },
+    {
+      "path": ".page-audit/upstream/official.esbuild.js",
+      "raw": 119434,
+      "gzip9": 36643,
+      "brotli11": 32733,
+      "sha256": "a1ec1e579f8918eac872ec9a1583486f6cdff08d5d6f6c2506582e8e5b0f8bfa"
+    }
+  ],
+  "candidateArtifacts": [
+    {
+      "path": "dist/react-markdown.closed.js",
+      "raw": 143696,
+      "gzip9": 48984,
+      "brotli11": 41861,
+      "sha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
+    },
+    {
+      "path": "dist/react-markdown.raw.js",
+      "raw": 143482,
+      "gzip9": 48846,
+      "brotli11": 41706,
+      "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+    },
+    {
+      "path": "dist/react-markdown.development.cjs",
+      "raw": 204591,
+      "gzip9": 55838,
+      "brotli11": 47140,
+      "sha256": "fe90a5baab8f9837748147b0f92314844be3a6b2b08e08d97250f0aad0f73381"
+    },
+    {
+      "path": "dist/react-markdown.development.js",
+      "raw": 143695,
+      "gzip9": 48983,
+      "brotli11": 41855,
+      "sha256": "68b09d09fdf6637b74b01c1f5b5f4150bb0bc8d31cfbd3596a8ff6a1ebbc7e3e"
+    },
+    {
+      "path": "dist/react-markdown.cjs",
+      "raw": 204560,
+      "gzip9": 55836,
+      "brotli11": 47008,
+      "sha256": "77a72c3608f8b819e6b0c10687335144467e6d087bc64e1c88f99616f30f807f"
+    },
+    {
+      "path": "dist/react-markdown.esm.js",
+      "raw": 143696,
+      "gzip9": 48984,
+      "brotli11": 41861,
+      "sha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
+    },
+    {
+      "path": ".page-audit/upstream/official.esbuild.js",
+      "raw": 119434,
+      "gzip9": 36643,
+      "brotli11": 32733,
+      "sha256": "a1ec1e579f8918eac872ec9a1583486f6cdff08d5d6f6c2506582e8e5b0f8bfa"
+    },
+    {
+      "path": ".page-audit/upstream/official.terser-nomangle.js",
+      "raw": 177625,
+      "gzip9": 42050,
+      "brotli11": 37374,
+      "sha256": "97795a140518587289ba504066e4fde1bcf131baa358cf73ae6a027beab98fd9"
+    },
+    {
+      "path": ".page-audit/upstream/official.unminified.js",
+      "raw": 295252,
+      "gzip9": 59175,
+      "brotli11": 50482,
+      "sha256": "e0f94625f6ebcea7b8e8e0bbe677fe09d84e82e2b20a79e9aa8a89dbde756812"
+    },
+    {
+      "path": ".page-audit/upstream/official.esm.js",
+      "raw": 116959,
+      "gzip9": 34672,
+      "brotli11": 30887,
+      "sha256": "74381d0b88e5477d8aa817879747d22dc6e5ab56a4119a217c053043ec9a2bf2"
+    }
+  ],
+  "timing": {
+    "primaryCompilerSeconds": 67.26646852493286,
+    "primaryScope": "One real compiler process, including code generation and codec-guided search; excludes subsequent package wrapping.",
+    "packageSeconds": 132.5098924140002,
+    "packageScope": "node scripts/build.mjs --compile --force; 2 successful compiler invocations plus package generation.",
+    "upstreamSeconds": 0.5399084660000001,
+    "upstreamScope": "react-markdown@10.1.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline",
+    "protocol": "Same shared worker for both lanes; one fresh LilScript package build; median of three sequential upstream ESM builds (PlayCanvas records one native reference build). Outside compiler jobs were observed in the pool, so contention is not excluded. Dependencies, tests and compression measurement are outside these build times.",
+    "upstreamSamples": [
+      {
+        "bundleSeconds": 0.01551289899999999,
+        "wallSeconds": 0.749251321
+      },
+      {
+        "bundleSeconds": 0.021151696000000015,
+        "wallSeconds": 0.5399084660000001
+      },
+      {
+        "bundleSeconds": 0.019207212000000026,
+        "wallSeconds": 0.5204195859999999
+      }
+    ]
+  },
+  "behavior": {
+    "command": "node --conditions development --experimental-loader=./test/load-jsx.js --no-warnings --test test/*.test.mjs test/official/test.jsx && npm run check:types",
+    "summary": "Repository test command failed (exit 2). # tests 120 \u00b7 # pass 120 \u00b7 # fail 0",
+    "before": {
+      "exitCode": 2,
+      "failures": [],
+      "logSha256": "c7c82b30c403143deb5d107c128e81defc8aa6c071babf368a0c86623105a5f2"
+    },
+    "after": {
+      "exitCode": 2,
+      "tail": "est.jsx:1065:19)\n#     at Test.runInAsyncScope (node:async_hooks:214:14)\n#     at Test.run (node:internal/test_runner/test:1047:25)\n#     at Test.start (node:internal/test_runner/test:944:17)\n#     at TestContext.test (node:internal/test_runner/test:373:20)\n#     at TestContext.<anonymous> (file://<snapshot>/test/official/test.jsx:1058:11)\n#     at async Test.run (node:internal/test_runner/test:1054:7)\n#     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7) {\n#   [stack]: [Getter/Setter],\n#   [message]: 'rejected'\n# }\n# The above error occurred in the <MarkdownHooks> component.\n# React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.\n# Note: the above error (`Error: rejected`) was expected.\n    # Subtest: should support plugins that error\n    ok 4 - should support plugins that error\n      ---\n      duration_ms: 6.889493\n      type: 'test'\n      ...\n    # Subtest: should support rerenders\n    ok 5 - should support rerenders\n      ---\n      duration_ms: 3.532894\n      type: 'test'\n      ...\n    1..5\nok 14 - MarkdownHooks\n  ---\n  duration_ms: 60.259942\n  type: 'test'\n  ...\n# Subtest: defaultUrlTransform preserves its string-only runtime contract\nok 15 - defaultUrlTransform preserves its string-only runtime contract\n  ---\n  duration_ms: 0.950321\n  type: 'test'\n  ...\n# Subtest: development assertions preserve devlop error details\nok 16 - development assertions preserve devlop error details\n  ---\n  duration_ms: 0.397915\n  type: 'test'\n  ...\n# Subtest: production assertions are no-ops\nok 17 - production assertions are no-ops\n  ---\n  duration_ms: 64.218453\n  type: 'test'\n  ...\n# Subtest: MarkdownAsync is async even when setup fails synchronously\nok 18 - MarkdownAsync is async even when setup fails synchronously\n  ---\n  duration_ms: 0.331877\n  type: 'test'\n  ...\n# Subtest: plugins share one in-graph VFile identity\nok 19 - plugins share one in-graph VFile identity\n  ---\n  duration_ms: 8.583918\n  type: 'test'\n  ...\n# Subtest: VFile metadata and diagnostics match the upstream contract\nok 20 - VFile metadata and diagnostics match the upstream contract\n  ---\n  duration_ms: 1.396759\n  type: 'test'\n  ...\n# Subtest: local GFM, breaks, math, and KaTeX plugins compose\nok 21 - local GFM, breaks, math, and KaTeX plugins compose\n  ---\n  duration_ms: 20.371987\n  type: 'test'\n  ...\n# Subtest: remarkRehypeOptions uses object-spread coercion\nok 22 - remarkRehypeOptions uses object-spread coercion\n  ---\n  duration_ms: 2.489323\n  type: 'test'\n  ...\n# Subtest: does not repair malformed element properties\nok 23 - does not repair malformed element properties\n  ---\n  duration_ms: 0.833005\n  type: 'test'\n  ...\n# Subtest: preserves failures and nonmatches for malformed tree nodes\nok 24 - preserves failures and nonmatches for malformed tree nodes\n  ---\n  duration_ms: 0.791204\n  type: 'test'\n  ...\n# Subtest: raw nodes are replaced with indexed assignment\nok 25 - raw nodes are replaced with indexed assignment\n  ---\n  duration_ms: 0.601439\n  type: 'test'\n  ...\n# Subtest: URL properties use String coercion\nok 26 - URL properties use String coercion\n  ---\n  duration_ms: 0.313088\n  type: 'test'\n  ...\n# Subtest: URL processing preserves properties getter access\nok 27 - URL processing preserves properties getter access\n  ---\n  duration_ms: 0.262863\n  type: 'test'\n  ...\n# Subtest: supports valid complex styles and ignores an entirely invalid style\nok 28 - supports valid complex styles and ignores an entirely invalid style\n  ---\n  duration_ms: 0.783822\n  type: 'test'\n  ...\n# Subtest: supports passed-through MDX JSX element attributes\nok 29 - supports passed-through MDX JSX element attributes\n  ---\n  duration_ms: 0.435281\n  type: 'test'\n  ...\n# Subtest: matches upstream JSX conversion for styles and property schemas\nok 30 - matches upstream JSX conversion for styles and property schemas\n  ---\n  duration_ms: 1.99885\n  type: 'test'\n  ...\n# Subtest: matches every upstream HTML and SVG property record\nok 31 - matches every upstream HTML and SVG property record\n  ---\n  duration_ms: 8.005012\n  type: 'test'\n  ...\n# Subtest: matches upstream MDX attributes and missing-evaluater errors\nok 32 - matches upstream MDX attributes and missing-evaluater errors\n  ---\n  duration_ms: 1.534214\n  type: 'test'\n  ...\n# Subtest: site\n    # Subtest: has a markedlil-style lab with stack tabs\n    ok 1 - has a markedlil-style lab with stack tabs\n      ---\n      duration_ms: 0.567158\n      type: 'test'\n      ...\n    1..1\nok 33 - site\n  ---\n  duration_ms: 1.058082\n  type: 'suite'\n  ...\n1..33\n# tests 120\n# suites 1\n# pass 120\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 907.046036\n\n> @itslil/react-markdown@10.1.0 check:types\n> tsc --noEmit --strict --preserveSymlinks --module node16 --moduleResolution node16 --target es2022 test/types.ts\n\nnode_modules/@itslil/remark-breaks/dist/remark-breaks.d.ts(2,7): error TS1005: ',' expected.\n",
+      "failures": [],
+      "logSha256": "0888fe4c62b38e5b1e0ddd36822bd0717eeafbe73bddbfa0932661921f0c4155"
+    }
+  },
+  "findings": [
+    "1 committed port changes were absent from GitHub at the start of the audit.",
+    "Published-to-fresh Brotli drift: -46 bytes (-0.11%). This includes port source/config changes and compiler changes.",
+    "All 120 runtime tests passed on the fresh artifact. The complete command fails its TypeScript check because the published @itslil/remark-breaks declaration has a syntax error (TS1005). The earlier distribution fails the same check; this is an existing npm dependency problem, not evidence of a new compiler regression.",
+    "Added the explicit LilScript plugin fixtures imported by the official/parity tests.",
+    "Repository test command failed (exit 2). # tests 120 \u00b7 # pass 120 \u00b7 # fail 0"
+  ],
+  "primaryArtifact": "dist/react-markdown.esm.js",
+  "beforePage": {
+    "url": "https://yeargun.github.io/react-markdownlil/",
+    "status": 200,
+    "sha256": "1de9767cd5415ac1e1abe0d403894c16bdc956ed04c71c15fce249e5f233c5bc",
+    "lastModified": "Wed, 02 Sep 2026 16:05:15 GMT"
+  },
+  "codecSha256": "9257fd055728895c11b9c4b0d882895d7d11bb3dd3495f560123879ca2bc3cd6",
+  "publicationArtifacts": [
+    {
+      "path": "dist/react-markdown.cjs",
+      "sha256": "310643206aa29e3bd947234eb09da814efd72062b46c5870560b11e40e0c2e8d"
+    },
+    {
+      "path": "dist/react-markdown.closed.js",
+      "sha256": "d85eda4569bc0965c3fd40a1772ef8ada12654a5d04274b697a2a403502ade5e"
+    },
+    {
+      "path": "dist/react-markdown.development.cjs",
+      "sha256": "2fb69e635772b9a499f5f00f4c88c65b88e85527e33106877fbb5e373108401e"
+    },
+    {
+      "path": "dist/react-markdown.development.js",
+      "sha256": "1051bd5f83cd237bfa4978996af98c7852dfbd961518660b1c4cb5ac28fe5045"
+    },
+    {
+      "path": "dist/react-markdown.esm.js",
+      "sha256": "d85eda4569bc0965c3fd40a1772ef8ada12654a5d04274b697a2a403502ade5e"
+    }
+  ],
+  "publicationPolicy": "Retain previous public distribution; publish the diagnostic audit",
+  "publicationBase": "2ee2b53f7c6125d85e745cb7420c2677703740eb",
+  "publicationSourceFingerprint": "7182e7bc105e70398cd964a9d3b0c89e32a0cd5fb8ce026ac8858eb570d6ab0c"
+}

@@ -1,5 +1,9 @@
 # @itslil/react-markdown
 
+<!-- current-build-audit -->
+**Build audit, 2026-09-10:** [blocked; compiler, machine, build times, version gaps and behavior checks](https://yeargun.github.io/react-markdownlil/#build-audit). The [JSON receipt](site/build-audit.json) records the current comparison; older benchmark prose retains its original scope.
+
+
 [`react-markdown@10.1.0`](https://github.com/remarkjs/react-markdown) rewritten in LilScript. This is **not** the official package.
 
 **Site:** [yeargun.github.io/react-markdownlil/](https://yeargun.github.io/react-markdownlil/)
