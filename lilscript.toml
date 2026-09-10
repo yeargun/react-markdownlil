@@ -1,5 +1,12 @@
 # reusable ESM — host-visible names stay
 [javascript]
+# 8.89: re-emit a twice-read member instead of naming it. Measured -339 Brotli on
+# this port's own artifact (8.79). It was measured then and not landed, because the
+# port's suite was red for an unrelated reason -- the live-18 miscompile, which
+# made every render throw. That is fixed and the suite passes, so the measurement
+# can be acted on.
+rematerialize_member_reads = true
+assume_pure_property_reads = true
 priority = "size-first"
 optimization_level = 13
 cost_model = "brotli"
