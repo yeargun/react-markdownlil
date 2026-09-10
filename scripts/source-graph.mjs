@@ -360,7 +360,16 @@ for (const definition of definitions) {
     if (expectedPackage.package !== `${definition.packageName}@${definition.packageVersion}`) {
       throw new Error(`${definition.id} package pin changed`)
     }
-    if (expectedPackage.siblingRevision && sibling.revision !== expectedPackage.siblingRevision) {
+    // A checkout with no `.git` has no revision to compare -- the build pool
+    // rsyncs the siblings without it -- and this port then refused to build
+    // there at all, so its artifact was never rebuilt by a fleet pass. The
+    // revision is a convenience: the file inventory and the two content
+    // digests below verify the source itself, which is the actual guarantee.
+    if (
+      expectedPackage.siblingRevision &&
+      sibling.revision &&
+      sibling.revision !== expectedPackage.siblingRevision
+    ) {
       throw new Error(`${definition.id} revision ${sibling.revision} does not match ${expectedPackage.siblingRevision}`)
     }
     sameArray(sibling.files.map(({path}) => path), expectedPackage.files.map(({path}) => path), `${definition.id} source inventory`)
