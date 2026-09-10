@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-09-10T13:59:31Z",
+  "name": "react-markdownlil",
+  "compiler": {
+    "commit": "63c2896a71e60cbcca7870fe979f9d6ecaff3452",
+    "sha256": "2319462ef7d858c8e2a5a767260aa4f80d325e0045afa0cc86cc122d1299b059",
+    "profile": "release",
+    "dirty": false
+  },
+  "upstream": {
+    "package": "react-markdown",
+    "version": "10.1.0"
+  },
+  "scope": "react-markdown@10.1.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline External on both sides: react, react/jsx-runtime, react-dom.",
+  "compatibility": "Compatibility checks are incomplete.",
+  "tests": {
+    "pass": 120,
+    "total": 120
+  },
+  "buildComplete": true,
+  "machine": {
+    "cpu": "AMD EPYC 9V45 96-Core Processor",
+    "logicalCpus": 16,
+    "memoryBytes": 33648431104,
+    "os": "Ubuntu 24.04.4 LTS",
+    "node": "v22.23.2",
+    "rayonThreads": 16,
+    "provider": "Azure",
+    "instanceClass": "Standard_D16als_v7"
+  },
+  "build": {
+    "compilerSeconds": 67.26646852493286,
+    "packageSeconds": 132.5098924140002,
+    "originalSeconds": 0.5399084660000001,
+    "packageScope": "node scripts/build.mjs --compile --force; 2 successful compiler invocations plus package generation.",
+    "originalScope": "react-markdown@10.1.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline",
+    "protocol": "Same shared worker for both lanes; one fresh LilScript package build; median of three sequential upstream ESM builds (PlayCanvas records one native reference build). Outside compiler jobs were observed in the pool, so contention is not excluded. Dependencies, tests and compression measurement are outside these build times."
+  },
+  "esm": {
+    "lilscript": {
+      "raw": 143696,
+      "gzip9": 48984,
+      "brotli11": 41861,
+      "sha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea",
+      "file": "./esm-comparison/lilscript.js"
+    },
+    "original": {
+      "raw": 116959,
+      "gzip9": 34672,
+      "brotli11": 30887,
+      "sha256": "74381d0b88e5477d8aa817879747d22dc6e5ab56a4119a217c053043ec9a2bf2",
+      "file": "./esm-comparison/original.js"
+    }
+  }
+}
