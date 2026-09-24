@@ -218,7 +218,7 @@
   ],
   "publicationPolicy": "Publish the compiler-written distribution",
   "publicationBase": "2e02fbcd37edd1afddec5520fe29175d9458a9e7",
-  "publicationSourceFingerprint": "d2e197948f9f7e420cd49078c9680cbe057baa1b943beb480d42d6ce7cf7dc88",
+  "publicationSourceFingerprint": "7e2a6127d42a3411f20c4fbf71d977e4795a5ba0e2a59cdb229a6286a89cd189",
   "comparisonArtifacts": [
     {
       "path": "site/esm-comparison/original.js",
