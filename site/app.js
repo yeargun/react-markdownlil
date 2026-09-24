@@ -1,3 +1,5 @@
+import { renderCompiler } from "./compiler.js"
+
 const data = await fetch("./results.json").then((response) => {
   if (!response.ok) throw new Error(`Unable to load results: ${response.status}`)
   return response.json()
@@ -39,7 +41,7 @@ function laneById(id, size = data.size) {
 
 function barClass(id) {
   if (id === "itslil") return "bar-lil"
-  if (id === "itslil-closed") return "bar-closed"
+  if (id.startsWith("itslil-")) return "bar-closed"
   return "bar-official"
 }
 
@@ -71,6 +73,8 @@ function renderFrom(results) {
   const itslil = laneById("itslil", results.size)
   if (baseline && itslil) {
     const smaller = smallerThan(itslil.brotli11, baseline.brotli11)
+    document.querySelector("#hero-label").textContent =
+      `Brotli-11 over the wire: ${itslil.name} against ${baseline.name}`
     document.querySelector("#hero-ratio").innerHTML = `${smaller.amount}<span>${smaller.word}</span>`
     document.querySelector("#hero-bytes").textContent =
       `${formatter.format(baseline.brotli11)} B → ${formatter.format(itslil.brotli11)} B Brotli-11`
@@ -83,9 +87,10 @@ function renderFrom(results) {
     : "—"
 
   const officialIds = results.size.filter((lane) => lane.id.startsWith("official")).map((lane) => lane.id)
-  renderCodec("brotli11", results.size, [...officialIds, "itslil", "itslil-closed"], "#bar-brotli", "#body-brotli")
-  renderCodec("gzip9", results.size, [...officialIds, "itslil", "itslil-closed"], "#bar-gzip", "#body-gzip")
-  renderCodec("raw", results.size, [...officialIds, "itslil", "itslil-closed"], "#bar-raw", "#body-raw")
+  const lilIds = results.size.filter((lane) => lane.id.startsWith("itslil")).map((lane) => lane.id)
+  renderCodec("brotli11", results.size, [...officialIds, ...lilIds], "#bar-brotli", "#body-brotli")
+  renderCodec("gzip9", results.size, [...officialIds, ...lilIds], "#bar-gzip", "#body-gzip")
+  renderCodec("raw", results.size, [...officialIds, ...lilIds], "#bar-raw", "#body-raw")
   document.querySelector("#body-matched").innerHTML = results.size
     .map((lane) => {
       const verdict = baseline ? smallerThan(lane.brotli11, baseline.brotli11) : { text: "—", state: "even" }
@@ -124,7 +129,7 @@ function renderFrom(results) {
     })
     .join("")
   document.querySelector("#perf-note").textContent =
-    `${results.runtime ?? "Node"}. ${results.codec ?? ""}. Quiet median after discarding the first ${results.warmupDiscard ?? 3} samples.`
+    `${results.runtime ?? "Node"}. ${results.throughputWorkload ? `${results.throughputWorkload} ` : ""}Quiet median after discarding the first ${results.warmupDiscard ?? 3} samples.`
 }
 
 function bindCopy() {
@@ -207,6 +212,7 @@ bindCopy()
 bindProgress()
 bindTabs()
 renderFrom(data)
+renderCompiler(data)
 
 if (document.querySelector("#playground-root")) {
   await import("./playground.js").catch(() => {})

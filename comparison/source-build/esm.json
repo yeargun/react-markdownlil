@@ -15,19 +15,19 @@
   ],
   "samples": [
     {
-      "bundleSeconds": 0.024657389999999998,
-      "wallSeconds": 0.598396941
+      "bundleSeconds": 0.11700027100000003,
+      "wallSeconds": 2.924190048
     },
     {
-      "bundleSeconds": 0.019552300999999942,
-      "wallSeconds": 0.506074147
+      "bundleSeconds": 0.14748058100000025,
+      "wallSeconds": 3.716897704
     },
     {
-      "bundleSeconds": 0.018153412000000115,
-      "wallSeconds": 0.431509902
+      "bundleSeconds": 0.11742438100000072,
+      "wallSeconds": 3.1530740329999998
     }
   ],
-  "medianSeconds": 0.506074147,
+  "medianSeconds": 3.1530740329999998,
   "toolchain": {
     "esbuild": "0.28.1",
     "terser": "5.51.2"
@@ -60,6 +60,20 @@
       "gzip9": 36700,
       "brotli11": 32810,
       "sha256": "44ba1dd1e6d2f135a2f4817c89773c2e653526c9e313cbf44b5e56944645e997"
+    },
+    {
+      "path": "original.oxc-mangle.js",
+      "raw": 117197,
+      "gzip9": 35251,
+      "brotli11": 31579,
+      "sha256": "f0e00d9a01e7859d4c18ef45ea39bd8185ac7c284719fc93b3af39b06cc83ddd"
+    },
+    {
+      "path": "original.oxc-nomangle.js",
+      "raw": 183399,
+      "gzip9": 43422,
+      "brotli11": 38613,
+      "sha256": "330861b82536ac6443ad0328ea6762227e9475997d73d43dac127e3b77395ba7"
     }
   ],
   "inputs": [

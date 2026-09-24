@@ -1,25 +1,21 @@
 # reusable ESM — host-visible names stay
 [javascript]
-# 8.89: re-emit a twice-read member instead of naming it. Measured -339 Brotli on
-# this port's own artifact (8.79). It was measured then and not landed, because the
-# port's suite was red for an unrelated reason -- the live-18 miscompile, which
-# made every render throw. That is fixed and the suite passes, so the measurement
-# can be acted on.
-rematerialize_member_reads = true
 assume_pure_property_reads = true
+# micromark's state functions and this layer's callbacks are called, never
+# constructed; React reads a component's prototype only to test for a class,
+# which an arrow answers the same way. Measured (b79): -146 Brotli.
+assume_unconstructed_callbacks = true
 priority = "size-first"
 optimization_level = 13
 cost_model = "brotli"
-assume_pristine_builtins = false
+# The graph and this layer call standard builtins the way upstream does; an
+# environment that replaces them breaks upstream too. Measured on the browser
+# build (b79): 29,681 -> 27,394 Brotli.
+assume_pristine_builtins = true
 strip_console = true
-local_name_reserve = 48
 candidate_search = "production"
-function_spelling = "function"
-public_aggregate_abi = "named"
 
 [mangle]
 identifiers = true
 properties = true
-exports = false
-extern_fields = true
 pool_strings = true

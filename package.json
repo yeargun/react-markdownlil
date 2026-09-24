@@ -34,6 +34,7 @@
         "require": "./dist/react-markdown.development.cjs",
         "default": "./dist/react-markdown.esm.js"
       },
+      "browser": "./dist/react-markdown.browser.js",
       "import": "./dist/react-markdown.esm.js",
       "require": "./dist/react-markdown.cjs",
       "default": "./dist/react-markdown.esm.js"
@@ -46,6 +47,7 @@
     "source-graph.lock.json",
     "src",
     "dist/react-markdown.esm.js",
+    "dist/react-markdown.browser.js",
     "dist/react-markdown.development.js",
     "dist/react-markdown.cjs",
     "dist/react-markdown.development.cjs",
@@ -73,6 +75,7 @@
     "check:site": "npm run build:site && node --test test/site.test.mjs",
     "check:pack": "node scripts/check-pack.mjs && node scripts/check-local-graph.mjs && npm run check:graph",
     "measure:graph": "node scripts/measure-graph.mjs",
+    "record:release": "node scripts/record-release.mjs",
     "prepublishOnly": "npm test && npm run check:pack && npm run check:site"
   },
   "dependencies": {

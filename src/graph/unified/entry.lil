@@ -1,22 +1,25 @@
 import {
-  Number,
+  Array,
+  Error,
   Object,
   Promise,
   String,
   TypeError,
   bail,
+  defineMembers,
+  finishClass,
   isFn,
   looksLikeAValue,
-  objectHasOwn,
-  sliceArgs,
-  throwError,
-  throwType
+  requireNew
 } from "./host.lil";
-import { isPlainObj } from "./plain.lil";
-import { cloneNamespace, extendWith } from "./extend.lil";
+import { hasOwnProperty, isPlainObj } from "./plain.lil";
+import { extendWith } from "./extend.lil";
 import { trough } from "./trough.lil";
-import { VFile, asVFile } from "./vfile.lil";
+import { VFile } from "./vfile.lil";
 
+// unified@11 over host objects: `Processor` is a callable instance (`processor()` copies it), its
+// methods live on `Processor.prototype` with class-method attributes, and plugins read and write the
+// members below by name.
 export extern class ProcessorApi {
   JsValue copy;
   JsValue use;
@@ -33,23 +36,46 @@ export extern class ProcessorApi {
   JsValue compiler;
   JsValue Parser;
   JsValue Compiler;
+  JsValue namespace;
+  JsValue frozen;
+  JsValue freezeIndex;
+  JsValue transformers;
+}
+
+extern class UnifiedPresetView {
+  JsValue plugins;
+  JsValue settings;
+}
+
+extern class UnifiedFileView {
+  JsValue value;
+  JsValue result;
+}
+
+bool looksLikeAVFile(JsValue value) {
+  return value.truthy() && JS.typeOf(value) == "object" && JS.in("message", value) && JS.in("messages", value);
+}
+
+JsValue asVFile(JsValue value) {
+  return if (looksLikeAVFile(value)) { value } else { JS.construct(VFile, value) };
 }
 
 void assertParser(string name, JsValue value) {
   if (!isFn(value)) {
-    throwType("Cannot `" + name + "` without `parser`");
+    throw JS.construct(TypeError, "Cannot `" + name + "` without `parser`");
   }
 }
 
 void assertCompiler(string name, JsValue value) {
   if (!isFn(value)) {
-    throwType("Cannot `" + name + "` without `compiler`");
+    throw JS.construct(TypeError, "Cannot `" + name + "` without `compiler`");
   }
 }
 
 void assertUnfrozen(string name, JsValue frozen) {
   if (frozen.truthy()) {
-    throwError(
+    throw JS.construct(
+      Error,
       "Cannot call `" +
         name +
         "` on a frozen processor.\nCreate a new processor first, by calling it: use `processor()` instead of `processor`."
@@ -58,416 +84,271 @@ void assertUnfrozen(string name, JsValue frozen) {
 }
 
 void assertNode(JsValue node) {
-  if (!isPlainObj(node) || JS.typeOf(JS.get(node, "type")) != "string") {
-    throwType("Expected node, got `" + JS.string(node) + "`");
+  if (!isPlainObj(node) || !(JS.get(node, "type") is string)) {
+    throw JS.construct(TypeError, "Expected node, got `" + node + "`");
   }
 }
 
 void assertDone(string name, string asyncName, bool complete) {
   if (!complete) {
-    throwError("`" + name + "` finished async. Use `" + asyncName + "` instead");
+    throw JS.construct(Error, "`" + name + "` finished async. Use `" + asyncName + "` instead");
   }
 }
 
-JsValue pickParser(JsValue self) {
-  JsValue parser = JS.get(self, "parser");
-  if (!parser.truthy()) {
-    parser = JS.get(self, "Parser");
-  }
-  return parser;
-}
-
-JsValue pickCompiler(JsValue self) {
-  JsValue compiler = JS.get(self, "compiler");
-  if (!compiler.truthy()) {
-    compiler = JS.get(self, "Compiler");
-  }
-  return compiler;
-}
-
-void addPlugin(JsValue[] attachers, JsValue plugin, JsValue parameters) {
-  int index = -1;
-  int entryIndex = -1;
-  int n = attachers.length;
-  while (true) {
-    index = index + 1;
-    if (index >= n) {
-      break;
+// `use(value, ...parameters)` (top) and the per-item `add(value)` of a list share one dispatch:
+// a list at the top level is a list of plugins, inside a list it is `[plugin, ...parameters]`.
+void addValue(JsValue attachers, JsValue namespace, JsValue value, JsValue parameters, bool top) {
+  if (isFn(value)) {
+    addPlugin(attachers, value, parameters);
+  } else if (JS.typeOf(value) == "object") {
+    if (!value.isArray()) {
+      UnifiedPresetView preset = JS.assume(value);
+      if (!JS.in("plugins", value) && !JS.in("settings", value)) {
+        throw JS.construct(
+          Error,
+          "Expected usable value but received an empty preset, which is probably a mistake: presets typically come with `plugins` and sometimes with `settings`, but this has neither"
+        );
+      }
+      addList(attachers, namespace, preset.plugins);
+      if (preset.settings.truthy()) {
+        UnifiedPresetView settings = JS.assume(namespace);
+        settings.settings = extendWith(settings.settings, preset.settings);
+      }
+    } else if (top) {
+      addList(attachers, namespace, value);
+    } else {
+      addPlugin(attachers, value[0], JS.invoke(value, "slice", 1.0));
     }
+  } else {
+    throw JS.construct(TypeError, "Expected usable value, not `" + value + "`");
+  }
+}
+
+void addList(JsValue attachers, JsValue namespace, JsValue plugins) {
+  if (!JS.isNullish(plugins)) {
+    if (!plugins.isArray()) {
+      throw JS.construct(TypeError, "Expected a list of plugins, not `" + plugins + "`");
+    }
+    for (float index = 0; index < plugins.length; index++) {
+      addValue(attachers, namespace, plugins[index], JS.array(), false);
+    }
+  }
+}
+
+void addPlugin(JsValue attachers, JsValue plugin, JsValue parameters) {
+  float entryIndex = -1;
+  for (float index = 0; index < attachers.length; index++) {
     if (JS.strictEqual(attachers[index][0], plugin)) {
       entryIndex = index;
       break;
     }
   }
-  if (entryIndex == -1) {
-    JsValue[] entry = sliceArgs(parameters, 0);
-    JS.call(JS.get(entry, "unshift"), entry, plugin);
-    attachers.push(entry);
-    return;
-  }
-  if (parameters.length.toInt() > 0) {
+  if (entryIndex > -1) {
+    if (parameters.length == 0.0) return;
     JsValue primary = parameters[0];
-    JsValue[] rest = sliceArgs(parameters, 1);
     JsValue currentPrimary = attachers[entryIndex][1];
-    if (isPlainObj(currentPrimary) && isPlainObj(primary)) {
-      primary = extendWith(currentPrimary, primary);
-    }
-    JsValue[] entry = [];
-    entry.push(plugin);
-    entry.push(primary);
-    int r = 0;
-    int rn = rest.length;
-    while (r < rn) {
-      entry.push(rest[r]);
-      r = r + 1;
-    }
-    JS.splice(attachers, entryIndex * 1.0, 1.0, entry);
+    if (isPlainObj(currentPrimary) && isPlainObj(primary)) parameters[0] = extendWith(currentPrimary, primary);
+  }
+  JsValue entry = JS.invoke(JS.array(plugin), "concat", parameters);
+  if (entryIndex < 0) {
+    JS.invoke(attachers, "push", entry);
+  } else {
+    attachers[entryIndex] = entry;
   }
 }
 
-void addList(JsValue[] attachers, JsValue namespace, JsValue plugins) {
-  if (JS.isNullish(plugins)) {
-    return;
-  }
-  if (!plugins.isArray()) {
-    throwType("Expected a list of plugins, not `" + JS.string(plugins) + "`");
-  }
-  int index = -1;
-  int n = plugins.length.toInt();
-  while (true) {
-    index = index + 1;
-    if (index >= n) {
-      break;
-    }
-    addOne(attachers, namespace, plugins[index]);
-  }
+JsValue executeWith(JsValue executor, JsValue done) {
+  return if (done.truthy()) { JS.call(executor, JS.undefined(), JS.undefined(), done) } else { JS.construct(Promise, executor) };
 }
 
-void addPreset(JsValue[] attachers, JsValue namespace, JsValue result) {
-  if (!JS.in("plugins", result) && !JS.in("settings", result)) {
-    throwError(
-      "Expected usable value but received an empty preset, which is probably a mistake: presets typically come with `plugins` and sometimes with `settings`, but this has neither"
-    );
-  }
-  addList(attachers, namespace, JS.get(result, "plugins"));
-  JsValue settings = JS.get(result, "settings");
-  if (settings.truthy()) {
-    JS.set(namespace, "settings", extendWith(JS.get(namespace, "settings"), settings));
-  }
-}
+JsValue Processor = JS.method0((JsValue self) => {
+  requireNew(self, "Processor");
+  // CallableInstance: calling the processor applies the prototype's `copy` (as it was at construction).
+  JsValue proto = JS.get(Processor, "prototype");
+  JsValue copy = JS.get(proto, "copy");
+  JsValue processor = JS.undefined();
+  processor = JS.staticRest((JsValue parameters) => JS.apply(copy, processor, parameters));
+  return JS.invoke(Object, "assign", JS.invoke(Object, "setPrototypeOf", processor, proto), JS.object(
+    "Compiler", JS.undefined(),
+    "Parser", JS.undefined(),
+    "attachers", JS.array(),
+    "compiler", JS.undefined(),
+    "freezeIndex", -1.0,
+    "frozen", JS.undefined(),
+    "namespace", JS.object(),
+    "parser", JS.undefined(),
+    "transformers", trough()
+  ));
+});
+finishClass(Processor, "Processor");
 
-void addOne(JsValue[] attachers, JsValue namespace, JsValue value) {
-  if (isFn(value)) {
-    addPlugin(attachers, value, JS.array());
-    return;
-  }
-  if (JS.typeOf(value) == "object") {
-    if (value.isArray()) {
-      addPlugin(attachers, value[0], sliceArgs(value, 1));
-      return;
-    }
-    addPreset(attachers, namespace, value);
-    return;
-  }
-  throwType("Expected usable value, not `" + JS.string(value) + "`");
-}
-
-JsValue useCall(JsValue self, JsValue args) {
-  assertUnfrozen("use", JS.get(self, "frozen"));
-  JsValue[] attachers = JS.assume(JS.get(self, "attachers"));
-  JsValue namespace = JS.get(self, "namespace");
-  int n = args.length.toInt();
-  JsValue value = JS.undefined();
-  if (n > 0) {
-    value = args[0];
-  }
-  if (JS.isNullish(value)) {
-    return self;
-  }
-  if (isFn(value)) {
-    addPlugin(attachers, value, sliceArgs(args, 1));
-    return self;
-  }
-  if (JS.typeOf(value) == "object") {
-    if (value.isArray()) {
-      addList(attachers, namespace, value);
-    } else {
-      addPreset(attachers, namespace, value);
-    }
-    return self;
-  }
-  throw JS.construct(TypeError, "Expected usable value, not `" + JS.string(value) + "`");
-}
-
-JsValue dataCall(JsValue self, JsValue args) {
-  JsValue namespace = JS.get(self, "namespace");
-  int n = args.length.toInt();
-  JsValue key = JS.undefined();
-  if (n > 0) {
-    key = args[0];
-  }
+JsValue dataMethod = JS.methodRest((JsValue self, JsValue parameters) => {
+  ProcessorApi processor = JS.assume(self);
+  JsValue key = parameters[0];
   if (key is string) {
-    if (n == 2) {
-      assertUnfrozen("data", JS.get(self, "frozen"));
-      JS.set(namespace, key, args[1]);
+    if (parameters.length == 2.0) {
+      assertUnfrozen("data", processor.frozen);
+      JS.set(processor.namespace, key, parameters[1]);
       return self;
     }
-    if (objectHasOwn(namespace, key)) {
-      JsValue got = JS.get(namespace, key);
-      if (got.truthy()) {
-        return got;
-      }
-    }
-    return JS.undefined();
+    return JS.or(JS.and(JS.call(hasOwnProperty, processor.namespace, key), JS.get(processor.namespace, key)), JS.undefined());
   }
   if (key.truthy()) {
-    assertUnfrozen("data", JS.get(self, "frozen"));
-    JS.set(self, "namespace", key);
+    assertUnfrozen("data", processor.frozen);
+    processor.namespace = key;
     return self;
   }
-  return namespace;
-}
+  return processor.namespace;
+});
 
-JsValue freezeCall(JsValue self) {
-  if (JS.get(self, "frozen").truthy()) {
-    return self;
+JsValue useMethod = JS.methodRest((JsValue self, JsValue parameters) => {
+  ProcessorApi processor = JS.assume(self);
+  JsValue attachers = processor.attachers;
+  JsValue namespace = processor.namespace;
+  assertUnfrozen("use", processor.frozen);
+  JsValue value = parameters[0];
+  if (!JS.isNullish(value)) {
+    addValue(attachers, namespace, value, JS.invoke(JS.invoke(Array, "from", parameters), "slice", 1.0), true);
   }
-  JsValue[] attachers = JS.assume(JS.get(self, "attachers"));
-  JsValue transformers = JS.get(self, "transformers");
-  while (true) {
-    float nextIndex = JS.number(JS.get(self, "freezeIndex")) + 1.0;
-    JS.set(self, "freezeIndex", nextIndex);
-    if (nextIndex >= attachers.length) {
-      break;
-    }
-    int idx = nextIndex.toInt();
-    JsValue entry = attachers[idx];
-    JsValue attacher = entry[0];
-    JsValue options = sliceArgs(entry, 1);
-    if (options.length.toInt() > 0 && JS.isFalse(options[0])) {
-      continue;
-    }
-    if (options.length.toInt() > 0 && JS.strictEqual(options[0], true)) {
-      JS.splice(options, 0.0, 1.0, JS.undefined());
-    }
-    JsValue transformer = JS.apply(attacher, self, options);
-    if (isFn(transformer)) {
-      JS.call(JS.get(transformers, "use"), transformers, transformer);
-    }
-  }
-  JS.set(self, "frozen", true);
-  JS.set(self, "freezeIndex", JS.get(Number, "POSITIVE_INFINITY"));
   return self;
-}
+});
 
-JsValue parseCall(JsValue self, JsValue file) {
-  JS.call(JS.get(self, "freeze"), self);
-  JsValue realFile = asVFile(file);
-  JsValue parser = pickParser(self);
-  assertParser("parse", parser);
-  return JS.call(parser, JS.undefined(), JS.call(String, JS.undefined(), realFile), realFile);
-}
-
-JsValue stringifyCall(JsValue self, JsValue tree, JsValue file) {
-  JS.call(JS.get(self, "freeze"), self);
-  JsValue realFile = asVFile(file);
-  JsValue compiler = pickCompiler(self);
-  assertCompiler("stringify", compiler);
-  assertNode(tree);
-  return JS.call(compiler, JS.undefined(), tree, realFile);
-}
-
-JsValue runCall(JsValue self, JsValue tree, JsValue file, JsValue done) {
-  assertNode(tree);
-  JS.call(JS.get(self, "freeze"), self);
-  if (!done.truthy() && isFn(file)) {
-    done = file;
-    file = JS.undefined();
-  }
-  JsValue transformers = JS.get(self, "transformers");
-  JsValue originalTree = tree;
-  JsValue executor = JS.method2((JsValue _t, JsValue resolve, JsValue reject) => {
-    JsValue realFile = asVFile(file);
-    JsValue realDone = JS.method3((JsValue _s, JsValue error, JsValue outputTree, JsValue outFile) => {
-      JsValue resulting = outputTree;
-      if (!resulting.truthy()) {
-        resulting = originalTree;
-      }
-      if (error.truthy()) {
-        JS.call(reject, JS.undefined(), error);
-        return JS.undefined();
-      }
-      if (resolve.truthy()) {
-        JS.call(resolve, JS.undefined(), resulting);
-        return JS.undefined();
-      }
-      JS.call(done, JS.undefined(), JS.undefined(), resulting, outFile);
-      return JS.undefined();
-    });
-    JS.call(JS.get(transformers, "run"), transformers, tree, realFile, realDone);
-    return JS.undefined();
-  });
-  if (done.truthy()) {
-    JS.call(executor, JS.undefined(), JS.undefined(), done);
-    return JS.undefined();
-  }
-  return JS.construct(Promise, executor);
-}
-
-JsValue runSyncCall(JsValue self, JsValue tree, JsValue file) {
-  bool complete = false;
-  JsValue result = JS.undefined();
-  JsValue realDone = JS.method3((JsValue _s, JsValue error, JsValue outTree, JsValue _f) => {
-    bail(error);
-    result = outTree;
-    complete = true;
-    return JS.undefined();
-  });
-  JS.call(JS.get(self, "run"), self, tree, file, realDone);
-  assertDone("runSync", "run", complete);
-  return result;
-}
-
-JsValue processCall(JsValue self, JsValue file, JsValue done) {
-  JS.call(JS.get(self, "freeze"), self);
-  assertParser("process", pickParser(self));
-  assertCompiler("process", pickCompiler(self));
-  JsValue executor = JS.method2((JsValue _t, JsValue resolve, JsValue reject) => {
-    JsValue realFile = asVFile(file);
-    JsValue parseTree = JS.call(JS.get(self, "parse"), self, realFile);
-    JsValue runDone = JS.method3((JsValue _s, JsValue error, JsValue tree, JsValue outFile) => {
-      if (error.truthy() || !tree.truthy() || !outFile.truthy()) {
-        JS.call(reject, JS.undefined(), error);
-        return JS.undefined();
-      }
-      JsValue compileResult = JS.call(JS.get(self, "stringify"), self, tree, outFile);
-      if (looksLikeAValue(compileResult)) {
-        JS.set(outFile, "value", compileResult);
-      } else {
-        JS.set(outFile, "result", compileResult);
-      }
-      if (resolve.truthy()) {
-        JS.call(resolve, JS.undefined(), outFile);
-        return JS.undefined();
-      }
-      JS.call(done, JS.undefined(), JS.undefined(), outFile);
-      return JS.undefined();
-    });
-    JS.call(JS.get(self, "run"), self, parseTree, realFile, runDone);
-    return JS.undefined();
-  });
-  if (done.truthy()) {
-    JS.call(executor, JS.undefined(), JS.undefined(), done);
-    return JS.undefined();
-  }
-  return JS.construct(Promise, executor);
-}
-
-JsValue processSyncCall(JsValue self, JsValue file) {
-  JS.call(JS.get(self, "freeze"), self);
-  assertParser("processSync", pickParser(self));
-  assertCompiler("processSync", pickCompiler(self));
-  bool complete = false;
-  JsValue result = JS.undefined();
-  JsValue realDone = JS.method2((JsValue _s, JsValue error, JsValue outFile) => {
-    complete = true;
-    bail(error);
-    result = outFile;
-    return JS.undefined();
-  });
-  JS.call(JS.get(self, "process"), self, file, realDone);
-  assertDone("processSync", "process", complete);
-  return result;
-}
-
-JsValue ProcessorConstructor = JS.undefined();
-
-JsValue copyProcessor(JsValue self) {
-  JsValue destination = JS.construct(ProcessorConstructor);
-  JsValue[] attachers = JS.assume(JS.get(self, "attachers"));
-  int index = -1;
-  int n = attachers.length;
-  while (true) {
-    index = index + 1;
-    if (index >= n) {
-      break;
+defineMembers(JS.object(
+  "copy", JS.method0((JsValue self) => {
+    ProcessorApi processor = JS.assume(self);
+    JsValue destination = JS.construct(Processor);
+    JsValue attachers = processor.attachers;
+    for (float index = 0; index < attachers.length; index++) {
+      JS.apply(JS.get(destination, "use"), destination, attachers[index]);
     }
-    JS.apply(JS.get(destination, "use"), destination, attachers[index]);
-  }
-  JS.call(JS.get(destination, "data"), destination, cloneNamespace(JS.get(self, "namespace")));
-  return destination;
-}
+    JS.invoke(destination, "data", extendWith(JS.object(), processor.namespace));
+    return destination;
+  }),
+  "data", dataMethod,
+  "freeze", JS.method0((JsValue self) => {
+    ProcessorApi processor = JS.assume(self);
+    if (processor.frozen.truthy()) return self;
+    while (true) {
+      float index = JS.number(processor.freezeIndex) + 1;
+      processor.freezeIndex = index;
+      if (!(index < processor.attachers.length)) break;
+      JsValue entry = processor.attachers[index];
+      JsValue options = JS.invoke(entry, "slice", 1.0);
+      if (JS.strictEqual(options[0], false)) continue;
+      if (JS.strictEqual(options[0], true)) options[0] = JS.undefined();
+      JsValue transformer = JS.apply(entry[0], self, options);
+      if (isFn(transformer)) JS.invoke(processor.transformers, "use", transformer);
+    }
+    processor.frozen = true;
+    processor.freezeIndex = 1.0 / 0.0;
+    return self;
+  }),
+  "parse", JS.method1((JsValue self, JsValue file) => {
+    ProcessorApi processor = JS.assume(self);
+    JS.invoke(self, "freeze");
+    JsValue realFile = asVFile(file);
+    JsValue parser = JS.or(processor.parser, processor.Parser);
+    assertParser("parse", parser);
+    return JS.call(parser, JS.undefined(), JS.call(String, JS.undefined(), realFile), realFile);
+  }),
+  "process", JS.method2((JsValue self, JsValue file, JsValue done) => {
+    ProcessorApi processor = JS.assume(self);
+    JS.invoke(self, "freeze");
+    assertParser("process", JS.or(processor.parser, processor.Parser));
+    assertCompiler("process", JS.or(processor.compiler, processor.Compiler));
+    return executeWith((JsValue resolve, JsValue reject) => {
+      JsValue realFile = asVFile(file);
+      JsValue parseTree = JS.invoke(self, "parse", realFile);
+      JS.invoke(self, "run", parseTree, realFile, (JsValue error, JsValue tree, JsValue outFile) => {
+        if (error.truthy() || !tree.truthy() || !outFile.truthy()) {
+          JS.call(reject, JS.undefined(), error);
+        } else {
+          UnifiedFileView output = JS.assume(outFile);
+          JsValue compileResult = JS.invoke(self, "stringify", tree, outFile);
+          if (looksLikeAValue(compileResult)) {
+            output.value = compileResult;
+          } else {
+            output.result = compileResult;
+          }
+          if (resolve.truthy()) {
+            JS.call(resolve, JS.undefined(), outFile);
+          } else {
+            JS.call(done, JS.undefined(), JS.undefined(), outFile);
+          }
+        }
+        return JS.undefined();
+      });
+      return JS.undefined();
+    }, done);
+  }),
+  "processSync", JS.method1((JsValue self, JsValue file) => {
+    ProcessorApi processor = JS.assume(self);
+    bool complete = false;
+    JsValue result = JS.undefined();
+    JS.invoke(self, "freeze");
+    assertParser("processSync", JS.or(processor.parser, processor.Parser));
+    assertCompiler("processSync", JS.or(processor.compiler, processor.Compiler));
+    JS.invoke(self, "process", file, (JsValue error, JsValue outFile) => {
+      complete = true;
+      bail(error);
+      result = outFile;
+      return JS.undefined();
+    });
+    assertDone("processSync", "process", complete);
+    return result;
+  }),
+  "run", JS.method3((JsValue self, JsValue tree, JsValue file, JsValue done) => {
+    ProcessorApi processor = JS.assume(self);
+    assertNode(tree);
+    JS.invoke(self, "freeze");
+    JsValue transformers = processor.transformers;
+    if (!done.truthy() && isFn(file)) {
+      done = file;
+      file = JS.undefined();
+    }
+    return executeWith((JsValue resolve, JsValue reject) => {
+      JS.invoke(transformers, "run", tree, asVFile(file), (JsValue error, JsValue outputTree, JsValue outFile) => {
+        JsValue resultingTree = JS.or(outputTree, tree);
+        if (error.truthy()) {
+          JS.call(reject, JS.undefined(), error);
+        } else if (resolve.truthy()) {
+          JS.call(resolve, JS.undefined(), resultingTree);
+        } else {
+          JS.call(done, JS.undefined(), JS.undefined(), resultingTree, outFile);
+        }
+        return JS.undefined();
+      });
+      return JS.undefined();
+    }, done);
+  }),
+  "runSync", JS.method2((JsValue self, JsValue tree, JsValue file) => {
+    bool complete = false;
+    JsValue result = JS.undefined();
+    JS.invoke(self, "run", tree, file, (JsValue error, JsValue outTree) => {
+      bail(error);
+      result = outTree;
+      complete = true;
+      return JS.undefined();
+    });
+    assertDone("runSync", "run", complete);
+    return result;
+  }),
+  "stringify", JS.method2((JsValue self, JsValue tree, JsValue file) => {
+    ProcessorApi processor = JS.assume(self);
+    JS.invoke(self, "freeze");
+    JsValue realFile = asVFile(file);
+    JsValue compiler = JS.or(processor.compiler, processor.Compiler);
+    assertCompiler("stringify", compiler);
+    assertNode(tree);
+    return JS.call(compiler, JS.undefined(), tree, realFile);
+  }),
+  "use", useMethod
+), JS.get(Processor, "prototype"));
+JS.invoke(Object, "defineProperty", dataMethod, "length", JS.object("value", 2.0));
+JS.invoke(Object, "defineProperty", useMethod, "length", JS.object("value", 1.0));
 
-JsValue useMethod = JS.methodRest(useCall);
-JsValue copyMethod = JS.method0((JsValue self) => {
-  return copyProcessor(self);
-});
-JsValue parseMethod = JS.method1(parseCall);
-JsValue runMethod = JS.method3(runCall);
-JsValue runSyncMethod = JS.method2(runSyncCall);
-JsValue stringifyMethod = JS.method2(stringifyCall);
-JsValue processMethod = JS.method2(processCall);
-JsValue processSyncMethod = JS.method1(processSyncCall);
-JsValue dataMethod = JS.methodRest(dataCall);
-JsValue freezeMethod = JS.method0(freezeCall);
-ProcessorConstructor = JS.method0((JsValue self) => {
-  if (JS.isUndefined(self)) {
-    throw JS.construct(TypeError, "Class constructor Processor cannot be invoked without 'new'");
-  }
-  return initializeProcessorValue();
-});
-JS.invoke(Object, "defineProperty", ProcessorConstructor, "name", JS.object("configurable", true, "value", "Processor"));
-JsValue processorPrototype = JS.get(ProcessorConstructor, "prototype");
-
-void defineProcessorMethod(string name, JsValue method, int length) {
-  JS.invoke(Object, "defineProperty", method, "name", JS.object("configurable", true, "value", name));
-  JS.invoke(Object, "defineProperty", method, "length", JS.object("configurable", true, "value", length * 1.0));
-  JS.invoke(
-    Object,
-    "defineProperty",
-    processorPrototype,
-    name,
-    JS.object("configurable", true, "writable", true, "value", method)
-  );
-}
-
-void initializeProcessorPrototype() {
-  defineProcessorMethod("copy", copyMethod, 0);
-  defineProcessorMethod("data", dataMethod, 2);
-  defineProcessorMethod("freeze", freezeMethod, 0);
-  defineProcessorMethod("parse", parseMethod, 1);
-  defineProcessorMethod("process", processMethod, 2);
-  defineProcessorMethod("processSync", processSyncMethod, 1);
-  defineProcessorMethod("run", runMethod, 3);
-  defineProcessorMethod("runSync", runSyncMethod, 2);
-  defineProcessorMethod("stringify", stringifyMethod, 2);
-  defineProcessorMethod("use", useMethod, 1);
-  JS.invoke(Object, "defineProperty", ProcessorConstructor, "prototype", JS.object("writable", false));
-}
-
-initializeProcessorPrototype();
-
-JsValue initializeProcessorValue() {
-  JsValue proc = JS.undefined();
-  proc = JS.staticRest((JsValue _args) => {
-    return copyProcessor(proc);
-  });
-  JS.call(JS.get(Object, "setPrototypeOf"), Object, proc, processorPrototype);
-  JS.set(proc, "Compiler", JS.undefined());
-  JS.set(proc, "Parser", JS.undefined());
-  JS.set(proc, "attachers", JS.array());
-  JS.set(proc, "compiler", JS.undefined());
-  JS.set(proc, "freezeIndex", -1.0);
-  JS.set(proc, "frozen", JS.undefined());
-  JS.set(proc, "namespace", JS.object());
-  JS.set(proc, "parser", JS.undefined());
-  JS.set(proc, "transformers", trough());
-  return proc;
-}
-
-JsValue unifiedValue = JS.construct(ProcessorConstructor);
-JS.call(JS.get(unifiedValue, "freeze"), unifiedValue);
+JsValue unifiedValue = JS.invoke(JS.construct(Processor), "freeze");
 
 export JsValue unified = unifiedValue;
 export JsValue VFileRuntime = VFile;
-export JsValue ProcessorRuntime = ProcessorConstructor;
+export JsValue ProcessorRuntime = Processor;

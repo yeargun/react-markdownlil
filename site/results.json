@@ -4,15 +4,15 @@
   "file": "react-markdown",
   "lilExport": "default",
   "officialExport": "default",
-  "node": "v20.19.0",
-  "codec": "lilscript-codec: stock zlib 1.3.1 gzip-9 / Google Brotli 1.1.0 quality-11",
-  "runtime": "Node v20.19.0",
+  "node": "v24.11.1",
+  "codec": "lilscript-codec: zlib 1.3.1 gzip-9 / Google Brotli 1.1.0 quality 11, lgwin 22",
+  "runtime": "Node v24.11.1",
   "warmupDiscard": 3,
-  "comparison": "Official is the esbuild 0.28.1 browser ESM graph followed by pinned Terser 5.51.2. LilScript is one 68-module source compilation with React external and no post-minification; its consumer graph has one input.",
+  "comparison": "Official rows bundle react-markdown@10.1.0 and its runtime dependencies for the browser with esbuild 0.28.1 (React external), then minify with Terser 5.51.2, Oxc or esbuild; one row is the same graph built from react-markdown's pinned Git source. LilScript rows are the delivered files, written by the compiler from one 69-module source graph with no minifier after it. The strongest bar is the baseline.",
   "spec": {
-    "total": 120,
-    "pass": 120,
-    "label": "runtime checks"
+    "total": 91,
+    "pass": 91,
+    "label": "official react-markdown tests"
   },
   "play": {
     "kind": "react-markdown",
@@ -21,79 +21,267 @@
   "size": [
     {
       "id": "official",
-      "name": "Official react-markdown@10.1.0 graph",
-      "raw": 294763,
-      "gzip9": 59287,
-      "brotli11": 50628,
-      "note": "esbuild bundle of the published package plus runtime deps, react external",
-      "diagnostic": false,
-      "measuredAt": "2026-09-10T20:55:31Z",
-      "artifactSha256": "30c56bd1ad9ad2af61773e4dbde71bad6bf30d1f6c0f3630d9f66e7274a8fd58"
+      "name": "Official react-markdown@10.1.0 browser graph",
+      "raw": 294369,
+      "gzip9": 59152,
+      "brotli11": 50469,
+      "note": "esbuild 0.28.1 bundle of the published package and its runtime dependencies, browser conditions, React external; not minified",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "72dcc3eef1db701ab726c937f6b17fb144a881459a0b18081bba1c42025212b2",
+      "diagnostic": false
     },
     {
       "id": "official-terser-mangle",
-      "name": "Official \u00b7 Terser mangle on",
-      "raw": 117068,
-      "gzip9": 34789,
-      "brotli11": 30950,
-      "note": "Terser 5.51.2 compress of that graph, module: true, mangle: true",
-      "baseline": true,
-      "measuredAt": "2026-09-10T20:55:31Z",
-      "artifactSha256": "e20527f2e1b933087a10f22d87f3d101dcd6c4b7c47ff5d96f2a037384b1be65"
+      "name": "Official · Terser mangle on",
+      "raw": 117674,
+      "gzip9": 34924,
+      "brotli11": 31082,
+      "note": "Terser 5.51.2 of that graph: module, compress, mangle",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "0d236fd6216daddef62db3e8d6def5916e6b3d8f5630e424589ad33f100d4d95"
     },
     {
       "id": "official-terser-nomangle",
-      "name": "Official \u00b7 Terser mangle off",
-      "raw": 178069,
-      "gzip9": 42263,
-      "brotli11": 37574,
-      "note": "Terser 5.51.2 compress of that graph, module: true, mangle: false",
-      "measuredAt": "2026-09-10T20:55:31Z",
-      "artifactSha256": "6f9c3b78e3633c8af242b2c33f746362db53ee1869f5556c77cde76d9bdcb146"
+      "name": "Official · Terser mangle off",
+      "raw": 180160,
+      "gzip9": 42658,
+      "brotli11": 37927,
+      "note": "Terser 5.51.2 of that graph: module, compress, no mangle",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "ef9be9735fb2f45d9b507fdffb44e26a60b17aed975cf1abcd53528704c6ee20"
+    },
+    {
+      "id": "official-oxc-mangle",
+      "name": "Official · Oxc mangle on",
+      "raw": 116998,
+      "gzip9": 35166,
+      "brotli11": 31413,
+      "note": "vite 8.2.1 minify (Oxc) of that graph, mangle on",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "30fa6c719c603afd0f74632bae53937ba6a473100524729ac97c61ff368dd31a"
+    },
+    {
+      "id": "official-oxc-nomangle",
+      "name": "Official · Oxc mangle off",
+      "raw": 183163,
+      "gzip9": 43324,
+      "brotli11": 38546,
+      "note": "vite 8.2.1 minify (Oxc) of that graph, mangle off",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "96d777d096adf3c52ae03b82829e751dab3b2d9a799d1960e439afd12693341c"
     },
     {
       "id": "official-esbuild",
-      "name": "Official \u00b7 esbuild minify",
-      "raw": 119506,
-      "gzip9": 36700,
-      "brotli11": 32810,
-      "note": "esbuild minify of that graph",
-      "measuredAt": "2026-09-10T20:55:31Z",
-      "artifactSha256": "44ba1dd1e6d2f135a2f4817c89773c2e653526c9e313cbf44b5e56944645e997"
+      "name": "Official · esbuild minify",
+      "raw": 118006,
+      "gzip9": 36331,
+      "brotli11": 32530,
+      "note": "esbuild 0.28.1 minify of that graph",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "3cff9c5e258bbf74882d6c4293f72103deb8500752a2cc31d65c6fee26005726"
+    },
+    {
+      "id": "official-source-terser",
+      "name": "Official · Git source + Terser",
+      "raw": 117068,
+      "gzip9": 34789,
+      "brotli11": 30950,
+      "note": "react-markdown's pinned Git source (44d2e4a) built with its own `npm run build`, bundled for the browser with esbuild 0.28.1 and minified by Terser 5.51.2 (module, compress passes 3, mangle)",
+      "measuredAt": "2026-09-24T06:33:34Z",
+      "artifactSha256": "e20527f2e1b933087a10f22d87f3d101dcd6c4b7c47ff5d96f2a037384b1be65",
+      "baseline": true
     },
     {
       "id": "itslil",
-      "name": "@itslil/react-markdown \u00b7 library",
-      "raw": 143696,
-      "gzip9": 48984,
-      "brotli11": 41861,
-      "note": "ESM output from LilScript 4dc4e33.",
-      "primary": true,
-      "measuredAt": "2026-09-10T20:55:31Z",
-      "artifactSha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
+      "name": "@itslil/react-markdown · browser",
+      "raw": 95501,
+      "gzip9": 30961,
+      "brotli11": 27312,
+      "note": "dist/react-markdown.browser.js as delivered (the package's `browser` condition): named character references decode through the document, as upstream's browser graph does. Compiler-written, no minifier after it.",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344",
+      "primary": true
+    },
+    {
+      "id": "itslil-node",
+      "name": "@itslil/react-markdown · Node",
+      "raw": 116039,
+      "gzip9": 41924,
+      "brotli11": 35933,
+      "note": "dist/react-markdown.esm.js as delivered (npm import): the same program with the 2,125-entry entity table, which upstream's Node graph also ships.",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "38b0f4a07df32821f6df01f75c0203d43b5625ef2d12670f9c4367aa0c973fc7"
     },
     {
       "id": "itslil-closed",
-      "name": "@itslil/react-markdown \u00b7 closed",
-      "raw": 143696,
-      "gzip9": 48984,
-      "brotli11": 41861,
-      "note": "ESM output from LilScript 4dc4e33.",
-      "measuredAt": "2026-09-10T20:55:31Z",
-      "artifactSha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
+      "name": "@itslil/react-markdown · closed",
+      "raw": 137070,
+      "gzip9": 46356,
+      "brotli11": 39464,
+      "note": "dist/react-markdown.closed.js, the `./closed` export: the Node program without the builtin and callback assumptions.",
+      "measuredAt": "2026-09-24T06:37:30Z",
+      "artifactSha256": "d1c3de7f1e147d9c730e1f632c8c6dcc5bdbe19df5ceab220cf217feb96ab0b4"
     }
   ],
   "throughput": [
     {
       "id": "official",
       "name": "react-markdown@10.1.0",
-      "documentMs": 2.1
+      "documentMs": 26.11
     },
     {
       "id": "itslil",
       "name": "@itslil/react-markdown",
-      "documentMs": 1.85
+      "documentMs": 24.353
     }
   ],
-  "sizeMeasuredAt": "2026-09-10T20:55:31Z"
+  "sizeMeasuredAt": "2026-09-24T06:37:30Z",
+  "previousRelease": {
+    "label": "the live release: npm files from commit 0a91fc1 (dist compiled 2026-09-02 by LilScript feature/source-maps, old compiler route), page refreshed 2026-09-10 (2e02fbc), which also showed a 41,861 B rebuild by 4dc4e33 that was never shipped",
+    "commit": "2e02fbc",
+    "date": "2026-09-02",
+    "measuredBy": "lilscript-codec, same as this release",
+    "files": {
+      "dist/react-markdown.esm.js": {
+        "raw": 142205,
+        "gzip9": 49008,
+        "brotli11": 41907
+      },
+      "dist/react-markdown.cjs": {
+        "raw": 199856,
+        "gzip9": 55072,
+        "brotli11": 46502
+      },
+      "dist/react-markdown.development.js": {
+        "raw": 142204,
+        "gzip9": 49008,
+        "brotli11": 41952
+      },
+      "dist/react-markdown.development.cjs": {
+        "raw": 199887,
+        "gzip9": 55075,
+        "brotli11": 46510
+      },
+      "dist/react-markdown.closed.js": {
+        "raw": 142205,
+        "gzip9": 49008,
+        "brotli11": 41907
+      }
+    },
+    "compile": {
+      "summary": "125.15 s per build (2026-09-10 record)",
+      "detail": "2026-09-10 paired source build (LilScript 4dc4e33, Azure Standard_D16als_v7, 16 vCPUs): the two compiles took 62.82 s and 62.08 s, the package build 125.15 s median of three"
+    }
+  },
+  "throughputWorkload": "renderToStaticMarkup of react-markdown's readme (26 KB), 10 renders per sample, the two lanes alternating; both render the same markup. LilScript lane: dist/react-markdown.esm.js.",
+  "delivered": [
+    {
+      "file": "dist/react-markdown.browser.js",
+      "role": "ESM, `browser` condition: named references decoded by the document",
+      "writtenBy": "compiler (the build adds a license banner, the two React imports and the `development` flag the program reads)",
+      "compilerWritten": true,
+      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344",
+      "raw": 95501,
+      "gzip9": 30961,
+      "brotli11": 27312
+    },
+    {
+      "file": "dist/react-markdown.esm.js",
+      "role": "ESM (npm import, Node): named references from the entity table",
+      "writtenBy": "compiler (the build adds a license banner, the two React imports and the `development` flag the program reads)",
+      "compilerWritten": true,
+      "sha256": "38b0f4a07df32821f6df01f75c0203d43b5625ef2d12670f9c4367aa0c973fc7",
+      "raw": 116039,
+      "gzip9": 41924,
+      "brotli11": 35933
+    },
+    {
+      "file": "dist/react-markdown.cjs",
+      "role": "CommonJS (npm require)",
+      "writtenBy": "compiler (the build adds a license banner, the React requires, the `development` flag, and module.exports in place of the export clause)",
+      "compilerWritten": true,
+      "sha256": "8ded76dc87be8252fb69616892ee06d6b610dc8ade862a4668eb883f229a7e98",
+      "raw": 116099,
+      "gzip9": 41947,
+      "brotli11": 35943
+    },
+    {
+      "file": "dist/react-markdown.development.js",
+      "role": "ESM, `development` condition (devlop assertions on)",
+      "writtenBy": "compiler (the build adds a license banner, the two React imports and the `development` flag the program reads)",
+      "compilerWritten": true,
+      "sha256": "52b9acc842943f3a4490541b9ad6fb290c4f9f82dac7830fc102fe3f4fc1cdc3",
+      "raw": 116038,
+      "gzip9": 41923,
+      "brotli11": 35978
+    },
+    {
+      "file": "dist/react-markdown.development.cjs",
+      "role": "CommonJS, `development` condition",
+      "writtenBy": "compiler (the build adds a license banner, the React requires, the `development` flag, and module.exports in place of the export clause)",
+      "compilerWritten": true,
+      "sha256": "f3354782fee0023932410aaab63556f2999bc2f41fc6fbd6d99e856d89753901",
+      "raw": 116098,
+      "gzip9": 41946,
+      "brotli11": 36005
+    },
+    {
+      "file": "dist/react-markdown.closed.js",
+      "role": "`./closed` export: no builtin or callback assumptions",
+      "writtenBy": "compiler (the build adds a license banner, the two React imports and the `development` flag the program reads)",
+      "compilerWritten": true,
+      "sha256": "d1c3de7f1e147d9c730e1f632c8c6dcc5bdbe19df5ceab220cf217feb96ab0b4",
+      "raw": 137070,
+      "gzip9": 46356,
+      "brotli11": 39464
+    }
+  ],
+  "compiler": {
+    "revision": "aa2052f0",
+    "binarySha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9",
+    "codecSha256": "125776830df72bbaf9704fee3c38bb0bf29bfc6bcceb5bc8707a0507a128d7b9",
+    "compileWallMs": [
+      5335.1,
+      5321.4,
+      5373
+    ],
+    "invocations": [
+      {
+        "source": "src/index.lil",
+        "config": "lilscript.toml",
+        "output": "dist/react-markdown.esm.js",
+        "wallMs": [
+          1807.4,
+          1803.4,
+          1785.6
+        ]
+      },
+      {
+        "source": "src/index.lil",
+        "config": "lilscript.closed.toml",
+        "output": "dist/react-markdown.closed.js",
+        "wallMs": [
+          2039.7,
+          2036.6,
+          2061.4
+        ]
+      },
+      {
+        "source": "src/index.lil",
+        "config": "lilscript.toml",
+        "output": "dist/react-markdown.browser.js",
+        "wallMs": [
+          1488,
+          1481.4,
+          1526
+        ]
+      }
+    ],
+    "timingScope": "wall time of the build's 3 compiler invocations in 3 clean builds (node scripts/build.mjs --compile), each spawned and timed by the build; the whole build, graph check and wrapping included, took 5.46 / 5.44 / 5.49 s",
+    "host": {
+      "cpus": 8,
+      "loadAverage1m": 2.4
+    },
+    "date": "2026-09-24"
+  }
 }

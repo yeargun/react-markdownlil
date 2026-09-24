@@ -7,6 +7,7 @@ import {fileURLToPath} from "node:url"
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const artifacts = [
   "dist/react-markdown.esm.js",
+  "dist/react-markdown.browser.js",
   "dist/react-markdown.development.js",
   "dist/react-markdown.cjs",
   "dist/react-markdown.development.cjs",

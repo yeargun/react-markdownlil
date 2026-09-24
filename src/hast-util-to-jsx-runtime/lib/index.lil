@@ -1,161 +1,101 @@
-import { Number, RegExp, objectHasOwn } from "../../host.lil";
-import { PropertyInfo, find, reactPropertyName } from "../../property-information/lib/find.lil";
+// hast-util-to-jsx-runtime@2.3.6 `toJsxRuntime(tree, options)` for the options react-markdown passes:
+// {Fragment, components, ignoreInvalidStyle: true, jsx, jsxs, passKeys: true, passNode: true} (production
+// `create`, React attribute and DOM style casing, table-cell `align` moved to `style`).
+import { Map, Object } from "../../host.lil";
+import { PropertyInfo, find, html, reactName, svg } from "../../property-information/lib/find.lil";
 import { styleToJs } from "../../style-to-js/index.lil";
 import { createVFileMessage } from "../../vfile/lib/index.lil";
 
-string docs = "https://github.com/syntax-tree/hast-util-to-jsx-runtime";
-JsValue identifierPattern = JS.construct(RegExp, "^[$_\\p{ID_Start}][$_\\u200C\\u200D\\p{ID_Continue}]*$", "u");
+export extern JsValue Fragment;
+export extern JsValue jsx;
+export extern JsValue jsxs;
+extern JsValue Number;
+extern JsValue RegExp;
+extern JsValue String;
 
-struct RuntimeState {
-  JsValue fragment;
-  JsValue[] ancestors;
+extern class State {
+  JsValue ancestors;
   JsValue components;
-  JsValue create;
-  string schema;
+  JsValue schema;
 }
 
-struct PropertyResult {
-  string key;
-  JsValue value;
-}
+JsValue identifierName = JS.construct(RegExp, "^[$_\\p{ID_Start}][$_\\u200C\\u200D\\p{ID_Continue}]*$", "u");
+JsValue lowercaseStart = JS.construct(RegExp, "^[a-z]");
+JsValue whitespaceOnly = JS.construct(RegExp, "^[ \\t\\n\\f\\r]*$");
 
-bool isTableElement(string tag) {
-  return tag == "table" || tag == "tbody" || tag == "thead" || tag == "tfoot" || tag == "tr";
-}
-
-bool isTableCell(string tag) {
-  return tag == "td" || tag == "th";
-}
-
-bool whitespace(string value) {
-  int index = 0;
-  while (index < value.length) {
-    int code = value.charCodeAt(index);
-    if (code != 9 && code != 10 && code != 12 && code != 13 && code != 32) {
-      return false;
-    }
-    index = index + 1;
-  }
-  return true;
-}
-
-string stringifyList(JsValue value, bool comma) {
-  string separator = " ";
-  if (comma) {
-    separator = ", ";
-  }
-  return JS.string(JS.invoke(value, "join", separator)).trim();
-}
-
-void addNode(RuntimeState state, JsValue props, JsValue type, JsValue node) {
-  if (JS.typeOf(type) != "string" && !JS.strictEqual(type, state.fragment)) {
-    props["node"] = node;
-  }
-}
-
-void addChildren(JsValue props, JsValue[] children) {
-  int count = children.length;
-  if (count > 0) {
-    JsValue value = children[0];
-    if (count > 1) {
-      value = children;
-    }
-    if (value.truthy()) {
-      props["children"] = value;
-    }
-  }
-}
-
-JsValue productionCreate(JsValue jsxFn, JsValue jsxsFn) {
-  return JS.methodRest((JsValue _self, JsValue args) => {
-    JsValue props = args[2];
-    JsValue fn = jsxFn;
-    if (JS.isArray(JS.get(props, "children"))) {
-      fn = jsxsFn;
-    }
-    JsValue key = JS.undefined();
-    if (args.length.toInt() > 3) {
-      key = args[3];
-    }
-    if (key.truthy()) {
-      return JS.call(fn, JS.undefined(), args[1], props, key);
-    }
-    return JS.call(fn, JS.undefined(), args[1], props);
+export JsValue toJsxRuntime(JsValue tree, JsValue components) {
+  State state = JS.assume(object {
+    ancestors: JS.array(),
+    components: JS.or(components, object {}),
+    schema: html
   });
-}
-
-void crashEstree(RuntimeState state, JsValue place) {
-  JsValue options = JS.object(
-    "ancestors", state.ancestors,
-    "place", place,
-    "ruleId", "mdx-estree",
-    "source", "hast-util-to-jsx-runtime"
-  );
-  JsValue message = createVFileMessage("Cannot handle MDX estrees without `createEvaluater`", options);
-  message["file"] = JS.undefined();
-  message["url"] = docs + "#cannot-handle-mdx-estrees-without-createevaluater";
-  throw message;
-}
-
-bool isIdentifierName(string name) {
-  return JS.invoke(identifierPattern, "test", name).truthy();
-}
-
-JsValue findComponentFromName(RuntimeState state, string name, bool allowExpression) {
-  if (!allowExpression || name.indexOf(".") < 0 && (!isIdentifierName(name) || name.charCodeAt(0) >= 97 && name.charCodeAt(0) <= 122)) {
-    JsValue components = state.components;
-    if (objectHasOwn(components, name)) return JS.get(components, name);
-    return name;
+  JsValue result = one(state, tree, JS.undefined());
+  if (result.truthy() && JS.typeOf(result) != "string") {
+    return result;
   }
-  crashEstree(state, JS.undefined());
+  return create(Fragment, object { children: JS.or(result, JS.undefined()) }, JS.undefined());
+}
+
+JsValue one(State state, JsValue node, JsValue key) {
+  JsValue type = JS.get(node, "type");
+  if (JS.strictEqual(type, "element")) {
+    return element(state, node, key);
+  }
+  if (JS.strictEqual(type, "mdxFlowExpression") || JS.strictEqual(type, "mdxTextExpression") || JS.strictEqual(type, "mdxjsEsm")) {
+    crashEstree(state, JS.get(node, "position"));
+  }
+  if (JS.strictEqual(type, "mdxJsxFlowElement") || JS.strictEqual(type, "mdxJsxTextElement")) {
+    return mdxJsxElement(state, node, key);
+  }
+  if (JS.strictEqual(type, "root")) {
+    JsValue props = object {};
+    addChildren(props, createChildren(state, node));
+    return create(Fragment, props, key);
+  }
+  if (JS.strictEqual(type, "text")) {
+    return JS.get(node, "value");
+  }
   return JS.undefined();
 }
 
-JsValue parseStyle(string value) {
-  try {
-    return styleToJs(value, true);
-  } catch (JsValue cause) {
-    return JS.object();
+JsValue element(State state, JsValue node, JsValue key) {
+  JsValue parentSchema = state.schema;
+  if (JS.strictEqual(JS.invoke(JS.get(node, "tagName"), "toLowerCase"), "svg") && JS.strictEqual(parentSchema, html)) {
+    state.schema = svg;
   }
-}
-
-PropertyResult? createProperty(RuntimeState state, string prop, JsValue value) {
-  PropertyInfo propertyInfo = find(state.schema, prop);
-  if (JS.isNullish(value) || JS.isUndefined(value) || JS.typeOf(value) == "number" && JS.call(JS.get(Number, "isNaN"), JS.undefined(), value).truthy()) {
-    return null;
-  }
-  JsValue next = value;
-  if (JS.isArray(value)) {
-    next = stringifyList(value, propertyInfo.commaSeparated);
-  }
-  if (propertyInfo.property == "style") {
-    JsValue styleObject = next;
-    if (JS.typeOf(next) != "object") {
-      styleObject = parseStyle(JS.string(next));
-    }
-    return PropertyResult{"style", styleObject};
-  }
-  string key = propertyInfo.attribute;
-  if (propertyInfo.spaceSeparated) {
-    key = reactPropertyName(propertyInfo.property);
-  }
-  return PropertyResult{key, next};
-}
-
-JsValue createElementProps(RuntimeState state, JsValue node) {
-  JsValue props = JS.object();
+  JS.invoke(state.ancestors, "push", node);
+  JsValue type = findComponentFromName(state, JS.get(node, "tagName"), false);
+  JsValue props = object {};
   JsValue alignValue = JS.undefined();
-  string tag = JS.string(JS.get(node, "tagName"));
   for (string prop in JS.get(node, "properties")) {
-    if (prop != "children" && objectHasOwn(JS.get(node, "properties"), prop)) {
-      PropertyResult? result = createProperty(state, prop, JS.get(JS.get(node, "properties"), prop));
-      if (result != null) {
-        string key = result.key;
-        JsValue value = result.value;
-        if (JS.strictEqual(key, "align") && JS.typeOf(value) == "string" && isTableCell(tag)) {
-          alignValue = value;
+    if (prop != "children" && JS.invoke(Object, "hasOwn", JS.get(node, "properties"), prop).truthy()) {
+      JsValue value = JS.get(JS.get(node, "properties"), prop);
+      PropertyInfo info = find(state.schema, prop);
+      // `value === null || value === undefined || (typeof value === 'number' && Number.isNaN(value))` skips it.
+      if (!JS.isNullish(value) && JS.strictEqual(value, value)) {
+        if (value.isArray()) {
+          // comma-separated-tokens / space-separated-tokens `stringify`
+          if (info.commaSeparated.truthy()) {
+            if (JS.strictEqual(value[value.length - 1], "")) {
+              value = JS.invoke(value, "concat", "");
+            }
+            value = JS.invoke(JS.invoke(value, "join", ", "), "trim");
+          } else {
+            value = JS.invoke(JS.invoke(value, "join", " "), "trim");
+          }
+        }
+        if (JS.strictEqual(info.property, "style")) {
+          if (JS.typeOf(value) != "object") {
+            value = styleToJs(JS.call(String, JS.undefined(), value));
+          }
+          props["style"] = value;
         } else {
-          JS.set(props, key, value);
+          JsValue name = if (info.space.truthy()) { reactName(info) } else { info.attribute };
+          if (JS.strictEqual(name, "align") && JS.typeOf(value) == "string" && (JS.strictEqual(JS.get(node, "tagName"), "td") || JS.strictEqual(JS.get(node, "tagName"), "th"))) {
+            alignValue = value;
+          } else {
+            props[name] = value;
+          }
         }
       }
     }
@@ -163,154 +103,115 @@ JsValue createElementProps(RuntimeState state, JsValue node) {
   if (alignValue.truthy()) {
     JsValue style = JS.get(props, "style");
     if (!style.truthy()) {
-      style = JS.object();
+      style = object {};
       props["style"] = style;
     }
     style["textAlign"] = alignValue;
   }
-  return props;
+  JsValue children = createChildren(state, node);
+  JsValue tag = JS.get(node, "tagName");
+  if (JS.strictEqual(tag, "table") || JS.strictEqual(tag, "tbody") || JS.strictEqual(tag, "thead") || JS.strictEqual(tag, "tfoot") || JS.strictEqual(tag, "tr")) {
+    children = JS.invoke(children, "filter", JS.method1((JsValue _t, JsValue child) => {
+      return JS.typeOf(child) != "string" || !JS.invoke(whitespaceOnly, "test", child).truthy();
+    }));
+  }
+  return finish(state, node, type, props, children, parentSchema, key);
 }
 
-JsValue createJsxElementProps(RuntimeState state, JsValue node) {
-  JsValue props = JS.object();
+JsValue mdxJsxElement(State state, JsValue node, JsValue key) {
+  JsValue parentSchema = state.schema;
+  if (JS.strictEqual(JS.get(node, "name"), "svg") && JS.strictEqual(parentSchema, html)) {
+    state.schema = svg;
+  }
+  JS.invoke(state.ancestors, "push", node);
+  JsValue type = if (JS.strictEqual(JS.get(node, "name"), JS.assume(null))) { Fragment } else { findComponentFromName(state, JS.get(node, "name"), true) };
+  JsValue props = object {};
   JsValue attributes = JS.get(node, "attributes");
-  int index = 0;
-  while (index < attributes.length.toInt()) {
+  for (float index = 0; index < attributes.length; index++) {
     JsValue attribute = attributes[index];
     if (JS.strictEqual(JS.get(attribute, "type"), "mdxJsxExpressionAttribute")) {
       crashEstree(state, JS.get(node, "position"));
     } else {
+      JsValue name = JS.get(attribute, "name");
       JsValue value = JS.get(attribute, "value");
       if (value.truthy() && JS.typeOf(value) == "object") {
         crashEstree(state, JS.get(node, "position"));
-      } else if (JS.isNullish(value) && !JS.isUndefined(value)) {
-        value = true;
       }
-      JS.set(props, JS.string(JS.get(attribute, "name")), value);
+      props[name] = if (JS.strictEqual(value, JS.assume(null))) { true } else { value };
     }
-    index = index + 1;
   }
-  return props;
+  return finish(state, node, type, props, createChildren(state, node), parentSchema, key);
 }
 
-JsValue[] createChildren(RuntimeState state, JsValue node) {
-  JsValue[] children = [];
-  JsValue source = JS.get(node, "children");
-  Map<string, int> counts = new Map<string, int>();
-  int index = 0;
-  while (index < source.length.toInt()) {
-    JsValue child = source[index];
-    JsValue key = JS.undefined();
-    JsValue childType = JS.get(child, "type");
-    JsValue name = JS.undefined();
-    if (JS.strictEqual(childType, "element")) {
-      name = JS.get(child, "tagName");
-    } else if (JS.strictEqual(childType, "mdxJsxFlowElement") || JS.strictEqual(childType, "mdxJsxTextElement")) {
-      name = JS.get(child, "name");
+JsValue finish(State state, JsValue node, JsValue type, JsValue props, JsValue children, JsValue parentSchema, JsValue key) {
+  if (JS.typeOf(type) != "string" && !JS.strictEqual(type, Fragment)) {
+    props["node"] = node;
+  }
+  addChildren(props, children);
+  JS.invoke(state.ancestors, "pop");
+  state.schema = parentSchema;
+  return create(type, props, key);
+}
+
+void addChildren(JsValue props, JsValue children) {
+  if (children.length > 0) {
+    JsValue value = if (children.length > 1) { children } else { children[0] };
+    if (value.truthy()) {
+      props["children"] = value;
     }
+  }
+}
+
+JsValue create(JsValue type, JsValue props, JsValue key) {
+  JsValue fn = if (JS.get(props, "children").isArray()) { jsxs } else { jsx };
+  if (key.truthy()) {
+    return JS.call(fn, JS.undefined(), type, props, key);
+  }
+  return JS.call(fn, JS.undefined(), type, props);
+}
+
+JsValue createChildren(State state, JsValue node) {
+  JsValue children = JS.array();
+  JsValue countsByName = JS.construct(Map);
+  for (float index = 0; index < JS.get(node, "children").length; index++) {
+    JsValue child = JS.get(node, "children")[index];
+    JsValue key = JS.undefined();
+    JsValue name = if (JS.strictEqual(JS.get(child, "type"), "element")) {
+      JS.get(child, "tagName")
+    } else {
+      if (JS.strictEqual(JS.get(child, "type"), "mdxJsxFlowElement") || JS.strictEqual(JS.get(child, "type"), "mdxJsxTextElement")) { JS.get(child, "name") } else { JS.undefined() }
+    };
     if (name.truthy()) {
-      string childName = JS.string(name);
-      int? countValue = counts.get(childName);
-      int count = 0;
-      if (countValue != null) {
-        count = countValue;
-      }
-      key = childName + "-" + JS.string(count);
-      counts.set(childName, count + 1);
+      JsValue count = JS.or(JS.invoke(countsByName, "get", name), 0);
+      key = JS.add(JS.add(name, "-"), count);
+      JS.invoke(countsByName, "set", name, JS.add(count, 1));
     }
     JsValue result = one(state, child, key);
     if (!JS.isUndefined(result)) {
-      JS.push(children, result);
+      JS.invoke(children, "push", result);
     }
-    index = index + 1;
   }
   return children;
 }
 
-JsValue element(RuntimeState state, JsValue node, JsValue key) {
-  string parentSchema = state.schema;
-  string tag = JS.string(JS.get(node, "tagName"));
-  if (tag.toLowerCase() == "svg" && parentSchema == "html") {
-    state.schema = "svg";
+JsValue findComponentFromName(State state, JsValue name, bool allowExpression) {
+  if (allowExpression && (JS.invoke(name, "includes", ".").truthy() || JS.invoke(identifierName, "test", name).truthy() && !JS.invoke(lowercaseStart, "test", name).truthy())) {
+    crashEstree(state, JS.undefined());
   }
-  state.ancestors.push(node);
-  JsValue type = findComponentFromName(state, tag, false);
-  JsValue props = createElementProps(state, node);
-  JsValue[] children = createChildren(state, node);
-  if (isTableElement(tag)) {
-    JsValue[] filtered = [];
-    int index = 0;
-    while (index < children.length) {
-      JsValue child = children[index];
-      if (JS.typeOf(child) != "string" || !whitespace(JS.string(child))) {
-        JS.push(filtered, child);
-      }
-      index = index + 1;
-    }
-    children = filtered;
+  if (JS.invoke(Object, "hasOwn", state.components, name).truthy()) {
+    return state.components[name];
   }
-  addNode(state, props, type, node);
-  addChildren(props, children);
-  state.ancestors.pop();
-  state.schema = parentSchema;
-  return JS.call(state.create, JS.undefined(), node, type, props, key);
+  return name;
 }
 
-JsValue root(RuntimeState state, JsValue node, JsValue key) {
-  JsValue props = JS.object();
-  addChildren(props, createChildren(state, node));
-  return JS.call(state.create, JS.undefined(), node, state.fragment, props, key);
-}
-
-JsValue mdxExpression(RuntimeState state, JsValue node) {
-  crashEstree(state, JS.get(node, "position"));
-  return JS.undefined();
-}
-
-JsValue mdxEsm(RuntimeState state, JsValue node) {
-  crashEstree(state, JS.get(node, "position"));
-  return JS.undefined();
-}
-
-JsValue mdxJsxElement(RuntimeState state, JsValue node, JsValue key) {
-  string parentSchema = state.schema;
-  JsValue name = JS.get(node, "name");
-  if (JS.strictEqual(name, "svg") && parentSchema == "html") {
-    state.schema = "svg";
-  }
-  state.ancestors.push(node);
-  JsValue type = state.fragment;
-  if (!JS.isNullish(name)) {
-    type = findComponentFromName(state, JS.string(name), true);
-  }
-  JsValue props = createJsxElementProps(state, node);
-  addNode(state, props, type, node);
-  addChildren(props, createChildren(state, node));
-  state.ancestors.pop();
-  state.schema = parentSchema;
-  return JS.call(state.create, JS.undefined(), node, type, props, key);
-}
-
-JsValue one(RuntimeState state, JsValue node, JsValue key) {
-  JsValue type = JS.get(node, "type");
-  if (JS.strictEqual(type, "element")) return element(state, node, key);
-  if (JS.strictEqual(type, "mdxFlowExpression") || JS.strictEqual(type, "mdxTextExpression")) return mdxExpression(state, node);
-  if (JS.strictEqual(type, "mdxJsxFlowElement") || JS.strictEqual(type, "mdxJsxTextElement")) return mdxJsxElement(state, node, key);
-  if (JS.strictEqual(type, "mdxjsEsm")) return mdxEsm(state, node);
-  if (JS.strictEqual(type, "root")) return root(state, node, key);
-  if (JS.strictEqual(type, "text")) return JS.get(node, "value");
-  return JS.undefined();
-}
-
-export JsValue toJsxRuntime(JsValue tree, JsValue fragment, JsValue components, JsValue jsxFn, JsValue jsxsFn) {
-  JsValue create = productionCreate(jsxFn, jsxsFn);
-  if (!components.truthy()) components = JS.object();
-  RuntimeState state = RuntimeState{fragment, [], components, create, "html"};
-  JsValue result = one(state, tree, JS.undefined());
-  if (result.truthy() && JS.typeOf(result) != "string") {
-    return result;
-  }
-  JsValue child = JS.undefined();
-  if (result.truthy()) child = result;
-  return JS.call(create, JS.undefined(), tree, state.fragment, JS.object("children", child), JS.undefined());
+void crashEstree(State state, JsValue place) {
+  JsValue message = createVFileMessage("Cannot handle MDX estrees without `createEvaluater`", object {
+    ancestors: state.ancestors,
+    place: place,
+    ruleId: "mdx-estree",
+    source: "hast-util-to-jsx-runtime"
+  });
+  message["file"] = JS.undefined();
+  message["url"] = "https://github.com/syntax-tree/hast-util-to-jsx-runtime#cannot-handle-mdx-estrees-without-createevaluater";
+  throw message;
 }

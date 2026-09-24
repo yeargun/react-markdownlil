@@ -20,6 +20,7 @@
       <nav aria-label="Main navigation">
         <a href="#stack">stack</a>
         <a href="#performance">performance</a>
+        <a href="#compiler">compiler</a>
         <a href="#lab">playground</a>
         <a href="#evidence">size</a>
         <a href="https://github.com/yeargun/react-markdownlil">GitHub ↗</a>
@@ -46,18 +47,19 @@
         </div>
         <div class="scoreboard" aria-label="Compression and performance results">
           <div class="score-main">
-            <span class="score-label">Bytes over the wire, Brotli-11, against Terser of the official runtime graph</span>
+            <span class="score-label" id="hero-label">Brotli-11 over the wire, against the strongest minifier bar of the official browser graph</span>
             <strong id="hero-ratio">—<span>smaller</span></strong>
             <p id="hero-bytes"></p>
           </div>
           <div class="score-grid">
-            <div><strong id="hero-shipped">—</strong><span>Brotli-11 you ship, vs Terser</span></div>
-            <div><strong id="hero-gzip">—</strong><span>gzip-9 vs Terser</span></div>
-            <div><strong id="hero-raw">—</strong><span>raw vs Terser</span></div>
+            <div><strong id="hero-shipped">—</strong><span>Brotli-11 you ship, vs the bar</span></div>
+            <div><strong id="hero-gzip">—</strong><span>gzip-9 vs the bar</span></div>
+            <div><strong id="hero-raw">—</strong><span>raw vs the bar</span></div>
             <div><strong id="hero-spec">—</strong><span>official tests</span></div>
           </div>
           <p class="score-note">
-            Default tab is the entire package. Other tabs are the published @itslil libraries this component installs. Runtime checks: 120/120 pass. Declaration or package checks fail.</p>
+            Default tab is the entire package, measured as its browser build. Other tabs are the published @itslil libraries this component installs.
+          </p>
         </div>
       </section>
       <section class="ticker" aria-label="Supported features">
@@ -76,15 +78,15 @@
         </div>
         <div class="stack-tabs" id="stack-tabs" role="tablist" aria-label="Package comparisons"></div>
       </section>
-<section class="performance shell" id="performance">
+      <section class="performance shell" id="performance">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Measured in Node</p>
             <h2>Same work,<br />two runtimes.</h2>
           </div>
           <p id="perf-copy">
-            Official rows are published react-markdown plus its runtime graph, then Terser and esbuild.
-            LilScript is the compiled npm file plus the @itslil processor packages it imports.
+            Official is published react-markdown@10.1.0 with its runtime dependencies.
+            LilScript is the compiled npm file, whose processor graph is compiled in; both render the same markup.
           </p>
         </div>
         <div class="perf-cards" id="perf-cards"></div>
@@ -101,6 +103,19 @@
           </table>
         </div>
         <p class="perf-note" id="perf-note"></p>
+      </section>
+      <section class="compiler-progress shell" id="compiler">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">One compiler</p>
+            <h2>Compile time,<br />and what it wrote.</h2>
+          </div>
+          <p>
+            Every delivered file is written by the LilScript compiler; the build adds only a license banner, the React imports and a module wrapper.
+            Compile times are wall times of each compiler invocation over three clean builds.
+          </p>
+        </div>
+        <div class="compiler-comparison" id="compiler-release"></div>
       </section>
       <section class="lab shell" id="lab">
         <div class="section-heading">
@@ -124,17 +139,17 @@
               <h2>Raw, gzip,<br />and Brotli.</h2>
             </div>
             <p id="evidence-copy">
-              Official react-markdown@10.1.0 bundled with its runtime graph, then Terser (mangle on/off) and esbuild minify.
-              LilScript is not post-minified.
+              Official react-markdown@10.1.0 bundled for the browser with its runtime graph, then Terser and Oxc (mangle on/off) and esbuild minify, plus the same graph built from its pinned Git source.
+              The strongest of these is the bar. LilScript rows are the delivered files, with no minifier after the compiler.
             </p>
           </div>
           <div class="codec-block">
             <h3>Brotli-11</h3>
-            <p class="codec-lead">The wire number. LilScript row is the measured ESM.</p>
+            <p class="codec-lead">The wire number. The primary LilScript row is the browser build, the file a browser bundle ships.</p>
             <div class="total-bar" id="bar-brotli"></div>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Lane</th><th>Brotli-11</th><th>vs Terser</th></tr></thead>
+                <thead><tr><th>Lane</th><th>Brotli-11</th><th>vs bar</th></tr></thead>
                 <tbody id="body-brotli"></tbody>
               </table>
             </div>
@@ -145,7 +160,7 @@
             <div class="total-bar" id="bar-gzip"></div>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Lane</th><th>gzip-9</th><th>vs Terser</th></tr></thead>
+                <thead><tr><th>Lane</th><th>gzip-9</th><th>vs bar</th></tr></thead>
                 <tbody id="body-gzip"></tbody>
               </table>
             </div>
@@ -156,7 +171,7 @@
             <div class="total-bar" id="bar-raw"></div>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Lane</th><th>Raw</th><th>vs Terser</th></tr></thead>
+                <thead><tr><th>Lane</th><th>Raw</th><th>vs bar</th></tr></thead>
                 <tbody id="body-raw"></tbody>
               </table>
             </div>
@@ -166,7 +181,7 @@
             <p class="codec-lead">Every lane, measured three ways.</p>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Lane</th><th>Raw</th><th>gzip-9</th><th>Brotli-11</th><th>Brotli vs Terser</th></tr></thead>
+                <thead><tr><th>Lane</th><th>Raw</th><th>gzip-9</th><th>Brotli-11</th><th>Brotli vs bar</th></tr></thead>
                 <tbody id="body-matched"></tbody>
               </table>
             </div>

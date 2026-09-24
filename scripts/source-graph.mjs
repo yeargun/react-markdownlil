@@ -120,6 +120,8 @@ extern JsValue encodeURIComponent;`
     return source.replace(before, after)
   }
   if (id === "remark-parse" && path === "src/micromark/character-entities.lil") {
+    // The table as an object literal (upstream's form) reads no host global.
+    if (source.startsWith("export JsValue characterEntities = object {")) return source
     const before = "export JsValue characterEntities = JSON.parse("
     const after = 'export JsValue characterEntities = JS.invoke(JSON, "parse", '
     if (!source.startsWith(before)) throw new Error("remark-parse entity table no longer matches the audited host-call wiring")

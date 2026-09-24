@@ -6,6 +6,7 @@ const result = JSON.parse(json)[0]
 const file = "react-markdown"
 const required = new Set([
   `dist/${file}.esm.js`,
+  `dist/${file}.browser.js`,
   `dist/${file}.development.js`,
   `dist/${file}.cjs`,
   `dist/${file}.development.cjs`,

@@ -1,54 +1,26 @@
-import { HAS_OWN, Object, Symbol, TO_STRING, protoOf } from "./host.lil";
+import { Object, Symbol } from "./host.lil";
 
+export JsValue hasOwnProperty = JS.get(JS.object(), "hasOwnProperty");
+
+// is-plain-obj@4
 export bool isPlainObj(JsValue value) {
-  if (JS.typeOf(value) != "object" || JS.isNullish(value)) {
-    return false;
-  }
-  JsValue prototype = protoOf(value);
-  bool protoOk = JS.isNullish(prototype) || JS.strictEqual(prototype, JS.get(Object, "prototype"));
-  if (!protoOk) {
-    protoOk = JS.isNullish(protoOf(prototype));
-  }
-  if (!protoOk) {
-    return false;
-  }
-  if (JS.in(JS.get(Symbol, "toStringTag"), value)) {
-    return false;
-  }
-  if (JS.in(JS.get(Symbol, "iterator"), value)) {
-    return false;
-  }
-  return true;
+  if (JS.typeOf(value) != "object" || JS.isNullish(value)) return false;
+  JsValue prototype = JS.invoke(Object, "getPrototypeOf", value);
+  return (JS.isNullish(prototype) || JS.strictEqual(prototype, JS.get(Object, "prototype")) || JS.isNullish(JS.invoke(Object, "getPrototypeOf", prototype))) &&
+    !JS.in(JS.get(Symbol, "toStringTag"), value) && !JS.in(JS.get(Symbol, "iterator"), value);
 }
 
+// extend@3's own check: a `[object Object]` whose constructor is Object-like and whose last key is own.
 export bool isPlainObjectExtend(JsValue obj) {
-  if (!obj.truthy()) {
-    return false;
-  }
-  JsValue tag = JS.call(TO_STRING, obj);
-  if (JS.string(tag) != "[object Object]") {
-    return false;
-  }
-  bool hasOwnConstructor = JS.call(HAS_OWN, obj, "constructor").truthy();
+  if (!obj.truthy() || JS.call(JS.get(JS.get(Object, "prototype"), "toString"), obj) != "[object Object]") return false;
   JsValue ctor = JS.get(obj, "constructor");
-  bool hasIsPrototypeOf = false;
-  if (ctor.truthy()) {
-    JsValue constructorPrototype = JS.get(ctor, "prototype");
-    if (constructorPrototype.truthy()) {
-      hasIsPrototypeOf = JS.call(HAS_OWN, JS.get(ctor, "prototype"), "isPrototypeOf").truthy();
-    }
+  if (ctor.truthy() && !JS.call(hasOwnProperty, obj, "constructor").truthy()) {
+    JsValue ctorPrototype = JS.get(ctor, "prototype");
+    if (!ctorPrototype.truthy() || !JS.call(hasOwnProperty, ctorPrototype, "isPrototypeOf").truthy()) return false;
   }
-  if (ctor.truthy() && !hasOwnConstructor && !hasIsPrototypeOf) {
-    return false;
-  }
-  string last = "";
-  bool saw = false;
+  JsValue last = JS.undefined();
   for (string key in obj) {
     last = key;
-    saw = true;
   }
-  if (!saw) {
-    return true;
-  }
-  return JS.call(HAS_OWN, obj, last).truthy();
+  return JS.isUndefined(last) || JS.call(hasOwnProperty, obj, last).truthy();
 }

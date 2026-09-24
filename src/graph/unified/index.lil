@@ -1,0 +1,4 @@
+// The published ESM: unified's public API only. entry.lil keeps the runtime exports other ports link.
+import { unified } from "./entry.lil";
+
+export { unified };

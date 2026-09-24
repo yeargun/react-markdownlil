@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "tools": {
-    "node": "v20.19.0",
+    "node": "v24.11.1",
     "esbuild": "0.28.1",
     "terser": "5.51.2",
     "compiler": {
       "version": "lilscript 0.1.0",
-      "sha256": "b49f339a9ae4a6ae844dfd7eb04ff79311be5593ebad8fd3a896675dc45ebfe5"
+      "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
     },
     "codec": {
-      "sha256": "42b2ca02cca2c80d90bfd3e0382139d19b12cb06f2045f6c2f3bf0c91208f866",
+      "sha256": "125776830df72bbaf9704fee3c38bb0bf29bfc6bcceb5bc8707a0507a128d7b9",
       "gzip9": {
         "encoder": "upstream-stock-zlib-c",
         "libraryVersion": "1.3.1",
@@ -31,14 +31,14 @@
   },
   "settings": {
     "official": "esbuild ESM graph, then Terser module=true/compress=true/mangle=true",
-    "lil": "LilScript js-module output with no post-minification",
+    "lil": "dist/react-markdown.browser.js as delivered: LilScript js-module output with no post-minification",
     "external": [
       "react",
       "react/*"
     ],
     "measurement": "lilscript-codec --json .tmp/measure-graph/*.js"
   },
-  "sourceGraphLockSha256": "ba7510b82aaba4ed9c37f194e03ecd76230c6f9a568d3cfa94030c6abc07f054",
+  "sourceGraphLockSha256": "658c93dc14b18e2bd987d5b6d5a3c2898b351267ced64ba846b105d597cafdeb",
   "official": {
     "graph": {
       "raw": 294369,
@@ -63,23 +63,37 @@
       "gzip9": 36331,
       "brotli11": 32530,
       "sha256": "3cff9c5e258bbf74882d6c4293f72103deb8500752a2cc31d65c6fee26005726"
+    },
+    "oxc": {
+      "raw": 116998,
+      "gzip9": 35166,
+      "brotli11": 31413,
+      "sha256": "30fa6c719c603afd0f74632bae53937ba6a473100524729ac97c61ff368dd31a",
+      "tool": "vite 8.2.1 minify (Oxc)"
+    },
+    "oxcNoMangle": {
+      "raw": 183163,
+      "gzip9": 43324,
+      "brotli11": 38546,
+      "sha256": "96d777d096adf3c52ae03b82829e751dab3b2d9a799d1960e439afd12693341c",
+      "tool": "vite 8.2.1 minify (Oxc)"
     }
   },
   "lil": {
     "standalone": {
-      "raw": 150636,
-      "gzip9": 52476,
-      "brotli11": 45285,
-      "sha256": "69b7f14d6018172b47042247782a18d2cdb9a9bdac48deed34662fbce7c14583"
+      "raw": 95501,
+      "gzip9": 30961,
+      "brotli11": 27312,
+      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344"
     },
     "consumerGraph": {
-      "raw": 218119,
-      "gzip9": 58386,
-      "brotli11": 49568,
-      "sha256": "9cc6a6cefc2511b34a485964b328a34b1a1b44c4373238942b874888f78507c3"
+      "raw": 143959,
+      "gzip9": 36264,
+      "brotli11": 31109,
+      "sha256": "b1c65d127463b2121e44a7ef5e2d7e11d69fc55f14f9990fce63e1c6b5422971"
     },
     "inputs": [
-      "dist/react-markdown.esm.js"
+      "dist/react-markdown.browser.js"
     ],
     "imports": [
       "react",
@@ -88,14 +102,14 @@
   },
   "deltaAgainstOfficialTerser": {
     "standalone": {
-      "raw": 32962,
-      "gzip9": 17552,
-      "brotli11": 14203
+      "raw": -22173,
+      "gzip9": -3963,
+      "brotli11": -3770
     },
     "consumerGraph": {
-      "raw": 100445,
-      "gzip9": 23462,
-      "brotli11": 18486
+      "raw": 26285,
+      "gzip9": 1340,
+      "brotli11": 27
     }
   }
 }

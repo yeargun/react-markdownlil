@@ -1,0 +1,25 @@
+// The browser build's decoder (the package's `browser` condition), as
+// decode-named-character-reference@1.3.0's `index.dom.js`: the document's
+// own HTML parser decodes a named reference, so the 2,125-entry table stays
+// out of the bundle. Node and the development build keep the table.
+extern JsValue document;
+
+JsValue element = JS.invoke(document, "createElement", "i");
+
+export JsValue decodeNamedCharacterReference(string value) {
+  string characterReference = "&" + value + ";";
+  JS.set(element, "innerHTML", characterReference);
+  JsValue character = JS.get(element, "textContent");
+  // A reference that does not need its semicolon (`&not`) matches a prefix
+  // of a longer one (`&notit;` reads `¬it;`): a trailing `;` after decoding,
+  // unless the reference is `&semi;` itself, means the match was partial.
+  int last = JS.number(JS.invoke(character, "charCodeAt", JS.number(JS.get(character, "length")) - 1)).toInt();
+  if (last == 59 && value != "semi") {
+    return false;
+  }
+  // Unchanged text was not a reference.
+  if (JS.strictEqual(character, characterReference)) {
+    return false;
+  }
+  return character;
+}

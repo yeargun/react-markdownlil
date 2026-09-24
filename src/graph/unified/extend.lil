@@ -1,66 +1,40 @@
-import { Object, objectHasOwn } from "./host.lil";
-import { isPlainObjectExtend } from "./plain.lil";
-
-void setProperty(JsValue target, string name, JsValue newValue) {
-  if (name == "__proto__") {
-    JS.invoke(
-      Object,
-      "defineProperty",
-      target,
-      "__proto__",
-      JS.object("enumerable", true, "configurable", true, "writable", true, "value", newValue)
-    );
-    return;
-  }
-  JS.set(target, name, newValue);
-}
+import { Object } from "./host.lil";
+import { hasOwnProperty, isPlainObjectExtend } from "./plain.lil";
 
 JsValue getProperty(JsValue obj, string name) {
   if (name == "__proto__") {
-    if (!objectHasOwn(obj, name)) {
-      return JS.undefined();
-    }
-    JsValue desc = JS.invoke(Object, "getOwnPropertyDescriptor", obj, name);
-    return JS.get(desc, "value");
+    if (!JS.call(hasOwnProperty, obj, name).truthy()) return JS.undefined();
+    return JS.get(JS.invoke(Object, "getOwnPropertyDescriptor", obj, name), "value");
   }
   return JS.get(obj, name);
 }
 
+// extend@3 with `deep = true` and one source: `extend(true, target, source)`.
 export JsValue extendWith(JsValue target, JsValue source) {
-  if (JS.isNullish(target) || (JS.typeOf(target) != "object" && JS.typeOf(target) != "function")) {
-    target = JS.object();
-  }
-  if (JS.isNullish(source)) {
-    return target;
-  }
-  for (string name in source) {
-    JsValue src = getProperty(target, name);
-    JsValue copy = getProperty(source, name);
-    if (!JS.strictEqual(target, copy)) {
-      if (copy.truthy() && (isPlainObjectExtend(copy) || copy.isArray())) {
-        JsValue clone = JS.undefined();
-        if (copy.isArray()) {
-          if (src.truthy() && src.isArray()) {
-            clone = src;
+  if (JS.isNullish(target) || JS.typeOf(target) != "object" && JS.typeOf(target) != "function") target = JS.object();
+  if (!JS.isNullish(source)) {
+    for (string name in source) {
+      JsValue src = getProperty(target, name);
+      JsValue copy = getProperty(source, name);
+      if (!JS.strictEqual(target, copy)) {
+        JsValue value = copy;
+        if (copy.truthy() && (isPlainObjectExtend(copy) || copy.isArray())) {
+          JsValue clone = if (copy.isArray()) {
+            if (src.truthy() && src.isArray()) { src } else { JS.array() }
           } else {
-            clone = JS.array();
-          }
-        } else {
-          if (src.truthy() && isPlainObjectExtend(src)) {
-            clone = src;
-          } else {
-            clone = JS.object();
-          }
+            if (src.truthy() && isPlainObjectExtend(src)) { src } else { JS.object() }
+          };
+          value = extendWith(clone, copy);
+        } else if (JS.isUndefined(copy)) {
+          continue;
         }
-        setProperty(target, name, extendWith(clone, copy));
-      } else if (JS.typeOf(copy) != "undefined") {
-        setProperty(target, name, copy);
+        if (name == "__proto__") {
+          JS.invoke(Object, "defineProperty", target, name, JS.object("enumerable", true, "configurable", true, "value", value, "writable", true));
+        } else {
+          JS.set(target, name, value);
+        }
       }
     }
   }
   return target;
-}
-
-export JsValue cloneNamespace(JsValue namespace) {
-  return extendWith(JS.object(), namespace);
 }

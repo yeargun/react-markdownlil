@@ -1,34 +1,18 @@
-import { Error, isErrorInstance } from "./host.lil";
+// devlop@1.1.0: the development build (`development` true) throws an `AssertionError`-shaped `Error`;
+// production does nothing. Every caller passes a message.
+import { Error, Object } from "./host.lil";
 
 extern JsValue development;
 
-void assertion(JsValue message) {
-  if (!development.truthy()) {
-    return;
+export void unreachable(string message) {
+  if (development.truthy()) {
+    throw JS.invoke(Object, "assign", JS.construct(Error, message), object {
+      name: "Assertion",
+      code: "ERR_ASSERTION",
+      actual: false,
+      expected: true,
+      generated: false,
+      operator: "ok"
+    });
   }
-  string text = "Unreachable";
-  bool generated = true;
-  if (message.truthy()) {
-    if (isErrorInstance(message)) {
-      throw message;
-    }
-    text = JS.string(message);
-    generated = false;
-  }
-  JsValue error = JS.construct(Error, text);
-  error["name"] = "Assertion";
-  error["code"] = "ERR_ASSERTION";
-  error["actual"] = false;
-  error["expected"] = true;
-  error["generated"] = generated;
-  error["operator"] = "ok";
-  throw error;
-}
-
-export void ok(JsValue value, JsValue message) {
-  if (!value.truthy()) assertion(message);
-}
-
-export void unreachable(JsValue message) {
-  assertion(message);
 }

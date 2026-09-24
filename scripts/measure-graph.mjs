@@ -3,7 +3,7 @@ import {createHash} from "node:crypto"
 import {existsSync, mkdirSync, readFileSync, writeFileSync} from "node:fs"
 import {createRequire} from "node:module"
 import {dirname, resolve} from "node:path"
-import {fileURLToPath} from "node:url"
+import {fileURLToPath, pathToFileURL} from "node:url"
 import {build} from "esbuild"
 import {minify} from "terser"
 
@@ -66,8 +66,29 @@ const officialTerserNoMangle = await minify(officialCode, {
 })
 if (!officialTerserNoMangle.code) throw new Error("Terser did not produce the no-mangle diagnostic")
 const officialEsbuild = await bundle("react-markdown", {metafile: false, minify: true})
+// Oxc through Vite 8's minify (the LilScript repository's benchmarks/popular
+// install), mangle on and off, when it is present.
+const vitePath = resolve(lilscriptRoot, "benchmarks", "popular", "node_modules", "vite", "dist", "node", "index.js")
+const oxc = {}
+if (existsSync(vitePath)) {
+  const vite = await import(pathToFileURL(vitePath).href)
+  for (const mangle of [true, false]) {
+    const result = await vite.minify("official.js", officialCode, {
+      module: true,
+      compress: true,
+      mangle,
+      codegen: {removeWhitespace: true, legalComments: "none"},
+      sourcemap: false,
+    })
+    if (result.errors?.length) throw new Error("Oxc rejected the official graph")
+    oxc[mangle ? "mangle" : "nomangle"] = result.code
+  }
+  oxc.version = require(resolve(dirname(dirname(dirname(vitePath))), "package.json")).version
+}
 
-const lilPath = resolve(root, "dist", "react-markdown.esm.js")
+// The official graph is bundled for the browser, so the comparison is the
+// port's browser build (the package's `browser` condition).
+const lilPath = resolve(root, "dist", "react-markdown.browser.js")
 const lilCode = readFileSync(lilPath)
 const lilBundle = await bundle(lilPath)
 const lilImports = imports(lilBundle)
@@ -85,6 +106,7 @@ const measuredInputs = [
   ["official-esbuild.js", officialEsbuild.outputFiles[0].contents],
   ["lil-standalone.js", lilCode],
   ["lil-consumer-graph.js", lilBundle.outputFiles[0].contents],
+  ...(oxc.mangle ? [["official-oxc.js", oxc.mangle], ["official-oxc-no-mangle.js", oxc.nomangle]] : []),
 ]
 const measuredPaths = measuredInputs.map(([name, code]) => {
   const path = resolve(work, name)
@@ -99,6 +121,8 @@ const [
   officialEsbuildMeasurement,
   standaloneMeasurement,
   graphMeasurement,
+  oxcMeasurement,
+  oxcNoMangleMeasurement,
 ] = codecReport.artifacts
 const official = artifact(officialTerser.code, officialMeasurement)
 const standalone = artifact(lilCode, standaloneMeasurement)
@@ -120,7 +144,7 @@ const report = {
   },
   settings: {
     official: "esbuild ESM graph, then Terser module=true/compress=true/mangle=true",
-    lil: "LilScript js-module output with no post-minification",
+    lil: "dist/react-markdown.browser.js as delivered: LilScript js-module output with no post-minification",
     external,
     measurement: "lilscript-codec --json .tmp/measure-graph/*.js",
   },
@@ -130,6 +154,12 @@ const report = {
     terser: official,
     terserNoMangle: artifact(officialTerserNoMangle.code, officialNoMangleMeasurement),
     esbuild: artifact(officialEsbuild.outputFiles[0].contents, officialEsbuildMeasurement),
+    ...(oxc.mangle
+      ? {
+          oxc: {...artifact(oxc.mangle, oxcMeasurement), tool: `vite ${oxc.version} minify (Oxc)`},
+          oxcNoMangle: {...artifact(oxc.nomangle, oxcNoMangleMeasurement), tool: `vite ${oxc.version} minify (Oxc)`},
+        }
+      : {}),
   },
   lil: {
     standalone,

@@ -1,31 +1,31 @@
 {
   "schemaVersion": 1,
   "name": "react-markdownlil",
-  "startedAt": "2026-09-10T20:48:56Z",
+  "startedAt": "2026-09-24T06:32:14Z",
   "machine": {
     "provider": "Azure",
-    "instanceClass": "Standard_D16als_v7",
-    "cpu": "AMD EPYC 9V45 96-Core Processor",
-    "logicalCpus": 16,
-    "memoryBytes": 33648427008,
-    "os": "Ubuntu 24.04.4 LTS",
-    "kernel": "6.17.0-1022-azure",
+    "instanceClass": "Standard_B8als_v2",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logicalCpus": 8,
+    "memoryBytes": 16706420736,
+    "os": "Ubuntu 24.04.3 LTS",
+    "kernel": "7.0.0-1014-azure",
     "node": "v24.11.1",
     "rayonThreads": 8,
     "loadAtStart": [
-      1.9189453125,
-      2.3623046875,
-      2.21728515625
+      2.333984375,
+      2.48388671875,
+      6.5771484375
     ],
     "loadAtEnd": [
-      2.771484375,
-      2.7275390625,
-      2.4814453125
+      8.626953125,
+      4.2255859375,
+      6.84033203125
     ]
   },
   "compiler": {
-    "commit": "4dc4e3337d9ffd758d65e3852682d6e13d9331c1",
-    "sha256": "0616048498eb9eb2e4bd75b39e8e6a083733ada647e16108edfee30ad183beeb"
+    "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
+    "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
   },
   "source": {
     "repository": "https://github.com/remarkjs/react-markdown.git",
@@ -35,9 +35,9 @@
     "directory": "."
   },
   "portSource": {
-    "commit": "a3c0ed56e78974051ec2d2ed503b5ccfb84f9239",
-    "snapshot": "/tmp/lilscript-page-refresh-20260910/current/react-markdownlil"
+    "commit": "76a327e plus the release working tree (committed together with these records)"
   },
+  "prerequisiteAdjustments": "Pin declared development dependencies for release compatibility: @types/hast@3.0.4, typescript@5.5.4",
   "steps": {
     "original-install": {
       "command": [
@@ -48,13 +48,13 @@
         "--no-fund"
       ],
       "cwd": "upstream",
-      "wallSeconds": 0.5647632230002273,
-      "cpuSeconds": 0.697098,
+      "wallSeconds": 3.1832936130085727,
+      "cpuSeconds": 2.856277,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-install.log",
-      "logSha256": "45deef3c83ca3e74a6a4922648926f19cbaebcfa3ac0ae2022a758cb364a2df4",
-      "tail": "\nup to date in 472ms\n"
+      "logSha256": "e64af586ea357f57559d65d1407e250bb430d9affd6f6fb18035db10efc3efe1",
+      "tail": "\nup to date in 3s\n"
     },
     "original-setup-0": {
       "command": [
@@ -69,13 +69,13 @@
         "typescript@5.5.4"
       ],
       "cwd": "upstream",
-      "wallSeconds": 0.9154160220004997,
-      "cpuSeconds": 1.144954,
+      "wallSeconds": 3.3874053719919175,
+      "cpuSeconds": 3.076961,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-setup-0.log",
-      "logSha256": "5d1b8da5e059d7548692d1c68360a3de8b9e95a5f2817ce0d966458275a3c4a4",
-      "tail": "npm warn idealTree Removing dependencies.@types/hast in favor of devDependencies.@types/hast\n\nadded 1 package, and changed 2 packages in 851ms\n"
+      "logSha256": "e64af586ea357f57559d65d1407e250bb430d9affd6f6fb18035db10efc3efe1",
+      "tail": "\nup to date in 3s\n"
     },
     "original-build-1": {
       "command": [
@@ -84,8 +84,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 2.818445920999693,
-      "cpuSeconds": 5.860290000000001,
+      "wallSeconds": 13.564330398992752,
+      "cpuSeconds": 16.604454,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-1.log",
@@ -99,45 +99,61 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 129.79313330200057,
-      "cpuSeconds": 306.980853,
+      "wallSeconds": 6.437189892007154,
+      "cpuSeconds": 6.269295,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-1.log",
-      "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6",
-      "tail": "fatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nsource graph: 68 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
+      "logSha256": "30dcdb31ddf90131e5b4a4aff42c63593b445e48f175a9d76b8b81a234cf332b",
+      "tail": "source graph: 69 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.browser.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
       "invocations": [
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.toml",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js"
           ],
-          "startedAt": 1789073341.0935798,
-          "wallSeconds": 66.64673852920532,
+          "startedAt": 1790231554.9960341,
+          "wallSeconds": 2.091146469116211,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js",
+          "sha256": "665985478a81fc9722d429ffbef8f13d55b585d1a865148cca082c63e2de8ca0"
         },
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.closed.toml",
+            "/home/azureuser/react-markdownlil/lilscript.closed.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js"
           ],
-          "startedAt": 1789073407.7662175,
-          "wallSeconds": 62.966179847717285,
+          "startedAt": 1790231557.1276262,
+          "wallSeconds": 2.321808099746704,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js",
+          "sha256": "9751f8a54308dff4dfaa01d2cdaffc06df957e01977ce9b00c7abadf78ea97e9"
+        },
+        {
+          "args": [
+            "/home/azureuser/react-markdownlil/.tmp/browser-src/index.lil",
+            "--target",
+            "js-module",
+            "--config",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
+            "-o",
+            "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js"
+          ],
+          "startedAt": 1790231559.495636,
+          "wallSeconds": 1.5430786609649658,
+          "exitCode": 0,
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js",
+          "sha256": "a799a14867e2493bd36a4ea293ce2475d2d375ff3d72c1a9a228ae18fcec44e0"
         }
       ]
     },
@@ -148,45 +164,61 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 125.14603469999929,
-      "cpuSeconds": 293.16221399999995,
+      "wallSeconds": 5.6769774409913225,
+      "cpuSeconds": 5.687045000000003,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-2.log",
-      "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6",
-      "tail": "fatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nsource graph: 68 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
+      "logSha256": "30dcdb31ddf90131e5b4a4aff42c63593b445e48f175a9d76b8b81a234cf332b",
+      "tail": "source graph: 69 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.browser.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
       "invocations": [
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.toml",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js"
           ],
-          "startedAt": 1789073470.8861945,
-          "wallSeconds": 62.994744539260864,
+          "startedAt": 1790231561.2509856,
+          "wallSeconds": 1.8116977214813232,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js",
+          "sha256": "665985478a81fc9722d429ffbef8f13d55b585d1a865148cca082c63e2de8ca0"
         },
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.closed.toml",
+            "/home/azureuser/react-markdownlil/lilscript.closed.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js"
           ],
-          "startedAt": 1789073533.9053867,
-          "wallSeconds": 61.95804786682129,
+          "startedAt": 1790231563.103112,
+          "wallSeconds": 2.062624216079712,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js",
+          "sha256": "9751f8a54308dff4dfaa01d2cdaffc06df957e01977ce9b00c7abadf78ea97e9"
+        },
+        {
+          "args": [
+            "/home/azureuser/react-markdownlil/.tmp/browser-src/index.lil",
+            "--target",
+            "js-module",
+            "--config",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
+            "-o",
+            "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js"
+          ],
+          "startedAt": 1790231565.209756,
+          "wallSeconds": 1.5158581733703613,
+          "exitCode": 0,
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js",
+          "sha256": "a799a14867e2493bd36a4ea293ce2475d2d375ff3d72c1a9a228ae18fcec44e0"
         }
       ]
     },
@@ -197,8 +229,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 2.719430447999912,
-      "cpuSeconds": 5.647505000000046,
+      "wallSeconds": 6.02968897401297,
+      "cpuSeconds": 12.225822999999995,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-2.log",
@@ -212,8 +244,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 2.7194137610003963,
-      "cpuSeconds": 5.662166000000086,
+      "wallSeconds": 5.826984783998341,
+      "cpuSeconds": 11.742483000000004,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-3.log",
@@ -227,58 +259,74 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 125.09659663500042,
-      "cpuSeconds": 293.45673700000003,
+      "wallSeconds": 9.348551169998245,
+      "cpuSeconds": 8.349087999999998,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-3.log",
-      "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6",
-      "tail": "fatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nsource graph: 68 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
+      "logSha256": "30dcdb31ddf90131e5b4a4aff42c63593b445e48f175a9d76b8b81a234cf332b",
+      "tail": "source graph: 69 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.browser.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
       "invocations": [
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.toml",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js"
           ],
-          "startedAt": 1789073601.4738467,
-          "wallSeconds": 62.8159441947937,
+          "startedAt": 1790231578.7851887,
+          "wallSeconds": 2.570727586746216,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js",
+          "sha256": "665985478a81fc9722d429ffbef8f13d55b585d1a865148cca082c63e2de8ca0"
         },
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.closed.toml",
+            "/home/azureuser/react-markdownlil/lilscript.closed.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js"
           ],
-          "startedAt": 1789073664.313585,
-          "wallSeconds": 62.08436965942383,
+          "startedAt": 1790231581.4212935,
+          "wallSeconds": 3.6576244831085205,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js",
+          "sha256": "9751f8a54308dff4dfaa01d2cdaffc06df957e01977ce9b00c7abadf78ea97e9"
+        },
+        {
+          "args": [
+            "/home/azureuser/react-markdownlil/.tmp/browser-src/index.lil",
+            "--target",
+            "js-module",
+            "--config",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
+            "-o",
+            "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js"
+          ],
+          "startedAt": 1790231585.2223854,
+          "wallSeconds": 2.6725270748138428,
+          "exitCode": 0,
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js",
+          "sha256": "a799a14867e2493bd36a4ea293ce2475d2d375ff3d72c1a9a228ae18fcec44e0"
         }
       ]
     },
     "original-esm": {
       "command": [
         "node",
-        "/home/lilfarm/source-perf-20260910/tools/source-esm.mjs",
-        "/home/lilfarm/source-perf-20260910",
+        "/home/azureuser/lilscript-work/release-m2/react-markdownlil/source-build/tools/source-esm.mjs",
+        "/home/azureuser/lilscript-work/release-m2/react-markdownlil/source-build",
         "react-markdownlil"
       ],
       "cwd": "upstream",
-      "wallSeconds": 2.6689611030005835,
-      "cpuSeconds": 4.149184000000032,
+      "wallSeconds": 15.592915727000218,
+      "cpuSeconds": 13.659349999999998,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-esm.log",
@@ -292,13 +340,13 @@
         "node --conditions development --experimental-loader=./test/load-jsx.js --no-warnings --test test/*.test.mjs test/official/test.jsx && npm run check:types"
       ],
       "cwd": "port",
-      "wallSeconds": 1.2661726040005306,
-      "cpuSeconds": 3.7005219999999737,
-      "exitCode": 2,
+      "wallSeconds": 9.000816214000224,
+      "cpuSeconds": 13.913696,
+      "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-tests.log",
-      "logSha256": "b37917d23d6eee3f0a3d0d06280f0209d23ebadf57b0722b0bae820798ef2cd1",
-      "tail": " support broken `style` properties (0.472922ms)\n  \u2714 should support SVG elements (0.499482ms)\n  \u2714 should support comments (ignore them) (0.307914ms)\n  \u2714 should support table cells w/ style (0.834786ms)\n  \u2714 should not fail on a plugin replacing `root` (0.356015ms)\n\u2714 Markdown (57.924967ms)\n\u25b6 MarkdownAsync\n  \u2714 should support `MarkdownAsync` (1) (0.525801ms)\n  \u2714 should support `MarkdownAsync` (2) (3.912958ms)\n  \u2714 should support async plugins w/ `MarkdownAsync` (`rehype-starry-night`) (84.471786ms)\n\u2714 MarkdownAsync (89.221493ms)\n\u25b6 MarkdownHooks\n  \u2714 should support `MarkdownHooks` (11.853337ms)\n  \u2714 should support async plugins w/ `MarkdownHooks` (`rehype-starry-night`) (31.674434ms)\n\nNote: the below error (`Error: rejected`) is expected.\n\n  \u2714 should support `fallback` (3.658796ms)\nError: rejected\n    at TestContext.<anonymous> (file:///home/lilfarm/source-perf-20260910/ports/react-markdownlil/test/official/test.jsx:1065:19)\n    at Test.runInAsyncScope (node:async_hooks:214:14)\n    at Test.run (node:internal/test_runner/test:1106:25)\n    at Test.start (node:internal/test_runner/test:1003:17)\n    at TestContext.test (node:internal/test_runner/test:378:20)\n    at TestContext.<anonymous> (file:///home/lilfarm/source-perf-20260910/ports/react-markdownlil/test/official/test.jsx:1058:11)\n    at async Test.run (node:internal/test_runner/test:1113:7)\n    at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {\n  [stack]: [Getter/Setter],\n  [message]: 'rejected'\n}\n\nThe above error occurred in the <MarkdownHooks> component.\n\nReact will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.\n\nNote: the above error (`Error: rejected`) was expected.\n  \u2714 should support plugins that error (6.667263ms)\n  \u2714 should support rerenders (3.543583ms)\n\u2714 MarkdownHooks (57.884847ms)\n\u2714 defaultUrlTransform preserves its string-only runtime contract (1.074607ms)\n\u2714 development assertions preserve devlop error details (0.419902ms)\n\u2714 production assertions are no-ops (69.785035ms)\n\u2714 MarkdownAsync is async even when setup fails synchronously (0.309966ms)\n\u2714 plugins share one in-graph VFile identity (5.892247ms)\n\u2714 VFile metadata and diagnostics match the upstream contract (0.949579ms)\n\u2714 local GFM, breaks, math, and KaTeX plugins compose (11.608769ms)\n\u2714 remarkRehypeOptions uses object-spread coercion (1.461659ms)\n\u2714 does not repair malformed element properties (0.411659ms)\n\u2714 preserves failures and nonmatches for malformed tree nodes (0.647885ms)\n\u2714 raw nodes are replaced with indexed assignment (0.416546ms)\n\u2714 URL properties use String coercion (0.35204ms)\n\u2714 URL processing preserves properties getter access (0.355515ms)\n\u2714 supports valid complex styles and ignores an entirely invalid style (0.843399ms)\n\u2714 supports passed-through MDX JSX element attributes (0.440202ms)\n\u2714 matches upstream JSX conversion for styles and property schemas (2.076454ms)\n\u2714 matches every upstream HTML and SVG property record (8.750648ms)\n\u2714 matches upstream MDX attributes and missing-evaluater errors (1.769993ms)\n\u25b6 site\n  \u2714 has a markedlil-style lab with stack tabs (0.788006ms)\n\u2714 site (1.443022ms)\n\u2139 tests 120\n\u2139 suites 1\n\u2139 pass 120\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 888.268218\n\n> @itslil/react-markdown@10.1.0 check:types\n> tsc --noEmit --strict --preserveSymlinks --module node16 --moduleResolution node16 --target es2022 test/types.ts\n\nnode_modules/@itslil/remark-breaks/dist/remark-breaks.d.ts(2,7): error TS1005: ',' expected.\n"
+      "logSha256": "13b94397339cfbd22f8fc2186537cd01e929c6ee07e47a30bb4fd465c4cf7723",
+      "tail": "\n  \u2714 should support `style` properties (5.197849ms)\n  \u2714 should support `style` properties w/ vendor prefixes (1.24416ms)\n  \u2714 should support broken `style` properties (1.032584ms)\n  \u2714 should support SVG elements (1.050539ms)\n  \u2714 should support comments (ignore them) (1.680438ms)\n  \u2714 should support table cells w/ style (2.262919ms)\n  \u2714 should not fail on a plugin replacing `root` (0.814676ms)\n\u2714 Markdown (198.758632ms)\n\u25b6 MarkdownAsync\n  \u2714 should support `MarkdownAsync` (1) (1.508537ms)\n  \u2714 should support `MarkdownAsync` (2) (10.353939ms)\n  \u2714 should support async plugins w/ `MarkdownAsync` (`rehype-starry-night`) (295.261484ms)\n\u2714 MarkdownAsync (307.861561ms)\n\u25b6 MarkdownHooks\n  \u2714 should support `MarkdownHooks` (39.230995ms)\n  \u2714 should support async plugins w/ `MarkdownHooks` (`rehype-starry-night`) (99.498496ms)\n\nNote: the below error (`Error: rejected`) is expected.\n\n  \u2714 should support `fallback` (7.969671ms)\nError: rejected\n    at TestContext.<anonymous> (file:///home/azureuser/react-markdownlil/test/official/test.jsx:1065:19)\n    at Test.runInAsyncScope (node:async_hooks:214:14)\n    at Test.run (node:internal/test_runner/test:1106:25)\n    at Test.start (node:internal/test_runner/test:1003:17)\n    at TestContext.test (node:internal/test_runner/test:378:20)\n    at TestContext.<anonymous> (file:///home/azureuser/react-markdownlil/test/official/test.jsx:1058:11)\n    at async Test.run (node:internal/test_runner/test:1113:7)\n    at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {\n  [stack]: [Getter/Setter],\n  [message]: 'rejected'\n}\n\nThe above error occurred in the <MarkdownHooks> component.\n\nReact will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.\n\nNote: the above error (`Error: rejected`) was expected.\n  \u2714 should support plugins that error (18.538954ms)\n  \u2714 should support rerenders (10.345744ms)\n\u2714 MarkdownHooks (176.644245ms)\n\u2714 defaultUrlTransform preserves its string-only runtime contract (6.466064ms)\n\u2714 development assertions preserve devlop error details (1.018498ms)\n\u2714 production assertions are no-ops (541.336446ms)\n\u2714 MarkdownAsync is async even when setup fails synchronously (0.587531ms)\n\u2714 plugins share one in-graph VFile identity (32.380033ms)\n\u2714 VFile metadata and diagnostics match the upstream contract (2.856452ms)\n\u2714 local GFM, breaks, math, and KaTeX plugins compose (89.281965ms)\n\u2714 remarkRehypeOptions uses object-spread coercion (8.351968ms)\n\u2714 does not repair malformed element properties (2.957162ms)\n\u2714 preserves failures and nonmatches for malformed tree nodes (1.874682ms)\n\u2714 raw nodes are replaced with indexed assignment (1.122913ms)\n\u2714 URL properties use String coercion (4.256495ms)\n\u2714 URL processing preserves properties getter access (3.959047ms)\n\u2714 supports valid complex styles and ignores an entirely invalid style (6.88117ms)\n\u2714 supports passed-through MDX JSX element attributes (1.081927ms)\n\u2714 matches upstream JSX conversion for styles and property schemas (12.541818ms)\n\u2714 matches every upstream HTML and SVG property record (36.968131ms)\n\u2714 matches upstream MDX attributes and missing-evaluater errors (3.368802ms)\n\u25b6 site\n  \u2714 has a markedlil-style lab with stack tabs (2.105014ms)\n\u2714 site (3.441838ms)\n\u2139 tests 122\n\u2139 suites 1\n\u2139 pass 122\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 4638.441277\n\n> @itslil/react-markdown@10.1.0 check:types\n> tsc --noEmit --strict --preserveSymlinks --module node16 --moduleResolution node16 --target es2022 test/types.ts\n\n"
     }
   },
   "nativeBuilds": [
@@ -309,8 +357,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 2.818445920999693,
-      "cpuSeconds": 5.860290000000001,
+      "wallSeconds": 13.564330398992752,
+      "cpuSeconds": 16.604454,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-1.log",
@@ -324,8 +372,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 2.719430447999912,
-      "cpuSeconds": 5.647505000000046,
+      "wallSeconds": 6.02968897401297,
+      "cpuSeconds": 12.225822999999995,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-2.log",
@@ -339,8 +387,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 2.7194137610003963,
-      "cpuSeconds": 5.662166000000086,
+      "wallSeconds": 5.826984783998341,
+      "cpuSeconds": 11.742483000000004,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-3.log",
@@ -356,45 +404,61 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 129.79313330200057,
-      "cpuSeconds": 306.980853,
+      "wallSeconds": 6.437189892007154,
+      "cpuSeconds": 6.269295,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-1.log",
-      "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6",
-      "tail": "fatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nsource graph: 68 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
+      "logSha256": "30dcdb31ddf90131e5b4a4aff42c63593b445e48f175a9d76b8b81a234cf332b",
+      "tail": "source graph: 69 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.browser.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
       "invocations": [
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.toml",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js"
           ],
-          "startedAt": 1789073341.0935798,
-          "wallSeconds": 66.64673852920532,
+          "startedAt": 1790231554.9960341,
+          "wallSeconds": 2.091146469116211,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js",
+          "sha256": "665985478a81fc9722d429ffbef8f13d55b585d1a865148cca082c63e2de8ca0"
         },
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.closed.toml",
+            "/home/azureuser/react-markdownlil/lilscript.closed.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js"
           ],
-          "startedAt": 1789073407.7662175,
-          "wallSeconds": 62.966179847717285,
+          "startedAt": 1790231557.1276262,
+          "wallSeconds": 2.321808099746704,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js",
+          "sha256": "9751f8a54308dff4dfaa01d2cdaffc06df957e01977ce9b00c7abadf78ea97e9"
+        },
+        {
+          "args": [
+            "/home/azureuser/react-markdownlil/.tmp/browser-src/index.lil",
+            "--target",
+            "js-module",
+            "--config",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
+            "-o",
+            "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js"
+          ],
+          "startedAt": 1790231559.495636,
+          "wallSeconds": 1.5430786609649658,
+          "exitCode": 0,
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js",
+          "sha256": "a799a14867e2493bd36a4ea293ce2475d2d375ff3d72c1a9a228ae18fcec44e0"
         }
       ]
     },
@@ -405,45 +469,61 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 125.14603469999929,
-      "cpuSeconds": 293.16221399999995,
+      "wallSeconds": 5.6769774409913225,
+      "cpuSeconds": 5.687045000000003,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-2.log",
-      "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6",
-      "tail": "fatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nsource graph: 68 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
+      "logSha256": "30dcdb31ddf90131e5b4a4aff42c63593b445e48f175a9d76b8b81a234cf332b",
+      "tail": "source graph: 69 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.browser.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
       "invocations": [
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.toml",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js"
           ],
-          "startedAt": 1789073470.8861945,
-          "wallSeconds": 62.994744539260864,
+          "startedAt": 1790231561.2509856,
+          "wallSeconds": 1.8116977214813232,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js",
+          "sha256": "665985478a81fc9722d429ffbef8f13d55b585d1a865148cca082c63e2de8ca0"
         },
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.closed.toml",
+            "/home/azureuser/react-markdownlil/lilscript.closed.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js"
           ],
-          "startedAt": 1789073533.9053867,
-          "wallSeconds": 61.95804786682129,
+          "startedAt": 1790231563.103112,
+          "wallSeconds": 2.062624216079712,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js",
+          "sha256": "9751f8a54308dff4dfaa01d2cdaffc06df957e01977ce9b00c7abadf78ea97e9"
+        },
+        {
+          "args": [
+            "/home/azureuser/react-markdownlil/.tmp/browser-src/index.lil",
+            "--target",
+            "js-module",
+            "--config",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
+            "-o",
+            "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js"
+          ],
+          "startedAt": 1790231565.209756,
+          "wallSeconds": 1.5158581733703613,
+          "exitCode": 0,
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js",
+          "sha256": "a799a14867e2493bd36a4ea293ce2475d2d375ff3d72c1a9a228ae18fcec44e0"
         }
       ]
     },
@@ -454,45 +534,61 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 125.09659663500042,
-      "cpuSeconds": 293.45673700000003,
+      "wallSeconds": 9.348551169998245,
+      "cpuSeconds": 8.349087999999998,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-3.log",
-      "logSha256": "9a772d7eb0cf2743762b3180af45a132b750324020418ddf30dc7e9217dd62d6",
-      "tail": "fatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nfatal: not a git repository (or any of the parent directories): .git\nsource graph: 68 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
+      "logSha256": "30dcdb31ddf90131e5b4a4aff42c63593b445e48f175a9d76b8b81a234cf332b",
+      "tail": "source graph: 69 LilScript modules match pinned sibling and upstream mappings\nwrote dist/react-markdown.esm.js, dist/react-markdown.browser.js, dist/react-markdown.development.js, dist/react-markdown.cjs, dist/react-markdown.development.cjs, dist/react-markdown.closed.js\n",
       "invocations": [
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.toml",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js"
           ],
-          "startedAt": 1789073601.4738467,
-          "wallSeconds": 62.8159441947937,
+          "startedAt": 1790231578.7851887,
+          "wallSeconds": 2.570727586746216,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.raw.js",
+          "sha256": "665985478a81fc9722d429ffbef8f13d55b585d1a865148cca082c63e2de8ca0"
         },
         {
           "args": [
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/src/index.lil",
+            "/home/azureuser/react-markdownlil/src/index.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/lilscript.closed.toml",
+            "/home/azureuser/react-markdownlil/lilscript.closed.toml",
             "-o",
-            "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js"
+            "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js"
           ],
-          "startedAt": 1789073664.313585,
-          "wallSeconds": 62.08436965942383,
+          "startedAt": 1790231581.4212935,
+          "wallSeconds": 3.6576244831085205,
           "exitCode": 0,
-          "output": "/home/lilfarm/source-perf-20260910/ports/react-markdownlil/dist/react-markdown.closed.raw.js",
-          "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.closed.raw.js",
+          "sha256": "9751f8a54308dff4dfaa01d2cdaffc06df957e01977ce9b00c7abadf78ea97e9"
+        },
+        {
+          "args": [
+            "/home/azureuser/react-markdownlil/.tmp/browser-src/index.lil",
+            "--target",
+            "js-module",
+            "--config",
+            "/home/azureuser/react-markdownlil/lilscript.toml",
+            "-o",
+            "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js"
+          ],
+          "startedAt": 1790231585.2223854,
+          "wallSeconds": 2.6725270748138428,
+          "exitCode": 0,
+          "output": "/home/azureuser/react-markdownlil/dist/react-markdown.browser.raw.js",
+          "sha256": "a799a14867e2493bd36a4ea293ce2475d2d375ff3d72c1a9a228ae18fcec44e0"
         }
       ]
     }
@@ -502,7 +598,7 @@
     "cleanOutputs": true,
     "dependencyInstallationTimedSeparately": true,
     "sourceArchives": "Pinned Git checkouts; original repository package build commands, followed by production ESM assembly.",
-    "workerUse": "Both implementations use the same machine and Node version. This shared build pool also runs unrelated jobs; timings are contextual wall times, with CPU time recorded separately."
+    "workerUse": "Both implementations use the same machine and Node version. The host is a burstable Azure VM and other sessions compiled on it during the run; timings are contextual wall times, with CPU time recorded separately."
   },
   "esm": {
     "source": {
@@ -521,19 +617,19 @@
     ],
     "samples": [
       {
-        "bundleSeconds": 0.024657389999999998,
-        "wallSeconds": 0.598396941
+        "bundleSeconds": 0.11700027100000003,
+        "wallSeconds": 2.924190048
       },
       {
-        "bundleSeconds": 0.019552300999999942,
-        "wallSeconds": 0.506074147
+        "bundleSeconds": 0.14748058100000025,
+        "wallSeconds": 3.716897704
       },
       {
-        "bundleSeconds": 0.018153412000000115,
-        "wallSeconds": 0.431509902
+        "bundleSeconds": 0.11742438100000072,
+        "wallSeconds": 3.1530740329999998
       }
     ],
-    "medianSeconds": 0.506074147,
+    "medianSeconds": 3.1530740329999998,
     "toolchain": {
       "esbuild": "0.28.1",
       "terser": "5.51.2"
@@ -566,6 +662,20 @@
         "gzip9": 36700,
         "brotli11": 32810,
         "sha256": "44ba1dd1e6d2f135a2f4817c89773c2e653526c9e313cbf44b5e56944645e997"
+      },
+      {
+        "path": "original.oxc-mangle.js",
+        "raw": 117197,
+        "gzip9": 35251,
+        "brotli11": 31579,
+        "sha256": "f0e00d9a01e7859d4c18ef45ea39bd8185ac7c284719fc93b3af39b06cc83ddd"
+      },
+      {
+        "path": "original.oxc-nomangle.js",
+        "raw": 183399,
+        "gzip9": 43422,
+        "brotli11": 38613,
+        "sha256": "330861b82536ac6443ad0328ea6762227e9475997d73d43dac127e3b77395ba7"
       }
     ],
     "inputs": [
@@ -731,63 +841,69 @@
   },
   "lilscriptArtifacts": [
     {
-      "path": "dist/react-markdown.closed.js",
-      "raw": 143696,
-      "gzip9": 48984,
-      "brotli11": 41861,
-      "sha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
-    },
-    {
-      "path": "dist/react-markdown.raw.js",
-      "raw": 143482,
-      "gzip9": 48846,
-      "brotli11": 41706,
-      "sha256": "a4d8070568297eafbd7ea6495b3cdd15d26ed8ea55878d8da6f43240085ed613"
-    },
-    {
-      "path": "dist/react-markdown.development.cjs",
-      "raw": 204591,
-      "gzip9": 55838,
-      "brotli11": 47140,
-      "sha256": "fe90a5baab8f9837748147b0f92314844be3a6b2b08e08d97250f0aad0f73381"
-    },
-    {
-      "path": "dist/react-markdown.development.js",
-      "raw": 143695,
-      "gzip9": 48983,
-      "brotli11": 41855,
-      "sha256": "68b09d09fdf6637b74b01c1f5b5f4150bb0bc8d31cfbd3596a8ff6a1ebbc7e3e"
-    },
-    {
       "path": "dist/react-markdown.cjs",
-      "raw": 204560,
-      "gzip9": 55836,
-      "brotli11": 47008,
-      "sha256": "77a72c3608f8b819e6b0c10687335144467e6d087bc64e1c88f99616f30f807f"
+      "raw": 116099,
+      "gzip9": 41947,
+      "brotli11": 35943,
+      "sha256": "8ded76dc87be8252fb69616892ee06d6b610dc8ade862a4668eb883f229a7e98"
+    },
+    {
+      "path": "dist/react-markdown.browser.js",
+      "raw": 95501,
+      "gzip9": 30961,
+      "brotli11": 27312,
+      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344"
     },
     {
       "path": "dist/react-markdown.esm.js",
-      "raw": 143696,
-      "gzip9": 48984,
-      "brotli11": 41861,
-      "sha256": "9d1929d7eb65440445761de79e9aa094f425aa936b23a3ec3033ad0d1aaabcea"
+      "raw": 116039,
+      "gzip9": 41924,
+      "brotli11": 35933,
+      "sha256": "38b0f4a07df32821f6df01f75c0203d43b5625ef2d12670f9c4367aa0c973fc7"
+    },
+    {
+      "path": "dist/react-markdown.development.cjs",
+      "raw": 116098,
+      "gzip9": 41946,
+      "brotli11": 36005,
+      "sha256": "f3354782fee0023932410aaab63556f2999bc2f41fc6fbd6d99e856d89753901"
+    },
+    {
+      "path": "dist/react-markdown.development.js",
+      "raw": 116038,
+      "gzip9": 41923,
+      "brotli11": 35978,
+      "sha256": "52b9acc842943f3a4490541b9ad6fb290c4f9f82dac7830fc102fe3f4fc1cdc3"
+    },
+    {
+      "path": "dist/react-markdown.closed.js",
+      "raw": 137070,
+      "gzip9": 46356,
+      "brotli11": 39464,
+      "sha256": "d1c3de7f1e147d9c730e1f632c8c6dcc5bdbe19df5ceab220cf217feb96ab0b4"
+    },
+    {
+      "path": "dist/react-markdown.raw.js",
+      "raw": 115825,
+      "gzip9": 41796,
+      "brotli11": 35864,
+      "sha256": "665985478a81fc9722d429ffbef8f13d55b585d1a865148cca082c63e2de8ca0"
     }
   ],
   "nativeBuildsSummary": {
     "samples": 3,
     "successful": 3,
-    "medianSeconds": 2.719430447999912,
-    "minimumSeconds": 2.7194137610003963,
-    "maximumSeconds": 2.818445920999693
+    "medianSeconds": 6.02968897401297,
+    "minimumSeconds": 5.826984783998341,
+    "maximumSeconds": 13.564330398992752
   },
   "lilscriptBuildsSummary": {
     "samples": 3,
     "successful": 3,
-    "medianSeconds": 125.14603469999929,
-    "minimumSeconds": 125.09659663500042,
-    "maximumSeconds": 129.79313330200057
+    "medianSeconds": 6.437189892007154,
+    "minimumSeconds": 5.6769774409913225,
+    "maximumSeconds": 9.348551169998245
   },
   "status": "complete",
-  "finishedAt": "2026-09-10T20:55:31Z",
-  "workerIp": "10.1.0.21"
+  "finishedAt": "2026-09-24T06:33:34Z"
 }

@@ -1,19 +1,15 @@
-export struct UrlAttribute {
-  string property;
-  string[] elements;
-  bool allElements;
-}
-
-export UrlAttribute[] urlAttributes = [
-  UrlAttribute{"action", ["form"], false},
-  UrlAttribute{"cite", ["blockquote", "del", "ins", "q"], false},
-  UrlAttribute{"data", ["object"], false},
-  UrlAttribute{"formAction", ["button", "input"], false},
-  UrlAttribute{"href", ["a", "area", "base", "link"], false},
-  UrlAttribute{"icon", ["menuitem"], false},
-  UrlAttribute{"itemId", [], true},
-  UrlAttribute{"manifest", ["html"], false},
-  UrlAttribute{"ping", ["a", "area"], false},
-  UrlAttribute{"poster", ["video"], false},
-  UrlAttribute{"src", ["audio", "embed", "iframe", "img", "input", "script", "source", "track", "video"], false}
-];
+// html-url-attributes@3.0.1: the attributes react-markdown passes through `urlTransform`, with the elements
+// they apply to (`0`: every element; upstream's `null`).
+export JsValue urlAttributes = object {
+  action: ["form"],
+  cite: ["blockquote", "del", "ins", "q"],
+  data: ["object"],
+  formAction: ["button", "input"],
+  href: ["a", "area", "base", "link"],
+  icon: ["menuitem"],
+  itemId: 0,
+  manifest: ["html"],
+  ping: ["a", "area"],
+  poster: ["video"],
+  src: ["audio", "embed", "iframe", "img", "input", "script", "source", "track", "video"]
+};

@@ -1,5 +1,5 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises"
-import { existsSync } from "node:fs"
+import { existsSync, mkdirSync, writeFileSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { spawnSync } from "node:child_process"
@@ -74,8 +74,31 @@ if (index.length) {
 
 const playground = join(root, "site", "playground-entry.js")
 const siblingsReady = existsSync(join(home, "unifiedlil/dist/unified.esm.js"))
+// The playground bundles the sibling ports as committed (their released files), not whatever a
+// rebuild left in their working trees.
+const committedDeps = join(root, ".tmp", "playground-deps")
+function committed(dir, file) {
+  const built = spawnSync("git", ["-C", join(home, dir), "show", `HEAD:dist/${file}`], { maxBuffer: 64 * 1024 * 1024 })
+  if (built.status !== 0) return join(home, dir, "dist", file)
+  const target = join(committedDeps, dir, file)
+  mkdirSync(dirname(target), { recursive: true })
+  writeFileSync(target, built.stdout)
+  return target
+}
+// A committed copy resolves its own imports from its sibling's directory, as the working file would.
+const committedSiblings = {
+  name: "committed-siblings",
+  setup(build) {
+    build.onResolve({ filter: /^[^./]/ }, (args) => {
+      if (!args.importer.startsWith(`${committedDeps}/`)) return undefined
+      const dir = args.importer.slice(committedDeps.length + 1).split("/")[0]
+      return build.resolve(args.path, { kind: args.kind, resolveDir: join(home, dir, "dist") })
+    })
+  },
+}
 if (existsSync(playground) && siblingsReady) {
   const { build: esbuild } = await import("esbuild")
+  await rm(committedDeps, { recursive: true, force: true })
   await esbuild({
     absWorkingDir: root,
     entryPoints: [playground],
@@ -86,17 +109,19 @@ if (existsSync(playground) && siblingsReady) {
     jsx: "automatic",
     legalComments: "none",
     minifyWhitespace: true,
+    plugins: [committedSiblings],
     alias: {
-      "@itslil/unified/vfile": join(home, "unifiedlil/dist/vfile.esm.js"),
-      "@itslil/unified": join(home, "unifiedlil/dist/unified.esm.js"),
-      "@itslil/remark-parse": join(home, "remark-parselil/dist/remark-parse.esm.js"),
-      "@itslil/remark-rehype": join(home, "remark-rehypelil/dist/remark-rehype.esm.js"),
-      "@itslil/remark-gfm": join(home, "remark-gfmlil/dist/remark-gfm.esm.js"),
-      "@itslil/remark-breaks": join(home, "remark-breakslil/dist/remark-breaks.esm.js"),
-      "@itslil/remark-math": join(home, "remark-mathlil/dist/remark-math.esm.js"),
-      "@itslil/rehype-katex": join(home, "rehype-katexlil/dist/rehype-katex.esm.js"),
-      "@itslil/katex": join(home, "katexlil/dist/katex.esm.js"),
-      "@itslil/react-markdown": join(root, "dist/react-markdown.esm.js"),
+      "@itslil/unified/vfile": committed("unifiedlil", "vfile.esm.js"),
+      "@itslil/unified": committed("unifiedlil", "unified.esm.js"),
+      "@itslil/remark-parse": committed("remark-parselil", "remark-parse.esm.js"),
+      "@itslil/remark-rehype": committed("remark-rehypelil", "remark-rehype.esm.js"),
+      "@itslil/remark-gfm": committed("remark-gfmlil", "remark-gfm.esm.js"),
+      "@itslil/remark-breaks": committed("remark-breakslil", "remark-breaks.esm.js"),
+      "@itslil/remark-math": committed("remark-mathlil", "remark-math.esm.js"),
+      "@itslil/rehype-katex": committed("rehype-katexlil", "rehype-katex.esm.js"),
+      "@itslil/katex": committed("katexlil", "katex.esm.js"),
+      // The lab runs in a browser, so it runs the package's browser build.
+      "@itslil/react-markdown": join(root, "dist/react-markdown.browser.js"),
     },
     logLevel: "error",
   })

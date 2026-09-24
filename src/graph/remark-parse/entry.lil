@@ -1,4 +1,4 @@
-import { fromMarkdownImpl as fromMarkdown } from "./from-markdown.lil";
+import { fromMarkdown } from "./from-markdown.lil";
 import { call1, objectAssign, undef } from "./micromark/host.lil";
 
 JsValue readData(JsValue self, string key) {

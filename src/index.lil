@@ -1,11 +1,8 @@
-import {
-  MarkdownAsync as markdownAsyncExport,
-  MarkdownHooks as markdownHooksExport,
-  defaultUrlTransform as defaultUrlTransformExport,
-  default as markdownDefault
-} from "./lib/index.lil";
+import { Markdown, MarkdownAsync, MarkdownHooks, defaultUrlTransform } from "./lib/index.lil";
+import { Object } from "./host.lil";
 
-export JsValue MarkdownAsync = markdownAsyncExport;
-export JsValue MarkdownHooks = markdownHooksExport;
-export JsValue defaultUrlTransform = defaultUrlTransformExport;
-export JsValue default = markdownDefault;
+export { MarkdownAsync, MarkdownHooks, defaultUrlTransform };
+export JsValue default = Markdown;
+
+// Upstream's `export function Markdown` is the default export; keep its name.
+JS.invoke(Object, "defineProperty", Markdown, "name", object { value: "Markdown" });

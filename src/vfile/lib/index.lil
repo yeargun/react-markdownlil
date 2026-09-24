@@ -1,12 +1,3 @@
-import {
-  VFile as SharedVFile,
-  VFileMessage as SharedVFileMessage,
-  createVFileMessage as sharedCreateVFileMessage
-} from "../../graph/unified/vfile.lil";
+import { VFile, createVFileMessage } from "../../graph/unified/vfile.lil";
 
-export JsValue VFile = SharedVFile;
-export JsValue VFileMessage = SharedVFileMessage;
-
-export JsValue createVFileMessage(string reason, JsValue options) {
-  return JS.call(sharedCreateVFileMessage, JS.undefined(), reason, options);
-}
+export { VFile, createVFileMessage };
