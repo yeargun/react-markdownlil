@@ -5,7 +5,7 @@
     {
       "id": "unified",
       "package": "@itslil/unified@11.0.6",
-      "siblingRevision": "7e15633a71a5eaec8ad9f9cf5ef2f5dc8128453b",
+      "siblingRevision": "bbeee952a479acfd45d3fc2b379de2817fe2a641",
       "sourceSha256": "066761813ad8539b8f8069a5e1f2ff7e34bc61e3de80da6fe36144aeab6afbb4",
       "graphSha256": "5b9a5806848b020b48fea9a3109552555d64c53a84adbada325e69a8e913b35c",
       "upstream": {
@@ -823,7 +823,7 @@
     {
       "id": "remark-rehype",
       "package": "@itslil/remark-rehype@11.1.4",
-      "siblingRevision": "b5ae9f79546d0bfccfc61a89e0c1aafe355ab18b",
+      "siblingRevision": "95ab87113bb8f4a0c7ccca8c8caa14e6c9c65af3",
       "sourceSha256": "cca4c2779b67e727743e4b6d9b2f6225df3f653451c9f59f2290e510fd65946a",
       "graphSha256": "acbb0cf4396fb2271e2c070a11f250e8287f27dbebdec641815333c1b0f2f8fa",
       "upstream": {

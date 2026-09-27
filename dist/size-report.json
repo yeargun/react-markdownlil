@@ -38,7 +38,7 @@
     ],
     "measurement": "lilscript-codec --json .tmp/measure-graph/*.js"
   },
-  "sourceGraphLockSha256": "658c93dc14b18e2bd987d5b6d5a3c2898b351267ced64ba846b105d597cafdeb",
+  "sourceGraphLockSha256": "d44aa2587b6cc0dc7088260397deb81d101d1726049687aba5f8bbb5e21e67f5",
   "official": {
     "graph": {
       "raw": 294369,
