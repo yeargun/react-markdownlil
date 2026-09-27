@@ -41,17 +41,17 @@ the only runtime imports in the ESM and CJS artifacts.
 
 ## Builds and sizes
 
-Every file in `dist/` is written by the LilScript compiler (`aa2052f0`); the build
+Every file in `dist/` is written by the LilScript compiler (`24968659`); the build
 adds only a license banner, the React imports, the `development` flag and, for
 CommonJS, `module.exports` in place of the export clause. No minifier runs after
 the compiler.
 
 | File | Condition | Brotli-11 | gzip-9 | raw |
 |---|---|---:|---:|---:|
-| `dist/react-markdown.browser.js` | `browser` | 27,312 | 30,961 | 95,501 |
-| `dist/react-markdown.esm.js` | `import` (Node) | 35,933 | 41,924 | 116,039 |
-| `dist/react-markdown.cjs` | `require` | 35,943 | 41,947 | 116,099 |
-| `dist/react-markdown.closed.js` | `./closed` | 39,464 | 46,356 | 137,070 |
+| `dist/react-markdown.browser.js` | `browser` | 27,250 | 30,919 | 95,307 |
+| `dist/react-markdown.esm.js` | `import` (Node) | 35,953 | 41,885 | 115,843 |
+| `dist/react-markdown.cjs` | `require` | 35,934 | 41,908 | 115,903 |
+| `dist/react-markdown.closed.js` | `./closed` | 39,417 | 46,347 | 136,925 |
 
 The browser build decodes named character references through the document, as
 upstream's browser graph does (`decode-named-character-reference`'s
@@ -66,12 +66,13 @@ React external) minified:
 | npm package + Oxc (Vite 8.2.1) | 31,413 | 35,166 | 116,998 |
 | npm package + esbuild 0.28.1 | 32,530 | 36,331 | 118,006 |
 
-The browser build is 3,638 B (11.8%) smaller in Brotli-11 than the strongest bar,
-3,828 B in gzip-9 and 21,497 B raw. The previous release's npm ESM was 41,907 B
-Brotli-11 (old compiler route, 2026-09-02). The three compiles of one build take
-about 5.3 s on this Azure B8als_v2 host, 1.5 s of it for the browser build; the
-previous release took 62 s per compile. `npm run record:release` re-measures
-everything the site shows (`site/results.json`).
+The browser build is 3,700 B (12.0%) smaller in Brotli-11 than the strongest bar,
+3,870 B in gzip-9 and 21,691 B raw. The previous release's browser build was
+27,312 B Brotli-11 (compiler `aa2052f0`, 2026-09-24). The three compiles of one
+build take about 23.3 s on this Azure B8als_v2 host (shared, 1-minute load 8.5),
+6.2 s of it for the browser build; the previous release took 5.34 s per build.
+`npm run record:release` re-measures everything the site shows
+(`site/results.json`).
 
 ## Source graph
 

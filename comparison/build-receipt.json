@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "name": "react-markdownlil",
-  "measuredAt": "2026-09-24T06:33:34Z",
+  "measuredAt": "2026-09-27T16:12:27Z",
   "status": "published",
   "buildPassed": true,
   "summary": "Rebuilt by the one LilScript compiler; every delivered file is compiler-written (a license banner, the React imports, the development flag and a CommonJS wrapper are the only bytes the build adds).",
-  "sourceCommit": "76a327e plus the release working tree (committed together with these records)",
-  "previousPublicCommit": "2e02fbcd37edd1afddec5520fe29175d9458a9e7",
+  "sourceCommit": "a3b91b3fb21072f3157df388e493af2802d842b7",
+  "previousPublicCommit": "b1eb4afda1ec497b30f147fbe90602a98830878f",
   "compiler": {
-    "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
-    "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9",
+    "commit": "249686599dc3bf1b6bf70dc9a030081b755bbb24",
+    "sha256": "47048e41164027e92d3bf1d1840d8d83e04c60532c031ceb3346222e194b3041",
     "profile": "release",
     "dirty": false
   },
@@ -24,14 +24,14 @@
     "node": "v24.11.1",
     "rayonThreads": 8,
     "loadAtStart": [
-      2.333984375,
-      2.48388671875,
-      6.5771484375
+      5.255859375,
+      8.916015625,
+      11.54833984375
     ],
     "loadAtEnd": [
-      8.626953125,
-      4.2255859375,
-      6.84033203125
+      8.5185546875,
+      8.82958984375,
+      11.25732421875
     ]
   },
   "upstream": {
@@ -44,27 +44,36 @@
   "comparisonScope": "react-markdown@10.1.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline External on both sides: react, react/jsx-runtime, react-dom. Sizes use canonical zlib 1.3.1 gzip-9 and Google Brotli 1.1.0 quality 11.",
   "sizes": {
     "previous": {
-      "path": "dist/react-markdown.esm.js",
-      "raw": 142205,
-      "gzip9": 49008,
-      "brotli11": 41907,
-      "sha256": "d85eda4569bc0965c3fd40a1772ef8ada12654a5d04274b697a2a403502ade5e",
-      "commit": "2e02fbcd37edd1afddec5520fe29175d9458a9e7",
-      "note": "The previous release shipped no browser build; this is its npm ESM (Node, entity table)."
-    },
-    "current": {
       "path": "dist/react-markdown.browser.js",
       "raw": 95501,
       "gzip9": 30961,
       "brotli11": 27312,
-      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344"
+      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344",
+      "commit": "b1eb4afda1ec497b30f147fbe90602a98830878f",
+      "note": "The browser build of the previous release (2026-09-24, compiler aa2052f0)."
     },
-    "currentNode": {
+    "previousNode": {
       "path": "dist/react-markdown.esm.js",
       "raw": 116039,
       "gzip9": 41924,
       "brotli11": 35933,
-      "sha256": "38b0f4a07df32821f6df01f75c0203d43b5625ef2d12670f9c4367aa0c973fc7"
+      "sha256": "38b0f4a07df32821f6df01f75c0203d43b5625ef2d12670f9c4367aa0c973fc7",
+      "commit": "b1eb4afda1ec497b30f147fbe90602a98830878f",
+      "note": "The npm ESM (Node, entity table) of the previous release."
+    },
+    "current": {
+      "path": "dist/react-markdown.browser.js",
+      "raw": 95307,
+      "gzip9": 30919,
+      "brotli11": 27250,
+      "sha256": "2415e68fc629a08ac6924daea7c5ed0926abf13d57eecad6947d35dd1c1b7726"
+    },
+    "currentNode": {
+      "path": "dist/react-markdown.esm.js",
+      "raw": 115843,
+      "gzip9": 41885,
+      "brotli11": 35953,
+      "sha256": "f20dc63a03aa59f82cbb90c7796fb2bdb44089b8e8df92bd77efcfa1273165af"
     },
     "upstream": {
       "path": "original.esm.js",
@@ -121,103 +130,103 @@
   "candidateArtifacts": [
     {
       "path": "dist/react-markdown.cjs",
-      "raw": 116099,
-      "gzip9": 41947,
-      "brotli11": 35943,
-      "sha256": "8ded76dc87be8252fb69616892ee06d6b610dc8ade862a4668eb883f229a7e98"
+      "raw": 115903,
+      "gzip9": 41908,
+      "brotli11": 35934,
+      "sha256": "331916a5136b66f33c0e090271d61946309e95874884f4db457f9548b350f44a"
     },
     {
       "path": "dist/react-markdown.browser.js",
-      "raw": 95501,
-      "gzip9": 30961,
-      "brotli11": 27312,
-      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344"
+      "raw": 95307,
+      "gzip9": 30919,
+      "brotli11": 27250,
+      "sha256": "2415e68fc629a08ac6924daea7c5ed0926abf13d57eecad6947d35dd1c1b7726"
     },
     {
       "path": "dist/react-markdown.esm.js",
-      "raw": 116039,
-      "gzip9": 41924,
-      "brotli11": 35933,
-      "sha256": "38b0f4a07df32821f6df01f75c0203d43b5625ef2d12670f9c4367aa0c973fc7"
+      "raw": 115843,
+      "gzip9": 41885,
+      "brotli11": 35953,
+      "sha256": "f20dc63a03aa59f82cbb90c7796fb2bdb44089b8e8df92bd77efcfa1273165af"
     },
     {
       "path": "dist/react-markdown.development.cjs",
-      "raw": 116098,
-      "gzip9": 41946,
-      "brotli11": 36005,
-      "sha256": "f3354782fee0023932410aaab63556f2999bc2f41fc6fbd6d99e856d89753901"
+      "raw": 115902,
+      "gzip9": 41909,
+      "brotli11": 35927,
+      "sha256": "bf7a55eeb398b340ffc9d05e6535378eeb63ee71af9d789733f5159584ad2526"
     },
     {
       "path": "dist/react-markdown.development.js",
-      "raw": 116038,
-      "gzip9": 41923,
-      "brotli11": 35978,
-      "sha256": "52b9acc842943f3a4490541b9ad6fb290c4f9f82dac7830fc102fe3f4fc1cdc3"
+      "raw": 115842,
+      "gzip9": 41885,
+      "brotli11": 35959,
+      "sha256": "2f971c54a27d5d27c070ce6fb01bf91cee7397d3df102f24c3292a754c8e2032"
     },
     {
       "path": "dist/react-markdown.closed.js",
-      "raw": 137070,
-      "gzip9": 46356,
-      "brotli11": 39464,
-      "sha256": "d1c3de7f1e147d9c730e1f632c8c6dcc5bdbe19df5ceab220cf217feb96ab0b4"
+      "raw": 136925,
+      "gzip9": 46347,
+      "brotli11": 39417,
+      "sha256": "03012c612cc243689c874c735e9429eb76d10446e4b414d67af3481209c9e64e"
     },
     {
       "path": "dist/react-markdown.raw.js",
-      "raw": 115825,
-      "gzip9": 41796,
-      "brotli11": 35864,
-      "sha256": "665985478a81fc9722d429ffbef8f13d55b585d1a865148cca082c63e2de8ca0"
+      "raw": 115629,
+      "gzip9": 41755,
+      "brotli11": 35823,
+      "sha256": "fb263ec18cacc37357b1b3ba4753c264fb3207d471cee407b3b41535935d9bde"
     }
   ],
   "timing": {
-    "primaryCompilerSeconds": 1.5430786609649658,
+    "primaryCompilerSeconds": 3.172091245651245,
     "primaryScope": "The invocation that writes the published browser build, median of three clean builds.",
-    "compilerSeconds": 5.956033229827881,
+    "compilerSeconds": 12.136579990386963,
     "compilerScope": "Sum of the wall times of the compiler invocations in one package build (Node ESM, closed, browser), median of three clean builds.",
-    "packageSeconds": 6.437189892007154,
+    "packageSeconds": 12.556090968020726,
     "packageScope": "node scripts/build.mjs --compile --force; 3 compiler invocations, the source-graph check and package wrapping",
-    "originalSeconds": 6.02968897401297,
+    "originalSeconds": 8.219573513022624,
     "originalScope": "npm run build"
   },
   "behavior": {
     "command": "node --conditions development --experimental-loader=./test/load-jsx.js --no-warnings --test test/*.test.mjs test/official/test.jsx && npm run check:types",
-    "summary": "Runtime checks: 122/122 pass; type checks pass.",
+    "summary": "Runtime checks: 123/123 pass; type checks pass.",
     "exitCode": 0,
-    "logSha256": "13b94397339cfbd22f8fc2186537cd01e929c6ee07e47a30bb4fd465c4cf7723"
+    "logSha256": "3f32d2f586065af4f3ca5ba8f10a59db57fb775702ff459faa2b25029ccfff91"
   },
   "findings": [
-    "Previous npm ESM to this release's Node ESM: -5974 Brotli-11 bytes; the browser build is new. This includes the port's source rewrite, config changes and the compiler change."
+    "Previous release to this one: browser build -62 Brotli-11 bytes, Node ESM +20. The port's source and configuration are unchanged; the difference is the compiler (aa2052f0 to 24968659)."
   ],
   "primaryArtifact": "dist/react-markdown.browser.js",
-  "codecSha256": "125776830df72bbaf9704fee3c38bb0bf29bfc6bcceb5bc8707a0507a128d7b9",
+  "codecSha256": "85329d361ef3339d4ff7b7ca1f00065d561340eb4fc98a2799af327134a3a3f0",
   "publicationArtifacts": [
     {
       "path": "dist/react-markdown.browser.js",
-      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344"
+      "sha256": "2415e68fc629a08ac6924daea7c5ed0926abf13d57eecad6947d35dd1c1b7726"
     },
     {
       "path": "dist/react-markdown.cjs",
-      "sha256": "8ded76dc87be8252fb69616892ee06d6b610dc8ade862a4668eb883f229a7e98"
+      "sha256": "331916a5136b66f33c0e090271d61946309e95874884f4db457f9548b350f44a"
     },
     {
       "path": "dist/react-markdown.closed.js",
-      "sha256": "d1c3de7f1e147d9c730e1f632c8c6dcc5bdbe19df5ceab220cf217feb96ab0b4"
+      "sha256": "03012c612cc243689c874c735e9429eb76d10446e4b414d67af3481209c9e64e"
     },
     {
       "path": "dist/react-markdown.development.cjs",
-      "sha256": "f3354782fee0023932410aaab63556f2999bc2f41fc6fbd6d99e856d89753901"
+      "sha256": "bf7a55eeb398b340ffc9d05e6535378eeb63ee71af9d789733f5159584ad2526"
     },
     {
       "path": "dist/react-markdown.development.js",
-      "sha256": "52b9acc842943f3a4490541b9ad6fb290c4f9f82dac7830fc102fe3f4fc1cdc3"
+      "sha256": "2f971c54a27d5d27c070ce6fb01bf91cee7397d3df102f24c3292a754c8e2032"
     },
     {
       "path": "dist/react-markdown.esm.js",
-      "sha256": "38b0f4a07df32821f6df01f75c0203d43b5625ef2d12670f9c4367aa0c973fc7"
+      "sha256": "f20dc63a03aa59f82cbb90c7796fb2bdb44089b8e8df92bd77efcfa1273165af"
     }
   ],
   "publicationPolicy": "Publish the compiler-written distribution",
-  "publicationBase": "2e02fbcd37edd1afddec5520fe29175d9458a9e7",
+  "publicationBase": "b1eb4afda1ec497b30f147fbe90602a98830878f",
   "publicationSourceFingerprint": "7e2a6127d42a3411f20c4fbf71d977e4795a5ba0e2a59cdb229a6286a89cd189",
   "comparisonArtifacts": [
     {
@@ -226,25 +235,26 @@
     },
     {
       "path": "site/esm-comparison/lilscript.js",
-      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344"
+      "sha256": "2415e68fc629a08ac6924daea7c5ed0926abf13d57eecad6947d35dd1c1b7726"
     },
     {
       "path": "site/source-build.json",
-      "sha256": "ccecf46da8ab8f1e99de578811abd5c45a054059400c0cb01f79b176935f634b"
+      "sha256": "f3af2fd5a0ffef269359d945a11a284d8f7724fcacaa807585661612fec655b8"
     },
     {
       "path": "site/comparison.json",
-      "sha256": "592c080826c3e0a9d31a212996e8ae2f89f34f71becffc4798743b2f09bc7581"
+      "sha256": "9ede905d98ce7892ce224ec9fac353bae6941d593494632ff1e19611ef16d46c"
     }
   ],
   "sourceBuildReceipt": "comparison/source-build/result.json",
   "currentMeasurement": {
     "compiler": {
-      "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
-      "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
+      "commit": "249686599dc3bf1b6bf70dc9a030081b755bbb24",
+      "sha256": "47048e41164027e92d3bf1d1840d8d83e04c60532c031ceb3346222e194b3041"
     },
     "source": {
-      "commit": "76a327e plus the release working tree (committed together with these records)"
+      "commit": "a3b91b3fb21072f3157df388e493af2802d842b7",
+      "snapshot": "/home/azureuser/lilscript-work/release-0927/ports/react-markdownlil"
     },
     "upstream": {
       "repository": "https://github.com/remarkjs/react-markdown.git",
@@ -253,6 +263,6 @@
       "version": "10.1.0",
       "directory": "."
     },
-    "compatibility": "Runtime checks: 122/122 pass; type checks pass."
+    "compatibility": "Runtime checks: 123/123 pass; type checks pass."
   }
 }

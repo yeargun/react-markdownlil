@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
-  "measuredAt": "2026-09-24T06:33:34Z",
+  "measuredAt": "2026-09-27T16:12:27Z",
   "name": "react-markdownlil",
   "compiler": {
-    "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
-    "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
+    "commit": "249686599dc3bf1b6bf70dc9a030081b755bbb24",
+    "sha256": "47048e41164027e92d3bf1d1840d8d83e04c60532c031ceb3346222e194b3041"
   },
   "upstream": {
     "package": "react-markdown",
@@ -13,10 +13,10 @@
     "commit": "44d2e4a44b37461ab7778d6870c1a9eb36393ad2"
   },
   "scope": "react-markdown@10.1.0 public ESM runtime graph for the browser. Original ESM assembled from the pinned Git source build; LilScript is its browser build.",
-  "compatibility": "Runtime checks: 122/122 pass; type checks pass.",
+  "compatibility": "Runtime checks: 123/123 pass; type checks pass.",
   "tests": {
-    "pass": 122,
-    "total": 122
+    "pass": 123,
+    "total": 123
   },
   "buildComplete": true,
   "machine": {
@@ -30,29 +30,29 @@
     "node": "v24.11.1",
     "rayonThreads": 8,
     "loadAtStart": [
-      2.333984375,
-      2.48388671875,
-      6.5771484375
+      5.255859375,
+      8.916015625,
+      11.54833984375
     ],
     "loadAtEnd": [
-      8.626953125,
-      4.2255859375,
-      6.84033203125
+      8.5185546875,
+      8.82958984375,
+      11.25732421875
     ]
   },
   "build": {
-    "compilerSeconds": 5.956033229827881,
+    "compilerSeconds": 12.136579990386963,
     "compilerInvocations": 3,
     "compilerScope": "Sum of the wall times of the compiler invocations in one package build (Node ESM, closed, browser), median of three clean builds.",
-    "primaryCompilerSeconds": 1.5430786609649658,
+    "primaryCompilerSeconds": 3.172091245651245,
     "primaryCompilerRange": [
-      1.5158581733703613,
-      2.6725270748138428
+      2.972752094268799,
+      4.223714828491211
     ],
     "primaryCompilerScope": "The invocation that writes the published browser build, median of three clean builds.",
-    "packageSeconds": 6.437189892007154,
-    "originalSeconds": 6.02968897401297,
-    "originalEsmSeconds": 3.1530740329999998,
+    "packageSeconds": 12.556090968020726,
+    "originalSeconds": 8.219573513022624,
+    "originalEsmSeconds": 1.426679427,
     "packageScope": "node scripts/build.mjs --compile --force",
     "originalScope": "npm run build",
     "protocol": {
@@ -65,10 +65,10 @@
   },
   "esm": {
     "lilscript": {
-      "raw": 95501,
-      "gzip9": 30961,
-      "brotli11": 27312,
-      "sha256": "5db7b98ba17a40ca423e8775a7694efbbd011370b8deeaa7477dc38076c95344",
+      "raw": 95307,
+      "gzip9": 30919,
+      "brotli11": 27250,
+      "sha256": "2415e68fc629a08ac6924daea7c5ed0926abf13d57eecad6947d35dd1c1b7726",
       "file": "./esm-comparison/lilscript.js"
     },
     "original": {
@@ -82,9 +82,9 @@
   "sourceBuild": {
     "original": {
       "complete": true,
-      "medianSeconds": 6.02968897401297,
-      "minimumSeconds": 5.826984783998341,
-      "maximumSeconds": 13.564330398992752,
+      "medianSeconds": 8.219573513022624,
+      "minimumSeconds": 6.789040644012857,
+      "maximumSeconds": 9.550036744971294,
       "samples": [
         {
           "command": [
@@ -92,8 +92,8 @@
             "run",
             "build"
           ],
-          "wallSeconds": 13.564330398992752,
-          "cpuSeconds": 16.604454,
+          "wallSeconds": 6.789040644012857,
+          "cpuSeconds": 12.955972999999998,
           "exitCode": 0,
           "timedOut": false,
           "log": "original-build-1.log",
@@ -105,8 +105,8 @@
             "run",
             "build"
           ],
-          "wallSeconds": 6.02968897401297,
-          "cpuSeconds": 12.225822999999995,
+          "wallSeconds": 8.219573513022624,
+          "cpuSeconds": 14.003708000000003,
           "exitCode": 0,
           "timedOut": false,
           "log": "original-build-2.log",
@@ -118,8 +118,8 @@
             "run",
             "build"
           ],
-          "wallSeconds": 5.826984783998341,
-          "cpuSeconds": 11.742483000000004,
+          "wallSeconds": 9.550036744971294,
+          "cpuSeconds": 14.316329999999995,
           "exitCode": 0,
           "timedOut": false,
           "log": "original-build-3.log",
@@ -129,9 +129,9 @@
     },
     "lilscript": {
       "complete": true,
-      "medianSeconds": 6.437189892007154,
-      "minimumSeconds": 5.6769774409913225,
-      "maximumSeconds": 9.348551169998245,
+      "medianSeconds": 12.556090968020726,
+      "minimumSeconds": 11.596612919005565,
+      "maximumSeconds": 17.028312331007328,
       "samples": [
         {
           "command": [
@@ -139,8 +139,8 @@
             "-c",
             "node scripts/build.mjs --compile --force"
           ],
-          "wallSeconds": 6.437189892007154,
-          "cpuSeconds": 6.269295,
+          "wallSeconds": 12.556090968020726,
+          "cpuSeconds": 12.467509999999999,
           "exitCode": 0,
           "timedOut": false,
           "log": "lilscript-build-1.log",
@@ -152,8 +152,8 @@
             "-c",
             "node scripts/build.mjs --compile --force"
           ],
-          "wallSeconds": 5.6769774409913225,
-          "cpuSeconds": 5.687045000000003,
+          "wallSeconds": 11.596612919005565,
+          "cpuSeconds": 11.573691000000002,
           "exitCode": 0,
           "timedOut": false,
           "log": "lilscript-build-2.log",
@@ -165,8 +165,8 @@
             "-c",
             "node scripts/build.mjs --compile --force"
           ],
-          "wallSeconds": 9.348551169998245,
-          "cpuSeconds": 8.349087999999998,
+          "wallSeconds": 17.028312331007328,
+          "cpuSeconds": 14.806498000000003,
           "exitCode": 0,
           "timedOut": false,
           "log": "lilscript-build-3.log",
