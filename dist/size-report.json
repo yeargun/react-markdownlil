@@ -38,59 +38,59 @@
     ],
     "measurement": "lilscript-codec --json .tmp/measure-graph/*.js"
   },
-  "sourceGraphLockSha256": "d44aa2587b6cc0dc7088260397deb81d101d1726049687aba5f8bbb5e21e67f5",
+  "sourceGraphLockSha256": "c6ec0b1e068de443c2aa0abc6d9f224704563c3dcae786945a4d049399b9912b",
   "official": {
     "graph": {
-      "raw": 294369,
-      "gzip9": 59152,
-      "brotli11": 50469,
-      "sha256": "72dcc3eef1db701ab726c937f6b17fb144a881459a0b18081bba1c42025212b2"
+      "raw": 297603,
+      "gzip9": 59975,
+      "brotli11": 51155,
+      "sha256": "5d11b1bec66e5f386de36174070ca23aef5583a532aa6645b08eefc828219f27"
     },
     "terser": {
-      "raw": 117674,
-      "gzip9": 34924,
-      "brotli11": 31082,
-      "sha256": "0d236fd6216daddef62db3e8d6def5916e6b3d8f5630e424589ad33f100d4d95"
+      "raw": 118496,
+      "gzip9": 35330,
+      "brotli11": 31460,
+      "sha256": "69aa9d7cb42271506da76e54efe41092e4018ea8698a37fd234d2b641d162cf8"
     },
     "terserNoMangle": {
-      "raw": 180160,
-      "gzip9": 42658,
-      "brotli11": 37927,
-      "sha256": "ef9be9735fb2f45d9b507fdffb44e26a60b17aed975cf1abcd53528704c6ee20"
+      "raw": 181536,
+      "gzip9": 43191,
+      "brotli11": 38371,
+      "sha256": "f7511135ebef965c10a7fddc5a3b6403f14b2480091c803c9f62072239217903"
     },
     "esbuild": {
-      "raw": 118006,
-      "gzip9": 36331,
-      "brotli11": 32530,
-      "sha256": "3cff9c5e258bbf74882d6c4293f72103deb8500752a2cc31d65c6fee26005726"
+      "raw": 118772,
+      "gzip9": 36764,
+      "brotli11": 32870,
+      "sha256": "7dfff124fd7f6cb07be78cfa9ca119885e520eef57509562c16de214f1bf76b2"
     },
     "oxc": {
-      "raw": 116998,
-      "gzip9": 35166,
-      "brotli11": 31413,
-      "sha256": "30fa6c719c603afd0f74632bae53937ba6a473100524729ac97c61ff368dd31a",
+      "raw": 117790,
+      "gzip9": 35548,
+      "brotli11": 31833,
+      "sha256": "5ffab7f25f45d763e3f580247047e343a64da1d5d41ab1c5145aed4c9e17e714",
       "tool": "vite 8.2.1 minify (Oxc)"
     },
     "oxcNoMangle": {
-      "raw": 183163,
-      "gzip9": 43324,
-      "brotli11": 38546,
-      "sha256": "96d777d096adf3c52ae03b82829e751dab3b2d9a799d1960e439afd12693341c",
+      "raw": 184428,
+      "gzip9": 43831,
+      "brotli11": 39059,
+      "sha256": "b0cecd6ac5ae2c05521697b93f2b5bc216f842f03baba0fcfe64d218353197ce",
       "tool": "vite 8.2.1 minify (Oxc)"
     }
   },
   "lil": {
     "standalone": {
-      "raw": 95307,
-      "gzip9": 30919,
-      "brotli11": 27250,
-      "sha256": "2415e68fc629a08ac6924daea7c5ed0926abf13d57eecad6947d35dd1c1b7726"
+      "raw": 98814,
+      "gzip9": 32365,
+      "brotli11": 28426,
+      "sha256": "31ded887c016bc71099da305708f9fd6db0e80346fae3484f9371ba5fc431c24"
     },
     "consumerGraph": {
-      "raw": 143543,
-      "gzip9": 36259,
-      "brotli11": 31093,
-      "sha256": "1e5b6a2fede1ef72cc887d296dff8153ef7517e2a6f95d570f182cba0109b0a9"
+      "raw": 149181,
+      "gzip9": 37984,
+      "brotli11": 32452,
+      "sha256": "12f234eb6b867a9c052d27e52852de6ab5d910b2e9039da8e3233033dd7b268b"
     },
     "inputs": [
       "dist/react-markdown.browser.js"
@@ -102,14 +102,14 @@
   },
   "deltaAgainstOfficialTerser": {
     "standalone": {
-      "raw": -22367,
-      "gzip9": -4005,
-      "brotli11": -3832
+      "raw": -19682,
+      "gzip9": -2965,
+      "brotli11": -3034
     },
     "consumerGraph": {
-      "raw": 25869,
-      "gzip9": 1335,
-      "brotli11": 11
+      "raw": 30685,
+      "gzip9": 2654,
+      "brotli11": 992
     }
   }
 }

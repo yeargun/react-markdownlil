@@ -219,6 +219,7 @@ const coreFuzz = fuzz.summary.core
 const nodeClass = classify['node fuzz (20,000)']
 const browserClass = classify['browser fuzz (3,000)']
 const lilGfmSpec = sum(rowsFor('gfm-spec', ['gfm']), 'mismatches')
+const differed = (count) => ({text: count === 0 ? '0 differ' : `${int.format(count)} differ, listed below`, state: count === 0 ? 'win' : 'loss'})
 const correctnessTable = {
   id: 'correctness', title: 'Same output',
   lead: `Each case is rendered by react-markdown and by @itslil/react-markdown in the same page (the production builds) and the DOM is compared. Plugin setups: none, npm remark-gfm, npm gfm + math + KaTeX, rehype-raw, a docs setup (remark-toc, rehype-slug, rehype-highlight), custom components, and allowedElements/urlTransform/skipHtml.`,
@@ -229,23 +230,20 @@ const correctnessTable = {
     correctnessRow('Named character references', 'entities', ['core'], '2,125 names in text, links, titles and code'),
     correctnessRow('Real documents (READMEs, CommonMark spec, chat, math)', 'documents', portSets, '7 documents'),
     ['Named references through the Node builds (SSR, then hydration)', '2,125 names', 'Node', {text: entitiesNode.mismatches === 0 ? '0 differ' : `${entitiesNode.mismatches} differ`, state: entitiesNode.mismatches === 0 ? 'win' : 'loss'}],
-    ['Seeded fuzz, browser', `${int.format(fzBrowser[0]?.total ?? 3000)} documents`, `${browsers.length} browsers`,
-      {text: `${int.format(browserClass.mismatch)} differ, all explained below`, state: browserClass.unexplained === 0 ? 'even' : 'loss'}],
-    ['Seeded fuzz with Unicode spaces, Node', `${int.format(coreFuzz.docs)} documents`, 'Node',
-      {text: `${int.format(nodeClass.mismatch)} differ, all explained below`, state: nodeClass.unexplained === 0 ? 'even' : 'loss'}],
+    ['Seeded fuzz, browser', `${int.format(fzBrowser[0]?.total ?? 3000)} documents`, `${browsers.length} browsers`, differed(browserClass.mismatch)],
+    ['Seeded fuzz with Unicode spaces, Node', `${int.format(coreFuzz.docs)} documents`, 'Node', differed(nodeClass.mismatch)],
     ['MarkdownHooks with an async plugin', 'fallback, then the result', `${browsers.length} browsers`,
       {text: browsers.every((b) => JSON.stringify(correctness[b].hooks.up) === JSON.stringify(correctness[b].hooks.lil)) ? 'same' : 'differs', state: 'win'}],
-    ['@itslil/remark-gfm ' + installed('@itslil/remark-gfm') + ' (npm), under either component', 'GFM spec', `${browsers.length} browsers`,
-      {text: `${lilGfmSpec / browsers.length} example differs`, state: 'loss'}],
+    ['@itslil/remark-gfm ' + installed('@itslil/remark-gfm') + ' (npm), under either component', '702 examples', `${browsers.length} browsers`, differed(lilGfmSpec)],
   ].filter(Boolean),
 }
 
 // ---- runtimes -------------------------------------------------------------------------------------------------
-const runtimeLabel = {'node (import)': 'Node (import)', 'cloudflare workers (wrangler)': 'Cloudflare Workers (workerd, worker, browser)',
-  deno: 'Deno', 'react-native (metro)': 'React Native (Metro)'}
+const runtimeLabel = {'node (import)': 'Node (node, import)', 'cloudflare workers (wrangler)': 'Cloudflare Workers (workerd, worker, browser)',
+  'next.js / vercel edge': 'Next.js and Vercel edge (edge-light, browser), with the edge process', deno: 'Deno (deno, node)', 'react-native (metro)': 'React Native (Metro)'}
 const runtimeTable = {
   id: 'runtimes', title: 'Where it runs without a DOM',
-  lead: "Each package bundled with the export conditions of the runtime, then run where there is no document. Worker and edge runtimes resolve the build with the entity table, as upstream's decode-named-character-reference does; the browser build decodes through the document.",
+  lead: "Each package bundled with the export conditions of the runtime, then run where there is no document; the edge row renders under a process whose cwd throws, as Next.js's edge sandbox has. Upstream resolves decode-named-character-reference's table and vfile's shims in worker and edge runtimes and node:path, node:process and node:url under node; the port resolves the build made of the same pair.",
   columns: ['Runtime (conditions)', 'react-markdown', '@itslil/react-markdown', 'file resolved'],
   rows: Object.keys(runtimeLabel).map((runtime) => {
     const up = edge.find((r) => r.runtime === runtime && r.who === 'upstream')
@@ -268,20 +266,26 @@ const cards = [
   {value: pct(longStream.ratio), label: 'main-thread time streaming a 10 KB answer (Chromium)', state: state(longStream.ratio)},
   {value: String(specDiffs), label: `differences in ${int.format(specCases)} CommonMark and GFM spec examples and 2,125 named references, Chromium and Firefox`, state: 'ink'},
 ]
-const whitespace = nodeClass.onlyLanguageClass + browserClass.onlyLanguageClass
-const both = nodeClass.both + browserClass.both
-const drift = nodeClass.mismatch + browserClass.mismatch - whitespace
+const fuzzDiffs = nodeClass.mismatch + browserClass.mismatch
+const fuzzDocs = coreFuzz.docs + (fzBrowser[0]?.total ?? 3000)
+const runtimeDiffs = Object.keys(runtimeLabel).filter((runtime) => {
+  const up = edge.find((r) => r.runtime === runtime && r.who === 'upstream')
+  const lil = edge.find((r) => r.runtime === runtime && r.who === 'port')
+  return up.result !== lil.result
+})
+const behaviorDiffs = specDiffs + fuzzDiffs + entitiesNode.mismatches + lilGfmSpec + runtimeDiffs.length
 const lists = [
   {
     title: 'Known differences',
-    lead: `Every fuzz difference (${int.format(nodeClass.mismatch + browserClass.mismatch)} of ${int.format(coreFuzz.docs + (fzBrowser[0]?.total ?? 3000))} documents) has one of the first two causes; none is left unexplained.`,
+    lead: behaviorDiffs === 0
+      ? `None in behavior: every case above renders the same (${int.format(specCases)} spec examples, ${int.format(fuzzDocs)} fuzz documents, 2,125 named references twice, ${Object.keys(runtimeLabel).length} runtimes). What differs is below.`
+      : `${int.format(behaviorDiffs)} of the cases above differ; each is listed below.`,
     items: [
-      {title: 'A Unicode space in a code-fence language.', text: `\`\`\`js title="a" with a non-breaking (or other Unicode) space gives class="language-js title=…" where upstream gives language-js: the port splits the info string at ASCII whitespace, upstream at JavaScript's \\s. Only the class differs (${int.format(whitespace)} fuzz documents).`},
-      {title: 'micromark-core-commonmark 2.0.4 (published 2026-09-26).', text: `Emphasis next to an underscore or an escaped asterisk (a**_b_**c, foo*_bar_*baz, \\**x**) follows 2.0.3, which this package's source graph pins; a fresh install of react-markdown resolves 2.0.4 (${int.format(drift)} fuzz documents, ${both} of them with the code-fence difference as well).`},
-      {title: 'One module, not tree-shakeable.', text: `An app that imports only defaultUrlTransform ships ${int.format(treeshake['lil-url'].brotli)} B Brotli with the port and ${int.format(treeshake['up-url'].brotli)} B with upstream.`},
-      {title: 'KaTeX stacks ship a little more.', text: `With npm rehype-katex the app is ${signed(sizes['lil-upfull'].brotli - sizes['up-full'].brotli, ' B')} Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.`},
-      {title: 'Earlier @itslil plugin builds.', text: `@itslil/remark-gfm ${installed('@itslil/remark-gfm')} links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex ${installed('@itslil/rehype-katex')} bundles an older KaTeX port that drops the <mspace> of \\quad; @itslil/remark-gfm 4.0.3 and @itslil/rehype-katex 7.0.3 match upstream, and the npm plugins work unchanged with @itslil/react-markdown.`},
-      {title: 'Next.js edge runtime.', text: 'A page with runtime = "edge" fails at request time: the compiled VFile calls process.cwd(), which that runtime replaces with a function that throws, where upstream\'s vfile uses its browser shim. Plain React apps, server rendering with react-dom/server, Cloudflare Workers, Deno and React Native are not affected.'},
+      ...(fuzzDiffs ? [{title: 'Fuzz documents that render differently.', text: `${int.format(fuzzDiffs)} of ${int.format(fuzzDocs)} (results/classify.json).`}] : []),
+      ...(runtimeDiffs.length ? [{title: 'Runtimes where the two packages differ.', text: runtimeDiffs.map((runtime) => runtimeLabel[runtime]).join(', ') + ' (results/edge-conditions.json).'}] : []),
+      ...(lilGfmSpec ? [{title: `@itslil/remark-gfm ${installed('@itslil/remark-gfm')}.`, text: `${lilGfmSpec / browsers.length} GFM spec example renders differently from npm remark-gfm under either component.`}] : []),
+      {title: 'Size, not behavior: one module, not tree-shakeable.', text: `An app that imports only defaultUrlTransform ships ${int.format(treeshake['lil-url'].brotli)} B Brotli with the port and ${int.format(treeshake['up-url'].brotli)} B with upstream.`},
+      {title: 'Size, not behavior: KaTeX stacks ship a little more.', text: `With npm rehype-katex the app is ${signed(sizes['lil-upfull'].brotli - sizes['up-full'].brotli, ' B')} Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.`},
       {title: 'Not measured: Safari/WebKit.', text: 'Playwright\'s WebKit needs system libraries the measuring host does not have.'},
     ],
   },

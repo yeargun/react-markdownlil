@@ -20,7 +20,19 @@
  {
   "runtime": "cloudflare workers (wrangler)",
   "who": "port",
-  "resolved": "@itslil/react-markdown/dist/react-markdown.esm.js",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.worker.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "next.js / vercel edge",
+  "who": "upstream",
+  "resolved": "decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "next.js / vercel edge",
+  "who": "port",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.worker.js",
   "result": "OK <p>© Æ ∉ &amp;</p>"
  },
  {
@@ -44,7 +56,7 @@
  {
   "runtime": "react-native (metro)",
   "who": "port",
-  "resolved": "@itslil/react-markdown/dist/react-markdown.esm.js",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.worker.js",
   "result": "OK <p>© Æ ∉ &amp;</p>"
  },
  {

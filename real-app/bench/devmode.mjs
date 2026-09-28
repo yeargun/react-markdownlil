@@ -1,6 +1,6 @@
-// The Vite dev server resolves the `development` condition before `browser`,
-// so in dev the app gets react-markdown.development.js (the Node build with the
-// entity table and development assertions). Check it runs in a real page.
+// The Vite dev server resolves the `development` condition with `browser`, so in
+// dev the app gets react-markdown.browser.development.js (the browser program with
+// devlop assertions on), as upstream's graph resolves. Check it runs in a real page.
 import fs from 'node:fs'
 import path from 'node:path'
 import {createServer} from 'vite'

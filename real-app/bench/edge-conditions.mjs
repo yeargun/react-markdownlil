@@ -4,10 +4,18 @@
 import fs from 'node:fs'
 import {build} from 'esbuild'
 
+// Next.js's edge sandbox has a `process` whose Node APIs throw; the edge row renders under one.
+const edgeProcess = {
+  env: {},
+  cwd() {
+    throw new Error('A Node.js API is used (process.cwd) which is not supported in the Edge Runtime.')
+  },
+}
 const runtimes = {
   'node (import)': {conditions: [], platform: 'node'},
   'cloudflare workers (wrangler)': {conditions: ['workerd', 'worker', 'browser'], platform: 'neutral'},
-  'deno': {conditions: ['deno'], platform: 'neutral'},
+  'next.js / vercel edge': {conditions: ['edge-light', 'browser', 'module', 'import'], platform: 'neutral', process: edgeProcess},
+  'deno': {conditions: ['deno', 'node'], platform: 'neutral'},
   'react-native (metro)': {conditions: ['react-native'], platform: 'neutral'},
   'browser bundle (vite/webpack prod)': {conditions: ['browser', 'production'], platform: 'browser'},
 }
@@ -24,7 +32,7 @@ for (const [runtime, opts] of Object.entries(runtimes)) {
         stdin: {contents: entry, resolveDir: process.cwd(), loader: 'js'},
         bundle: true, format: 'esm', write: true, outfile: file, metafile: true, logLevel: 'silent',
         conditions: opts.conditions, platform: opts.platform, mainFields: ['module', 'main'],
-        external: ['react', 'react-dom', 'react-dom/*', 'react/*'],
+        external: ['react', 'react-dom', 'react-dom/*', 'react/*', 'node:*'],
       })
       resolved = Object.keys(out.metafile.inputs).filter((p) => /react-markdown|decode-named-character-reference/.test(p)).map((p) => p.replace(/^.*node_modules\//, '')).join(', ')
     } catch (e) {
@@ -35,7 +43,13 @@ for (const [runtime, opts] of Object.entries(runtimes)) {
     try {
       // Node has no `document`, like a worker or edge runtime.
       const mod = await import(new URL('../' + file, import.meta.url).href + '?' + Date.now())
-      result = 'OK ' + mod.default()
+      const saved = Object.getOwnPropertyDescriptor(globalThis, 'process')
+      if (opts.process) Object.defineProperty(globalThis, 'process', {value: opts.process, configurable: true, writable: true})
+      try {
+        result = 'OK ' + mod.default()
+      } finally {
+        Object.defineProperty(globalThis, 'process', saved)
+      }
     } catch (e) {
       result = 'CRASH ' + String(e.message).slice(0, 80)
     }

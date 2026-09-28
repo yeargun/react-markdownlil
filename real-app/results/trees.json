@@ -1,0 +1,14 @@
+{
+ "core": {
+  "documents": 4452,
+  "mdastDiffer": 0,
+  "hastDiffer": 0,
+  "htmlDiffer": 0
+ },
+ "gfm + math": {
+  "documents": 4452,
+  "mdastDiffer": 0,
+  "hastDiffer": 0,
+  "htmlDiffer": 0
+ }
+}

@@ -68,8 +68,8 @@ the `node` condition.
 The same React app, built with Vite once per markdown stack and driven by Playwright ([`real-app/`](real-app/)).
 
 - **−3.1 KB** JavaScript the app ships, Brotli-11 (react-markdown alone)
-- **−12.4%** render time, react-markdown's README, warm (Chromium)
-- **−7.5%** main-thread time streaming a 10 KB answer (Chromium)
+- **−12.5%** render time, react-markdown's README, warm (Chromium)
+- **−8.9%** main-thread time streaming a 10 KB answer (Chromium)
 - **0** differences in 1,354 CommonMark and GFM spec examples and 2,125 named references, Chromium and Firefox
 
 ### What the app ships
@@ -80,13 +80,13 @@ All JavaScript of the app, React 19.2.0 included: Vite 8.3.1 production build (R
 |---|---:|---:|---:|---:|---:|
 | App without markdown (baseline) | 193,483 | 60,172 | 51,950 | — | — |
 | react-markdown 10.1.0 | 310,588 | 94,972 | 82,134 | 30,184 | — |
-| @itslil/react-markdown | 285,625 | 91,318 | 79,001 | 27,051 | −3,133 B (−10.4% of what markdown adds) |
+| @itslil/react-markdown | 285,640 | 91,293 | 79,004 | 27,054 | −3,130 B (−10.4% of what markdown adds) |
 | react-markdown + remark-gfm 4.0.1 | 348,442 | 105,566 | 90,991 | 39,041 | — |
-| @itslil/react-markdown + remark-gfm (npm) | 327,385 | 103,204 | 89,252 | 37,302 | −1,739 B (−4.5% of what markdown adds) |
-| @itslil/react-markdown + @itslil/remark-gfm 4.0.3 | 317,909 | 101,777 | 88,171 | 36,221 | −2,820 B (−7.2% of what markdown adds) |
+| @itslil/react-markdown + remark-gfm (npm) | 327,396 | 103,171 | 89,138 | 37,188 | −1,853 B (−4.7% of what markdown adds) |
+| @itslil/react-markdown + @itslil/remark-gfm 4.0.3 | 317,924 | 101,738 | 88,032 | 36,082 | −2,959 B (−7.6% of what markdown adds) |
 | react-markdown + remark-gfm, remark-math, rehype-katex | 627,629 | 187,225 | 157,237 | 105,287 | — |
-| @itslil/react-markdown + the same npm plugins | 624,659 | 190,652 | 159,620 | 107,670 | +2,383 B (+2.3% of what markdown adds) |
-| @itslil/react-markdown + @itslil/remark-gfm, remark-math, rehype-katex (4.0.3, 6.0.2, 7.0.3) | 617,612 | 190,385 | 159,757 | 107,807 | +2,520 B (+2.4% of what markdown adds) |
+| @itslil/react-markdown + the same npm plugins | 624,672 | 190,643 | 159,468 | 107,518 | +2,231 B (+2.1% of what markdown adds) |
+| @itslil/react-markdown + @itslil/remark-gfm, remark-math, rehype-katex (4.0.3, 6.0.2, 7.0.3) | 617,625 | 190,361 | 159,672 | 107,722 | +2,435 B (+2.3% of what markdown adds) |
 
 ### Time to markdown on screen (Chromium)
 
@@ -94,12 +94,12 @@ A fresh browser context per load; the app fetches react-markdown's README and re
 
 | Stack | desktop, upstream | desktop, @itslil | Δ | mobile, upstream | mobile, @itslil | Δ |
 |---|---:|---:|---:|---:|---:|---:|
-| App without markdown | 64.7 ms | — | — | 884 ms | — | — |
-| react-markdown alone | 149.8 ms | 151.6 ms | +2 ms (faster in 8/12) | 1341 ms | 1330 ms | −11 ms (faster in 7/12) |
-| + remark-gfm (npm), drop-in | 164.2 ms | 164.8 ms | +1 ms (faster in 6/12) | 1436 ms | 1432 ms | −4 ms (faster in 6/12) |
-| + @itslil/remark-gfm 4.0.3 | 164.2 ms | 169.1 ms | +5 ms (faster in 6/12) | 1436 ms | 1439 ms | +3 ms (faster in 5/12) |
-| + gfm, math, KaTeX (npm), drop-in | 191.4 ms | 204.3 ms | +13 ms (faster in 3/12) | 1877 ms | 1890 ms | +14 ms (faster in 5/12) |
-| + @itslil gfm, math, KaTeX (npm builds) | 191.4 ms | 214.4 ms | +23 ms (faster in 2/12) | 1877 ms | 1902 ms | +25 ms (faster in 5/12) |
+| App without markdown | 64.7 ms | — | — | 882 ms | — | — |
+| react-markdown alone | 154.8 ms | 152.5 ms | −2 ms (faster in 8/12) | 1341 ms | 1343 ms | +2 ms (faster in 7/12) |
+| + remark-gfm (npm), drop-in | 164.4 ms | 176.8 ms | +12 ms (faster in 5/12) | 1471 ms | 1454 ms | −17 ms (faster in 6/12) |
+| + @itslil/remark-gfm 4.0.3 | 164.4 ms | 169.8 ms | +5 ms (faster in 5/12) | 1471 ms | 1445 ms | −26 ms (faster in 6/12) |
+| + gfm, math, KaTeX (npm), drop-in | 201.0 ms | 219.0 ms | +18 ms (faster in 2/12) | 1872 ms | 1887 ms | +15 ms (faster in 2/12) |
+| + @itslil gfm, math, KaTeX (npm builds) | 201.0 ms | 207.6 ms | +7 ms (faster in 4/12) | 1872 ms | 1903 ms | +30 ms (faster in 5/12) |
 
 ### Rendering, react-markdown alone (Chromium)
 
@@ -107,13 +107,13 @@ Warm medians on 5 fresh pages per variant, variants interleaved round by round. 
 
 | Document | pipeline, upstream | pipeline, @itslil | Δ | mount, upstream | mount, @itslil | Δ |
 |---|---:|---:|---:|---:|---:|---:|
-| short reply (307 B) | 0.30 ms | 0.29 ms | −3.3% | 0.40 ms | 0.38 ms | −6.8% |
-| chat answer (3.3 KB) | 1.52 ms | 1.44 ms | −5.6% | 1.71 ms | 1.69 ms | −1.0% |
-| remark-gfm's README (15 KB) | 10.7 ms | 9.59 ms | −10.2% | 11.0 ms | 9.94 ms | −9.6% |
-| react-markdown's README (26 KB) | 16.9 ms | 14.8 ms | −12.4% | 18.6 ms | 17.0 ms | −8.8% |
-| unified's README (49 KB) | 32.3 ms | 29.3 ms | −9.1% | 34.1 ms | 31.3 ms | −8.4% |
-| CommonMark spec (205 KB) | 110 ms | 100.0 ms | −8.7% | 110 ms | 103 ms | −6.4% |
-| chat history, 40 messages | — | — | — | 7.48 ms | 7.80 ms | +4.3% |
+| short reply (307 B) | 0.31 ms | 0.30 ms | −3.2% | 0.41 ms | 0.39 ms | −4.9% |
+| chat answer (3.3 KB) | 1.62 ms | 1.47 ms | −9.3% | 1.78 ms | 1.75 ms | −1.8% |
+| remark-gfm's README (15 KB) | 11.2 ms | 9.55 ms | −14.5% | 11.6 ms | 10.5 ms | −9.2% |
+| react-markdown's README (26 KB) | 17.4 ms | 15.3 ms | −12.5% | 18.7 ms | 17.1 ms | −8.8% |
+| unified's README (49 KB) | 33.1 ms | 30.2 ms | −8.9% | 37.6 ms | 33.8 ms | −9.9% |
+| CommonMark spec (205 KB) | 119 ms | 110 ms | −8.0% | 120 ms | 107 ms | −10.9% |
+| chat history, 40 messages | — | — | — | 8.20 ms | 7.88 ms | −3.8% |
 
 ### Rendering at 4× CPU slowdown (Chromium)
 
@@ -121,13 +121,13 @@ The same, with the CPU slowed four times (a mid-range phone).
 
 | Document | pipeline, upstream | pipeline, @itslil | Δ | mount, upstream | mount, @itslil | Δ |
 |---|---:|---:|---:|---:|---:|---:|
-| short reply (307 B) | 1.61 ms | 1.44 ms | −10.9% | 1.76 ms | 2.14 ms | +21.6% |
-| chat answer (3.3 KB) | 10.3 ms | 9.40 ms | −8.5% | 8.59 ms | 8.04 ms | −6.3% |
-| remark-gfm's README (15 KB) | 48.5 ms | 45.0 ms | −7.4% | 54.6 ms | 52.3 ms | −4.1% |
-| react-markdown's README (26 KB) | 78.9 ms | 74.2 ms | −6.0% | 83.7 ms | 81.3 ms | −2.9% |
-| unified's README (49 KB) | 162 ms | 158 ms | −2.1% | 171 ms | 176 ms | +2.6% |
-| CommonMark spec (205 KB) | 497 ms | 450 ms | −9.4% | 508 ms | 474 ms | −6.6% |
-| chat history, 40 messages | — | — | — | 39.6 ms | 40.4 ms | +2.1% |
+| short reply (307 B) | 1.52 ms | 1.48 ms | −2.3% | 1.72 ms | 1.95 ms | +13.7% |
+| chat answer (3.3 KB) | 9.74 ms | 8.81 ms | −9.6% | 8.44 ms | 9.34 ms | +10.6% |
+| remark-gfm's README (15 KB) | 50.5 ms | 43.7 ms | −13.6% | 58.0 ms | 50.5 ms | −13.0% |
+| react-markdown's README (26 KB) | 79.5 ms | 73.6 ms | −7.4% | 86.2 ms | 84.2 ms | −2.4% |
+| unified's README (49 KB) | 169 ms | 151 ms | −10.2% | 185 ms | 160 ms | −13.4% |
+| CommonMark spec (205 KB) | 503 ms | 463 ms | −8.1% | 507 ms | 474 ms | −6.6% |
+| chat history, 40 messages | — | — | — | 44.3 ms | 39.7 ms | −10.4% |
 
 ### Rendering with plugins (Chromium)
 
@@ -135,18 +135,18 @@ Pipeline only, warm medians. The npm plugins on both sides, then the @itslil plu
 
 | Stack | document | upstream | @itslil | Δ |
 |---|---:|---:|---:|---:|
-| + remark-gfm (npm), drop-in | chat answer (3.3 KB) | 2.76 ms | 2.87 ms | +4.0% |
-| + remark-gfm (npm), drop-in | react-markdown's README (26 KB) | 23.7 ms | 22.1 ms | −6.8% |
-| + remark-gfm (npm), drop-in | CommonMark spec (205 KB) | 154 ms | 151 ms | −2.4% |
-| + @itslil/remark-gfm 4.0.3 | chat answer (3.3 KB) | 2.76 ms | 2.57 ms | −7.0% |
-| + @itslil/remark-gfm 4.0.3 | react-markdown's README (26 KB) | 23.7 ms | 20.9 ms | −11.7% |
-| + @itslil/remark-gfm 4.0.3 | CommonMark spec (205 KB) | 154 ms | 150 ms | −2.5% |
-| + gfm, math, KaTeX (npm), drop-in | chat answer (3.3 KB) | 3.00 ms | 2.79 ms | −7.0% |
-| + gfm, math, KaTeX (npm), drop-in | react-markdown's README (26 KB) | 26.1 ms | 23.2 ms | −10.9% |
-| + gfm, math, KaTeX (npm), drop-in | math notes (2 KB, 20 formulas) | 23.0 ms | 16.8 ms | −26.7% |
-| + @itslil gfm, math, KaTeX (npm builds) | chat answer (3.3 KB) | 3.00 ms | 2.55 ms | −14.9% |
-| + @itslil gfm, math, KaTeX (npm builds) | react-markdown's README (26 KB) | 26.1 ms | 21.3 ms | −18.5% |
-| + @itslil gfm, math, KaTeX (npm builds) | math notes (2 KB, 20 formulas) | 23.0 ms | 16.8 ms | −26.8% |
+| + remark-gfm (npm), drop-in | chat answer (3.3 KB) | 2.81 ms | 2.77 ms | −1.4% |
+| + remark-gfm (npm), drop-in | react-markdown's README (26 KB) | 24.4 ms | 22.2 ms | −9.0% |
+| + remark-gfm (npm), drop-in | CommonMark spec (205 KB) | 161 ms | 157 ms | −1.9% |
+| + @itslil/remark-gfm 4.0.3 | chat answer (3.3 KB) | 2.81 ms | 2.55 ms | −9.4% |
+| + @itslil/remark-gfm 4.0.3 | react-markdown's README (26 KB) | 24.4 ms | 21.4 ms | −12.4% |
+| + @itslil/remark-gfm 4.0.3 | CommonMark spec (205 KB) | 161 ms | 156 ms | −2.5% |
+| + gfm, math, KaTeX (npm), drop-in | chat answer (3.3 KB) | 3.15 ms | 3.31 ms | +5.0% |
+| + gfm, math, KaTeX (npm), drop-in | react-markdown's README (26 KB) | 24.5 ms | 22.4 ms | −8.3% |
+| + gfm, math, KaTeX (npm), drop-in | math notes (2 KB, 20 formulas) | 22.4 ms | 17.6 ms | −21.3% |
+| + @itslil gfm, math, KaTeX (npm builds) | chat answer (3.3 KB) | 3.15 ms | 2.65 ms | −15.9% |
+| + @itslil gfm, math, KaTeX (npm builds) | react-markdown's README (26 KB) | 24.5 ms | 22.4 ms | −8.6% |
+| + @itslil gfm, math, KaTeX (npm builds) | math notes (2 KB, 20 formulas) | 22.4 ms | 16.8 ms | −24.7% |
 
 ### Streaming an answer, as a chat UI does (Chromium)
 
@@ -154,12 +154,12 @@ The growing message is re-rendered after every 12 characters (flushSync, so each
 
 | Stack | stream | upstream, total | @itslil, total | Δ | p95 per update (upstream / @itslil) |
 |---|---:|---:|---:|---:|---:|
-| react-markdown alone | chat answer, 3.3 KB · 277 updates | 226 ms | 224 ms | −1.1% | 1.58 / 1.47 ms |
-| react-markdown alone | long answer, 10 KB · 834 updates | 3613 ms | 3343 ms | −7.5% | 7.58 / 7.21 ms |
-| react-markdown alone | chat answer, 3.3 KB · 277 updates · 4× CPU | 1124 ms | 1034 ms | −7.9% | 7.94 / 7.08 ms |
-| + remark-gfm (npm), drop-in | long answer, 10 KB · 834 updates | 5544 ms | 5228 ms | −5.7% | 12.52 / 11.66 ms |
-| + @itslil/remark-gfm 4.0.3 | long answer, 10 KB · 834 updates | 5544 ms | 5050 ms | −8.9% | 12.52 / 11.25 ms |
-| + gfm, math, KaTeX (npm), drop-in | long answer, 10 KB · 834 updates | 5908 ms | 5744 ms | −2.8% | 13.19 / 12.70 ms |
+| react-markdown alone | chat answer, 3.3 KB · 277 updates | 256 ms | 237 ms | −7.5% | 1.78 / 1.70 ms |
+| react-markdown alone | long answer, 10 KB · 834 updates | 3850 ms | 3507 ms | −8.9% | 8.34 / 7.34 ms |
+| react-markdown alone | chat answer, 3.3 KB · 277 updates · 4× CPU | 1127 ms | 1018 ms | −9.7% | 8.07 / 6.84 ms |
+| + remark-gfm (npm), drop-in | long answer, 10 KB · 834 updates | 5839 ms | 5321 ms | −8.9% | 13.28 / 12.09 ms |
+| + @itslil/remark-gfm 4.0.3 | long answer, 10 KB · 834 updates | 5839 ms | 5101 ms | −12.6% | 13.28 / 11.26 ms |
+| + gfm, math, KaTeX (npm), drop-in | long answer, 10 KB · 834 updates | 5832 ms | 5711 ms | −2.1% | 13.15 / 12.86 ms |
 
 ### Where the time goes (Chromium)
 
@@ -167,12 +167,12 @@ Timing plugins at both ends of the unified pipeline split one render: parse (mic
 
 | Stack | document | parse | mdast → hast | hast → React | allocated per render |
 |---|---:|---:|---:|---:|---:|
-| react-markdown | react-markdown's README (26 KB) | 18.3 ms | 1.32 ms | 1.32 ms | 13.6 MB |
-| @itslil/react-markdown | react-markdown's README (26 KB) | 16.9 ms | 0.58 ms | 0.44 ms | 12.2 MB |
-| react-markdown | CommonMark spec (205 KB) | 101 ms | 5.53 ms | 7.07 ms |  |
-| @itslil/react-markdown | CommonMark spec (205 KB) | 98.9 ms | 2.34 ms | 2.34 ms |  |
-| react-markdown + remark-gfm | react-markdown's README (26 KB) | 23.2 ms | 1.23 ms | 1.30 ms | 17.2 MB |
-| @itslil/react-markdown + remark-gfm | react-markdown's README (26 KB) | 23.7 ms | 0.63 ms | 0.51 ms | 15.6 MB |
+| react-markdown | react-markdown's README (26 KB) | 17.9 ms | 1.37 ms | 1.34 ms | 13.6 MB |
+| @itslil/react-markdown | react-markdown's README (26 KB) | 19.0 ms | 0.60 ms | 0.47 ms | 12.1 MB |
+| react-markdown | CommonMark spec (205 KB) | 106 ms | 5.66 ms | 7.40 ms |  |
+| @itslil/react-markdown | CommonMark spec (205 KB) | 106 ms | 2.55 ms | 2.38 ms |  |
+| react-markdown + remark-gfm | react-markdown's README (26 KB) | 23.1 ms | 1.25 ms | 1.36 ms | 17.2 MB |
+| @itslil/react-markdown + remark-gfm | react-markdown's README (26 KB) | 22.2 ms | 0.54 ms | 0.48 ms | 15.6 MB |
 
 ### Firefox 153.0
 
@@ -180,13 +180,13 @@ The same app and harness in Firefox (no CPU throttling; Firefox has no DevTools 
 
 | Measure | upstream | @itslil | Δ |
 |---|---:|---:|---:|
-| Markdown on screen, desktop load | 270.3 ms | 278.9 ms | +9 ms (faster in 3/8) |
-| Pipeline, chat answer (3.3 KB) | 2.60 ms | 2.48 ms | −4.6% |
-| Pipeline, react-markdown's README (26 KB) | 30.3 ms | 29.6 ms | −2.3% |
-| Pipeline, CommonMark spec (205 KB) | 205 ms | 188 ms | −8.6% |
-| Pipeline + remark-gfm, react-markdown's README (26 KB) | 38.8 ms | 36.1 ms | −6.9% |
-| Streaming the 10 KB answer, total | 5937 ms | 5752 ms | −3.1% |
-| Streaming with remark-gfm, total | 8530 ms | 7444 ms | −12.7% |
+| Markdown on screen, desktop load | 258.9 ms | 277.5 ms | +19 ms (faster in 3/8) |
+| Pipeline, chat answer (3.3 KB) | 2.56 ms | 2.42 ms | −5.5% |
+| Pipeline, react-markdown's README (26 KB) | 30.0 ms | 26.7 ms | −11.0% |
+| Pipeline, CommonMark spec (205 KB) | 205 ms | 186 ms | −9.3% |
+| Pipeline + remark-gfm, react-markdown's README (26 KB) | 40.0 ms | 38.4 ms | −4.1% |
+| Streaming the 10 KB answer, total | 6076 ms | 5495 ms | −9.6% |
+| Streaming with remark-gfm, total | 8025 ms | 7634 ms | −4.9% |
 
 ### Same output
 
@@ -220,8 +220,8 @@ Each package bundled with the export conditions of the runtime, then run where t
 
 None in behavior: every case above renders the same (1,354 spec examples, 23,000 fuzz documents, 2,125 named references twice, 5 runtimes). What differs is below.
 
-- **Size, not behavior: one module, not tree-shakeable.** An app that imports only defaultUrlTransform ships 30,246 B Brotli with the port and 264 B with upstream.
-- **Size, not behavior: KaTeX stacks ship a little more.** With npm rehype-katex the app is +2,383 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.
+- **Size, not behavior: one module, not tree-shakeable.** An app that imports only defaultUrlTransform ships 30,278 B Brotli with the port and 264 B with upstream.
+- **Size, not behavior: KaTeX stacks ship a little more.** With npm rehype-katex the app is +2,231 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.
 - **Not measured: Safari/WebKit.** Playwright's WebKit needs system libraries the measuring host does not have.
 
 Measured 2026-09-28 on an Azure Standard_B8als_v2 (8 vCPU, burstable) with Playwright 1.62.1: Chromium 151.0.7922.34, Firefox 153.0; React 19.2.0, Vite 8.3.1; react-markdown 10.1.0 against @itslil/react-markdown packed from this repository, plugins from npm. Reproduce: cd real-app && npm run setup && npm run build && npm run correctness && npm run fuzz && npm run edge && npm run perf && npm run report.
@@ -236,11 +236,11 @@ the compiler.
 
 | File | Conditions | Brotli-11 | gzip-9 | raw |
 |---|---|---:|---:|---:|
-| `dist/react-markdown.browser.js` | `browser` | 28,473 | 32,339 | 98,862 |
-| `dist/react-markdown.worker.js` | `edge-light`, `react-native`, `worker`, `workerd`, `convex`, any runtime without `node` | 37,059 | 43,222 | 119,255 |
-| `dist/react-markdown.esm.js` | `node` (Node, Deno, Bun) | 36,399 | 42,483 | 117,324 |
-| `dist/react-markdown.cjs` | `node` with `require` | 36,412 | 42,505 | 117,375 |
-| `dist/react-markdown.closed.js` | `./closed` | 39,877 | 46,823 | 136,666 |
+| `dist/react-markdown.browser.js` | `browser` | 28,426 | 32,365 | 98,814 |
+| `dist/react-markdown.worker.js` | `edge-light`, `react-native`, `worker`, `workerd`, `convex`, any runtime without `node` | 37,130 | 43,327 | 119,596 |
+| `dist/react-markdown.esm.js` | `node` (Node, Deno, Bun) | 36,441 | 42,524 | 117,540 |
+| `dist/react-markdown.cjs` | `node` with `require` | 36,492 | 42,548 | 117,591 |
+| `dist/react-markdown.closed.js` | `./closed` | 39,878 | 46,905 | 136,897 |
 
 Upstream's graph resolves two condition maps, and the package resolves the same
 pair. decode-named-character-reference decodes named character references
@@ -259,13 +259,13 @@ The bars are upstream's browser graph (esbuild, React external) minified:
 | Official browser graph | Brotli-11 | gzip-9 | raw |
 |---|---:|---:|---:|
 | Git source (`44d2e4a`) + Terser 5.51.2, passes 3 (strongest) | 31,280 | 35,092 | 117,688 |
-| npm package + Terser 5.51.2 | 31,405 | 35,248 | 118,297 |
-| npm package + Oxc (Vite 8.2.1) | 31,725 | 35,470 | 117,592 |
-| npm package + esbuild 0.28.1 | 32,786 | 36,663 | 118,575 |
+| npm package + Terser 5.51.2 | 31,460 | 35,330 | 118,496 |
+| npm package + Oxc (Vite 8.2.1) | 31,833 | 35,548 | 117,790 |
+| npm package + esbuild 0.28.1 | 32,870 | 36,764 | 118,772 |
 
-The browser build is 2,807 B (9.0%) smaller in Brotli-11 than the strongest bar,
-2,753 B in gzip-9 and 18,730 B raw. The four compiles of one build take about
-23.5 s on this Azure B8als_v2 host (shared, 1-minute load 2.1), 7.0 s of it for the
+The browser build is 2,854 B (9.1%) smaller in Brotli-11 than the strongest bar,
+2,727 B in gzip-9 and 18,874 B raw. The four compiles of one build take about
+24.2 s on this Azure B8als_v2 host (shared, 1-minute load 2.3), 7.2 s of it for the
 browser build. `npm run record:release` re-measures everything the site
 shows (`site/results.json`).
 

@@ -4,21 +4,21 @@
 |---|---:|---:|---:|---:|
 | none | 193,483 | 60,172 | 51,950 | – |
 | up | 310,588 | 94,972 | 82,134 | 30,184 |
-| lil | 282,260 | 89,957 | 77,787 | 25,837 |
+| lil | 285,640 | 91,293 | 79,004 | 27,054 |
 | up-gfm | 348,442 | 105,566 | 90,991 | 39,041 |
-| lil-upgfm | 323,962 | 101,823 | 88,056 | 36,106 |
-| lil-gfm | 315,577 | 100,769 | 87,288 | 35,338 |
+| lil-upgfm | 327,396 | 103,171 | 89,138 | 37,188 |
+| lil-gfm | 317,924 | 101,738 | 88,032 | 36,082 |
 | up-full | 627,629 | 187,225 | 157,237 | 105,287 |
-| lil-upfull | 621,258 | 189,231 | 158,491 | 106,541 |
-| lil-full | 613,103 | 188,470 | 158,544 | 106,594 |
+| lil-upfull | 624,672 | 190,643 | 159,468 | 107,518 |
+| lil-full | 617,625 | 190,361 | 159,672 | 107,722 |
 
 | pair | upstream Brotli | port Brotli | port − upstream | markdown stack Δ |
 |---|---:|---:|---:|---:|
-| up → lil | 82,134 | 77,787 | -4,347 | −14.4% |
-| up-gfm → lil-upgfm | 90,991 | 88,056 | -2,935 | −7.5% |
-| up-gfm → lil-gfm | 90,991 | 87,288 | -3,703 | −9.5% |
-| up-full → lil-upfull | 157,237 | 158,491 | 1,254 | +1.2% |
-| up-full → lil-full | 157,237 | 158,544 | 1,307 | +1.2% |
+| up → lil | 82,134 | 79,004 | -3,130 | −10.4% |
+| up-gfm → lil-upgfm | 90,991 | 89,138 | -1,853 | −4.7% |
+| up-gfm → lil-gfm | 90,991 | 88,032 | -2,959 | −7.6% |
+| up-full → lil-upfull | 157,237 | 159,468 | 2,231 | +2.1% |
+| up-full → lil-full | 157,237 | 159,672 | 2,435 | +2.3% |
 
 ## chromium 151.0.7922.34
 
@@ -26,222 +26,222 @@
 
 | variant | markdown on screen (ms) | Δ vs no-markdown app | JS execution (ms) | heap after GC (MB) | JS transferred (B) |
 |---|---:|---:|---:|---:|---:|
-| none | 60.7 | – | 20.1 | 1.55 | 52,250 |
-| up | 144.8 | 84.0 | 99.1 | 2.78 | 82,434 |
-| lil | 145.8 | 85.0 | 97.8 | 2.69 | 78,087 |
-| up-gfm | 161.4 | 100.7 | 113.6 | 2.95 | 91,291 |
-| lil-upgfm | 161.5 | 100.7 | 111.6 | 2.95 | 88,356 |
-| lil-gfm | 167.5 | 106.7 | 116.6 | 2.97 | 87,588 |
-| up-full | 187.6 | 126.9 | 128.1 | 3.78 | 157,537 |
-| lil-upfull | 194.3 | 133.6 | 130.0 | 3.89 | 158,791 |
-| lil-full | 196.1 | 135.4 | 134.0 | 3.82 | 158,844 |
+| none | 64.7 | – | 21.0 | 1.55 | 52,250 |
+| up | 154.8 | 90.1 | 103.9 | 2.78 | 82,434 |
+| lil | 152.5 | 87.8 | 100.8 | 2.71 | 79,304 |
+| up-gfm | 164.4 | 99.7 | 114.6 | 2.95 | 91,291 |
+| lil-upgfm | 176.8 | 112.1 | 120.5 | 2.96 | 89,438 |
+| lil-gfm | 169.8 | 105.1 | 117.3 | 3.01 | 88,332 |
+| up-full | 201.0 | 136.2 | 134.9 | 3.78 | 157,537 |
+| lil-upfull | 219.0 | 154.2 | 147.2 | 3.90 | 159,768 |
+| lil-full | 207.6 | 142.9 | 138.9 | 3.96 | 159,972 |
 
 | pair (same-round) | median Δ on-screen (ms) | port faster in | median Δ JS execution (ms) |
 |---|---:|---:|---:|
-| up → lil | -5.2 | 9/12 | -3.8 |
-| up-gfm → lil-upgfm | -5.1 | 7/12 | -1.8 |
-| up-gfm → lil-gfm | 2.8 | 5/12 | 1.7 |
-| up-full → lil-upfull | 7.1 | 4/12 | 2.5 |
-| up-full → lil-full | 10.9 | 2/12 | 7.5 |
+| up → lil | -3.1 | 8/12 | -2.8 |
+| up-gfm → lil-upgfm | 7.2 | 5/12 | 8.2 |
+| up-gfm → lil-gfm | 2.8 | 5/12 | 1.6 |
+| up-full → lil-upfull | 15.9 | 2/12 | 9.6 |
+| up-full → lil-full | 3.4 | 4/12 | 3.7 |
 
 ### Page load, mobile-slow4g (12 fresh loads per variant; median)
 
 | variant | markdown on screen (ms) | Δ vs no-markdown app | JS execution (ms) | heap after GC (MB) | JS transferred (B) |
 |---|---:|---:|---:|---:|---:|
-| none | 877.0 | – | 85.8 | 1.55 | 52,250 |
-| up | 1,320.4 | 443.3 | 385.7 | 2.75 | 82,434 |
-| lil | 1,306.0 | 429.0 | 382.3 | 2.66 | 78,087 |
-| up-gfm | 1,407.9 | 530.8 | 428.6 | 2.91 | 91,291 |
-| lil-upgfm | 1,407.1 | 530.1 | 438.3 | 2.90 | 88,356 |
-| lil-gfm | 1,421.8 | 544.8 | 456.6 | 2.92 | 87,588 |
-| up-full | 1,873.2 | 996.2 | 528.2 | 3.75 | 157,537 |
-| lil-upfull | 1,867.7 | 990.7 | 520.6 | 3.86 | 158,791 |
-| lil-full | 1,888.7 | 1,011.6 | 543.9 | 3.79 | 158,844 |
+| none | 882.5 | – | 88.4 | 1.55 | 52,250 |
+| up | 1,341.1 | 458.7 | 408.3 | 2.75 | 82,434 |
+| lil | 1,343.2 | 460.8 | 420.3 | 2.67 | 79,304 |
+| up-gfm | 1,471.3 | 588.8 | 483.5 | 2.92 | 91,291 |
+| lil-upgfm | 1,454.1 | 571.7 | 479.7 | 2.92 | 89,438 |
+| lil-gfm | 1,444.8 | 562.4 | 476.0 | 2.97 | 88,332 |
+| up-full | 1,872.4 | 989.9 | 526.0 | 3.75 | 157,537 |
+| lil-upfull | 1,887.0 | 1,004.5 | 534.5 | 3.87 | 159,768 |
+| lil-full | 1,902.8 | 1,020.3 | 548.0 | 3.92 | 159,972 |
 
 | pair (same-round) | median Δ on-screen (ms) | port faster in | median Δ JS execution (ms) |
 |---|---:|---:|---:|
-| up → lil | -28.1 | 7/12 | -12.4 |
-| up-gfm → lil-upgfm | -12.9 | 9/12 | 8.6 |
-| up-gfm → lil-gfm | 4.3 | 6/12 | 18.4 |
-| up-full → lil-upfull | -6.5 | 7/12 | -14.3 |
-| up-full → lil-full | 21.3 | 2/12 | 15.8 |
+| up → lil | -17.2 | 7/12 | -1.2 |
+| up-gfm → lil-upgfm | -5.3 | 6/12 | 2.4 |
+| up-gfm → lil-gfm | -13.6 | 6/12 | -3.0 |
+| up-full → lil-upfull | 23.6 | 2/12 | 13.8 |
+| up-full → lil-full | 21.7 | 5/12 | 8.3 |
 
 ### Rendering, CPU 1× (5 fresh pages per variant; ms, median of per-page medians)
 
 | pair | document | first call up | first call port | pipeline up | pipeline port | Δ | React mount up | React mount port | Δ |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| up → lil | small | 1.74 | 1.63 | 0.295 | 0.285 | −3.4% | 0.405 | 0.355 | −11.8% |
-| up → lil | chat | 8.04 | 9.27 | 1.525 | 1.383 | −8.7% | 1.713 | 1.555 | −10.1% |
-| up → lil | gfmreadme | 31.84 | 33.03 | 10.723 | 9.595 | −14.4% | 11.130 | 10.055 | −9.3% |
-| up → lil | readme | 33.73 | 33.51 | 16.977 | 14.732 | −11.6% | 17.875 | 16.235 | −9.4% |
-| up → lil | unified | 49.88 | 43.75 | 31.910 | 27.520 | −13.8% | 34.663 | 31.908 | −8.6% |
-| up → lil | spec | 148.07 | 124.27 | 106.675 | 97.585 | −8.8% | 108.580 | 99.180 | −8.4% |
-| up → lil | conversation(40) | 8.41 | 8.56 | – | – | – | 7.723 | 7.265 | −7.0% |
-| up-gfm → lil-upgfm | small | 2.08 | 2.11 | 0.410 | 0.420 | −1.9% | 0.463 | 0.508 | +10.3% |
-| up-gfm → lil-upgfm | chat | 13.70 | 12.94 | 2.762 | 2.692 | −2.7% | 3.137 | 2.985 | −4.3% |
-| up-gfm → lil-upgfm | gfmreadme | 34.23 | 34.00 | 14.095 | 13.260 | −5.5% | 15.855 | 14.095 | −10.1% |
-| up-gfm → lil-upgfm | readme | 38.20 | 40.71 | 23.160 | 20.777 | −9.9% | 24.633 | 22.413 | −7.8% |
-| up-gfm → lil-upgfm | unified | 62.10 | 60.06 | 44.225 | 41.967 | −6.5% | 48.298 | 41.935 | −13.0% |
-| up-gfm → lil-upgfm | spec | 199.48 | 187.76 | 154.473 | 139.515 | −10.4% | 155.925 | 141.295 | −9.4% |
-| up-gfm → lil-upgfm | conversation(40) | 16.47 | 15.23 | – | – | – | 13.622 | 13.020 | −5.7% |
-| up-gfm → lil-gfm | small | 2.08 | 2.40 | 0.410 | 0.390 | −4.9% | 0.463 | 0.485 | +5.4% |
-| up-gfm → lil-gfm | chat | 13.70 | 14.41 | 2.762 | 3.143 | +11.9% | 3.137 | 3.583 | +12.4% |
-| up-gfm → lil-gfm | gfmreadme | 34.23 | 40.70 | 14.095 | 15.290 | +7.5% | 15.855 | 16.570 | +4.6% |
-| up-gfm → lil-gfm | readme | 38.20 | 44.85 | 23.160 | 23.787 | +2.7% | 24.633 | 25.788 | +4.7% |
-| up-gfm → lil-gfm | unified | 62.10 | 65.63 | 44.225 | 46.658 | +5.0% | 48.298 | 48.803 | −0.7% |
-| up-gfm → lil-gfm | spec | 199.48 | 227.23 | 154.473 | 175.858 | +13.4% | 155.925 | 176.820 | +13.3% |
-| up-gfm → lil-gfm | conversation(40) | 16.47 | 18.59 | – | – | – | 13.622 | 15.520 | +15.2% |
-| up-full → lil-upfull | small | 1.95 | 2.21 | 0.430 | 0.435 | −0.6% | 0.505 | 0.485 | −4.0% |
-| up-full → lil-upfull | chat | 12.85 | 15.20 | 2.932 | 2.855 | −2.6% | 3.202 | 2.940 | −9.6% |
-| up-full → lil-upfull | readme | 53.78 | 61.48 | 23.935 | 22.257 | −7.3% | 27.400 | 25.910 | −2.7% |
-| up-full → lil-upfull | math | 49.98 | 41.18 | 21.695 | 16.557 | −25.0% | 28.495 | 22.265 | −21.9% |
-| up-full → lil-upfull | conversation(40) | 22.60 | 23.86 | – | – | – | 17.200 | 19.785 | +15.0% |
-| up-full → lil-full | small | 1.95 | 2.88 | 0.430 | 0.460 | +7.1% | 0.505 | 0.505 | −1.0% |
-| up-full → lil-full | chat | 12.85 | 17.11 | 2.932 | 3.092 | +4.4% | 3.202 | 3.277 | +0.2% |
-| up-full → lil-full | readme | 53.78 | 66.40 | 23.935 | 23.933 | +0.1% | 27.400 | 28.535 | +6.5% |
-| up-full → lil-full | math | 49.98 | 30.57 | 21.695 | 8.273 | −61.9% | 28.495 | 13.850 | −52.6% |
-| up-full → lil-full | conversation(40) | 22.60 | 19.02 | – | – | – | 17.200 | 16.295 | −5.8% |
+| up → lil | small | 1.70 | 1.72 | 0.310 | 0.300 | −3.3% | 0.410 | 0.390 | −4.9% |
+| up → lil | chat | 8.31 | 8.98 | 1.620 | 1.470 | −4.7% | 1.782 | 1.750 | +0.3% |
+| up → lil | gfmreadme | 35.46 | 33.69 | 11.172 | 9.548 | −10.8% | 11.595 | 10.525 | −10.1% |
+| up → lil | readme | 34.07 | 37.69 | 17.432 | 15.255 | −11.8% | 18.710 | 17.062 | −6.9% |
+| up → lil | unified | 55.94 | 54.10 | 33.107 | 30.157 | −10.2% | 37.555 | 33.828 | −8.4% |
+| up → lil | spec | 178.28 | 139.72 | 119.045 | 109.535 | −8.0% | 120.340 | 107.245 | −8.2% |
+| up → lil | conversation(40) | 8.76 | 8.58 | – | – | – | 8.195 | 7.883 | −9.4% |
+| up-gfm → lil-upgfm | small | 2.20 | 2.70 | 0.418 | 0.422 | +1.2% | 0.472 | 0.465 | −0.5% |
+| up-gfm → lil-upgfm | chat | 14.73 | 16.22 | 2.813 | 2.773 | −3.0% | 3.242 | 3.088 | −4.3% |
+| up-gfm → lil-upgfm | gfmreadme | 37.72 | 43.76 | 15.245 | 14.177 | −4.8% | 15.940 | 15.000 | −5.1% |
+| up-gfm → lil-upgfm | readme | 48.25 | 49.44 | 24.385 | 22.182 | −9.0% | 25.247 | 24.818 | −6.5% |
+| up-gfm → lil-upgfm | unified | 84.13 | 70.56 | 45.790 | 45.835 | +1.7% | 50.115 | 45.863 | −10.8% |
+| up-gfm → lil-upgfm | spec | 225.46 | 223.19 | 160.500 | 157.495 | −1.9% | 161.215 | 150.890 | −7.6% |
+| up-gfm → lil-upgfm | conversation(40) | 16.53 | 15.66 | – | – | – | 14.405 | 13.300 | −7.2% |
+| up-gfm → lil-gfm | small | 2.20 | 2.94 | 0.418 | 0.472 | +13.2% | 0.472 | 0.470 | +0.6% |
+| up-gfm → lil-gfm | chat | 14.73 | 15.03 | 2.813 | 2.547 | −9.6% | 3.242 | 2.898 | −9.5% |
+| up-gfm → lil-gfm | gfmreadme | 37.72 | 41.89 | 15.245 | 13.833 | −10.8% | 15.940 | 14.345 | −13.1% |
+| up-gfm → lil-gfm | readme | 48.25 | 53.36 | 24.385 | 21.355 | −13.4% | 25.247 | 24.587 | −7.3% |
+| up-gfm → lil-gfm | unified | 84.13 | 68.03 | 45.790 | 45.627 | −5.1% | 50.115 | 42.930 | −14.2% |
+| up-gfm → lil-gfm | spec | 225.46 | 218.66 | 160.500 | 156.463 | −1.9% | 161.215 | 150.570 | −6.3% |
+| up-gfm → lil-gfm | conversation(40) | 16.53 | 19.64 | – | – | – | 14.405 | 14.752 | −1.6% |
+| up-full → lil-upfull | small | 2.17 | 2.36 | 0.600 | 0.455 | −28.3% | 0.540 | 0.533 | −4.1% |
+| up-full → lil-upfull | chat | 14.53 | 15.06 | 3.153 | 3.310 | +0.2% | 3.398 | 2.977 | −11.9% |
+| up-full → lil-upfull | readme | 64.16 | 56.58 | 24.477 | 22.438 | −6.7% | 28.635 | 27.862 | −9.5% |
+| up-full → lil-upfull | math | 61.52 | 47.55 | 22.358 | 17.590 | −26.1% | 31.230 | 24.825 | −24.3% |
+| up-full → lil-upfull | conversation(40) | 20.69 | 23.83 | – | – | – | 18.660 | 18.055 | −3.2% |
+| up-full → lil-full | small | 2.17 | 2.31 | 0.600 | 0.492 | −30.8% | 0.540 | 0.502 | −4.7% |
+| up-full → lil-full | chat | 14.53 | 16.00 | 3.153 | 2.653 | −17.9% | 3.398 | 2.830 | −16.0% |
+| up-full → lil-full | readme | 64.16 | 70.19 | 24.477 | 22.378 | −7.0% | 28.635 | 28.110 | −1.8% |
+| up-full → lil-full | math | 61.52 | 48.14 | 22.358 | 16.840 | −24.7% | 31.230 | 24.250 | −22.9% |
+| up-full → lil-full | conversation(40) | 20.69 | 23.30 | – | – | – | 18.660 | 19.242 | +5.1% |
 
 ### Rendering, CPU 4× (5 fresh pages per variant; ms, median of per-page medians)
 
 | pair | document | first call up | first call port | pipeline up | pipeline port | Δ | React mount up | React mount port | Δ |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| up → lil | small | 7.55 | 6.36 | 1.400 | 1.365 | −1.8% | 1.725 | 1.920 | +14.0% |
-| up → lil | chat | 33.77 | 36.56 | 9.280 | 8.095 | −14.3% | 7.685 | 7.350 | −3.4% |
-| up → lil | gfmreadme | 114.16 | 119.71 | 43.393 | 39.178 | −9.7% | 50.855 | 45.410 | −12.4% |
-| up → lil | readme | 113.73 | 119.43 | 68.980 | 62.615 | −8.7% | 75.285 | 67.950 | −7.6% |
-| up → lil | unified | 202.72 | 179.08 | 135.473 | 137.990 | −2.2% | 156.195 | 141.615 | −10.2% |
-| up → lil | spec | 592.07 | 510.45 | 462.980 | 405.830 | −12.3% | 472.920 | 433.085 | −7.7% |
-| up → lil | conversation(40) | 44.36 | 38.79 | – | – | – | 40.440 | 33.287 | −13.2% |
-| up-gfm → lil-upgfm | small | 8.84 | 8.85 | 2.240 | 2.115 | −2.7% | 2.540 | 2.685 | +7.6% |
-| up-gfm → lil-upgfm | chat | 55.53 | 55.37 | 12.130 | 11.300 | −6.8% | 13.895 | 12.660 | −8.6% |
-| up-gfm → lil-upgfm | gfmreadme | 148.85 | 149.73 | 60.275 | 56.188 | −9.5% | 65.215 | 62.470 | −3.6% |
-| up-gfm → lil-upgfm | readme | 177.13 | 147.42 | 113.070 | 101.900 | −6.6% | 113.035 | 103.420 | −6.9% |
-| up-gfm → lil-upgfm | unified | 265.66 | 225.57 | 194.355 | 183.580 | −5.5% | 216.345 | 183.325 | −15.1% |
-| up-gfm → lil-upgfm | spec | 827.43 | 765.69 | 628.125 | 583.960 | −7.8% | 743.035 | 661.985 | −7.1% |
-| up-gfm → lil-upgfm | conversation(40) | 74.18 | 72.74 | – | – | – | 66.225 | 66.627 | −0.5% |
-| up-gfm → lil-gfm | small | 8.84 | 9.84 | 2.240 | 1.840 | −16.2% | 2.540 | 2.375 | −6.5% |
-| up-gfm → lil-gfm | chat | 55.53 | 59.37 | 12.130 | 13.995 | +15.4% | 13.895 | 15.020 | +8.1% |
-| up-gfm → lil-gfm | gfmreadme | 148.85 | 155.65 | 60.275 | 64.033 | +6.7% | 65.215 | 72.945 | +7.0% |
-| up-gfm → lil-gfm | readme | 177.13 | 175.61 | 113.070 | 113.550 | −1.5% | 113.035 | 115.730 | +3.3% |
-| up-gfm → lil-gfm | unified | 265.66 | 277.29 | 194.355 | 200.603 | +2.7% | 216.345 | 210.645 | −3.0% |
-| up-gfm → lil-gfm | spec | 827.43 | 951.21 | 628.125 | 810.535 | +28.2% | 743.035 | 799.815 | +8.1% |
-| up-gfm → lil-gfm | conversation(40) | 74.18 | 81.24 | – | – | – | 66.225 | 72.480 | +9.4% |
-| up-full → lil-upfull | small | 8.42 | 9.51 | 2.340 | 2.265 | +4.4% | 2.565 | 2.390 | −6.8% |
-| up-full → lil-upfull | chat | 56.38 | 60.58 | 13.025 | 12.345 | −7.1% | 15.045 | 13.840 | −9.4% |
-| up-full → lil-upfull | readme | 220.49 | 217.83 | 115.735 | 102.250 | −12.8% | 118.315 | 108.180 | −12.2% |
-| up-full → lil-upfull | math | 219.42 | 191.69 | 103.490 | 77.340 | −23.3% | 128.775 | 105.330 | −17.4% |
-| up-full → lil-upfull | conversation(40) | 93.32 | 95.77 | – | – | – | 83.018 | 84.930 | +2.7% |
-| up-full → lil-full | small | 8.42 | 10.73 | 2.340 | 2.530 | +9.8% | 2.565 | 2.625 | +1.8% |
-| up-full → lil-full | chat | 56.38 | 67.86 | 13.025 | 14.865 | +11.4% | 15.045 | 16.595 | +17.2% |
-| up-full → lil-full | readme | 220.49 | 237.25 | 115.735 | 114.430 | −2.1% | 118.315 | 112.915 | −4.7% |
-| up-full → lil-full | math | 219.42 | 134.88 | 103.490 | 37.905 | −61.8% | 128.775 | 57.835 | −54.0% |
-| up-full → lil-full | conversation(40) | 93.32 | 75.66 | – | – | – | 83.018 | 71.050 | −15.0% |
+| up → lil | small | 7.77 | 7.86 | 1.520 | 1.485 | +1.4% | 1.715 | 1.950 | +15.0% |
+| up → lil | chat | 35.23 | 40.39 | 9.745 | 8.810 | −13.7% | 8.440 | 9.335 | +0.4% |
+| up → lil | gfmreadme | 124.03 | 137.28 | 50.517 | 43.665 | −12.9% | 58.030 | 50.500 | −11.0% |
+| up → lil | readme | 131.41 | 136.15 | 79.450 | 73.550 | −6.3% | 86.230 | 84.200 | −2.7% |
+| up → lil | unified | 213.98 | 216.56 | 168.593 | 151.375 | −5.2% | 184.695 | 159.865 | −9.9% |
+| up → lil | spec | 633.35 | 568.42 | 503.080 | 462.540 | −5.4% | 506.795 | 473.585 | −5.6% |
+| up → lil | conversation(40) | 46.32 | 47.47 | – | – | – | 44.340 | 39.748 | −2.4% |
+| up-gfm → lil-upgfm | small | 9.58 | 9.03 | 2.330 | 2.300 | −4.1% | 2.955 | 2.495 | −13.1% |
+| up-gfm → lil-upgfm | chat | 66.93 | 60.36 | 13.515 | 13.100 | +0.8% | 14.775 | 14.645 | −1.9% |
+| up-gfm → lil-upgfm | gfmreadme | 159.79 | 160.27 | 71.282 | 65.250 | −4.9% | 81.800 | 74.985 | −10.2% |
+| up-gfm → lil-upgfm | readme | 172.35 | 170.68 | 125.330 | 118.150 | −5.6% | 126.350 | 128.990 | +2.0% |
+| up-gfm → lil-upgfm | unified | 282.33 | 284.95 | 237.900 | 218.252 | −12.8% | 245.615 | 221.845 | −9.3% |
+| up-gfm → lil-upgfm | spec | 933.91 | 869.55 | 685.115 | 648.380 | −5.2% | 799.905 | 756.815 | −5.3% |
+| up-gfm → lil-upgfm | conversation(40) | 77.22 | 83.02 | – | – | – | 75.443 | 74.617 | +1.1% |
+| up-gfm → lil-gfm | small | 9.58 | 10.13 | 2.330 | 2.385 | +0.6% | 2.955 | 2.425 | −20.9% |
+| up-gfm → lil-gfm | chat | 66.93 | 64.52 | 13.515 | 11.930 | −13.2% | 14.775 | 14.550 | +0.1% |
+| up-gfm → lil-gfm | gfmreadme | 159.79 | 162.83 | 71.282 | 63.822 | −11.4% | 81.800 | 72.325 | −15.4% |
+| up-gfm → lil-gfm | readme | 172.35 | 166.13 | 125.330 | 110.850 | −12.1% | 126.350 | 122.370 | −3.6% |
+| up-gfm → lil-gfm | unified | 282.33 | 274.50 | 237.900 | 201.530 | −13.4% | 245.615 | 225.130 | −13.0% |
+| up-gfm → lil-gfm | spec | 933.91 | 866.51 | 685.115 | 644.730 | −7.2% | 799.905 | 713.980 | −12.0% |
+| up-gfm → lil-gfm | conversation(40) | 77.22 | 77.94 | – | – | – | 75.443 | 74.375 | −1.8% |
+| up-full → lil-upfull | small | 11.39 | 11.20 | 2.615 | 2.480 | −6.9% | 3.125 | 2.725 | −17.3% |
+| up-full → lil-upfull | chat | 67.01 | 69.28 | 15.910 | 14.385 | −9.4% | 19.355 | 17.115 | −13.7% |
+| up-full → lil-upfull | readme | 247.14 | 249.31 | 130.660 | 121.475 | −8.7% | 139.465 | 136.040 | −2.0% |
+| up-full → lil-upfull | math | 252.97 | 212.20 | 114.805 | 88.773 | −21.1% | 143.875 | 115.655 | −18.6% |
+| up-full → lil-upfull | conversation(40) | 100.36 | 104.63 | – | – | – | 93.807 | 93.638 | +0.7% |
+| up-full → lil-full | small | 11.39 | 12.79 | 2.615 | 2.390 | −9.7% | 3.125 | 2.700 | −13.7% |
+| up-full → lil-full | chat | 67.01 | 62.20 | 15.910 | 13.445 | −16.6% | 19.355 | 15.230 | −25.7% |
+| up-full → lil-full | readme | 247.14 | 227.53 | 130.660 | 111.310 | −14.8% | 139.465 | 124.660 | −16.7% |
+| up-full → lil-full | math | 252.97 | 207.19 | 114.805 | 89.355 | −23.3% | 143.875 | 119.590 | −16.5% |
+| up-full → lil-full | conversation(40) | 100.36 | 109.73 | – | – | – | 93.807 | 90.852 | −4.2% |
 
 ### Streaming (re-render the growing message every 12 characters; ms)
 
 | CPU | stream | pair | upstream / port |  |  |  |
 |---|---:|---:|---:|---:|---:|---:|
-| 1× | chat (277 updates) | up → lil | total 225 / 210 (−7.5%) | p95 1.57 / 1.41 | last 1.54 / 1.33 | >16.7ms 0 / 0 |
-| 1× | chat (277 updates) | up-gfm → lil-upgfm | total 383 / 370 (−4.8%) | p95 2.75 / 2.45 | last 2.75 / 2.46 | >16.7ms 0 / 0 |
-| 1× | chat (277 updates) | up-gfm → lil-gfm | total 383 / 418 (+10.4%) | p95 2.75 / 2.96 | last 2.75 / 2.96 | >16.7ms 0 / 0 |
-| 1× | chat (277 updates) | up-full → lil-upfull | total 428 / 431 (+1.0%) | p95 3.07 / 2.91 | last 2.95 / 2.95 | >16.7ms 0 / 0 |
-| 1× | chat (277 updates) | up-full → lil-full | total 428 / 436 (+1.6%) | p95 3.07 / 3.08 | last 2.95 / 3.14 | >16.7ms 0 / 0 |
-| 1× | long (834 updates) | up → lil | total 3,660 / 3,181 (−13.7%) | p95 7.60 / 6.63 | last 8.16 / 6.55 | >16.7ms 0 / 0 |
-| 1× | long (834 updates) | up-gfm → lil-upgfm | total 5,346 / 4,855 (−9.7%) | p95 11.91 / 10.52 | last 11.27 / 11.04 | >16.7ms 3 / 1 |
-| 1× | long (834 updates) | up-gfm → lil-gfm | total 5,346 / 5,711 (+5.8%) | p95 11.91 / 12.57 | last 11.27 / 11.93 | >16.7ms 3 / 3 |
-| 1× | long (834 updates) | up-full → lil-upfull | total 5,595 / 5,525 (−2.1%) | p95 12.30 / 12.09 | last 11.55 / 11.16 | >16.7ms 3 / 3 |
-| 1× | long (834 updates) | up-full → lil-full | total 5,595 / 5,800 (+3.7%) | p95 12.30 / 12.55 | last 11.55 / 13.68 | >16.7ms 3 / 5 |
+| 1× | chat (277 updates) | up → lil | total 256 / 237 (−7.7%) | p95 1.78 / 1.70 | last 1.59 / 1.49 | >16.7ms 0 / 0 |
+| 1× | chat (277 updates) | up-gfm → lil-upgfm | total 422 / 372 (−12.2%) | p95 3.05 / 2.72 | last 2.73 / 2.48 | >16.7ms 0 / 0 |
+| 1× | chat (277 updates) | up-gfm → lil-gfm | total 422 / 369 (−8.4%) | p95 3.05 / 2.77 | last 2.73 / 2.36 | >16.7ms 0 / 0 |
+| 1× | chat (277 updates) | up-full → lil-upfull | total 465 / 406 (−12.7%) | p95 3.20 / 2.92 | last 3.10 / 2.92 | >16.7ms 0 / 0 |
+| 1× | chat (277 updates) | up-full → lil-full | total 465 / 441 (−6.2%) | p95 3.20 / 3.02 | last 3.10 / 2.76 | >16.7ms 0 / 0 |
+| 1× | long (834 updates) | up → lil | total 3,850 / 3,507 (−8.4%) | p95 8.34 / 7.34 | last 8.33 / 8.16 | >16.7ms 0 / 0 |
+| 1× | long (834 updates) | up-gfm → lil-upgfm | total 5,839 / 5,321 (−7.0%) | p95 13.28 / 12.09 | last 12.17 / 11.53 | >16.7ms 10 / 6 |
+| 1× | long (834 updates) | up-gfm → lil-gfm | total 5,839 / 5,101 (−9.9%) | p95 13.28 / 11.26 | last 12.17 / 10.06 | >16.7ms 10 / 3 |
+| 1× | long (834 updates) | up-full → lil-upfull | total 5,832 / 5,711 (−3.6%) | p95 13.15 / 12.86 | last 13.00 / 11.39 | >16.7ms 10 / 9 |
+| 1× | long (834 updates) | up-full → lil-full | total 5,832 / 5,726 (−8.5%) | p95 13.15 / 12.58 | last 13.00 / 11.88 | >16.7ms 10 / 9 |
 | 1× | chat-realtime-30ms | up → lil | frames>33ms 0 / 0 | p95 frame 16.7 / 16.7 | max frame 16.7 / 16.7 |  |
 | 1× | chat-realtime-30ms | up-gfm → lil-upgfm | frames>33ms 0 / 0 | p95 frame 16.7 / 16.7 | max frame 16.7 / 16.7 |  |
 | 1× | chat-realtime-30ms | up-gfm → lil-gfm | frames>33ms 0 / 0 | p95 frame 16.7 / 16.7 | max frame 16.7 / 16.7 |  |
 | 1× | chat-realtime-30ms | up-full → lil-upfull | frames>33ms 0 / 0 | p95 frame 16.7 / 16.7 | max frame 16.7 / 16.7 |  |
 | 1× | chat-realtime-30ms | up-full → lil-full | frames>33ms 0 / 0 | p95 frame 16.7 / 16.7 | max frame 16.7 / 16.7 |  |
-| 4× | chat (277 updates) | up → lil | total 1,009 / 905 (−9.3%) | p95 7.04 / 6.45 | last 6.69 / 5.86 | >16.7ms 0 / 0 |
-| 4× | chat (277 updates) | up-gfm → lil-upgfm | total 1,690 / 1,585 (−6.2%) | p95 12.34 / 10.88 | last 11.86 / 11.28 | >16.7ms 1 / 0 |
-| 4× | chat (277 updates) | up-gfm → lil-gfm | total 1,690 / 1,873 (+9.7%) | p95 12.34 / 13.32 | last 11.86 / 14.59 | >16.7ms 1 / 2 |
-| 4× | chat (277 updates) | up-full → lil-upfull | total 1,918 / 1,867 (−2.9%) | p95 13.42 / 12.83 | last 12.51 / 12.49 | >16.7ms 4 / 2 |
-| 4× | chat (277 updates) | up-full → lil-full | total 1,918 / 1,985 (+2.1%) | p95 13.42 / 14.03 | last 12.51 / 13.22 | >16.7ms 4 / 1 |
+| 4× | chat (277 updates) | up → lil | total 1,127 / 1,018 (−8.5%) | p95 8.07 / 6.84 | last 8.98 / 6.09 | >16.7ms 0 / 0 |
+| 4× | chat (277 updates) | up-gfm → lil-upgfm | total 1,883 / 1,822 (−5.1%) | p95 13.57 / 13.14 | last 12.77 / 11.97 | >16.7ms 3 / 2 |
+| 4× | chat (277 updates) | up-gfm → lil-gfm | total 1,883 / 1,690 (−9.2%) | p95 13.57 / 12.50 | last 12.77 / 11.21 | >16.7ms 3 / 4 |
+| 4× | chat (277 updates) | up-full → lil-upfull | total 2,178 / 2,051 (−6.8%) | p95 15.77 / 14.53 | last 15.05 / 12.28 | >16.7ms 7 / 3 |
+| 4× | chat (277 updates) | up-full → lil-full | total 2,178 / 1,854 (−14.7%) | p95 15.77 / 12.64 | last 15.05 / 12.10 | >16.7ms 7 / 1 |
 
 ## firefox 153.0
 
-### Page load, desktop (20 fresh loads per variant; median)
+### Page load, desktop (8 fresh loads per variant; median)
 
 | variant | markdown on screen (ms) | Δ vs no-markdown app | JS execution (ms) | heap after GC (MB) | JS transferred (B) |
 |---|---:|---:|---:|---:|---:|
-| none | 130.0 | – | – | – | 52,250 |
-| up | 244.7 | 114.7 | – | – | 82,434 |
-| lil | 240.7 | 110.7 | – | – | 78,087 |
-| up-gfm | 273.1 | 143.1 | – | – | 91,291 |
-| lil-upgfm | 265.6 | 135.6 | – | – | 88,356 |
-| lil-gfm | 289.3 | 159.3 | – | – | 87,588 |
-| up-full | 311.5 | 181.5 | – | – | 157,537 |
-| lil-upfull | 307.6 | 177.6 | – | – | 158,791 |
-| lil-full | 320.9 | 190.9 | – | – | 158,844 |
+| none | 129.0 | – | – | – | 52,250 |
+| up | 258.9 | 129.8 | – | – | 82,434 |
+| lil | 277.5 | 148.5 | – | – | 79,304 |
+| up-gfm | 288.9 | 159.8 | – | – | 91,291 |
+| lil-upgfm | 281.7 | 152.6 | – | – | 89,438 |
+| lil-gfm | 286.0 | 156.9 | – | – | 88,332 |
+| up-full | 333.1 | 204.0 | – | – | 157,537 |
+| lil-upfull | 311.9 | 182.8 | – | – | 159,768 |
+| lil-full | 311.1 | 182.0 | – | – | 159,972 |
 
 | pair (same-round) | median Δ on-screen (ms) | port faster in | median Δ JS execution (ms) |
 |---|---:|---:|---:|
-| up → lil | -6.9 | 13/20 | – |
-| up-gfm → lil-upgfm | -5.5 | 14/20 | – |
-| up-gfm → lil-gfm | 13.0 | 6/20 | – |
-| up-full → lil-upfull | -1.8 | 11/20 | – |
-| up-full → lil-full | 4.2 | 9/20 | – |
+| up → lil | 12.1 | 3/8 | – |
+| up-gfm → lil-upgfm | -4.1 | 5/8 | – |
+| up-gfm → lil-gfm | -19.3 | 5/8 | – |
+| up-full → lil-upfull | 2.0 | 3/8 | – |
+| up-full → lil-full | -8.7 | 5/8 | – |
 
 ### Rendering, CPU 1× (5 fresh pages per variant; ms, median of per-page medians)
 
 | pair | document | first call up | first call port | pipeline up | pipeline port | Δ | React mount up | React mount port | Δ |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| up → lil | small | 4.26 | 4.60 | 0.400 | 0.400 | −2.5% | 0.560 | 0.570 | +0.0% |
-| up → lil | chat | 12.74 | 12.72 | 2.530 | 2.360 | −9.1% | 2.960 | 2.700 | −9.8% |
-| up → lil | gfmreadme | 50.32 | 52.46 | 18.370 | 17.080 | −7.3% | 20.600 | 19.940 | +2.4% |
-| up → lil | readme | 52.74 | 49.42 | 28.050 | 26.130 | −5.4% | 33.360 | 29.130 | −7.1% |
-| up → lil | unified | 82.66 | 83.24 | 55.470 | 50.250 | −11.8% | 65.370 | 55.660 | −9.6% |
-| up → lil | spec | 245.76 | 223.76 | 188.680 | 174.020 | −10.1% | 204.660 | 192.480 | −9.8% |
-| up → lil | conversation(40) | 19.94 | 17.96 | – | – | – | 16.180 | 13.340 | −9.5% |
-| up-gfm → lil-upgfm | small | 4.00 | 4.74 | 0.600 | 0.580 | −3.3% | 0.740 | 0.720 | −2.7% |
-| up-gfm → lil-upgfm | chat | 19.44 | 19.22 | 4.040 | 3.760 | −6.9% | 4.570 | 4.420 | −2.6% |
-| up-gfm → lil-upgfm | gfmreadme | 55.16 | 53.52 | 22.880 | 21.980 | −2.8% | 23.000 | 24.280 | +6.8% |
-| up-gfm → lil-upgfm | readme | 64.02 | 57.80 | 36.070 | 34.520 | −7.2% | 40.360 | 38.880 | −3.7% |
-| up-gfm → lil-upgfm | unified | 96.78 | 99.60 | 72.180 | 67.500 | −10.4% | 75.450 | 72.630 | −6.8% |
-| up-gfm → lil-upgfm | spec | 296.34 | 288.78 | 252.110 | 236.190 | −3.4% | 267.140 | 258.900 | −0.8% |
-| up-gfm → lil-upgfm | conversation(40) | 31.86 | 29.64 | – | – | – | 24.530 | 22.450 | −8.5% |
-| up-gfm → lil-gfm | small | 4.00 | 4.38 | 0.600 | 0.670 | +11.7% | 0.740 | 0.800 | +8.3% |
-| up-gfm → lil-gfm | chat | 19.44 | 22.80 | 4.040 | 4.860 | +20.6% | 4.570 | 5.570 | +20.8% |
-| up-gfm → lil-gfm | gfmreadme | 55.16 | 63.52 | 22.880 | 27.270 | +13.9% | 23.000 | 29.200 | +25.2% |
-| up-gfm → lil-gfm | readme | 64.02 | 67.40 | 36.070 | 45.160 | +33.8% | 40.360 | 48.510 | +20.9% |
-| up-gfm → lil-gfm | unified | 96.78 | 110.84 | 72.180 | 84.590 | +20.5% | 75.450 | 92.420 | +21.8% |
-| up-gfm → lil-gfm | spec | 296.34 | 382.80 | 252.110 | 330.390 | +33.3% | 267.140 | 352.980 | +32.1% |
-| up-gfm → lil-gfm | conversation(40) | 31.86 | 46.10 | – | – | – | 24.530 | 25.600 | +7.7% |
-| up-full → lil-upfull | small | 4.76 | 4.24 | 0.700 | 0.700 | −2.9% | 0.840 | 0.820 | −4.8% |
-| up-full → lil-upfull | chat | 21.16 | 23.72 | 4.400 | 4.300 | −3.1% | 4.580 | 4.530 | −0.7% |
-| up-full → lil-upfull | readme | 81.10 | 90.80 | 40.140 | 38.700 | −3.9% | 41.990 | 41.240 | −3.1% |
-| up-full → lil-upfull | math | 63.52 | 55.66 | 25.300 | 21.470 | −18.1% | 38.960 | 33.840 | −12.6% |
-| up-full → lil-upfull | conversation(40) | 32.32 | 31.26 | – | – | – | 26.680 | 25.450 | −2.9% |
-| up-full → lil-full | small | 4.76 | 4.58 | 0.700 | 0.760 | +6.7% | 0.840 | 0.840 | +4.4% |
-| up-full → lil-full | chat | 21.16 | 23.36 | 4.400 | 5.030 | +12.9% | 4.580 | 5.180 | +13.1% |
-| up-full → lil-full | readme | 81.10 | 87.26 | 40.140 | 44.170 | +8.6% | 41.990 | 44.780 | +6.6% |
-| up-full → lil-full | math | 63.52 | 41.36 | 25.300 | 10.740 | −57.4% | 38.960 | 21.080 | −45.9% |
-| up-full → lil-full | conversation(40) | 32.32 | 27.44 | – | – | – | 26.680 | 25.260 | −1.8% |
+| up → lil | small | 4.42 | 4.64 | 0.420 | 0.400 | +0.0% | 0.560 | 0.560 | −3.4% |
+| up → lil | chat | 13.80 | 14.26 | 2.560 | 2.420 | −5.1% | 3.250 | 2.760 | −12.0% |
+| up → lil | gfmreadme | 52.10 | 51.58 | 19.130 | 18.450 | −3.6% | 22.120 | 20.560 | −2.5% |
+| up → lil | readme | 52.60 | 53.74 | 30.040 | 26.740 | −11.8% | 33.600 | 31.080 | −0.8% |
+| up → lil | unified | 81.02 | 89.96 | 58.430 | 55.510 | −4.2% | 67.640 | 61.900 | −10.1% |
+| up → lil | spec | 241.40 | 250.88 | 205.280 | 186.180 | −10.8% | 217.040 | 200.900 | −9.4% |
+| up → lil | conversation(40) | 21.28 | 19.38 | – | – | – | 15.400 | 14.780 | −14.9% |
+| up-gfm → lil-upgfm | small | 4.30 | 4.90 | 0.620 | 0.610 | −1.6% | 0.780 | 0.760 | −2.6% |
+| up-gfm → lil-upgfm | chat | 21.58 | 23.92 | 4.140 | 3.860 | −6.8% | 4.850 | 4.680 | −4.8% |
+| up-gfm → lil-upgfm | gfmreadme | 61.54 | 67.06 | 25.310 | 22.880 | −6.7% | 25.940 | 25.260 | −3.5% |
+| up-gfm → lil-upgfm | readme | 67.36 | 64.90 | 39.990 | 38.360 | −5.0% | 43.150 | 41.410 | −4.0% |
+| up-gfm → lil-upgfm | unified | 106.68 | 104.16 | 75.350 | 69.560 | −8.3% | 77.140 | 77.350 | −2.2% |
+| up-gfm → lil-upgfm | spec | 319.70 | 308.38 | 261.160 | 258.590 | +0.8% | 274.400 | 269.020 | +1.3% |
+| up-gfm → lil-upgfm | conversation(40) | 32.14 | 28.80 | – | – | – | 24.670 | 23.650 | −6.3% |
+| up-gfm → lil-gfm | small | 4.30 | 5.06 | 0.620 | 0.620 | +3.3% | 0.780 | 0.740 | +0.0% |
+| up-gfm → lil-gfm | chat | 21.58 | 25.26 | 4.140 | 4.030 | −1.4% | 4.850 | 4.530 | −6.6% |
+| up-gfm → lil-gfm | gfmreadme | 61.54 | 65.06 | 25.310 | 23.070 | −7.3% | 25.940 | 25.400 | −4.3% |
+| up-gfm → lil-gfm | readme | 67.36 | 67.84 | 39.990 | 36.030 | −8.1% | 43.150 | 41.550 | +0.4% |
+| up-gfm → lil-gfm | unified | 106.68 | 112.20 | 75.350 | 70.410 | −10.1% | 77.140 | 76.310 | −1.3% |
+| up-gfm → lil-gfm | spec | 319.70 | 329.18 | 261.160 | 254.870 | −2.8% | 274.400 | 266.640 | −4.1% |
+| up-gfm → lil-gfm | conversation(40) | 32.14 | 33.62 | – | – | – | 24.670 | 21.590 | −13.3% |
+| up-full → lil-upfull | small | 3.94 | 4.80 | 0.720 | 0.700 | −2.8% | 0.860 | 0.820 | −2.4% |
+| up-full → lil-upfull | chat | 20.12 | 26.86 | 4.460 | 4.500 | −1.6% | 4.690 | 4.690 | −1.6% |
+| up-full → lil-upfull | readme | 88.86 | 100.96 | 40.770 | 40.260 | +0.4% | 44.440 | 42.540 | −2.7% |
+| up-full → lil-upfull | math | 64.30 | 58.72 | 27.190 | 22.440 | −16.3% | 40.000 | 35.480 | −13.6% |
+| up-full → lil-upfull | conversation(40) | 33.70 | 31.64 | – | – | – | 26.380 | 26.530 | −0.9% |
+| up-full → lil-full | small | 3.94 | 4.46 | 0.720 | 0.680 | −5.6% | 0.860 | 0.820 | −2.5% |
+| up-full → lil-full | chat | 20.12 | 22.04 | 4.460 | 4.330 | −4.7% | 4.690 | 4.580 | −1.5% |
+| up-full → lil-full | readme | 88.86 | 94.94 | 40.770 | 38.650 | −2.4% | 44.440 | 41.420 | −1.5% |
+| up-full → lil-full | math | 64.30 | 57.08 | 27.190 | 22.180 | −19.5% | 40.000 | 32.760 | −18.5% |
+| up-full → lil-full | conversation(40) | 33.70 | 34.02 | – | – | – | 26.380 | 25.390 | −4.7% |
 
 ### Streaming (re-render the growing message every 12 characters; ms)
 
 | CPU | stream | pair | upstream / port |  |  |  |
 |---|---:|---:|---:|---:|---:|---:|
-| 1× | chat (277 updates) | up → lil | total 400 / 388 (−3.1%) | p95 2.78 / 2.24 | last 2.48 / 2.20 | >16.7ms 0 / 0 |
-| 1× | chat (277 updates) | up-gfm → lil-upgfm | total 560 / 548 (−2.0%) | p95 3.76 / 3.66 | last 3.76 / 3.56 | >16.7ms 0 / 0 |
-| 1× | chat (277 updates) | up-gfm → lil-gfm | total 560 / 718 (+27.4%) | p95 3.76 / 5.04 | last 3.76 / 4.76 | >16.7ms 0 / 0 |
-| 1× | chat (277 updates) | up-full → lil-upfull | total 619 / 615 (−0.4%) | p95 4.70 / 4.28 | last 4.08 / 4.00 | >16.7ms 0 / 0 |
-| 1× | chat (277 updates) | up-full → lil-full | total 619 / 752 (+19.9%) | p95 4.70 / 6.08 | last 4.08 / 4.96 | >16.7ms 0 / 0 |
-| 1× | long (834 updates) | up → lil | total 5,550 / 5,199 (−5.7%) | p95 11.84 / 10.98 | last 11.30 / 10.80 | >16.7ms 3 / 4 |
-| 1× | long (834 updates) | up-gfm → lil-upgfm | total 7,516 / 7,144 (−5.1%) | p95 16.76 / 15.80 | last 15.88 / 15.26 | >16.7ms 44 / 33 |
-| 1× | long (834 updates) | up-gfm → lil-gfm | total 7,516 / 9,220 (+21.9%) | p95 16.76 / 21.04 | last 15.88 / 19.44 | >16.7ms 44 / 179 |
-| 1× | long (834 updates) | up-full → lil-upfull | total 8,060 / 7,454 (−5.9%) | p95 18.22 / 16.68 | last 16.72 / 15.08 | >16.7ms 76 / 41 |
-| 1× | long (834 updates) | up-full → lil-full | total 8,060 / 9,100 (+16.1%) | p95 18.22 / 20.44 | last 16.72 / 18.80 | >16.7ms 76 / 168 |
-| 1× | chat-realtime-30ms | up → lil | frames>33ms 0 / 0 | p95 frame 17.1 / 17.1 | max frame 17.1 / 17.1 |  |
-| 1× | chat-realtime-30ms | up-gfm → lil-upgfm | frames>33ms 0 / 0 | p95 frame 17.1 / 17.1 | max frame 17.1 / 17.1 |  |
-| 1× | chat-realtime-30ms | up-gfm → lil-gfm | frames>33ms 0 / 0 | p95 frame 17.1 / 17.1 | max frame 17.1 / 17.2 |  |
-| 1× | chat-realtime-30ms | up-full → lil-upfull | frames>33ms 1 / 1 | p95 frame 17.1 / 17.1 | max frame 66.4 / 67.4 |  |
-| 1× | chat-realtime-30ms | up-full → lil-full | frames>33ms 1 / 0 | p95 frame 17.1 / 17.1 | max frame 66.4 / 17.3 |  |
+| 1× | chat (277 updates) | up → lil | total 401 / 356 (−11.6%) | p95 2.58 / 2.38 | last 2.62 / 2.30 | >16.7ms 0 / 0 |
+| 1× | chat (277 updates) | up-gfm → lil-upgfm | total 627 / 585 (−7.0%) | p95 4.48 / 4.32 | last 4.58 / 3.68 | >16.7ms 0 / 0 |
+| 1× | chat (277 updates) | up-gfm → lil-gfm | total 627 / 539 (−15.5%) | p95 4.48 / 3.78 | last 4.58 / 3.58 | >16.7ms 0 / 0 |
+| 1× | chat (277 updates) | up-full → lil-upfull | total 617 / 610 (−5.9%) | p95 4.90 / 4.34 | last 4.64 / 4.04 | >16.7ms 0 / 0 |
+| 1× | chat (277 updates) | up-full → lil-full | total 617 / 610 (−1.6%) | p95 4.90 / 5.14 | last 4.64 / 4.34 | >16.7ms 0 / 0 |
+| 1× | long (834 updates) | up → lil | total 6,076 / 5,495 (−8.7%) | p95 13.88 / 12.34 | last 12.26 / 10.60 | >16.7ms 9 / 8 |
+| 1× | long (834 updates) | up-gfm → lil-upgfm | total 8,025 / 7,634 (−0.8%) | p95 17.72 / 17.98 | last 16.78 / 16.14 | >16.7ms 59 / 74 |
+| 1× | long (834 updates) | up-gfm → lil-gfm | total 8,025 / 7,744 (−5.2%) | p95 17.72 / 17.08 | last 16.78 / 17.24 | >16.7ms 59 / 48 |
+| 1× | long (834 updates) | up-full → lil-upfull | total 7,986 / 7,707 (−3.5%) | p95 18.08 / 17.92 | last 16.24 / 17.46 | >16.7ms 65 / 54 |
+| 1× | long (834 updates) | up-full → lil-full | total 7,986 / 7,451 (−5.8%) | p95 18.08 / 17.20 | last 16.24 / 15.56 | >16.7ms 65 / 51 |
+| 1× | chat-realtime-30ms | up → lil | frames>33ms 0 / 0 | p95 frame 17.1 / 17.1 | max frame 17.2 / 17.3 |  |
+| 1× | chat-realtime-30ms | up-gfm → lil-upgfm | frames>33ms 0 / 0 | p95 frame 17.1 / 17.1 | max frame 17.3 / 17.4 |  |
+| 1× | chat-realtime-30ms | up-gfm → lil-gfm | frames>33ms 0 / 0 | p95 frame 17.1 / 17.1 | max frame 17.3 / 17.2 |  |
+| 1× | chat-realtime-30ms | up-full → lil-upfull | frames>33ms 1 / 2 | p95 frame 17.1 / 17.1 | max frame 66.4 / 67.5 |  |
+| 1× | chat-realtime-30ms | up-full → lil-full | frames>33ms 1 / 1 | p95 frame 17.1 / 17.1 | max frame 66.4 / 67.5 |  |
 
 ## Differential correctness in the browser (DOM of the production builds)
 
@@ -254,24 +254,24 @@
 | chromium | commonmark | raw | 652 | 0 |
 | chromium | commonmark | components | 652 | 0 |
 | chromium | commonmark | filter | 652 | 0 |
-| chromium | gfm-spec | gfm | 702 | 1 |
+| chromium | gfm-spec | gfm | 702 | 0 |
 | chromium | gfm-spec | gfm-npm-on-port | 702 | 0 |
-| chromium | gfm-spec | gfm-port-on-upstream | 702 | 1 |
-| chromium | gfm-spec | full | 702 | 1 |
+| chromium | gfm-spec | gfm-port-on-upstream | 702 | 0 |
+| chromium | gfm-spec | full | 702 | 0 |
 | chromium | gfm-spec | full-npm-on-port | 702 | 0 |
 | chromium | gfm-spec | raw | 702 | 0 |
 | chromium | entities | core | 91 | 0 |
 | chromium | entities | gfm | 91 | 0 |
-| chromium | fuzz | core | 3000 | 52 |
-| chromium | fuzz | gfm | 3000 | 52 |
-| chromium | fuzz | gfm-npm-on-port | 3000 | 51 |
-| chromium | fuzz | full | 3000 | 49 |
-| chromium | fuzz | raw | 3000 | 51 |
+| chromium | fuzz | core | 3000 | 0 |
+| chromium | fuzz | gfm | 3000 | 0 |
+| chromium | fuzz | gfm-npm-on-port | 3000 | 0 |
+| chromium | fuzz | full | 3000 | 0 |
+| chromium | fuzz | raw | 3000 | 0 |
 | chromium | documents | core | 7 | 0 |
 | chromium | documents | gfm | 7 | 0 |
 | chromium | documents | gfm-npm-on-port | 7 | 0 |
 | chromium | documents | gfm-port-on-upstream | 7 | 0 |
-| chromium | documents | full | 7 | 1 |
+| chromium | documents | full | 7 | 0 |
 | chromium | documents | full-npm-on-port | 7 | 0 |
 | chromium | documents | raw | 7 | 0 |
 | chromium | documents | docsite | 7 | 0 |
@@ -284,24 +284,24 @@
 | firefox | commonmark | raw | 652 | 0 |
 | firefox | commonmark | components | 652 | 0 |
 | firefox | commonmark | filter | 652 | 0 |
-| firefox | gfm-spec | gfm | 702 | 1 |
+| firefox | gfm-spec | gfm | 702 | 0 |
 | firefox | gfm-spec | gfm-npm-on-port | 702 | 0 |
-| firefox | gfm-spec | gfm-port-on-upstream | 702 | 1 |
-| firefox | gfm-spec | full | 702 | 1 |
+| firefox | gfm-spec | gfm-port-on-upstream | 702 | 0 |
+| firefox | gfm-spec | full | 702 | 0 |
 | firefox | gfm-spec | full-npm-on-port | 702 | 0 |
 | firefox | gfm-spec | raw | 702 | 0 |
 | firefox | entities | core | 91 | 0 |
 | firefox | entities | gfm | 91 | 0 |
-| firefox | fuzz | core | 3000 | 52 |
-| firefox | fuzz | gfm | 3000 | 52 |
-| firefox | fuzz | gfm-npm-on-port | 3000 | 51 |
-| firefox | fuzz | full | 3000 | 49 |
-| firefox | fuzz | raw | 3000 | 51 |
+| firefox | fuzz | core | 3000 | 0 |
+| firefox | fuzz | gfm | 3000 | 0 |
+| firefox | fuzz | gfm-npm-on-port | 3000 | 0 |
+| firefox | fuzz | full | 3000 | 0 |
+| firefox | fuzz | raw | 3000 | 0 |
 | firefox | documents | core | 7 | 0 |
 | firefox | documents | gfm | 7 | 0 |
 | firefox | documents | gfm-npm-on-port | 7 | 0 |
 | firefox | documents | gfm-port-on-upstream | 7 | 0 |
-| firefox | documents | full | 7 | 1 |
+| firefox | documents | full | 7 | 0 |
 | firefox | documents | full-npm-on-port | 7 | 0 |
 | firefox | documents | raw | 7 | 0 |
 | firefox | documents | docsite | 7 | 0 |
@@ -312,9 +312,9 @@
 
 | set | documents | mismatches | gone when non-ASCII whitespace is replaced | other |
 |---|---:|---:|---:|---:|
-| core | 20000 | 2232 | 2200 | 32 |
-| npm remark-gfm + remark-math on both | 20000 | 2083 | 2055 | 28 |
-| @itslil/remark-gfm + remark-math (npm) | 20000 | 2108 | 2056 | 52 |
+| core | 20000 | 0 | 0 | 0 |
+| npm remark-gfm + remark-math on both | 20000 | 0 | 0 | 0 |
+| @itslil/remark-gfm + remark-math (npm) | 20000 | 0 | 0 | 0 |
 
 ## Export conditions without a DOM
 
@@ -323,13 +323,13 @@
 | node (import) | upstream | OK <p>© Æ ∉ &amp;</p> | decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js |
 | node (import) | port | OK <p>© Æ ∉ &amp;</p> | @itslil/react-markdown/dist/react-markdown.esm.js |
 | cloudflare workers (wrangler) | upstream | OK <p>© Æ ∉ &amp;</p> | decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js |
-| cloudflare workers (wrangler) | port | OK <p>© Æ ∉ &amp;</p> | @itslil/react-markdown/dist/react-markdown.esm.js |
-| next.js edge runtime | upstream | OK <p>© Æ ∉ &amp;</p> | decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js |
-| next.js edge runtime | port | OK <p>© Æ ∉ &amp;</p> | @itslil/react-markdown/dist/react-markdown.esm.js |
+| cloudflare workers (wrangler) | port | OK <p>© Æ ∉ &amp;</p> | @itslil/react-markdown/dist/react-markdown.worker.js |
+| next.js / vercel edge | upstream | OK <p>© Æ ∉ &amp;</p> | decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js |
+| next.js / vercel edge | port | OK <p>© Æ ∉ &amp;</p> | @itslil/react-markdown/dist/react-markdown.worker.js |
 | deno | upstream | OK <p>© Æ ∉ &amp;</p> | decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js |
 | deno | port | OK <p>© Æ ∉ &amp;</p> | @itslil/react-markdown/dist/react-markdown.esm.js |
 | react-native (metro) | upstream | OK <p>© Æ ∉ &amp;</p> | decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js |
-| react-native (metro) | port | OK <p>© Æ ∉ &amp;</p> | @itslil/react-markdown/dist/react-markdown.esm.js |
+| react-native (metro) | port | OK <p>© Æ ∉ &amp;</p> | @itslil/react-markdown/dist/react-markdown.worker.js |
 | browser bundle (vite/webpack prod) | upstream | CRASH document is not defined | decode-named-character-reference/index.dom.js, react-markdown/lib/index.js, react-markdown/index.js |
 | browser bundle (vite/webpack prod) | port | CRASH document is not defined | @itslil/react-markdown/dist/react-markdown.browser.js |
 
@@ -337,27 +337,27 @@
 
 | variant | document | parse (micromark + mdast) | mdast → hast | hast → React elements | GC share | allocated per README render |
 |---|---|---:|---:|---:|---:|---:|
-| up | chat | 1.68 | 0.14 | 0.15 |  |  |
-| up | readme | 14.71 | 1.16 | 1.21 | 2.1% | 13.52 MB |
-| up | spec | 89.50 | 4.99 | 6.66 |  |  |
-| lil | chat | 1.49 | 0.08 | 0.06 |  |  |
-| lil | readme | 14.40 | 0.48 | 0.42 | 2.3% | 11.79 MB |
-| lil | spec | 90.12 | 1.89 | 2.18 |  |  |
-| up-gfm | chat | 2.64 | 0.17 | 0.23 |  |  |
-| up-gfm | readme | 21.59 | 1.18 | 1.25 | 2.7% | 17.19 MB |
-| up-gfm | spec | 136.58 | 4.11 | 6.89 |  |  |
-| lil-upgfm | chat | 2.63 | 0.10 | 0.10 |  |  |
-| lil-upgfm | readme | 22.36 | 0.50 | 0.46 | 2.5% | 15.29 MB |
-| lil-upgfm | spec | 129.12 | 1.59 | 2.51 |  |  |
-| lil-gfm | chat | 3.06 | 0.09 | 0.09 |  |  |
-| lil-gfm | readme | 22.75 | 0.48 | 0.44 | 3.3% | 19.74 MB |
-| lil-gfm | spec | 170.43 | 1.53 | 2.45 |  |  |
-| up-full | chat | 2.55 | 0.30 | 0.23 |  |  |
-| up-full | readme | 21.33 | 1.98 | 1.26 | 2.5% | 17.56 MB |
-| up-full | spec | 134.11 | 8.91 | 6.62 |  |  |
-| lil-upfull | chat | 2.58 | 0.24 | 0.10 |  |  |
-| lil-upfull | readme | 20.44 | 1.36 | 0.45 | 2.5% | 15.75 MB |
-| lil-upfull | spec | 131.18 | 6.54 | 2.44 |  |  |
-| lil-full | chat | 3.17 | 0.11 | 0.10 |  |  |
-| lil-full | readme | 23.27 | 0.56 | 0.45 | 3.6% | 19.90 MB |
-| lil-full | spec | 171.84 | 1.87 | 2.40 |  |  |
+| up | chat | 1.61 | 0.16 | 0.16 |  |  |
+| up | readme | 17.89 | 1.37 | 1.34 | 2.3% | 13.60 MB |
+| up | spec | 105.68 | 5.66 | 7.40 |  |  |
+| lil | chat | 1.66 | 0.08 | 0.06 |  |  |
+| lil | readme | 18.97 | 0.60 | 0.47 | 2.2% | 12.15 MB |
+| lil | spec | 105.66 | 2.55 | 2.38 |  |  |
+| up-gfm | chat | 3.07 | 0.18 | 0.25 |  |  |
+| up-gfm | readme | 23.06 | 1.25 | 1.36 | 2.8% | 17.18 MB |
+| up-gfm | spec | 151.06 | 5.05 | 8.39 |  |  |
+| lil-upgfm | chat | 2.92 | 0.09 | 0.10 |  |  |
+| lil-upgfm | readme | 22.17 | 0.54 | 0.48 | 2.3% | 15.61 MB |
+| lil-upgfm | spec | 147.98 | 1.85 | 2.55 |  |  |
+| lil-gfm | chat | 2.78 | 0.11 | 0.11 |  |  |
+| lil-gfm | readme | 23.58 | 0.63 | 0.48 | 2.7% | 15.34 MB |
+| lil-gfm | spec | 144.13 | 2.10 | 2.79 |  |  |
+| up-full | chat | 3.13 | 0.36 | 0.25 |  |  |
+| up-full | readme | 24.48 | 2.11 | 1.30 | 2.5% | 17.45 MB |
+| up-full | spec | 145.75 | 10.04 | 7.50 |  |  |
+| lil-upfull | chat | 2.95 | 0.28 | 0.11 |  |  |
+| lil-upfull | readme | 25.18 | 1.54 | 0.49 | 2.7% | 16.03 MB |
+| lil-upfull | spec | 151.59 | 6.82 | 2.82 |  |  |
+| lil-full | chat | 3.18 | 0.35 | 0.13 |  |  |
+| lil-full | readme | 23.03 | 1.41 | 0.47 | 2.9% | 15.85 MB |
+| lil-full | spec | 143.99 | 6.75 | 2.77 |  |  |

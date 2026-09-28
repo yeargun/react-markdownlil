@@ -4,17 +4,17 @@
   "firefox": "Firefox 153.0",
   "cards": [
     {
-      "value": "−4.3 KB",
+      "value": "−3.1 KB",
       "label": "JavaScript the app ships, Brotli-11 (react-markdown alone)",
       "state": "win"
     },
     {
-      "value": "−13.2%",
+      "value": "−12.5%",
       "label": "render time, react-markdown's README, warm (Chromium)",
       "state": "win"
     },
     {
-      "value": "−13.1%",
+      "value": "−8.9%",
       "label": "main-thread time streaming a 10 KB answer (Chromium)",
       "state": "win"
     },
@@ -56,12 +56,12 @@
         ],
         [
           "@itslil/react-markdown",
-          "282,260",
-          "89,957",
-          "77,787",
-          "25,837",
+          "285,640",
+          "91,293",
+          "79,004",
+          "27,054",
           {
-            "text": "−4,347 B (−14.4% of what markdown adds)",
+            "text": "−3,130 B (−10.4% of what markdown adds)",
             "state": "win"
           }
         ],
@@ -75,23 +75,23 @@
         ],
         [
           "@itslil/react-markdown + remark-gfm (npm)",
-          "323,962",
-          "101,823",
-          "88,056",
-          "36,106",
+          "327,396",
+          "103,171",
+          "89,138",
+          "37,188",
           {
-            "text": "−2,935 B (−7.5% of what markdown adds)",
+            "text": "−1,853 B (−4.7% of what markdown adds)",
             "state": "win"
           }
         ],
         [
-          "@itslil/react-markdown + @itslil/remark-gfm 4.0.2",
-          "315,577",
-          "100,769",
-          "87,288",
-          "35,338",
+          "@itslil/react-markdown + @itslil/remark-gfm 4.0.3",
+          "317,924",
+          "101,738",
+          "88,032",
+          "36,082",
           {
-            "text": "−3,703 B (−9.5% of what markdown adds)",
+            "text": "−2,959 B (−7.6% of what markdown adds)",
             "state": "win"
           }
         ],
@@ -105,23 +105,23 @@
         ],
         [
           "@itslil/react-markdown + the same npm plugins",
-          "621,258",
-          "189,231",
-          "158,491",
-          "106,541",
+          "624,672",
+          "190,643",
+          "159,468",
+          "107,518",
           {
-            "text": "+1,254 B (+1.2% of what markdown adds)",
+            "text": "+2,231 B (+2.1% of what markdown adds)",
             "state": "loss"
           }
         ],
         [
-          "@itslil/react-markdown + @itslil/remark-gfm, remark-math, rehype-katex (4.0.2, 6.0.1, 7.0.2)",
-          "613,103",
-          "188,470",
-          "158,544",
-          "106,594",
+          "@itslil/react-markdown + @itslil/remark-gfm, remark-math, rehype-katex (4.0.3, 6.0.2, 7.0.3)",
+          "617,625",
+          "190,361",
+          "159,672",
+          "107,722",
           {
-            "text": "+1,307 B (+1.2% of what markdown adds)",
+            "text": "+2,435 B (+2.3% of what markdown adds)",
             "state": "loss"
           }
         ]
@@ -143,85 +143,85 @@
       "rows": [
         [
           "App without markdown",
-          "60.7 ms",
+          "64.7 ms",
           "—",
           "—",
-          "877 ms",
+          "882 ms",
           "—",
           "—"
         ],
         [
           "react-markdown alone",
-          "144.8 ms",
-          "145.8 ms",
+          "154.8 ms",
+          "152.5 ms",
           {
-            "text": "+1 ms (faster in 9/12)",
+            "text": "−2 ms (faster in 8/12)",
             "state": "even"
           },
-          "1320 ms",
-          "1306 ms",
+          "1341 ms",
+          "1343 ms",
           {
-            "text": "−14 ms (faster in 7/12)",
+            "text": "+2 ms (faster in 7/12)",
             "state": "even"
           }
         ],
         [
           "+ remark-gfm (npm), drop-in",
-          "161.4 ms",
-          "161.5 ms",
+          "164.4 ms",
+          "176.8 ms",
           {
-            "text": "+0 ms (faster in 7/12)",
-            "state": "even"
+            "text": "+12 ms (faster in 5/12)",
+            "state": "loss"
           },
-          "1408 ms",
-          "1407 ms",
+          "1471 ms",
+          "1454 ms",
           {
-            "text": "−1 ms (faster in 9/12)",
+            "text": "−17 ms (faster in 6/12)",
             "state": "even"
           }
         ],
         [
-          "+ @itslil/remark-gfm 4.0.2",
-          "161.4 ms",
-          "167.5 ms",
+          "+ @itslil/remark-gfm 4.0.3",
+          "164.4 ms",
+          "169.8 ms",
           {
-            "text": "+6 ms (faster in 5/12)",
+            "text": "+5 ms (faster in 5/12)",
             "state": "loss"
           },
-          "1408 ms",
-          "1422 ms",
+          "1471 ms",
+          "1445 ms",
           {
-            "text": "+14 ms (faster in 6/12)",
+            "text": "−26 ms (faster in 6/12)",
             "state": "even"
           }
         ],
         [
           "+ gfm, math, KaTeX (npm), drop-in",
-          "187.6 ms",
-          "194.3 ms",
+          "201.0 ms",
+          "219.0 ms",
           {
-            "text": "+7 ms (faster in 4/12)",
+            "text": "+18 ms (faster in 2/12)",
             "state": "loss"
           },
-          "1873 ms",
-          "1868 ms",
+          "1872 ms",
+          "1887 ms",
           {
-            "text": "−6 ms (faster in 7/12)",
+            "text": "+15 ms (faster in 2/12)",
             "state": "even"
           }
         ],
         [
           "+ @itslil gfm, math, KaTeX (npm builds)",
-          "187.6 ms",
-          "196.1 ms",
+          "201.0 ms",
+          "207.6 ms",
           {
-            "text": "+8 ms (faster in 2/12)",
+            "text": "+7 ms (faster in 4/12)",
             "state": "loss"
           },
-          "1873 ms",
-          "1889 ms",
+          "1872 ms",
+          "1903 ms",
           {
-            "text": "+15 ms (faster in 2/12)",
+            "text": "+30 ms (faster in 5/12)",
             "state": "even"
           }
         ]
@@ -243,91 +243,91 @@
       "rows": [
         [
           "short reply (307 B)",
-          "0.29 ms",
-          "0.29 ms",
+          "0.31 ms",
+          "0.30 ms",
           {
-            "text": "−3.4%",
+            "text": "−3.2%",
             "state": "win"
           },
           "0.41 ms",
-          "0.35 ms",
+          "0.39 ms",
           {
-            "text": "−12.3%",
+            "text": "−4.9%",
             "state": "win"
           }
         ],
         [
           "chat answer (3.3 KB)",
-          "1.53 ms",
-          "1.38 ms",
+          "1.62 ms",
+          "1.47 ms",
           {
             "text": "−9.3%",
             "state": "win"
           },
-          "1.71 ms",
-          "1.55 ms",
+          "1.78 ms",
+          "1.75 ms",
           {
-            "text": "−9.2%",
-            "state": "win"
+            "text": "−1.8%",
+            "state": "even"
           }
         ],
         [
           "remark-gfm's README (15 KB)",
-          "10.7 ms",
-          "9.59 ms",
+          "11.2 ms",
+          "9.55 ms",
           {
-            "text": "−10.5%",
+            "text": "−14.5%",
             "state": "win"
           },
-          "11.1 ms",
-          "10.1 ms",
+          "11.6 ms",
+          "10.5 ms",
           {
-            "text": "−9.7%",
+            "text": "−9.2%",
             "state": "win"
           }
         ],
         [
           "react-markdown's README (26 KB)",
-          "17.0 ms",
-          "14.7 ms",
+          "17.4 ms",
+          "15.3 ms",
           {
-            "text": "−13.2%",
+            "text": "−12.5%",
             "state": "win"
           },
-          "17.9 ms",
-          "16.2 ms",
+          "18.7 ms",
+          "17.1 ms",
           {
-            "text": "−9.2%",
+            "text": "−8.8%",
             "state": "win"
           }
         ],
         [
           "unified's README (49 KB)",
-          "31.9 ms",
-          "27.5 ms",
+          "33.1 ms",
+          "30.2 ms",
           {
-            "text": "−13.8%",
+            "text": "−8.9%",
             "state": "win"
           },
-          "34.7 ms",
-          "31.9 ms",
+          "37.6 ms",
+          "33.8 ms",
           {
-            "text": "−7.9%",
+            "text": "−9.9%",
             "state": "win"
           }
         ],
         [
           "CommonMark spec (205 KB)",
-          "107 ms",
-          "97.6 ms",
+          "119 ms",
+          "110 ms",
           {
-            "text": "−8.5%",
+            "text": "−8.0%",
             "state": "win"
           },
-          "109 ms",
-          "99.2 ms",
+          "120 ms",
+          "107 ms",
           {
-            "text": "−8.7%",
+            "text": "−10.9%",
             "state": "win"
           }
         ],
@@ -336,10 +336,10 @@
           "—",
           "—",
           "—",
-          "7.72 ms",
-          "7.27 ms",
+          "8.20 ms",
+          "7.88 ms",
           {
-            "text": "−5.9%",
+            "text": "−3.8%",
             "state": "win"
           }
         ]
@@ -361,91 +361,91 @@
       "rows": [
         [
           "short reply (307 B)",
-          "1.40 ms",
-          "1.37 ms",
+          "1.52 ms",
+          "1.48 ms",
           {
-            "text": "−2.5%",
+            "text": "−2.3%",
             "state": "win"
           },
-          "1.73 ms",
-          "1.92 ms",
+          "1.72 ms",
+          "1.95 ms",
           {
-            "text": "+11.3%",
+            "text": "+13.7%",
             "state": "loss"
           }
         ],
         [
           "chat answer (3.3 KB)",
-          "9.28 ms",
-          "8.09 ms",
+          "9.74 ms",
+          "8.81 ms",
           {
-            "text": "−12.8%",
+            "text": "−9.6%",
             "state": "win"
           },
-          "7.68 ms",
-          "7.35 ms",
+          "8.44 ms",
+          "9.34 ms",
           {
-            "text": "−4.4%",
-            "state": "win"
+            "text": "+10.6%",
+            "state": "loss"
           }
         ],
         [
           "remark-gfm's README (15 KB)",
-          "43.4 ms",
-          "39.2 ms",
+          "50.5 ms",
+          "43.7 ms",
           {
-            "text": "−9.7%",
+            "text": "−13.6%",
             "state": "win"
           },
-          "50.9 ms",
-          "45.4 ms",
+          "58.0 ms",
+          "50.5 ms",
           {
-            "text": "−10.7%",
+            "text": "−13.0%",
             "state": "win"
           }
         ],
         [
           "react-markdown's README (26 KB)",
-          "69.0 ms",
-          "62.6 ms",
+          "79.5 ms",
+          "73.6 ms",
           {
-            "text": "−9.2%",
+            "text": "−7.4%",
             "state": "win"
           },
-          "75.3 ms",
-          "67.9 ms",
+          "86.2 ms",
+          "84.2 ms",
           {
-            "text": "−9.7%",
+            "text": "−2.4%",
             "state": "win"
           }
         ],
         [
           "unified's README (49 KB)",
-          "135 ms",
-          "138 ms",
+          "169 ms",
+          "151 ms",
           {
-            "text": "+1.9%",
-            "state": "even"
+            "text": "−10.2%",
+            "state": "win"
           },
-          "156 ms",
-          "142 ms",
+          "185 ms",
+          "160 ms",
           {
-            "text": "−9.3%",
+            "text": "−13.4%",
             "state": "win"
           }
         ],
         [
           "CommonMark spec (205 KB)",
+          "503 ms",
           "463 ms",
-          "406 ms",
           {
-            "text": "−12.3%",
+            "text": "−8.1%",
             "state": "win"
           },
-          "473 ms",
-          "433 ms",
+          "507 ms",
+          "474 ms",
           {
-            "text": "−8.4%",
+            "text": "−6.6%",
             "state": "win"
           }
         ],
@@ -454,10 +454,10 @@
           "—",
           "—",
           "—",
-          "40.4 ms",
-          "33.3 ms",
+          "44.3 ms",
+          "39.7 ms",
           {
-            "text": "−17.7%",
+            "text": "−10.4%",
             "state": "win"
           }
         ]
@@ -478,120 +478,120 @@
         [
           "+ remark-gfm (npm), drop-in",
           "chat answer (3.3 KB)",
-          "2.76 ms",
-          "2.69 ms",
+          "2.81 ms",
+          "2.77 ms",
+          {
+            "text": "−1.4%",
+            "state": "even"
+          }
+        ],
+        [
+          "+ remark-gfm (npm), drop-in",
+          "react-markdown's README (26 KB)",
+          "24.4 ms",
+          "22.2 ms",
+          {
+            "text": "−9.0%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ remark-gfm (npm), drop-in",
+          "CommonMark spec (205 KB)",
+          "161 ms",
+          "157 ms",
+          {
+            "text": "−1.9%",
+            "state": "even"
+          }
+        ],
+        [
+          "+ @itslil/remark-gfm 4.0.3",
+          "chat answer (3.3 KB)",
+          "2.81 ms",
+          "2.55 ms",
+          {
+            "text": "−9.4%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ @itslil/remark-gfm 4.0.3",
+          "react-markdown's README (26 KB)",
+          "24.4 ms",
+          "21.4 ms",
+          {
+            "text": "−12.4%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ @itslil/remark-gfm 4.0.3",
+          "CommonMark spec (205 KB)",
+          "161 ms",
+          "156 ms",
           {
             "text": "−2.5%",
             "state": "win"
           }
         ],
         [
-          "+ remark-gfm (npm), drop-in",
-          "react-markdown's README (26 KB)",
-          "23.2 ms",
-          "20.8 ms",
-          {
-            "text": "−10.3%",
-            "state": "win"
-          }
-        ],
-        [
-          "+ remark-gfm (npm), drop-in",
-          "CommonMark spec (205 KB)",
-          "154 ms",
-          "140 ms",
-          {
-            "text": "−9.7%",
-            "state": "win"
-          }
-        ],
-        [
-          "+ @itslil/remark-gfm 4.0.2",
+          "+ gfm, math, KaTeX (npm), drop-in",
           "chat answer (3.3 KB)",
-          "2.76 ms",
-          "3.14 ms",
+          "3.15 ms",
+          "3.31 ms",
           {
-            "text": "+13.8%",
-            "state": "loss"
-          }
-        ],
-        [
-          "+ @itslil/remark-gfm 4.0.2",
-          "react-markdown's README (26 KB)",
-          "23.2 ms",
-          "23.8 ms",
-          {
-            "text": "+2.7%",
-            "state": "loss"
-          }
-        ],
-        [
-          "+ @itslil/remark-gfm 4.0.2",
-          "CommonMark spec (205 KB)",
-          "154 ms",
-          "176 ms",
-          {
-            "text": "+13.8%",
+            "text": "+5.0%",
             "state": "loss"
           }
         ],
         [
           "+ gfm, math, KaTeX (npm), drop-in",
-          "chat answer (3.3 KB)",
-          "2.93 ms",
-          "2.86 ms",
-          {
-            "text": "−2.6%",
-            "state": "win"
-          }
-        ],
-        [
-          "+ gfm, math, KaTeX (npm), drop-in",
           "react-markdown's README (26 KB)",
-          "23.9 ms",
-          "22.3 ms",
+          "24.5 ms",
+          "22.4 ms",
           {
-            "text": "−7.0%",
+            "text": "−8.3%",
             "state": "win"
           }
         ],
         [
           "+ gfm, math, KaTeX (npm), drop-in",
           "math notes (2 KB, 20 formulas)",
-          "21.7 ms",
-          "16.6 ms",
+          "22.4 ms",
+          "17.6 ms",
           {
-            "text": "−23.7%",
+            "text": "−21.3%",
             "state": "win"
           }
         ],
         [
           "+ @itslil gfm, math, KaTeX (npm builds)",
           "chat answer (3.3 KB)",
-          "2.93 ms",
-          "3.09 ms",
+          "3.15 ms",
+          "2.65 ms",
           {
-            "text": "+5.5%",
-            "state": "loss"
+            "text": "−15.9%",
+            "state": "win"
           }
         ],
         [
           "+ @itslil gfm, math, KaTeX (npm builds)",
           "react-markdown's README (26 KB)",
-          "23.9 ms",
-          "23.9 ms",
+          "24.5 ms",
+          "22.4 ms",
           {
-            "text": "−0.0%",
-            "state": "even"
+            "text": "−8.6%",
+            "state": "win"
           }
         ],
         [
           "+ @itslil gfm, math, KaTeX (npm builds)",
           "math notes (2 KB, 20 formulas)",
-          "21.7 ms",
-          "8.27 ms",
+          "22.4 ms",
+          "16.8 ms",
           {
-            "text": "−61.9%",
+            "text": "−24.7%",
             "state": "win"
           }
         ]
@@ -613,68 +613,68 @@
         [
           "react-markdown alone",
           "chat answer, 3.3 KB · 277 updates",
-          "225 ms",
-          "210 ms",
+          "256 ms",
+          "237 ms",
           {
-            "text": "−6.7%",
+            "text": "−7.5%",
             "state": "win"
           },
-          "1.57 / 1.41 ms"
+          "1.78 / 1.70 ms"
         ],
         [
           "react-markdown alone",
           "long answer, 10 KB · 834 updates",
-          "3660 ms",
-          "3181 ms",
+          "3850 ms",
+          "3507 ms",
           {
-            "text": "−13.1%",
+            "text": "−8.9%",
             "state": "win"
           },
-          "7.60 / 6.63 ms"
+          "8.34 / 7.34 ms"
         ],
         [
           "react-markdown alone",
           "chat answer, 3.3 KB · 277 updates · 4× CPU",
-          "1009 ms",
-          "905 ms",
+          "1127 ms",
+          "1018 ms",
           {
-            "text": "−10.3%",
+            "text": "−9.7%",
             "state": "win"
           },
-          "7.04 / 6.45 ms"
+          "8.07 / 6.84 ms"
         ],
         [
           "+ remark-gfm (npm), drop-in",
           "long answer, 10 KB · 834 updates",
-          "5346 ms",
-          "4855 ms",
+          "5839 ms",
+          "5321 ms",
           {
-            "text": "−9.2%",
+            "text": "−8.9%",
             "state": "win"
           },
-          "11.91 / 10.52 ms"
+          "13.28 / 12.09 ms"
         ],
         [
-          "+ @itslil/remark-gfm 4.0.2",
+          "+ @itslil/remark-gfm 4.0.3",
           "long answer, 10 KB · 834 updates",
-          "5346 ms",
-          "5711 ms",
+          "5839 ms",
+          "5101 ms",
           {
-            "text": "+6.8%",
-            "state": "loss"
+            "text": "−12.6%",
+            "state": "win"
           },
-          "11.91 / 12.57 ms"
+          "13.28 / 11.26 ms"
         ],
         [
           "+ gfm, math, KaTeX (npm), drop-in",
           "long answer, 10 KB · 834 updates",
-          "5595 ms",
-          "5525 ms",
+          "5832 ms",
+          "5711 ms",
           {
-            "text": "−1.3%",
-            "state": "even"
+            "text": "−2.1%",
+            "state": "win"
           },
-          "12.30 / 12.09 ms"
+          "13.15 / 12.86 ms"
         ]
       ]
     },
@@ -694,50 +694,50 @@
         [
           "react-markdown",
           "react-markdown's README (26 KB)",
-          "14.7 ms",
-          "1.16 ms",
-          "1.21 ms",
-          "13.5 MB"
+          "17.9 ms",
+          "1.37 ms",
+          "1.34 ms",
+          "13.6 MB"
         ],
         [
           "@itslil/react-markdown",
           "react-markdown's README (26 KB)",
-          "14.4 ms",
-          "0.48 ms",
-          "0.42 ms",
-          "11.8 MB"
+          "19.0 ms",
+          "0.60 ms",
+          "0.47 ms",
+          "12.1 MB"
         ],
         [
           "react-markdown",
           "CommonMark spec (205 KB)",
-          "89.5 ms",
-          "4.99 ms",
-          "6.66 ms",
+          "106 ms",
+          "5.66 ms",
+          "7.40 ms",
           ""
         ],
         [
           "@itslil/react-markdown",
           "CommonMark spec (205 KB)",
-          "90.1 ms",
-          "1.89 ms",
-          "2.18 ms",
+          "106 ms",
+          "2.55 ms",
+          "2.38 ms",
           ""
         ],
         [
           "react-markdown + remark-gfm",
           "react-markdown's README (26 KB)",
-          "21.6 ms",
-          "1.18 ms",
+          "23.1 ms",
           "1.25 ms",
+          "1.36 ms",
           "17.2 MB"
         ],
         [
           "@itslil/react-markdown + remark-gfm",
           "react-markdown's README (26 KB)",
-          "22.4 ms",
-          "0.50 ms",
-          "0.46 ms",
-          "15.3 MB"
+          "22.2 ms",
+          "0.54 ms",
+          "0.48 ms",
+          "15.6 MB"
         ]
       ]
     },
@@ -754,64 +754,64 @@
       "rows": [
         [
           "Markdown on screen, desktop load",
-          "244.7 ms",
-          "240.7 ms",
+          "258.9 ms",
+          "277.5 ms",
           {
-            "text": "−4 ms (faster in 13/20)",
-            "state": "even"
+            "text": "+19 ms (faster in 3/8)",
+            "state": "loss"
           }
         ],
         [
           "Pipeline, chat answer (3.3 KB)",
-          "2.53 ms",
-          "2.36 ms",
+          "2.56 ms",
+          "2.42 ms",
           {
-            "text": "−6.7%",
+            "text": "−5.5%",
             "state": "win"
           }
         ],
         [
           "Pipeline, react-markdown's README (26 KB)",
-          "28.0 ms",
-          "26.1 ms",
+          "30.0 ms",
+          "26.7 ms",
           {
-            "text": "−6.8%",
+            "text": "−11.0%",
             "state": "win"
           }
         ],
         [
           "Pipeline, CommonMark spec (205 KB)",
-          "189 ms",
-          "174 ms",
+          "205 ms",
+          "186 ms",
           {
-            "text": "−7.8%",
+            "text": "−9.3%",
             "state": "win"
           }
         ],
         [
           "Pipeline + remark-gfm, react-markdown's README (26 KB)",
-          "36.1 ms",
-          "34.5 ms",
+          "40.0 ms",
+          "38.4 ms",
           {
-            "text": "−4.3%",
+            "text": "−4.1%",
             "state": "win"
           }
         ],
         [
           "Streaming the 10 KB answer, total",
-          "5550 ms",
-          "5199 ms",
+          "6076 ms",
+          "5495 ms",
           {
-            "text": "−6.3%",
+            "text": "−9.6%",
             "state": "win"
           }
         ],
         [
           "Streaming with remark-gfm, total",
-          "7516 ms",
-          "7144 ms",
+          "8025 ms",
+          "7634 ms",
           {
-            "text": "−5.0%",
+            "text": "−4.9%",
             "state": "win"
           }
         ]
@@ -878,8 +878,8 @@
           "3,000 documents",
           "2 browsers",
           {
-            "text": "52 differ, all explained below",
-            "state": "even"
+            "text": "0 differ",
+            "state": "win"
           }
         ],
         [
@@ -887,8 +887,8 @@
           "20,000 documents",
           "Node",
           {
-            "text": "2,232 differ, all explained below",
-            "state": "even"
+            "text": "0 differ",
+            "state": "win"
           }
         ],
         [
@@ -901,12 +901,12 @@
           }
         ],
         [
-          "@itslil/remark-gfm 4.0.2 (npm), under either component",
-          "GFM spec",
+          "@itslil/remark-gfm 4.0.3 (npm), under either component",
+          "702 examples",
           "2 browsers",
           {
-            "text": "1 example differs",
-            "state": "loss"
+            "text": "0 differ",
+            "state": "win"
           }
         ]
       ]
@@ -914,7 +914,7 @@
     {
       "id": "runtimes",
       "title": "Where it runs without a DOM",
-      "lead": "Each package bundled with the export conditions of the runtime, then run where there is no document. Worker and edge runtimes resolve the build with the entity table, as upstream's decode-named-character-reference does; the browser build decodes through the document.",
+      "lead": "Each package bundled with the export conditions of the runtime, then run where there is no document; the edge row renders under a process whose cwd throws, as Next.js's edge sandbox has. Upstream resolves decode-named-character-reference's table and vfile's shims in worker and edge runtimes and node:path, node:process and node:url under node; the port resolves the build made of the same pair.",
       "columns": [
         "Runtime (conditions)",
         "react-markdown",
@@ -923,7 +923,7 @@
       ],
       "rows": [
         [
-          "Node (import)",
+          "Node (node, import)",
           {
             "text": "renders",
             "state": "win"
@@ -944,10 +944,22 @@
             "text": "renders",
             "state": "win"
           },
-          "dist/react-markdown.esm.js"
+          "dist/react-markdown.worker.js"
         ],
         [
-          "Deno",
+          "Next.js and Vercel edge (edge-light, browser), with the edge process",
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          "dist/react-markdown.worker.js"
+        ],
+        [
+          "Deno (deno, node)",
           {
             "text": "renders",
             "state": "win"
@@ -968,7 +980,7 @@
             "text": "renders",
             "state": "win"
           },
-          "dist/react-markdown.esm.js"
+          "dist/react-markdown.worker.js"
         ]
       ]
     }
@@ -976,31 +988,15 @@
   "lists": [
     {
       "title": "Known differences",
-      "lead": "Every fuzz difference (2,284 of 23,000 documents) has one of the first two causes; none is left unexplained.",
+      "lead": "None in behavior: every case above renders the same (1,354 spec examples, 23,000 fuzz documents, 2,125 named references twice, 5 runtimes). What differs is below.",
       "items": [
         {
-          "title": "A Unicode space in a code-fence language.",
-          "text": "```js title=\"a\" with a non-breaking (or other Unicode) space gives class=\"language-js title=…\" where upstream gives language-js: the port splits the info string at ASCII whitespace, upstream at JavaScript's \\s. Only the class differs (2,242 fuzz documents)."
+          "title": "Size, not behavior: one module, not tree-shakeable.",
+          "text": "An app that imports only defaultUrlTransform ships 30,278 B Brotli with the port and 264 B with upstream."
         },
         {
-          "title": "micromark-core-commonmark 2.0.4 (published 2026-09-26).",
-          "text": "Emphasis next to an underscore or an escaped asterisk (a**_b_**c, foo*_bar_*baz, \\**x**) follows 2.0.3, which this package's source graph pins; a fresh install of react-markdown resolves 2.0.4 (42 fuzz documents, 6 of them with the code-fence difference as well)."
-        },
-        {
-          "title": "One module, not tree-shakeable.",
-          "text": "An app that imports only defaultUrlTransform ships 29,034 B Brotli with the port and 264 B with upstream."
-        },
-        {
-          "title": "KaTeX stacks ship a little more.",
-          "text": "With npm rehype-katex the app is +1,254 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in."
-        },
-        {
-          "title": "Earlier @itslil plugin builds.",
-          "text": "@itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the <mspace> of \\quad; @itslil/remark-gfm 4.0.3 and @itslil/rehype-katex 7.0.3 match upstream, and the npm plugins work unchanged with @itslil/react-markdown."
-        },
-        {
-          "title": "Next.js edge runtime.",
-          "text": "A page with runtime = \"edge\" fails at request time: the compiled VFile calls process.cwd(), which that runtime replaces with a function that throws, where upstream's vfile uses its browser shim. Plain React apps, server rendering with react-dom/server, Cloudflare Workers, Deno and React Native are not affected."
+          "title": "Size, not behavior: KaTeX stacks ship a little more.",
+          "text": "With npm rehype-katex the app is +2,231 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in."
         },
         {
           "title": "Not measured: Safari/WebKit.",
@@ -1014,38 +1010,38 @@
     {
       "pair": "core",
       "doc": "small",
-      "up": 0.29499999806284904,
-      "lil": 0.2850000001490116
+      "up": 0.3100000023841858,
+      "lil": 0.29999999701976776
     },
     {
       "pair": "core",
       "doc": "chat",
-      "up": 1.5250000022351742,
-      "lil": 1.3825000002980232
+      "up": 1.6200000047683716,
+      "lil": 1.469999998807907
     },
     {
       "pair": "core",
       "doc": "gfmreadme",
-      "up": 10.722500000149012,
-      "lil": 9.594999998807907
+      "up": 11.172499999403954,
+      "lil": 9.547500006854534
     },
     {
       "pair": "core",
       "doc": "readme",
-      "up": 16.97749999910593,
-      "lil": 14.732499999925494
+      "up": 17.43249999731779,
+      "lil": 15.255000002682209
     },
     {
       "pair": "core",
       "doc": "unified",
-      "up": 31.91000000014901,
-      "lil": 27.52000000141561
+      "up": 33.10749999433756,
+      "lil": 30.157499991357327
     },
     {
       "pair": "core",
       "doc": "spec",
-      "up": 106.67499999888241,
-      "lil": 97.58499999903142
+      "up": 119.04500000178814,
+      "lil": 109.53499999642372
     }
   ]
 }

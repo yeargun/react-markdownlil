@@ -16,7 +16,7 @@
    "Failed to load resource: the server responded with a status of 404 (Not Found)",
    "Unexpected value `1` for `children` prop, expected `string`"
   ],
-  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.development.js",
+  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.browser.development.js",
   "assertion": "no throw"
  },
  {
@@ -26,7 +26,7 @@
    "Failed to load resource: the server responded with a status of 404 (Not Found)",
    "Unexpected value `1` for `children` prop, expected `string`"
   ],
-  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.development.js",
+  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.browser.development.js",
   "assertion": "no throw"
  },
  {
@@ -36,7 +36,7 @@
    "Failed to load resource: the server responded with a status of 404 (Not Found)",
    "Unexpected value `1` for `children` prop, expected `string`"
   ],
-  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.development.js",
+  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.browser.development.js",
   "assertion": "no throw"
  }
 ]

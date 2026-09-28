@@ -15,19 +15,19 @@
   ],
   "samples": [
     {
-      "bundleSeconds": 0.11189676500000002,
-      "wallSeconds": 2.023279009
+      "bundleSeconds": 0.07271499899999997,
+      "wallSeconds": 1.2647477939999998
     },
     {
-      "bundleSeconds": 0.06221319300000005,
-      "wallSeconds": 1.426679427
+      "bundleSeconds": 0.03079437299999995,
+      "wallSeconds": 1.0630516239999999
     },
     {
-      "bundleSeconds": 0.04676194299999997,
-      "wallSeconds": 0.9722484199999994
+      "bundleSeconds": 0.031397519999999984,
+      "wallSeconds": 0.9061970099999999
     }
   ],
-  "medianSeconds": 1.426679427,
+  "medianSeconds": 1.0630516239999999,
   "toolchain": {
     "esbuild": "0.28.1",
     "terser": "5.51.2"
@@ -35,45 +35,45 @@
   "artifacts": [
     {
       "path": "original.esm.js",
-      "raw": 117068,
-      "gzip9": 34789,
-      "brotli11": 30950,
-      "sha256": "e20527f2e1b933087a10f22d87f3d101dcd6c4b7c47ff5d96f2a037384b1be65"
+      "raw": 117688,
+      "gzip9": 35092,
+      "brotli11": 31280,
+      "sha256": "a60d0c0eb64f963152faa4dee4946a9ed9f59758ffa8a6ef343d5879c238165e"
     },
     {
       "path": "original.unminified.js",
-      "raw": 294763,
-      "gzip9": 59287,
-      "brotli11": 50628,
-      "sha256": "30c56bd1ad9ad2af61773e4dbde71bad6bf30d1f6c0f3630d9f66e7274a8fd58"
+      "raw": 297547,
+      "gzip9": 59973,
+      "brotli11": 51209,
+      "sha256": "7f859d83ed47a377ce7fd0e370cc107f21068fcdec1cbd4497bc2761e8002331"
     },
     {
       "path": "original.terser-nomangle.js",
-      "raw": 178069,
-      "gzip9": 42263,
-      "brotli11": 37574,
-      "sha256": "6f9c3b78e3633c8af242b2c33f746362db53ee1869f5556c77cde76d9bdcb146"
+      "raw": 179188,
+      "gzip9": 42688,
+      "brotli11": 37961,
+      "sha256": "6b13a68513cb062171c9b1bc19abb79a75befd5d6d2cc071c9cdbc0ad3167955"
     },
     {
       "path": "original.esbuild.js",
-      "raw": 119506,
-      "gzip9": 36700,
-      "brotli11": 32810,
-      "sha256": "44ba1dd1e6d2f135a2f4817c89773c2e653526c9e313cbf44b5e56944645e997"
+      "raw": 120118,
+      "gzip9": 37028,
+      "brotli11": 33102,
+      "sha256": "c1443c9ffcdb31d1dfa6fc737f2c6a00092b5dc7a4ad95d1e3ad560c9b3c17a8"
     },
     {
       "path": "original.oxc-mangle.js",
-      "raw": 117197,
-      "gzip9": 35251,
-      "brotli11": 31579,
-      "sha256": "f0e00d9a01e7859d4c18ef45ea39bd8185ac7c284719fc93b3af39b06cc83ddd"
+      "raw": 117791,
+      "gzip9": 35550,
+      "brotli11": 31827,
+      "sha256": "93111622b23f579e0306cf226f690b022865a76e703eb6d1e9d591eb6ccd97bb"
     },
     {
       "path": "original.oxc-nomangle.js",
-      "raw": 183399,
-      "gzip9": 43422,
-      "brotli11": 38613,
-      "sha256": "330861b82536ac6443ad0328ea6762227e9475997d73d43dac127e3b77395ba7"
+      "raw": 184429,
+      "gzip9": 43833,
+      "brotli11": 39014,
+      "sha256": "c8bee14dd4bcafc40a36cb69e83ef7766c018ea831b8907069793d55164d8c8a"
     }
   ],
   "inputs": [
@@ -129,6 +129,7 @@
     "node_modules/micromark/lib/compile.js",
     "node_modules/micromark-factory-space/index.js",
     "node_modules/micromark/lib/initialize/content.js",
+    "node_modules/micromark-util-edit-map/index.js",
     "node_modules/micromark/lib/initialize/document.js",
     "node_modules/micromark-util-classify-character/index.js",
     "node_modules/micromark-util-resolve-all/index.js",
@@ -138,6 +139,7 @@
     "node_modules/micromark-core-commonmark/lib/block-quote.js",
     "node_modules/micromark-core-commonmark/lib/character-escape.js",
     "node_modules/micromark-core-commonmark/lib/character-reference.js",
+    "node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js",
     "node_modules/micromark-core-commonmark/lib/code-fenced.js",
     "node_modules/micromark-core-commonmark/lib/code-indented.js",
     "node_modules/micromark-core-commonmark/lib/code-text.js",

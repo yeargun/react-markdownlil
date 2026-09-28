@@ -1,18 +1,18 @@
 {
  "browser fuzz (3,000)": {
-  "mismatch": 52,
-  "whitespace": 45,
-  "onlyLanguageClass": 45,
-  "drift": 6,
-  "both": 1,
+  "mismatch": 0,
+  "whitespace": 0,
+  "onlyLanguageClass": 0,
+  "drift": 0,
+  "both": 0,
   "unexplained": 0
  },
  "node fuzz (20,000)": {
-  "mismatch": 2232,
-  "whitespace": 2200,
-  "onlyLanguageClass": 2197,
-  "drift": 27,
-  "both": 5,
+  "mismatch": 0,
+  "whitespace": 0,
+  "onlyLanguageClass": 0,
+  "drift": 0,
+  "both": 0,
   "unexplained": 0
  }
 }

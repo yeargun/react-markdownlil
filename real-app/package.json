@@ -14,9 +14,9 @@
     "report": "node bench/report.mjs && node scripts/summarize.mjs"
   },
   "dependencies": {
-    "@itslil/rehype-katex": "7.0.2",
-    "@itslil/remark-gfm": "4.0.2",
-    "@itslil/remark-math": "6.0.1",
+    "@itslil/rehype-katex": "7.0.3",
+    "@itslil/remark-gfm": "4.0.3",
+    "@itslil/remark-math": "6.0.2",
     "katex": "0.16.22",
     "react": "19.2.0",
     "react-dom": "19.2.0",
