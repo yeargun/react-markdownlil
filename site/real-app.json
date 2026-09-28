@@ -995,8 +995,8 @@
           "text": "With npm rehype-katex the app is +1,254 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in."
         },
         {
-          "title": "The @itslil plugin builds on npm are older than their GitHub releases.",
-          "text": "@itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the <mspace> of \\quad; the npm plugins work unchanged with @itslil/react-markdown."
+          "title": "Earlier @itslil plugin builds.",
+          "text": "@itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the <mspace> of \\quad; @itslil/remark-gfm 4.0.3 and @itslil/rehype-katex 7.0.3 match upstream, and the npm plugins work unchanged with @itslil/react-markdown."
         },
         {
           "title": "Next.js edge runtime.",

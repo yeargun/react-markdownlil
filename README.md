@@ -42,8 +42,10 @@ import rehypeKatex from "rehype-katex"
 `rehype-slug` and `remark-toc` from npm are checked against upstream in the
 real-app test below. LilScript ports of the plugins exist too
 (`@itslil/remark-gfm`, `@itslil/remark-math`, `@itslil/rehype-katex`,
-`@itslil/remark-breaks`); their npm builds are older than their GitHub releases
-(see *Known differences*).
+`@itslil/remark-breaks`): use `@itslil/remark-gfm` 4.0.3, `@itslil/remark-math`
+6.0.2 and `@itslil/rehype-katex` 7.0.3 or later, which match upstream; the
+earlier 4.0.2 and 7.0.2 builds have the differences listed under *Known
+differences*.
 
 The processor uses the exact LilScript sources from `@itslil/unified@11.0.6`,
 `@itslil/remark-parse@11.0.2`, and `@itslil/remark-rehype@11.1.4`. They are
@@ -218,7 +220,7 @@ Every fuzz difference (2,284 of 23,000 documents) has one of the first two cause
 - **micromark-core-commonmark 2.0.4 (published 2026-09-26).** Emphasis next to an underscore or an escaped asterisk (a**_b_**c, foo*_bar_*baz, \**x**) follows 2.0.3, which this package's source graph pins; a fresh install of react-markdown resolves 2.0.4 (42 fuzz documents, 6 of them with the code-fence difference as well).
 - **One module, not tree-shakeable.** An app that imports only defaultUrlTransform ships 29,034 B Brotli with the port and 264 B with upstream.
 - **KaTeX stacks ship a little more.** With npm rehype-katex the app is +1,254 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.
-- **The @itslil plugin builds on npm are older than their GitHub releases.** @itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the &lt;mspace> of \quad; the npm plugins work unchanged with @itslil/react-markdown.
+- **Earlier @itslil plugin builds.** @itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the &lt;mspace> of \quad; @itslil/remark-gfm 4.0.3 and @itslil/rehype-katex 7.0.3 match upstream, and the npm plugins work unchanged with @itslil/react-markdown.
 - **Next.js edge runtime.** A page with runtime = "edge" fails at request time: the compiled VFile calls process.cwd(), which that runtime replaces with a function that throws, where upstream's vfile uses its browser shim. Plain React apps, server rendering with react-dom/server, Cloudflare Workers, Deno and React Native are not affected.
 - **Not measured: Safari/WebKit.** Playwright's WebKit needs system libraries the measuring host does not have.
 
