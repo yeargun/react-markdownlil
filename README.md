@@ -9,7 +9,20 @@ npm install @itslil/react-markdown react
 ```
 
 It is a drop-in replacement: change the import and keep the remark and rehype
-plugins you already install from npm.
+plugins you already install from npm. Or keep every import as it is and install
+it under react-markdown's name:
+
+```sh
+npm install react-markdown@npm:@itslil/react-markdown
+```
+
+Checked that way (2026-09-28): react-markdown 10.1.0's own test suite,
+`test.jsx` unmodified, gives the same result against this package as against
+react-markdown itself (86 pass, and the one that fails for both asserts an older
+React error message). The public API is the same: `Markdown` (default),
+`MarkdownAsync`, `MarkdownHooks` and `defaultUrlTransform`, and the TypeScript
+types `Options`, `Components`, `ExtraProps`, `UrlTransform`, `AllowElement` and
+`HooksOptions` are identical to upstream's, not only compatible.
 
 ```js
 import Markdown from "@itslil/react-markdown"
@@ -194,7 +207,6 @@ Each package bundled with the export conditions of the runtime, then run where t
 |---|---:|---:|---:|
 | Node (import) | renders | renders | dist/react-markdown.esm.js |
 | Cloudflare Workers (workerd, worker, browser) | renders | renders | dist/react-markdown.esm.js |
-| Next.js edge runtime (edge-light, worker, browser) | renders | renders | dist/react-markdown.esm.js |
 | Deno | renders | renders | dist/react-markdown.esm.js |
 | React Native (Metro) | renders | renders | dist/react-markdown.esm.js |
 
@@ -207,6 +219,7 @@ Every fuzz difference (2,284 of 23,000 documents) has one of the first two cause
 - **One module, not tree-shakeable.** An app that imports only defaultUrlTransform ships 29,034 B Brotli with the port and 264 B with upstream.
 - **KaTeX stacks ship a little more.** With npm rehype-katex the app is +1,254 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.
 - **The @itslil plugin builds on npm are older than their GitHub releases.** @itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the &lt;mspace> of \quad; the npm plugins work unchanged with @itslil/react-markdown.
+- **Next.js edge runtime.** A page with runtime = "edge" fails at request time: the compiled VFile calls process.cwd(), which that runtime replaces with a function that throws, where upstream's vfile uses its browser shim. Plain React apps, server rendering with react-dom/server, Cloudflare Workers, Deno and React Native are not affected.
 - **Not measured: Safari/WebKit.** Playwright's WebKit needs system libraries the measuring host does not have.
 
 Measured 2026-09-28 on an Azure Standard_B8als_v2 (8 vCPU, burstable) with Playwright 1.62.1: Chromium 151.0.7922.34, Firefox 153.0; React 19.2.0, Vite 8.3.1; react-markdown 10.1.0 against @itslil/react-markdown packed from this repository, plugins from npm. Reproduce: cd real-app && npm run setup && npm run build && npm run correctness && npm run fuzz && npm run edge && npm run perf && npm run report.

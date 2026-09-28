@@ -242,7 +242,7 @@ const correctnessTable = {
 
 // ---- runtimes -------------------------------------------------------------------------------------------------
 const runtimeLabel = {'node (import)': 'Node (import)', 'cloudflare workers (wrangler)': 'Cloudflare Workers (workerd, worker, browser)',
-  'next.js edge runtime': 'Next.js edge runtime (edge-light, worker, browser)', deno: 'Deno', 'react-native (metro)': 'React Native (Metro)'}
+  deno: 'Deno', 'react-native (metro)': 'React Native (Metro)'}
 const runtimeTable = {
   id: 'runtimes', title: 'Where it runs without a DOM',
   lead: "Each package bundled with the export conditions of the runtime, then run where there is no document. Worker and edge runtimes resolve the build with the entity table, as upstream's decode-named-character-reference does; the browser build decodes through the document.",
@@ -281,6 +281,7 @@ const lists = [
       {title: 'One module, not tree-shakeable.', text: `An app that imports only defaultUrlTransform ships ${int.format(treeshake['lil-url'].brotli)} B Brotli with the port and ${int.format(treeshake['up-url'].brotli)} B with upstream.`},
       {title: 'KaTeX stacks ship a little more.', text: `With npm rehype-katex the app is ${signed(sizes['lil-upfull'].brotli - sizes['up-full'].brotli, ' B')} Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.`},
       {title: 'The @itslil plugin builds on npm are older than their GitHub releases.', text: `@itslil/remark-gfm ${installed('@itslil/remark-gfm')} links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex ${installed('@itslil/rehype-katex')} bundles an older KaTeX port that drops the <mspace> of \\quad; the npm plugins work unchanged with @itslil/react-markdown.`},
+      {title: 'Next.js edge runtime.', text: 'A page with runtime = "edge" fails at request time: the compiled VFile calls process.cwd(), which that runtime replaces with a function that throws, where upstream\'s vfile uses its browser shim. Plain React apps, server rendering with react-dom/server, Cloudflare Workers, Deno and React Native are not affected.'},
       {title: 'Not measured: Safari/WebKit.', text: 'Playwright\'s WebKit needs system libraries the measuring host does not have.'},
     ],
   },

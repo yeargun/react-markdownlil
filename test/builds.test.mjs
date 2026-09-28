@@ -45,11 +45,16 @@ test("the browser build decodes references through the document as the table doe
 test("worker and edge runtimes resolve a build that needs no document", async () => {
   const {build} = await import("esbuild")
   const root = new URL("..", import.meta.url).pathname
+  // Next.js's edge compiler adds `edge-light` to the web conditions (no `worker`), so each
+  // runtime's own condition must come before `browser`, as in decode-named-character-reference.
   const runtimes = {
     "cloudflare workers": ["workerd", "worker", "browser"],
-    "next.js edge": ["edge-light", "worker", "browser"],
-    deno: ["deno"],
-    "react-native": ["react-native"],
+    "next.js edge": ["edge-light", "browser", "module", "import"],
+    "vercel edge functions": ["edge-light", "browser"],
+    "web worker bundles": ["worker", "browser"],
+    convex: ["convex", "browser"],
+    deno: ["deno", "browser"],
+    "react-native": ["react-native", "browser"],
     browser: ["browser"],
   }
   for (const [runtime, conditions] of Object.entries(runtimes)) {

@@ -24,18 +24,6 @@
   "result": "OK <p>© Æ ∉ &amp;</p>"
  },
  {
-  "runtime": "next.js edge runtime",
-  "who": "upstream",
-  "resolved": "decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js",
-  "result": "OK <p>© Æ ∉ &amp;</p>"
- },
- {
-  "runtime": "next.js edge runtime",
-  "who": "port",
-  "resolved": "@itslil/react-markdown/dist/react-markdown.esm.js",
-  "result": "OK <p>© Æ ∉ &amp;</p>"
- },
- {
   "runtime": "deno",
   "who": "upstream",
   "resolved": "decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js",

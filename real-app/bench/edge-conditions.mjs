@@ -7,7 +7,6 @@ import {build} from 'esbuild'
 const runtimes = {
   'node (import)': {conditions: [], platform: 'node'},
   'cloudflare workers (wrangler)': {conditions: ['workerd', 'worker', 'browser'], platform: 'neutral'},
-  'next.js edge runtime': {conditions: ['edge-light', 'worker', 'browser'], platform: 'neutral'},
   'deno': {conditions: ['deno'], platform: 'neutral'},
   'react-native (metro)': {conditions: ['react-native'], platform: 'neutral'},
   'browser bundle (vite/webpack prod)': {conditions: ['browser', 'production'], platform: 'browser'},

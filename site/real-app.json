@@ -947,18 +947,6 @@
           "dist/react-markdown.esm.js"
         ],
         [
-          "Next.js edge runtime (edge-light, worker, browser)",
-          {
-            "text": "renders",
-            "state": "win"
-          },
-          {
-            "text": "renders",
-            "state": "win"
-          },
-          "dist/react-markdown.esm.js"
-        ],
-        [
           "Deno",
           {
             "text": "renders",
@@ -1009,6 +997,10 @@
         {
           "title": "The @itslil plugin builds on npm are older than their GitHub releases.",
           "text": "@itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the <mspace> of \\quad; the npm plugins work unchanged with @itslil/react-markdown."
+        },
+        {
+          "title": "Next.js edge runtime.",
+          "text": "A page with runtime = \"edge\" fails at request time: the compiled VFile calls process.cwd(), which that runtime replaces with a function that throws, where upstream's vfile uses its browser shim. Plain React apps, server rendering with react-dom/server, Cloudflare Workers, Deno and React Native are not affected."
         },
         {
           "title": "Not measured: Safari/WebKit.",
