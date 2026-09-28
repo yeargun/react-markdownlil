@@ -1,0 +1,15 @@
+{
+  "name": "react-markdown-on-micromark-core-commonmark-2.0.3",
+  "private": true,
+  "description": "Control: upstream react-markdown@10.1.0 resolved against micromark-core-commonmark 2.0.3, the version the port's source graph pins (2.0.4 was published 2026-09-26).",
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-markdown": "10.1.0"
+  },
+  "overrides": {
+    "micromark-core-commonmark": "2.0.3",
+    "micromark": "4.0.2",
+    "micromark-factory-space": "2.0.1"
+  }
+}

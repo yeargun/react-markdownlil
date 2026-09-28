@@ -1,0 +1,20 @@
+:root { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; }
+body { margin: 0; background: #fff; color: #1f2328; }
+.shell.dark { background: #0d1117; color: #e6edf3; }
+header { display: flex; gap: 12px; align-items: center; padding: 10px 16px; border-bottom: 1px solid #d0d7de; position: sticky; top: 0; background: inherit; }
+header .variant { font: 12px ui-monospace, monospace; padding: 2px 6px; border-radius: 6px; background: #eaeef2; }
+main { max-width: 880px; margin: 0 auto; padding: 16px; }
+.markdown-body { font-size: 16px; overflow-wrap: break-word; }
+.markdown-body h1, .markdown-body h2 { border-bottom: 1px solid #d0d7de; padding-bottom: .3em; }
+.markdown-body code { font: 85% ui-monospace, SFMono-Regular, Menlo, monospace; background: rgba(175,184,193,.2); padding: .2em .4em; border-radius: 6px; }
+.markdown-body pre { background: #f6f8fa; padding: 16px; overflow: auto; border-radius: 6px; }
+.markdown-body pre code { background: none; padding: 0; }
+.markdown-body table { border-collapse: collapse; display: block; overflow: auto; }
+.markdown-body th, .markdown-body td { border: 1px solid #d0d7de; padding: 6px 13px; }
+.markdown-body blockquote { margin: 0; padding: 0 1em; color: #59636e; border-left: .25em solid #d0d7de; }
+.markdown-body img { max-width: 100%; }
+.message { display: flex; gap: 10px; margin: 12px 0; }
+.message .avatar { width: 28px; height: 28px; border-radius: 50%; background: #d0d7de; display: grid; place-items: center; font-size: 12px; flex: none; }
+.message.assistant .bubble { background: #f6f8fa; }
+.bubble { padding: 8px 14px; border-radius: 12px; min-width: 0; }
+#bench { position: absolute; left: 0; top: 0; width: 880px; visibility: hidden; }

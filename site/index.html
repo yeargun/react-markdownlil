@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="@itslil/react-markdown is react-markdown@10.1.0 rewritten in LilScript. Default tab is the whole package. Other tabs compare every @itslil subpackage in the stack." />
+    <meta name="description" content="@itslil/react-markdown is react-markdown@10.1.0 rewritten in LilScript: every library of its stack against its original, and a real Vite app measured with Playwright." />
     <meta name="theme-color" content="#c9a227" />
     <title>itslil/react-markdown — react-markdown@10.1.0 through LilScript</title>
     <link rel="stylesheet" href="./styles.css" />
@@ -19,6 +19,7 @@
       </a>
       <nav aria-label="Main navigation">
         <a href="#stack">stack</a>
+        <a href="#real-app">real app</a>
         <a href="#performance">performance</a>
         <a href="#compiler">compiler</a>
         <a href="#lab">playground</a>
@@ -33,8 +34,8 @@
           <h1>Markdown,<br /><em>as React</em></h1>
           <p class="lede">
             Official <code>react-markdown@10.1.0</code> rewritten in LilScript.
-            The processor is published <code>@itslil/unified</code> + <code>@itslil/remark-parse</code> + <code>@itslil/remark-rehype</code>.
-            Plugins install from the same scope: <code>@itslil/remark-gfm</code>, <code>@itslil/remark-math</code>, <code>@itslil/rehype-katex</code>.
+            The processor (<code>@itslil/unified</code> + <code>@itslil/remark-parse</code> + <code>@itslil/remark-rehype</code>) is compiled in.
+            The npm plugins you already use work unchanged: <code>remark-gfm</code>, <code>remark-math</code>, <code>rehype-katex</code>, <code>rehype-raw</code> and the rest.
           </p>
           <div class="install-row">
             <code>npm install @itslil/react-markdown</code>
@@ -58,25 +59,48 @@
             <div><strong id="hero-spec">—</strong><span>official tests</span></div>
           </div>
           <p class="score-note">
-            Default tab is the entire package, measured as its browser build. Other tabs are the published @itslil libraries this component installs.
+            The whole package, measured as its browser build. Every library of the stack is in the table below; a real Vite app is further down.
           </p>
         </div>
       </section>
       <section class="ticker" aria-label="Supported features">
         <div>Markdown <span>✦</span> MarkdownAsync <span>✦</span> MarkdownHooks <span>✦</span> remark-gfm <span>✦</span> remark-math <span>✦</span> rehype-katex <span>✦</span> @itslil</div>
       </section>
-      <section class="shell" id="stack">
+      <section class="shell stack" id="stack">
         <div class="section-heading">
           <div>
             <p class="eyebrow">The stack</p>
-            <h2>Whole package,<br />then each library.</h2>
+            <h2>Every library,<br />against its original.</h2>
           </div>
           <p>
-            The first tab is <code>@itslil/react-markdown</code>.
-            The rest are size and spec receipts copied from each sibling GitHub Pages lab.
+            Each row is an <code>@itslil</code> package as delivered against its original package minified by the strongest official lane of the same surface on that package's page.
+            Tests are each package's own suite. Speed is shown only where the page documents its workload.
+            Click a row or a tab for every lane.
           </p>
         </div>
-        <div class="stack-tabs" id="stack-tabs" role="tablist" aria-label="Package comparisons"></div>
+        <div class="table-wrap light stack-table">
+          <table>
+            <thead><tr><th>Package</th><th>original, Brotli-11</th><th>@itslil, Brotli-11</th><th>Brotli</th><th>gzip-9</th><th>raw</th><th>tests</th><th>speed</th></tr></thead>
+            <tbody id="stack-body"></tbody>
+          </table>
+        </div>
+        <p class="perf-note">* Not like for like; the package's detail says why. Sizes are from each package's published page; the first row is this package.</p>
+        <div class="stack-tabs" id="stack-tabs" role="tablist" aria-label="Package detail"></div>
+        <div class="stack-detail" id="stack-detail" role="tabpanel"></div>
+      </section>
+      <section class="real-app shell" id="real-app">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">In a real app · Playwright</p>
+            <h2>Same app,<br />both stacks.</h2>
+          </div>
+          <p>
+            One React 19 app built with Vite 8 once per stack, loaded and driven by Playwright in Chromium and Firefox.
+            Sizes are everything the app ships; times are medians of fresh pages, the variants interleaved.
+            The output of both is compared node for node.
+          </p>
+        </div>
+        <div id="real-app-body"></div>
       </section>
       <section class="performance shell" id="performance">
         <div class="section-heading">
@@ -186,24 +210,24 @@
               </table>
             </div>
           </div>
-          <div id="stack-detail"></div>
           <div class="method-note">
             <p>
               <strong>Why this surface.</strong>
-              The default tab is the component you install.
-              Subpackage tabs are the same receipts each library already publishes on github.io.
+              These lanes are the component you install, as a browser bundle ships it.
+              Every library of the stack has its own row in the stack table above.
             </p>
             <a href="https://github.com/yeargun/react-markdownlil">README ↗</a>
           </div>
         </div>
       </section>
       <section class="closing shell">
-        <p class="eyebrow">Install the stack</p>
-        <h2>Plugins from<br />the same scope.</h2>
+        <p class="eyebrow">Install</p>
+        <h2>Swap one<br />import.</h2>
         <div class="install-row large">
-          <code>npm install @itslil/react-markdown @itslil/remark-gfm @itslil/remark-math @itslil/rehype-katex</code>
-          <button class="copy" data-copy="npm install @itslil/react-markdown @itslil/remark-gfm @itslil/remark-math @itslil/rehype-katex" type="button">copy</button>
+          <code>npm install @itslil/react-markdown</code>
+          <button class="copy" data-copy="npm install @itslil/react-markdown" type="button">copy</button>
         </div>
+        <p class="closing-note"><code>import Markdown from "@itslil/react-markdown"</code>. Keep your remark and rehype plugins from npm; the real-app test checks them against upstream.</p>
       </section>
     </main>
     <footer class="shell">

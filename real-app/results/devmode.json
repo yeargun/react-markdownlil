@@ -1,0 +1,42 @@
+[
+ {
+  "variant": "up",
+  "html": "<p>© <em>a</em> <code>b</code> ~~c~~ $x$</p>\n<p>| a | b |\n|---|---|\n| 1 | 2 |</p>",
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Unexpected value `1` for `children` prop, expected `string`"
+  ],
+  "resolved": "react-markdown <- ../../react-markdown/index.js",
+  "assertion": "no throw"
+ },
+ {
+  "variant": "lil",
+  "html": "<p>© <em>a</em> <code>b</code> ~~c~~ $x$</p>\n<p>| a | b |\n|---|---|\n| 1 | 2 |</p>",
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Unexpected value `1` for `children` prop, expected `string`"
+  ],
+  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.development.js",
+  "assertion": "no throw"
+ },
+ {
+  "variant": "lil-gfm",
+  "html": "<p>© <em>a</em> <code>b</code> <del>c</del> $x$</p>\n<table><thead><tr><th>a</th><th>b</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table>",
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Unexpected value `1` for `children` prop, expected `string`"
+  ],
+  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.development.js",
+  "assertion": "no throw"
+ },
+ {
+  "variant": "lil-full",
+  "html": "<p>© <em>a</em> <code>b</code> <del>c</del> <span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">x</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height: 0.4306em;\"></span><span class=\"mord mathnormal\">x</span></span></span></span></p>\n<table><thead><tr><th>a</th><th>b</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table>",
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Unexpected value `1` for `children` prop, expected `string`"
+  ],
+  "resolved": "@itslil/react-markdown <- ../../@itslil/react-markdown/dist/react-markdown.development.js",
+  "assertion": "no throw"
+ }
+]

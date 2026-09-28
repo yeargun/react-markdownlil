@@ -12,8 +12,8 @@
 // 4. Measures render throughput of the delivered ESM against official react-markdown in this Node.
 //
 // The row built from react-markdown's pinned Git source ("Git source + Terser") comes from the paired
-// source build (site/comparison.json, comparison/source-build/); it and `previousRelease` are kept as
-// they are.
+// source build (site/comparison.json, comparison/source-build/); it is kept as it is. The page shows
+// this release only: no previous-release comparison is recorded.
 import { createHash } from "node:crypto"
 import { execFileSync, spawnSync } from "node:child_process"
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
@@ -222,6 +222,7 @@ results.compiler = {
   host: { cpus: cpus().length, loadAverage1m: round(loadAverage1m) },
   date: measuredAt.slice(0, 10),
 }
+delete results.previousRelease
 writeFileSync(resultsPath, `${JSON.stringify(results, null, 2)}\n`)
 console.log(
   `recorded: browser ${browser.brotli11} B Brotli-11 (bar ${baseline.name} ${baseline.brotli11}); Node ${node.brotli11}; ` +

@@ -136,48 +136,6 @@
     }
   ],
   "sizeMeasuredAt": "2026-09-27T16:24:30Z",
-  "previousRelease": {
-    "label": "the 2026-09-24 release: npm files from commit 32f7fde, compiled by the one LilScript compiler at aa2052f0; page b1eb4af",
-    "commit": "b1eb4af",
-    "date": "2026-09-24",
-    "measuredBy": "lilscript-codec, same as this release",
-    "files": {
-      "dist/react-markdown.browser.js": {
-        "raw": 95501,
-        "gzip9": 30961,
-        "brotli11": 27312
-      },
-      "dist/react-markdown.esm.js": {
-        "raw": 116039,
-        "gzip9": 41924,
-        "brotli11": 35933
-      },
-      "dist/react-markdown.cjs": {
-        "raw": 116099,
-        "gzip9": 41947,
-        "brotli11": 35943
-      },
-      "dist/react-markdown.development.js": {
-        "raw": 116038,
-        "gzip9": 41923,
-        "brotli11": 35978
-      },
-      "dist/react-markdown.development.cjs": {
-        "raw": 116098,
-        "gzip9": 41946,
-        "brotli11": 36005
-      },
-      "dist/react-markdown.closed.js": {
-        "raw": 137070,
-        "gzip9": 46356,
-        "brotli11": 39464
-      }
-    },
-    "compile": {
-      "summary": "5.34 s per build (2026-09-24 record)",
-      "detail": "2026-09-24 record (LilScript aa2052f0, this host, 1-minute load 2.4): the three compiles took 1.80 s (Node ESM), 2.04 s (closed) and 1.49 s (browser) median, 5.34 s per build; the paired source build's package build took 6.44 s median of three"
-    }
-  },
   "throughputWorkload": "renderToStaticMarkup of react-markdown's readme (26 KB), 10 renders per sample, the two lanes alternating; both render the same markup. LilScript lane: dist/react-markdown.esm.js.",
   "delivered": [
     {

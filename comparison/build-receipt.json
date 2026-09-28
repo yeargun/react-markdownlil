@@ -227,7 +227,7 @@
   ],
   "publicationPolicy": "Publish the compiler-written distribution",
   "publicationBase": "b1eb4afda1ec497b30f147fbe90602a98830878f",
-  "publicationSourceFingerprint": "7e2a6127d42a3411f20c4fbf71d977e4795a5ba0e2a59cdb229a6286a89cd189",
+  "publicationSourceFingerprint": "c78ab23fa4646946c22a71aaf04894715ab69ccf30782669e3033dc8122693e5",
   "comparisonArtifacts": [
     {
       "path": "site/esm-comparison/original.js",
@@ -264,5 +264,6 @@
       "directory": "."
     },
     "compatibility": "Runtime checks: 123/123 pass; type checks pass."
-  }
+  },
+  "fingerprintNote": "2026-09-28: package.json gained worker, deno and react-native export conditions (the entity-table build for runtimes without a document). Nothing was rebuilt; every artifact hash above is unchanged and verified."
 }

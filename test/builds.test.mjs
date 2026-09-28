@@ -38,3 +38,28 @@ test("the browser build decodes references through the document as the table doe
   assert.match(expected, /© &amp; &lt;b&gt; Æ ½/)
   assert.equal(render(browser.default, references), expected)
 })
+
+// Runtimes without a DOM that bundle with the `browser` condition too
+// (Cloudflare Workers, Next.js edge) must get the entity-table build, as
+// upstream's decode-named-character-reference routes them to its table.
+test("worker and edge runtimes resolve a build that needs no document", async () => {
+  const {build} = await import("esbuild")
+  const root = new URL("..", import.meta.url).pathname
+  const runtimes = {
+    "cloudflare workers": ["workerd", "worker", "browser"],
+    "next.js edge": ["edge-light", "worker", "browser"],
+    deno: ["deno"],
+    "react-native": ["react-native"],
+    browser: ["browser"],
+  }
+  for (const [runtime, conditions] of Object.entries(runtimes)) {
+    const result = await build({
+      stdin: {contents: 'export {default} from "@itslil/react-markdown"', resolveDir: root},
+      bundle: true, conditions, external: ["react", "react/jsx-runtime"], format: "esm",
+      metafile: true, platform: "neutral", write: false, logLevel: "silent",
+    })
+    const inputs = Object.keys(result.metafile.inputs).filter((path) => path.startsWith("dist/"))
+    const expected = runtime === "browser" ? "dist/react-markdown.browser.js" : "dist/react-markdown.esm.js"
+    assert.deepEqual(inputs, [expected], runtime)
+  }
+})

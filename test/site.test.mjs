@@ -42,4 +42,41 @@ describe("site", () => {
     const bars = results.size.filter((lane) => lane.id.startsWith("official-"))
     assert.equal(baseline.brotli11, Math.min(...bars.map((lane) => lane.brotli11)))
   })
+
+  it("compares every library of the stack in one table, with the detail in place", () => {
+    const html = readFileSync(resolve(root, "site/index.html"), "utf8")
+    assert.match(html, /id="stack-body"/)
+    assert.match(html, /id="stack-tabs"/)
+    assert.match(html, /id="stack-detail"/)
+    const stack = JSON.parse(readFileSync(resolve(root, "site/stack/index.json"), "utf8"))
+    assert.ok(stack.packages.length >= 15)
+    for (const pkg of stack.packages) {
+      assert.ok(pkg.lil?.brotli11 > 0, `${pkg.id}: delivered lane`)
+      assert.ok(pkg.bar?.brotli11 > 0, `${pkg.id}: bar`)
+      assert.ok(!pkg.bar.id.includes("nomangle") && !pkg.bar.id.includes("browser"), `${pkg.id}: same-surface bar`)
+      assert.ok(pkg.comparable || pkg.note, `${pkg.id}: an unlike comparison says why`)
+    }
+  })
+
+  it("shows the real-app test, written from its results, in the page and the README alike", () => {
+    const html = readFileSync(resolve(root, "site/index.html"), "utf8")
+    assert.match(html, /id="real-app"/)
+    const real = JSON.parse(readFileSync(resolve(root, "site/real-app.json"), "utf8"))
+    assert.ok(real.cards.length >= 4)
+    assert.ok(real.tables.length >= 8)
+    for (const table of real.tables) {
+      for (const row of table.rows) assert.equal(row.length, table.columns.length, `${table.id}: ${row[0]}`)
+    }
+    const readme = readFileSync(resolve(root, "README.md"), "utf8")
+    const section = readme.match(/<!-- real-app:start -->([\s\S]*)<!-- real-app:end -->/)?.[1] ?? ""
+    assert.match(section, /## In a real app/)
+    for (const table of real.tables) assert.ok(section.includes(`### ${table.title}`), table.title)
+  })
+
+  it("shows this release only, with no previous-release comparison", () => {
+    const results = JSON.parse(readFileSync(resolve(root, "site/results.json"), "utf8"))
+    assert.equal("previousRelease" in results, false)
+    assert.doesNotMatch(readFileSync(resolve(root, "site/compiler.js"), "utf8"), /previous/i)
+    assert.doesNotMatch(readFileSync(resolve(root, "README.md"), "utf8"), /previous release/i)
+  })
 })

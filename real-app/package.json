@@ -1,0 +1,41 @@
+{
+  "name": "react-markdownlil-real-app",
+  "private": true,
+  "type": "module",
+  "description": "The same React 19 app built with Vite 8 once per markdown stack: react-markdown@10.1.0 against @itslil/react-markdown (packed from this repository) with the @itslil plugins npm serves. Playwright checks the DOM and measures load, render and streaming.",
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "build": "node scripts/build-all.mjs && node scripts/landing.mjs",
+    "serve": "node scripts/serve.mjs",
+    "correctness": "node bench/correctness.mjs",
+    "fuzz": "node bench/fuzz-node.mjs && node bench/classify.mjs",
+    "edge": "node bench/edge-conditions.mjs",
+    "perf": "node bench/perf.mjs --tag=chromium --browser=chromium && node bench/stages.mjs && node bench/perf.mjs --tag=firefox --browser=firefox --cpu=1 --load-runs=8",
+    "report": "node bench/report.mjs && node scripts/summarize.mjs"
+  },
+  "dependencies": {
+    "@itslil/rehype-katex": "7.0.2",
+    "@itslil/remark-gfm": "4.0.2",
+    "@itslil/remark-math": "6.0.1",
+    "katex": "0.16.22",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-markdown": "10.1.0",
+    "rehype-highlight": "7.0.2",
+    "rehype-katex": "7.0.1",
+    "rehype-raw": "7.0.0",
+    "rehype-slug": "6.0.0",
+    "remark-gfm": "4.0.1",
+    "remark-math": "6.0.0",
+    "remark-toc": "9.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.1",
+    "character-entities": "2.0.2",
+    "character-entities-legacy": "3.0.0",
+    "commonmark-spec": "0.31.2",
+    "esbuild": "0.28.1",
+    "playwright": "1.62.1",
+    "vite": "8.3.1"
+  }
+}

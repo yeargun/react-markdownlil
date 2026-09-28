@@ -1,0 +1,1059 @@
+{
+  "measuredAt": "2026-09-28",
+  "chromium": "Chromium 151.0.7922.34",
+  "firefox": "Firefox 153.0",
+  "cards": [
+    {
+      "value": "−4.3 KB",
+      "label": "JavaScript the app ships, Brotli-11 (react-markdown alone)",
+      "state": "win"
+    },
+    {
+      "value": "−13.2%",
+      "label": "render time, react-markdown's README, warm (Chromium)",
+      "state": "win"
+    },
+    {
+      "value": "−13.1%",
+      "label": "main-thread time streaming a 10 KB answer (Chromium)",
+      "state": "win"
+    },
+    {
+      "value": "0",
+      "label": "differences in 1,354 CommonMark and GFM spec examples and 2,125 named references, Chromium and Firefox",
+      "state": "ink"
+    }
+  ],
+  "tables": [
+    {
+      "id": "size",
+      "title": "What the app ships",
+      "lead": "All JavaScript of the app, React 19.2.0 included: Vite 8.3.1 production build (Rolldown + Oxc minifier), one chunk, Brotli-11. \"Markdown adds\" is the difference to the same app without a markdown library.",
+      "columns": [
+        "Stack",
+        "raw",
+        "gzip-9",
+        "Brotli-11",
+        "markdown adds",
+        "vs react-markdown"
+      ],
+      "rows": [
+        [
+          "App without markdown (baseline)",
+          "193,483",
+          "60,172",
+          "51,950",
+          "—",
+          "—"
+        ],
+        [
+          "react-markdown 10.1.0",
+          "310,588",
+          "94,972",
+          "82,134",
+          "30,184",
+          "—"
+        ],
+        [
+          "@itslil/react-markdown",
+          "282,260",
+          "89,957",
+          "77,787",
+          "25,837",
+          {
+            "text": "−4,347 B (−14.4% of what markdown adds)",
+            "state": "win"
+          }
+        ],
+        [
+          "react-markdown + remark-gfm 4.0.1",
+          "348,442",
+          "105,566",
+          "90,991",
+          "39,041",
+          "—"
+        ],
+        [
+          "@itslil/react-markdown + remark-gfm (npm)",
+          "323,962",
+          "101,823",
+          "88,056",
+          "36,106",
+          {
+            "text": "−2,935 B (−7.5% of what markdown adds)",
+            "state": "win"
+          }
+        ],
+        [
+          "@itslil/react-markdown + @itslil/remark-gfm 4.0.2",
+          "315,577",
+          "100,769",
+          "87,288",
+          "35,338",
+          {
+            "text": "−3,703 B (−9.5% of what markdown adds)",
+            "state": "win"
+          }
+        ],
+        [
+          "react-markdown + remark-gfm, remark-math, rehype-katex",
+          "627,629",
+          "187,225",
+          "157,237",
+          "105,287",
+          "—"
+        ],
+        [
+          "@itslil/react-markdown + the same npm plugins",
+          "621,258",
+          "189,231",
+          "158,491",
+          "106,541",
+          {
+            "text": "+1,254 B (+1.2% of what markdown adds)",
+            "state": "loss"
+          }
+        ],
+        [
+          "@itslil/react-markdown + @itslil/remark-gfm, remark-math, rehype-katex (4.0.2, 6.0.1, 7.0.2)",
+          "613,103",
+          "188,470",
+          "158,544",
+          "106,594",
+          {
+            "text": "+1,307 B (+1.2% of what markdown adds)",
+            "state": "loss"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "load",
+      "title": "Time to markdown on screen (Chromium)",
+      "lead": "A fresh browser context per load; the app fetches react-markdown's README and renders it on start. Median of 12 loads per variant, variants interleaved round by round; \"faster in\" counts the rounds the port won. Mobile is Lighthouse's preset: 4× CPU slowdown, 150 ms RTT, 1.6 Mbit/s. Differences under about 3% (desktop) and 2% (mobile) are within the run-to-run noise of this host.",
+      "columns": [
+        "Stack",
+        "desktop, upstream",
+        "desktop, @itslil",
+        "Δ",
+        "mobile, upstream",
+        "mobile, @itslil",
+        "Δ"
+      ],
+      "rows": [
+        [
+          "App without markdown",
+          "60.7 ms",
+          "—",
+          "—",
+          "877 ms",
+          "—",
+          "—"
+        ],
+        [
+          "react-markdown alone",
+          "144.8 ms",
+          "145.8 ms",
+          {
+            "text": "+1 ms (faster in 9/12)",
+            "state": "even"
+          },
+          "1320 ms",
+          "1306 ms",
+          {
+            "text": "−14 ms (faster in 7/12)",
+            "state": "even"
+          }
+        ],
+        [
+          "+ remark-gfm (npm), drop-in",
+          "161.4 ms",
+          "161.5 ms",
+          {
+            "text": "+0 ms (faster in 7/12)",
+            "state": "even"
+          },
+          "1408 ms",
+          "1407 ms",
+          {
+            "text": "−1 ms (faster in 9/12)",
+            "state": "even"
+          }
+        ],
+        [
+          "+ @itslil/remark-gfm 4.0.2",
+          "161.4 ms",
+          "167.5 ms",
+          {
+            "text": "+6 ms (faster in 5/12)",
+            "state": "loss"
+          },
+          "1408 ms",
+          "1422 ms",
+          {
+            "text": "+14 ms (faster in 6/12)",
+            "state": "even"
+          }
+        ],
+        [
+          "+ gfm, math, KaTeX (npm), drop-in",
+          "187.6 ms",
+          "194.3 ms",
+          {
+            "text": "+7 ms (faster in 4/12)",
+            "state": "loss"
+          },
+          "1873 ms",
+          "1868 ms",
+          {
+            "text": "−6 ms (faster in 7/12)",
+            "state": "even"
+          }
+        ],
+        [
+          "+ @itslil gfm, math, KaTeX (npm builds)",
+          "187.6 ms",
+          "196.1 ms",
+          {
+            "text": "+8 ms (faster in 2/12)",
+            "state": "loss"
+          },
+          "1873 ms",
+          "1889 ms",
+          {
+            "text": "+15 ms (faster in 2/12)",
+            "state": "even"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "render",
+      "title": "Rendering, react-markdown alone (Chromium)",
+      "lead": "Warm medians on 5 fresh pages per variant, variants interleaved round by round. Pipeline is the component body (parse, plugins, hast, React elements); mount adds React's render and the DOM commit.",
+      "columns": [
+        "Document",
+        "pipeline, upstream",
+        "pipeline, @itslil",
+        "Δ",
+        "mount, upstream",
+        "mount, @itslil",
+        "Δ"
+      ],
+      "rows": [
+        [
+          "short reply (307 B)",
+          "0.29 ms",
+          "0.29 ms",
+          {
+            "text": "−3.4%",
+            "state": "win"
+          },
+          "0.41 ms",
+          "0.35 ms",
+          {
+            "text": "−12.3%",
+            "state": "win"
+          }
+        ],
+        [
+          "chat answer (3.3 KB)",
+          "1.53 ms",
+          "1.38 ms",
+          {
+            "text": "−9.3%",
+            "state": "win"
+          },
+          "1.71 ms",
+          "1.55 ms",
+          {
+            "text": "−9.2%",
+            "state": "win"
+          }
+        ],
+        [
+          "remark-gfm's README (15 KB)",
+          "10.7 ms",
+          "9.59 ms",
+          {
+            "text": "−10.5%",
+            "state": "win"
+          },
+          "11.1 ms",
+          "10.1 ms",
+          {
+            "text": "−9.7%",
+            "state": "win"
+          }
+        ],
+        [
+          "react-markdown's README (26 KB)",
+          "17.0 ms",
+          "14.7 ms",
+          {
+            "text": "−13.2%",
+            "state": "win"
+          },
+          "17.9 ms",
+          "16.2 ms",
+          {
+            "text": "−9.2%",
+            "state": "win"
+          }
+        ],
+        [
+          "unified's README (49 KB)",
+          "31.9 ms",
+          "27.5 ms",
+          {
+            "text": "−13.8%",
+            "state": "win"
+          },
+          "34.7 ms",
+          "31.9 ms",
+          {
+            "text": "−7.9%",
+            "state": "win"
+          }
+        ],
+        [
+          "CommonMark spec (205 KB)",
+          "107 ms",
+          "97.6 ms",
+          {
+            "text": "−8.5%",
+            "state": "win"
+          },
+          "109 ms",
+          "99.2 ms",
+          {
+            "text": "−8.7%",
+            "state": "win"
+          }
+        ],
+        [
+          "chat history, 40 messages",
+          "—",
+          "—",
+          "—",
+          "7.72 ms",
+          "7.27 ms",
+          {
+            "text": "−5.9%",
+            "state": "win"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "render-4x",
+      "title": "Rendering at 4× CPU slowdown (Chromium)",
+      "lead": "The same, with the CPU slowed four times (a mid-range phone).",
+      "columns": [
+        "Document",
+        "pipeline, upstream",
+        "pipeline, @itslil",
+        "Δ",
+        "mount, upstream",
+        "mount, @itslil",
+        "Δ"
+      ],
+      "rows": [
+        [
+          "short reply (307 B)",
+          "1.40 ms",
+          "1.37 ms",
+          {
+            "text": "−2.5%",
+            "state": "win"
+          },
+          "1.73 ms",
+          "1.92 ms",
+          {
+            "text": "+11.3%",
+            "state": "loss"
+          }
+        ],
+        [
+          "chat answer (3.3 KB)",
+          "9.28 ms",
+          "8.09 ms",
+          {
+            "text": "−12.8%",
+            "state": "win"
+          },
+          "7.68 ms",
+          "7.35 ms",
+          {
+            "text": "−4.4%",
+            "state": "win"
+          }
+        ],
+        [
+          "remark-gfm's README (15 KB)",
+          "43.4 ms",
+          "39.2 ms",
+          {
+            "text": "−9.7%",
+            "state": "win"
+          },
+          "50.9 ms",
+          "45.4 ms",
+          {
+            "text": "−10.7%",
+            "state": "win"
+          }
+        ],
+        [
+          "react-markdown's README (26 KB)",
+          "69.0 ms",
+          "62.6 ms",
+          {
+            "text": "−9.2%",
+            "state": "win"
+          },
+          "75.3 ms",
+          "67.9 ms",
+          {
+            "text": "−9.7%",
+            "state": "win"
+          }
+        ],
+        [
+          "unified's README (49 KB)",
+          "135 ms",
+          "138 ms",
+          {
+            "text": "+1.9%",
+            "state": "even"
+          },
+          "156 ms",
+          "142 ms",
+          {
+            "text": "−9.3%",
+            "state": "win"
+          }
+        ],
+        [
+          "CommonMark spec (205 KB)",
+          "463 ms",
+          "406 ms",
+          {
+            "text": "−12.3%",
+            "state": "win"
+          },
+          "473 ms",
+          "433 ms",
+          {
+            "text": "−8.4%",
+            "state": "win"
+          }
+        ],
+        [
+          "chat history, 40 messages",
+          "—",
+          "—",
+          "—",
+          "40.4 ms",
+          "33.3 ms",
+          {
+            "text": "−17.7%",
+            "state": "win"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "render-plugins",
+      "title": "Rendering with plugins (Chromium)",
+      "lead": "Pipeline only, warm medians. The npm plugins on both sides, then the @itslil plugin builds on npm.",
+      "columns": [
+        "Stack",
+        "document",
+        "upstream",
+        "@itslil",
+        "Δ"
+      ],
+      "rows": [
+        [
+          "+ remark-gfm (npm), drop-in",
+          "chat answer (3.3 KB)",
+          "2.76 ms",
+          "2.69 ms",
+          {
+            "text": "−2.5%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ remark-gfm (npm), drop-in",
+          "react-markdown's README (26 KB)",
+          "23.2 ms",
+          "20.8 ms",
+          {
+            "text": "−10.3%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ remark-gfm (npm), drop-in",
+          "CommonMark spec (205 KB)",
+          "154 ms",
+          "140 ms",
+          {
+            "text": "−9.7%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ @itslil/remark-gfm 4.0.2",
+          "chat answer (3.3 KB)",
+          "2.76 ms",
+          "3.14 ms",
+          {
+            "text": "+13.8%",
+            "state": "loss"
+          }
+        ],
+        [
+          "+ @itslil/remark-gfm 4.0.2",
+          "react-markdown's README (26 KB)",
+          "23.2 ms",
+          "23.8 ms",
+          {
+            "text": "+2.7%",
+            "state": "loss"
+          }
+        ],
+        [
+          "+ @itslil/remark-gfm 4.0.2",
+          "CommonMark spec (205 KB)",
+          "154 ms",
+          "176 ms",
+          {
+            "text": "+13.8%",
+            "state": "loss"
+          }
+        ],
+        [
+          "+ gfm, math, KaTeX (npm), drop-in",
+          "chat answer (3.3 KB)",
+          "2.93 ms",
+          "2.86 ms",
+          {
+            "text": "−2.6%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ gfm, math, KaTeX (npm), drop-in",
+          "react-markdown's README (26 KB)",
+          "23.9 ms",
+          "22.3 ms",
+          {
+            "text": "−7.0%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ gfm, math, KaTeX (npm), drop-in",
+          "math notes (2 KB, 20 formulas)",
+          "21.7 ms",
+          "16.6 ms",
+          {
+            "text": "−23.7%",
+            "state": "win"
+          }
+        ],
+        [
+          "+ @itslil gfm, math, KaTeX (npm builds)",
+          "chat answer (3.3 KB)",
+          "2.93 ms",
+          "3.09 ms",
+          {
+            "text": "+5.5%",
+            "state": "loss"
+          }
+        ],
+        [
+          "+ @itslil gfm, math, KaTeX (npm builds)",
+          "react-markdown's README (26 KB)",
+          "23.9 ms",
+          "23.9 ms",
+          {
+            "text": "−0.0%",
+            "state": "even"
+          }
+        ],
+        [
+          "+ @itslil gfm, math, KaTeX (npm builds)",
+          "math notes (2 KB, 20 formulas)",
+          "21.7 ms",
+          "8.27 ms",
+          {
+            "text": "−61.9%",
+            "state": "win"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "stream",
+      "title": "Streaming an answer, as a chat UI does (Chromium)",
+      "lead": "The growing message is re-rendered after every 12 characters (flushSync, so each update is measured whole). Total main-thread time for the whole answer; p95 is per update.",
+      "columns": [
+        "Stack",
+        "stream",
+        "upstream, total",
+        "@itslil, total",
+        "Δ",
+        "p95 per update (upstream / @itslil)"
+      ],
+      "rows": [
+        [
+          "react-markdown alone",
+          "chat answer, 3.3 KB · 277 updates",
+          "225 ms",
+          "210 ms",
+          {
+            "text": "−6.7%",
+            "state": "win"
+          },
+          "1.57 / 1.41 ms"
+        ],
+        [
+          "react-markdown alone",
+          "long answer, 10 KB · 834 updates",
+          "3660 ms",
+          "3181 ms",
+          {
+            "text": "−13.1%",
+            "state": "win"
+          },
+          "7.60 / 6.63 ms"
+        ],
+        [
+          "react-markdown alone",
+          "chat answer, 3.3 KB · 277 updates · 4× CPU",
+          "1009 ms",
+          "905 ms",
+          {
+            "text": "−10.3%",
+            "state": "win"
+          },
+          "7.04 / 6.45 ms"
+        ],
+        [
+          "+ remark-gfm (npm), drop-in",
+          "long answer, 10 KB · 834 updates",
+          "5346 ms",
+          "4855 ms",
+          {
+            "text": "−9.2%",
+            "state": "win"
+          },
+          "11.91 / 10.52 ms"
+        ],
+        [
+          "+ @itslil/remark-gfm 4.0.2",
+          "long answer, 10 KB · 834 updates",
+          "5346 ms",
+          "5711 ms",
+          {
+            "text": "+6.8%",
+            "state": "loss"
+          },
+          "11.91 / 12.57 ms"
+        ],
+        [
+          "+ gfm, math, KaTeX (npm), drop-in",
+          "long answer, 10 KB · 834 updates",
+          "5595 ms",
+          "5525 ms",
+          {
+            "text": "−1.3%",
+            "state": "even"
+          },
+          "12.30 / 12.09 ms"
+        ]
+      ]
+    },
+    {
+      "id": "stages",
+      "title": "Where the time goes (Chromium)",
+      "lead": "Timing plugins at both ends of the unified pipeline split one render: parse (micromark + mdast-util-from-markdown), mdast → hast (remark-rehype, mdast-util-to-hast and any plugins), and hast → React elements (hast-util-to-jsx-runtime). Allocation is sampled by V8, collected objects included.",
+      "columns": [
+        "Stack",
+        "document",
+        "parse",
+        "mdast → hast",
+        "hast → React",
+        "allocated per render"
+      ],
+      "rows": [
+        [
+          "react-markdown",
+          "react-markdown's README (26 KB)",
+          "14.7 ms",
+          "1.16 ms",
+          "1.21 ms",
+          "13.5 MB"
+        ],
+        [
+          "@itslil/react-markdown",
+          "react-markdown's README (26 KB)",
+          "14.4 ms",
+          "0.48 ms",
+          "0.42 ms",
+          "11.8 MB"
+        ],
+        [
+          "react-markdown",
+          "CommonMark spec (205 KB)",
+          "89.5 ms",
+          "4.99 ms",
+          "6.66 ms",
+          ""
+        ],
+        [
+          "@itslil/react-markdown",
+          "CommonMark spec (205 KB)",
+          "90.1 ms",
+          "1.89 ms",
+          "2.18 ms",
+          ""
+        ],
+        [
+          "react-markdown + remark-gfm",
+          "react-markdown's README (26 KB)",
+          "21.6 ms",
+          "1.18 ms",
+          "1.25 ms",
+          "17.2 MB"
+        ],
+        [
+          "@itslil/react-markdown + remark-gfm",
+          "react-markdown's README (26 KB)",
+          "22.4 ms",
+          "0.50 ms",
+          "0.46 ms",
+          "15.3 MB"
+        ]
+      ]
+    },
+    {
+      "id": "firefox",
+      "title": "Firefox 153.0",
+      "lead": "The same app and harness in Firefox (no CPU throttling; Firefox has no DevTools protocol for it).",
+      "columns": [
+        "Measure",
+        "upstream",
+        "@itslil",
+        "Δ"
+      ],
+      "rows": [
+        [
+          "Markdown on screen, desktop load",
+          "244.7 ms",
+          "240.7 ms",
+          {
+            "text": "−4 ms (faster in 13/20)",
+            "state": "even"
+          }
+        ],
+        [
+          "Pipeline, chat answer (3.3 KB)",
+          "2.53 ms",
+          "2.36 ms",
+          {
+            "text": "−6.7%",
+            "state": "win"
+          }
+        ],
+        [
+          "Pipeline, react-markdown's README (26 KB)",
+          "28.0 ms",
+          "26.1 ms",
+          {
+            "text": "−6.8%",
+            "state": "win"
+          }
+        ],
+        [
+          "Pipeline, CommonMark spec (205 KB)",
+          "189 ms",
+          "174 ms",
+          {
+            "text": "−7.8%",
+            "state": "win"
+          }
+        ],
+        [
+          "Pipeline + remark-gfm, react-markdown's README (26 KB)",
+          "36.1 ms",
+          "34.5 ms",
+          {
+            "text": "−4.3%",
+            "state": "win"
+          }
+        ],
+        [
+          "Streaming the 10 KB answer, total",
+          "5550 ms",
+          "5199 ms",
+          {
+            "text": "−6.3%",
+            "state": "win"
+          }
+        ],
+        [
+          "Streaming with remark-gfm, total",
+          "7516 ms",
+          "7144 ms",
+          {
+            "text": "−5.0%",
+            "state": "win"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "correctness",
+      "title": "Same output",
+      "lead": "Each case is rendered by react-markdown and by @itslil/react-markdown in the same page (the production builds) and the DOM is compared. Plugin setups: none, npm remark-gfm, npm gfm + math + KaTeX, rehype-raw, a docs setup (remark-toc, rehype-slug, rehype-highlight), custom components, and allowedElements/urlTransform/skipHtml.",
+      "columns": [
+        "Suite",
+        "cases",
+        "setups",
+        "result"
+      ],
+      "rows": [
+        [
+          "CommonMark 0.31.2 spec",
+          "652 examples",
+          "5 × 2 browsers",
+          {
+            "text": "0 differ",
+            "state": "win"
+          }
+        ],
+        [
+          "GFM spec + extensions (cmark-gfm 0.29.0.gfm.13)",
+          "702 examples",
+          "3 × 2 browsers",
+          {
+            "text": "0 differ",
+            "state": "win"
+          }
+        ],
+        [
+          "Named character references",
+          "2,125 names in text, links, titles and code",
+          "1 × 2 browsers",
+          {
+            "text": "0 differ",
+            "state": "win"
+          }
+        ],
+        [
+          "Real documents (READMEs, CommonMark spec, chat, math)",
+          "7 documents",
+          "7 × 2 browsers",
+          {
+            "text": "0 differ",
+            "state": "win"
+          }
+        ],
+        [
+          "Named references through the Node builds (SSR, then hydration)",
+          "2,125 names",
+          "Node",
+          {
+            "text": "0 differ",
+            "state": "win"
+          }
+        ],
+        [
+          "Seeded fuzz, browser",
+          "3,000 documents",
+          "2 browsers",
+          {
+            "text": "52 differ, all explained below",
+            "state": "even"
+          }
+        ],
+        [
+          "Seeded fuzz with Unicode spaces, Node",
+          "20,000 documents",
+          "Node",
+          {
+            "text": "2,232 differ, all explained below",
+            "state": "even"
+          }
+        ],
+        [
+          "MarkdownHooks with an async plugin",
+          "fallback, then the result",
+          "2 browsers",
+          {
+            "text": "same",
+            "state": "win"
+          }
+        ],
+        [
+          "@itslil/remark-gfm 4.0.2 (npm), under either component",
+          "GFM spec",
+          "2 browsers",
+          {
+            "text": "1 example differs",
+            "state": "loss"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "runtimes",
+      "title": "Where it runs without a DOM",
+      "lead": "Each package bundled with the export conditions of the runtime, then run where there is no document. Worker and edge runtimes resolve the build with the entity table, as upstream's decode-named-character-reference does; the browser build decodes through the document.",
+      "columns": [
+        "Runtime (conditions)",
+        "react-markdown",
+        "@itslil/react-markdown",
+        "file resolved"
+      ],
+      "rows": [
+        [
+          "Node (import)",
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          "dist/react-markdown.esm.js"
+        ],
+        [
+          "Cloudflare Workers (workerd, worker, browser)",
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          "dist/react-markdown.esm.js"
+        ],
+        [
+          "Next.js edge runtime (edge-light, worker, browser)",
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          "dist/react-markdown.esm.js"
+        ],
+        [
+          "Deno",
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          "dist/react-markdown.esm.js"
+        ],
+        [
+          "React Native (Metro)",
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          {
+            "text": "renders",
+            "state": "win"
+          },
+          "dist/react-markdown.esm.js"
+        ]
+      ]
+    }
+  ],
+  "lists": [
+    {
+      "title": "Known differences",
+      "lead": "Every fuzz difference (2,284 of 23,000 documents) has one of the first two causes; none is left unexplained.",
+      "items": [
+        {
+          "title": "A Unicode space in a code-fence language.",
+          "text": "```js title=\"a\" with a non-breaking (or other Unicode) space gives class=\"language-js title=…\" where upstream gives language-js: the port splits the info string at ASCII whitespace, upstream at JavaScript's \\s. Only the class differs (2,242 fuzz documents)."
+        },
+        {
+          "title": "micromark-core-commonmark 2.0.4 (published 2026-09-26).",
+          "text": "Emphasis next to an underscore or an escaped asterisk (a**_b_**c, foo*_bar_*baz, \\**x**) follows 2.0.3, which this package's source graph pins; a fresh install of react-markdown resolves 2.0.4 (42 fuzz documents, 6 of them with the code-fence difference as well)."
+        },
+        {
+          "title": "One module, not tree-shakeable.",
+          "text": "An app that imports only defaultUrlTransform ships 29,034 B Brotli with the port and 264 B with upstream."
+        },
+        {
+          "title": "KaTeX stacks ship a little more.",
+          "text": "With npm rehype-katex the app is +1,254 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in."
+        },
+        {
+          "title": "The @itslil plugin builds on npm are older than their GitHub releases.",
+          "text": "@itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the <mspace> of \\quad; the npm plugins work unchanged with @itslil/react-markdown."
+        },
+        {
+          "title": "Not measured: Safari/WebKit.",
+          "text": "Playwright's WebKit needs system libraries the measuring host does not have."
+        }
+      ]
+    }
+  ],
+  "method": "Measured 2026-09-28 on an Azure Standard_B8als_v2 (8 vCPU, burstable) with Playwright 1.62.1: Chromium 151.0.7922.34, Firefox 153.0; React 19.2.0, Vite 8.3.1; react-markdown 10.1.0 against @itslil/react-markdown packed from this repository, plugins from npm. Reproduce: cd real-app && npm run setup && npm run build && npm run correctness && npm run fuzz && npm run edge && npm run perf && npm run report.",
+  "render": [
+    {
+      "pair": "core",
+      "doc": "small",
+      "up": 0.29499999806284904,
+      "lil": 0.2850000001490116
+    },
+    {
+      "pair": "core",
+      "doc": "chat",
+      "up": 1.5250000022351742,
+      "lil": 1.3825000002980232
+    },
+    {
+      "pair": "core",
+      "doc": "gfmreadme",
+      "up": 10.722500000149012,
+      "lil": 9.594999998807907
+    },
+    {
+      "pair": "core",
+      "doc": "readme",
+      "up": 16.97749999910593,
+      "lil": 14.732499999925494
+    },
+    {
+      "pair": "core",
+      "doc": "unified",
+      "up": 31.91000000014901,
+      "lil": 27.52000000141561
+    },
+    {
+      "pair": "core",
+      "doc": "spec",
+      "up": 106.67499999888241,
+      "lil": 97.58499999903142
+    }
+  ]
+}

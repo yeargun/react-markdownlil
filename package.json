@@ -34,6 +34,17 @@
         "require": "./dist/react-markdown.development.cjs",
         "default": "./dist/react-markdown.esm.js"
       },
+      "deno": "./dist/react-markdown.esm.js",
+      "react-native": {
+        "import": "./dist/react-markdown.esm.js",
+        "require": "./dist/react-markdown.cjs",
+        "default": "./dist/react-markdown.esm.js"
+      },
+      "worker": {
+        "import": "./dist/react-markdown.esm.js",
+        "require": "./dist/react-markdown.cjs",
+        "default": "./dist/react-markdown.esm.js"
+      },
       "browser": "./dist/react-markdown.browser.js",
       "import": "./dist/react-markdown.esm.js",
       "require": "./dist/react-markdown.cjs",

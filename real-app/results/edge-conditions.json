@@ -1,0 +1,74 @@
+[
+ {
+  "runtime": "node (import)",
+  "who": "upstream",
+  "resolved": "decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "node (import)",
+  "who": "port",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.esm.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "cloudflare workers (wrangler)",
+  "who": "upstream",
+  "resolved": "decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "cloudflare workers (wrangler)",
+  "who": "port",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.esm.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "next.js edge runtime",
+  "who": "upstream",
+  "resolved": "decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "next.js edge runtime",
+  "who": "port",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.esm.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "deno",
+  "who": "upstream",
+  "resolved": "decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "deno",
+  "who": "port",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.esm.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "react-native (metro)",
+  "who": "upstream",
+  "resolved": "decode-named-character-reference/index.js, react-markdown/lib/index.js, react-markdown/index.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "react-native (metro)",
+  "who": "port",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.esm.js",
+  "result": "OK <p>© Æ ∉ &amp;</p>"
+ },
+ {
+  "runtime": "browser bundle (vite/webpack prod)",
+  "who": "upstream",
+  "resolved": "decode-named-character-reference/index.dom.js, react-markdown/lib/index.js, react-markdown/index.js",
+  "result": "CRASH document is not defined"
+ },
+ {
+  "runtime": "browser bundle (vite/webpack prod)",
+  "who": "port",
+  "resolved": "@itslil/react-markdown/dist/react-markdown.browser.js",
+  "result": "CRASH document is not defined"
+ }
+]

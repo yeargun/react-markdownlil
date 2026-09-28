@@ -1,4 +1,6 @@
 import { renderCompiler } from "./compiler.js"
+import { renderRealApp } from "./realapp.js"
+import { renderStack } from "./stack.js"
 
 const data = await fetch("./results.json").then((response) => {
   if (!response.ok) throw new Error(`Unable to load results: ${response.status}`)
@@ -154,65 +156,12 @@ function bindProgress() {
   update()
 }
 
-function renderStackDetail(pkg) {
-  const host = document.querySelector("#stack-detail")
-  if (!pkg) {
-    host.innerHTML = ""
-    return
-  }
-  host.innerHTML = `<div class="stack-card" style="margin-top:56px">
-    <div>
-      <h3>${pkg.package}</h3>
-      <p>${pkg.pin}. Official suite ${pkg.spec ? `${pkg.spec.pass}/${pkg.spec.total} ${pkg.spec.label}` : "—" }.</p>
-      <div class="stack-meta">
-        <a href="${pkg.site}">github.io ↗</a>
-        <a href="${pkg.npm}">npm ↗</a>
-      </div>
-    </div>
-    <p>This tab is the same size and spec receipt published on that package’s lab. The playground above stays on the whole react-markdown package.</p>
-  </div>`
-}
-
-async function selectTab(id) {
-  const buttons = document.querySelectorAll("#stack-tabs button")
-  for (const button of buttons) {
-    button.setAttribute("aria-selected", button.dataset.id === id ? "true" : "false")
-  }
-  if (id === "react-markdown") {
-    renderFrom(data)
-    renderStackDetail(null)
-    document.querySelector("#lab").hidden = false
-    return
-  }
-  const pkg = (stackIndex.packages ?? []).find((item) => item.id === id)
-  if (!pkg) return
-  const results = await fetch(`./stack/${id}.json`).then((response) => response.json())
-  renderFrom(results)
-  renderStackDetail(pkg)
-  document.querySelector("#lab").hidden = false
-}
-
-function bindTabs() {
-  const tabs = document.querySelector("#stack-tabs")
-  const items = [{ id: "react-markdown", package: "@itslil/react-markdown" }, ...(stackIndex.packages ?? [])]
-  tabs.innerHTML = items
-    .map(
-      (item) =>
-        `<button type="button" role="tab" data-id="${item.id}" aria-selected="${item.id === "react-markdown"}">${item.package}</button>`,
-    )
-    .join("")
-  tabs.addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-id]")
-    if (!button) return
-    selectTab(button.dataset.id)
-  })
-}
-
 bindCopy()
 bindProgress()
-bindTabs()
 renderFrom(data)
 renderCompiler(data)
+const realApp = await renderRealApp()
+renderStack(data, stackIndex, realApp)
 
 if (document.querySelector("#playground-root")) {
   await import("./playground.js").catch(() => {})
