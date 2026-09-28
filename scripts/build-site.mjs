@@ -66,7 +66,7 @@ function published(dir) {
   return shown.status === 0 ? shown.stdout.toString() : null
 }
 
-if (!existsSync(join(root, "dist", `${file}.esm.js`))) {
+if (!existsSync(join(root, "dist", `${file}.browser.js`))) {
   const built = spawnSync(process.execPath, [join(root, "scripts", "build.mjs"), "--compile"], {
     cwd: root,
     stdio: "inherit",
@@ -77,7 +77,8 @@ if (!existsSync(join(root, "dist", `${file}.esm.js`))) {
 await rm(output, { recursive: true, force: true })
 await mkdir(output, { recursive: true })
 await cp(join(root, "site"), output, { recursive: true })
-await cp(join(root, "dist", `${file}.esm.js`), join(output, `${file}.js`))
+// The page is for browsers: the file it serves is the package's browser program.
+await cp(join(root, "dist", `${file}.browser.js`), join(output, `${file}.js`))
 
 const stackOut = join(output, "stack")
 await mkdir(stackOut, { recursive: true })

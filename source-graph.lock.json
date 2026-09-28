@@ -4,10 +4,10 @@
   "packages": [
     {
       "id": "unified",
-      "package": "@itslil/unified@11.0.6",
-      "siblingRevision": "bbeee952a479acfd45d3fc2b379de2817fe2a641",
-      "sourceSha256": "066761813ad8539b8f8069a5e1f2ff7e34bc61e3de80da6fe36144aeab6afbb4",
-      "graphSha256": "5b9a5806848b020b48fea9a3109552555d64c53a84adbada325e69a8e913b35c",
+      "package": "@itslil/unified@11.0.7",
+      "siblingRevision": "0b16ca8ea46375803aa3fc5a7ae6af93bcc6b9d4",
+      "sourceSha256": "e9ff8415f08e5bfe5e3b99b6ce63fd6e5c40e1450ff7c18746cb8b4fa4b8bd30",
+      "graphSha256": "a12eb13d67054c7650cdbb5cf82ce048c54fd0fe9b2838a1f383d3ea945a3c5f",
       "upstream": {
         "repository": "https://github.com/unifiedjs/unified.git",
         "tag": "11.0.5",
@@ -15,6 +15,26 @@
         "tree": "82877c0fca91f41bda24de546f79a40d2cfaeae1"
       },
       "files": [
+        {
+          "path": "src/browser/vfile-imports.lil",
+          "graphPath": "src/graph/unified/browser/vfile-imports.lil",
+          "sha256": "17515fa203f6b6981aa3d6d3024ee2204605ca241493f833f523e2e8ca260b50",
+          "graphSha256": "17515fa203f6b6981aa3d6d3024ee2204605ca241493f833f523e2e8ca260b50",
+          "upstream": [
+            {
+              "path": "vfile@6.0.3/lib/minpath.browser.js",
+              "sha256": "6c011d74955d2c202e1af91c8616e92e0a2381dce628128553dd81b03c900f95"
+            },
+            {
+              "path": "vfile@6.0.3/lib/minproc.browser.js",
+              "sha256": "f13b22707f7048a983027bec0bfefa9f4630ae4b992031cfd772642c1598f993"
+            },
+            {
+              "path": "vfile@6.0.3/lib/minurl.browser.js",
+              "sha256": "c0fdbff8069606f5eef2ccb588abe8f06a7597bcf1894bd1a9ba155b1ebafc1f"
+            }
+          ]
+        },
         {
           "path": "src/entry.lil",
           "graphPath": "src/graph/unified/entry.lil",
@@ -88,10 +108,30 @@
           ]
         },
         {
+          "path": "src/vfile-imports.lil",
+          "graphPath": "src/graph/unified/vfile-imports.lil",
+          "sha256": "3b61b2a37ac0feac08c5af6c1910d6d2ca9f0a8bde7deb21607651d1965aa180",
+          "graphSha256": "3b61b2a37ac0feac08c5af6c1910d6d2ca9f0a8bde7deb21607651d1965aa180",
+          "upstream": [
+            {
+              "path": "vfile@6.0.3/lib/minpath.js",
+              "sha256": "9246b83dceb34b4deae069662d5612399a7edc833655ebe44a28ac70e1b7344a"
+            },
+            {
+              "path": "vfile@6.0.3/lib/minproc.js",
+              "sha256": "44dfae751a9c90d8ed1fe3e79114c6f23a0515e5e7714e392dcfd268afd06f75"
+            },
+            {
+              "path": "vfile@6.0.3/lib/minurl.js",
+              "sha256": "97a5e44981c259584daad9164251c443f2d6a982f9ab407d5b18732c12709a03"
+            }
+          ]
+        },
+        {
           "path": "src/vfile.lil",
           "graphPath": "src/graph/unified/vfile.lil",
-          "sha256": "044d55ffc6d6d3506521dfb940667253cd6393add8f77ed689aac98e42271195",
-          "graphSha256": "044d55ffc6d6d3506521dfb940667253cd6393add8f77ed689aac98e42271195",
+          "sha256": "b802ee848f32c20ffd2207d9e4b16b7aac257bd5445f0919dfc8b1b8c7b86e99",
+          "graphSha256": "b802ee848f32c20ffd2207d9e4b16b7aac257bd5445f0919dfc8b1b8c7b86e99",
           "upstream": [
             {
               "path": "vfile@6.0.3/lib/index.js",
@@ -111,10 +151,10 @@
     },
     {
       "id": "remark-parse",
-      "package": "@itslil/remark-parse@11.0.2",
-      "siblingRevision": "fd629cecf4ca76501d1c6a21ce450570c1326063",
-      "sourceSha256": "07051b93cbe51a2c1b98f923860132147794041ee91fb5eed0d9094458182112",
-      "graphSha256": "53e969fc5f5bf32ec641887604119f1f20d6c5219a2696aec1deb328032a36b1",
+      "package": "@itslil/remark-parse@11.0.3",
+      "siblingRevision": "083ba3684ab4cc9c92dfa59cf1cda978774f96cf",
+      "sourceSha256": "361b15a286cfad3f6d2759e2c6252f02e0b398deaa898802fd54709a2428c2c7",
+      "graphSha256": "64abbdbc23ed17f49e801306e9cfcf8b7d4ac25a5f97eacdc419d3893054cccd",
       "upstream": {
         "repository": "https://github.com/remarkjs/remark.git",
         "tag": "remark-parse@11.0.0",
@@ -165,7 +205,7 @@
           "graphSha256": "74cb525c1651cc300f78f4770c648d3593c4e2dc3f4a45351e459b29be14d84a",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/constructs.js",
+              "path": "micromark@4.0.3/dev/lib/constructs.js",
               "sha256": "4ea13a4a84bb7ef17d38121ffd79263829222370aa2bc1eaf99db016ac9ca5d4"
             }
           ]
@@ -173,12 +213,12 @@
         {
           "path": "src/micromark/core/attention.lil",
           "graphPath": "src/graph/remark-parse/micromark/core/attention.lil",
-          "sha256": "35d47c10695c713c471cc468088ac8cf975ce0d48e7dff237d951112a09f5632",
-          "graphSha256": "35d47c10695c713c471cc468088ac8cf975ce0d48e7dff237d951112a09f5632",
+          "sha256": "8785d4809209ff4f57b2f9a4b1e44b13e6dfa95fb8642533febc044370b26fbd",
+          "graphSha256": "8785d4809209ff4f57b2f9a4b1e44b13e6dfa95fb8642533febc044370b26fbd",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/attention.js",
-              "sha256": "68a7272fe39790a096c5eec21fa8aacf75c9501a3cf24fa92ed286cea24ae388"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/attention.js",
+              "sha256": "a80deb1561614d952f3b283999cc3f949f23525de164b390e8e78b151049cfea"
             }
           ]
         },
@@ -189,7 +229,7 @@
           "graphSha256": "97e7eb8b4b33f23df8600b7d811b5cfbbb8df23bfc01dfa25fb528a085d55703",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/autolink.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/autolink.js",
               "sha256": "a3cea6304d952c9b4c8846b97bd82b1d197910494f9445b36083b533be3660ed"
             }
           ]
@@ -201,7 +241,7 @@
           "graphSha256": "115d2dcacdf715b02efce52caac3960d5b855939a68dc0a20817491e8b1194b0",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/blank-line.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/blank-line.js",
               "sha256": "d731b3d0f1d83b81421505822c5b23136f5042cdb4dc8c7559c71624e6d01e92"
             }
           ]
@@ -213,7 +253,7 @@
           "graphSha256": "eae45318d2972f4be0fd616cb243d59dd366cb61209b13796d651cfc8297ab49",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/block-quote.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/block-quote.js",
               "sha256": "2a6d2854f85833a1354fb0aa8f5089bd55537b55bdd8b94612eeeb712db0d8fb"
             }
           ]
@@ -225,7 +265,7 @@
           "graphSha256": "20193c0809adfe18e77d04a7a782ad437d912f3de997a402930af8e46031c6ab",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/character-escape.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/character-escape.js",
               "sha256": "6f2aba35a910722534ead485a0d913b7b2beed1d737c9c0f3d3330cc0d307af8"
             }
           ]
@@ -237,7 +277,7 @@
           "graphSha256": "b355201b60833cf854ca7328b4cd1a9d405ae491b4d1b5a70178313c8c16c71a",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/character-reference.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/character-reference.js",
               "sha256": "50efe26b87b50dea2d55e8f4271b4ded853638b2b00b68b5d7287ecb6bf42c1d"
             }
           ]
@@ -245,24 +285,24 @@
         {
           "path": "src/micromark/core/code-fenced.lil",
           "graphPath": "src/graph/remark-parse/micromark/core/code-fenced.lil",
-          "sha256": "3f4bb3f8b531e3729291c8dcdeab6d6a8e6fc2449eafac161d818f2ddbb27a1e",
-          "graphSha256": "3f4bb3f8b531e3729291c8dcdeab6d6a8e6fc2449eafac161d818f2ddbb27a1e",
+          "sha256": "fbf73e900a6ec1c4e65bd5ad337cf9e265cc09ed58a109a6d5af3681ba04dc3f",
+          "graphSha256": "fbf73e900a6ec1c4e65bd5ad337cf9e265cc09ed58a109a6d5af3681ba04dc3f",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/code-fenced.js",
-              "sha256": "ddbb5c3556f2a7400cab8ef9fa2b5d62d5f15860bdcb058d0c749b6f619d5fdb"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/code-fenced.js",
+              "sha256": "578b35f5270418d22802139ebc4848ba284a1b7dbdde8f11d94de8c297a2d4fa"
             }
           ]
         },
         {
           "path": "src/micromark/core/code-indented.lil",
           "graphPath": "src/graph/remark-parse/micromark/core/code-indented.lil",
-          "sha256": "fb8705076d7529695e7da77e235cd90de1af56c92b7ec746de3af9499a2f8be8",
-          "graphSha256": "fb8705076d7529695e7da77e235cd90de1af56c92b7ec746de3af9499a2f8be8",
+          "sha256": "0c425be55062ae56586da36fadf63199832686073abadb34d5dcb3eaba4113c3",
+          "graphSha256": "0c425be55062ae56586da36fadf63199832686073abadb34d5dcb3eaba4113c3",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/code-indented.js",
-              "sha256": "1dbb8e1a0f80571cc457115ebceb7e62820641673ae4b4f108c5b2bd9d6afb8e"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/code-indented.js",
+              "sha256": "cdf898af20e88bf9c22424ba4ec037199665e00d9a88727ecdd4a8b5d2c61d26"
             }
           ]
         },
@@ -273,7 +313,7 @@
           "graphSha256": "d35e0cdd7e33ae98579152b3114a826ff43fe69b3802b9e9db7c58fae8ee4388",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/code-text.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/code-text.js",
               "sha256": "e5540a23ed094c27546f0123aa116ef9bd469118ba1e891418af79c605d95122"
             }
           ]
@@ -285,7 +325,7 @@
           "graphSha256": "05cc704bd51c0eaf8b9740bd243bbd92842e77a0c6d0372834c76d42ca6a7620",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/content.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/content.js",
               "sha256": "6b2361944579f219fa98371b2ebcd134edb442937d5a790709ad2eb2c23c767d"
             }
           ]
@@ -297,7 +337,7 @@
           "graphSha256": "38becb049d8509a9239480090acf683d90d24ad4ef4e8b35f14e92c326788011",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/definition.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/definition.js",
               "sha256": "fe5180346198b9fd0585d98f3a091e07c6b69b3e3cc4fd57fbae642709b3fe96"
             }
           ]
@@ -309,7 +349,7 @@
           "graphSha256": "92b8a9e28270f61184e6572a8e0640c33f7fbd163c24dde1255d7211e7ca0b2a",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/hard-break-escape.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/hard-break-escape.js",
               "sha256": "b270445c07088e2d6e976f1e107017dafb7df1be4d79e168b537b9719e967ab5"
             }
           ]
@@ -321,20 +361,20 @@
           "graphSha256": "9d2fd673aab15d904d2b876aa66e7c92ac30c14f8b838ea34b58d4af0f9d269c",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/heading-atx.js",
-              "sha256": "0e5118537bf3c87b1b18cc40e2bba652201be04c4088d56f7c2750054967a0e6"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/heading-atx.js",
+              "sha256": "cdc3ffd6f3c93f14c3f0ea5962f56107fae479516270b57c6782703b9779d0ad"
             }
           ]
         },
         {
           "path": "src/micromark/core/html-flow.lil",
           "graphPath": "src/graph/remark-parse/micromark/core/html-flow.lil",
-          "sha256": "ba2daf14d7cd5c29ab123ce10374c26fb784770eebf8348ce73bb5a58c3a67ef",
-          "graphSha256": "ba2daf14d7cd5c29ab123ce10374c26fb784770eebf8348ce73bb5a58c3a67ef",
+          "sha256": "c281af2ed8e0cbf2acdaac9f6f2be7e5ef5da63d07c9acc309f96511516d3587",
+          "graphSha256": "c281af2ed8e0cbf2acdaac9f6f2be7e5ef5da63d07c9acc309f96511516d3587",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/html-flow.js",
-              "sha256": "f85f903670d8fd070a56fd2b7af44d0c83d5edaf682ca10c5237026425f0e8b2"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/html-flow.js",
+              "sha256": "1996e938d4e606797a441272acadb9fca91cb26caae5fc154c798f485fef5b56"
             }
           ]
         },
@@ -345,7 +385,7 @@
           "graphSha256": "1e386a681a07b86327fc72dd7735683e86367f0a183a817976a302c0b3da26fa",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/html-text.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/html-text.js",
               "sha256": "c2348014bdeabb73d5fb53dcebe72de149d4fd4d0109089f099d956361937afe"
             }
           ]
@@ -353,36 +393,36 @@
         {
           "path": "src/micromark/core/label-end.lil",
           "graphPath": "src/graph/remark-parse/micromark/core/label-end.lil",
-          "sha256": "4192d0a356f2953a56f695f038c3920ab20305956b310d7061b4cd8bc5274f1d",
-          "graphSha256": "4192d0a356f2953a56f695f038c3920ab20305956b310d7061b4cd8bc5274f1d",
+          "sha256": "458a5430025df6d45ea1d75e645d6d1aeda9b985118f30d34336fc5e5f4fcc1f",
+          "graphSha256": "458a5430025df6d45ea1d75e645d6d1aeda9b985118f30d34336fc5e5f4fcc1f",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/label-end.js",
-              "sha256": "1127987d50522b84787b1f81969b5d43aae0f00fd5d8d5b4fd73261edff95ea5"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/label-end.js",
+              "sha256": "a98205fee00589963f9fc4426871a9eaef43621216d5966df7de3525f7a1cee6"
             }
           ]
         },
         {
           "path": "src/micromark/core/label-start-image.lil",
           "graphPath": "src/graph/remark-parse/micromark/core/label-start-image.lil",
-          "sha256": "e4a9ba23857880369a5b7912a5316c41173094574b6b5b6721447a399a7e7673",
-          "graphSha256": "e4a9ba23857880369a5b7912a5316c41173094574b6b5b6721447a399a7e7673",
+          "sha256": "93c9f78c05ccb6f61784e976eda38b88151e28f7ecb4e94e6b40cb4855a19f58",
+          "graphSha256": "93c9f78c05ccb6f61784e976eda38b88151e28f7ecb4e94e6b40cb4855a19f58",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/label-start-image.js",
-              "sha256": "081c08b2a65a5953d1007ce9d90e219f61a48135290a56a69eeadfb0568526c3"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/label-start-image.js",
+              "sha256": "2f9ef453bb2b58e9ddd4be82c6b327050710a1b7adf2b2dff4612bce99c559f2"
             }
           ]
         },
         {
           "path": "src/micromark/core/label-start-link.lil",
           "graphPath": "src/graph/remark-parse/micromark/core/label-start-link.lil",
-          "sha256": "e350229f5af2055c3a065af25bacaa22765e13f1fb9c137df624cfac1b89d002",
-          "graphSha256": "e350229f5af2055c3a065af25bacaa22765e13f1fb9c137df624cfac1b89d002",
+          "sha256": "c44bd16f9b0c8c5e447b80c86e6957fcbd1ea118e591532ee9890971c48093b0",
+          "graphSha256": "c44bd16f9b0c8c5e447b80c86e6957fcbd1ea118e591532ee9890971c48093b0",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/label-start-link.js",
-              "sha256": "a36c6ad3c1d629e7de9b1b2dd654ddac8ec8aeec546afa306bcf734dd11a5198"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/label-start-link.js",
+              "sha256": "cd0590a7d02d8ca231751dff3fc043ab0d55f54dc273d65ee710adca3727d630"
             }
           ]
         },
@@ -393,7 +433,7 @@
           "graphSha256": "a448ed6a6485a776f3e67941bebef001cdbe486f23bdfd4664842178973d39be",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/line-ending.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/line-ending.js",
               "sha256": "4ae98bbed82460a71cdda62226b094da3c9b8b7dc449377c850778e95f98497d"
             }
           ]
@@ -405,20 +445,32 @@
           "graphSha256": "3a8e976a8a6ccdc8330f26561caa457040ecf0c2d86773551abc505180ef4119",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/list.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/list.js",
               "sha256": "018a96b3766e38af201c63f80955f99fb0af156515a8e4cb1aedb0d68cd6f040"
+            }
+          ]
+        },
+        {
+          "path": "src/micromark/core/partial-non-lazy-continuation.lil",
+          "graphPath": "src/graph/remark-parse/micromark/core/partial-non-lazy-continuation.lil",
+          "sha256": "5af2c36e199564378933b8c17cdd4216891c1b88b0359e0a2a244419745bd721",
+          "graphSha256": "5af2c36e199564378933b8c17cdd4216891c1b88b0359e0a2a244419745bd721",
+          "upstream": [
+            {
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/partial-non-lazy-continuation.js",
+              "sha256": "c9837712e09d2df22050464e4835fcc968a629e88da9a6323910ca7885276dae"
             }
           ]
         },
         {
           "path": "src/micromark/core/setext-underline.lil",
           "graphPath": "src/graph/remark-parse/micromark/core/setext-underline.lil",
-          "sha256": "4e4ca3c5448dd4955789148a6f77ee089c20d55702db91657a92f0641bc6752b",
-          "graphSha256": "4e4ca3c5448dd4955789148a6f77ee089c20d55702db91657a92f0641bc6752b",
+          "sha256": "d0de9d01945e3ef6e84aa15a45fdb5f93d3be2301fe8865c0c950d49358029a7",
+          "graphSha256": "d0de9d01945e3ef6e84aa15a45fdb5f93d3be2301fe8865c0c950d49358029a7",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/setext-underline.js",
-              "sha256": "5b0fa2c9d0619720371d3647f1b951a875e5a5812fbf99cc7f114ee60e7c3072"
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/setext-underline.js",
+              "sha256": "429dbe5f51e097a0c22bb80a4c335239678c44d01e824cc769cfbaf4c5c2bff4"
             }
           ]
         },
@@ -429,7 +481,7 @@
           "graphSha256": "5776bda5a2850218bd3c4c9fdc796d46c8979b2deac17c7e19376c6816a54313",
           "upstream": [
             {
-              "path": "micromark-core-commonmark@2.0.3/dev/lib/thematic-break.js",
+              "path": "micromark-core-commonmark@2.0.4/dev/lib/thematic-break.js",
               "sha256": "dcb65163d7e8742abefe892defd4c4b9c9b688de85b92f439eef87a065598be0"
             }
           ]
@@ -441,8 +493,8 @@
           "graphSha256": "d587bd8a701c469fb05407a1b988231862430bc2d1cbaa0198218a705d41e690",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/create-tokenizer.js",
-              "sha256": "3db90e9fc5908dd92648b631dbd689a268d955f03b43c39db3542fa2d7e5280b"
+              "path": "micromark@4.0.3/dev/lib/create-tokenizer.js",
+              "sha256": "3046dca3821cd57682f7bea3a91879519d7821a5976f2bd8aef5ce644885f7ce"
             }
           ]
         },
@@ -485,12 +537,12 @@
         {
           "path": "src/micromark/factory-space.lil",
           "graphPath": "src/graph/remark-parse/micromark/factory-space.lil",
-          "sha256": "a5932f5e1b06d6517cdc43a5b0a12cfc9a6b875e94d9c937213f5192fb3b50ba",
-          "graphSha256": "a5932f5e1b06d6517cdc43a5b0a12cfc9a6b875e94d9c937213f5192fb3b50ba",
+          "sha256": "10e2f534df5fd967981552355489c5540dd7f66f05da8e18b1aae8f0f009c6c3",
+          "graphSha256": "10e2f534df5fd967981552355489c5540dd7f66f05da8e18b1aae8f0f009c6c3",
           "upstream": [
             {
-              "path": "micromark-factory-space@2.0.1/dev/index.js",
-              "sha256": "8b99bf7e33bfa17acaf71bae820e780e5d731cb6f5c5a52cc2d5f885fba196df"
+              "path": "micromark-factory-space@2.1.0/dev/index.js",
+              "sha256": "c8061bf30fa6302bfb0d4acbd60f73beb61ad77d751df5f942a1bec217f680bd"
             }
           ]
         },
@@ -525,8 +577,8 @@
           "graphSha256": "ba98ab9f1dc8d9dc1bed4fb4278280da8b4e3724276594f59b4a4fd29efc849e",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/create-tokenizer.js",
-              "sha256": "3db90e9fc5908dd92648b631dbd689a268d955f03b43c39db3542fa2d7e5280b"
+              "path": "micromark@4.0.3/dev/lib/create-tokenizer.js",
+              "sha256": "3046dca3821cd57682f7bea3a91879519d7821a5976f2bd8aef5ce644885f7ce"
             }
           ]
         },
@@ -537,7 +589,7 @@
           "graphSha256": "3f4959b21c63be2570bbc74960af330e4b6a9646fbb348cef55300baabff2d45",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/initialize/content.js",
+              "path": "micromark@4.0.3/dev/lib/initialize/content.js",
               "sha256": "31089bf9723fc4cda1d965c8d59b0440c34e657553cc7a25ca1fcca68a724e0e"
             }
           ]
@@ -545,12 +597,12 @@
         {
           "path": "src/micromark/initialize/document.lil",
           "graphPath": "src/graph/remark-parse/micromark/initialize/document.lil",
-          "sha256": "d74de0315b97b124e43f302f64eb4cfd2cc1466dafd00639d20b818a84958856",
-          "graphSha256": "d74de0315b97b124e43f302f64eb4cfd2cc1466dafd00639d20b818a84958856",
+          "sha256": "131e9ea079af0550bb72bfe044e8d4f1865f8145223fd2a140ac876fd512a6ed",
+          "graphSha256": "131e9ea079af0550bb72bfe044e8d4f1865f8145223fd2a140ac876fd512a6ed",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/initialize/document.js",
-              "sha256": "a21a34ddda07cd33f5c0333fadfca0b5da8b41e07e07d208a21fa37b6e337718"
+              "path": "micromark@4.0.3/dev/lib/initialize/document.js",
+              "sha256": "5393afecf82bbf1084ca353cb97d373394ad9733d5fbeb22496265579b63fcce"
             }
           ]
         },
@@ -561,7 +613,7 @@
           "graphSha256": "4ed3a38963b8557e3d1cf818ad7ba0f9bcd3f90c2268f91962891ec3fb14f1e7",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/initialize/flow.js",
+              "path": "micromark@4.0.3/dev/lib/initialize/flow.js",
               "sha256": "7b94046af28ffb28bfd60e70eb183066663cd3875e03393a7acaa92dba9af1e9"
             }
           ]
@@ -569,12 +621,12 @@
         {
           "path": "src/micromark/initialize/text.lil",
           "graphPath": "src/graph/remark-parse/micromark/initialize/text.lil",
-          "sha256": "85651ec8148ff18619ca4e46f5e5e4ea5c810c537b6e69d807fc824e4a1f1905",
-          "graphSha256": "85651ec8148ff18619ca4e46f5e5e4ea5c810c537b6e69d807fc824e4a1f1905",
+          "sha256": "7fbecd09aaf42b50850007228d62d7adbe2e2b761ecbabdc4de644216035d1ba",
+          "graphSha256": "7fbecd09aaf42b50850007228d62d7adbe2e2b761ecbabdc4de644216035d1ba",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/initialize/text.js",
-              "sha256": "5b13ee844b759a68e6c559eaf9248da10e6c25002e3a0ff37d5bd1834eec8714"
+              "path": "micromark@4.0.3/dev/lib/initialize/text.js",
+              "sha256": "42f71a37602a65811779e2ae2977bd968504e2b54b575c1458ebb7dd0ca4ff66"
             }
           ]
         },
@@ -585,7 +637,7 @@
           "graphSha256": "b036c2932912ef350c629c126601292bda49caab2a0152d77988dcb979481d83",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/parse.js",
+              "path": "micromark@4.0.3/dev/lib/parse.js",
               "sha256": "ae9cf9fc82bcf90bec3b26e35b82aae65a2f532e11b0a2432ff0d905d1b7904b"
             }
           ]
@@ -597,7 +649,7 @@
           "graphSha256": "0ea578b00bed09960e8f9c2d06f962b9e626fec4a528beaba4be30f2c5c50b31",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/postprocess.js",
+              "path": "micromark@4.0.3/dev/lib/postprocess.js",
               "sha256": "19235517bce642e601323905abee5412cb3f5c8a5e997084a23f30ac7b4da665"
             }
           ]
@@ -609,8 +661,8 @@
           "graphSha256": "ce28b92f70b3bd54428324b0f6695ca162aa5df1d2e0f431fde1f8ef4638e9b8",
           "upstream": [
             {
-              "path": "micromark@4.0.2/dev/lib/preprocess.js",
-              "sha256": "e8d45ad4b25f9a2700fe5ebaac62b053282c8ef06b6c332ee0a8c536b35036c0"
+              "path": "micromark@4.0.3/dev/lib/preprocess.js",
+              "sha256": "9fcd1199a8f45c9c9f34b6697f29a1482efaf2e76ecc116cfcc4b86d7d3201c2"
             }
           ]
         },
@@ -747,6 +799,18 @@
           ]
         },
         {
+          "path": "src/micromark/util-edit-map.lil",
+          "graphPath": "src/graph/remark-parse/micromark/util-edit-map.lil",
+          "sha256": "e3c8260f5d93c40adf0423ae85ae6f24508aba764eafb850b509eb83301bf16b",
+          "graphSha256": "e3c8260f5d93c40adf0423ae85ae6f24508aba764eafb850b509eb83301bf16b",
+          "upstream": [
+            {
+              "path": "micromark-util-edit-map@1.0.0/dev/index.js",
+              "sha256": "98048a86eeaf5d5b9c85715c124bd5865685a964cabe2a77e5039bf11d987017"
+            }
+          ]
+        },
+        {
           "path": "src/micromark/util-html-tag-name.lil",
           "graphPath": "src/graph/remark-parse/micromark/util-html-tag-name.lil",
           "sha256": "db2a6d54b5cbdbc8273a776f7b609fb2ed9b90f87242c1d26801ef11771b0380",
@@ -822,10 +886,10 @@
     },
     {
       "id": "remark-rehype",
-      "package": "@itslil/remark-rehype@11.1.4",
-      "siblingRevision": "95ab87113bb8f4a0c7ccca8c8caa14e6c9c65af3",
-      "sourceSha256": "cca4c2779b67e727743e4b6d9b2f6225df3f653451c9f59f2290e510fd65946a",
-      "graphSha256": "acbb0cf4396fb2271e2c070a11f250e8287f27dbebdec641815333c1b0f2f8fa",
+      "package": "@itslil/remark-rehype@11.1.6",
+      "siblingRevision": "2bd9529f4c7c761ea861c0d70ecab533cd38acbb",
+      "sourceSha256": "7a936e663cd07aae4c4cf595543acfbe2d2c98cd39827880bbd96f93bcbdc72f",
+      "graphSha256": "65d4aeef944f0c1fe3e51742272a97656624bd439e345b691b01c23660e9b2cc",
       "upstream": {
         "repository": "https://github.com/remarkjs/remark-rehype.git",
         "tag": "11.1.2",
@@ -848,8 +912,8 @@
         {
           "path": "src/hast/convert.lil",
           "graphPath": "src/graph/remark-rehype/hast/convert.lil",
-          "sha256": "0a1b84c293a46c7203021074a62f6dce5478ca08b0434d86d68c45f334f76cde",
-          "graphSha256": "74927a0f56b910d012112d12baed5fe6d0b7872f9b07564e27695a83a65dd004",
+          "sha256": "408d807a8668b4c46e2502c52ccecdf345d373249c44d5a831e55f0efbc2a357",
+          "graphSha256": "93c26d08f35f7127fc9312474a39b83ec5a4dc510eddd36461382dcf1c98b65a",
           "upstream": [
             {
               "path": "mdast-util-to-hast@13.2.1/lib/state.js",
@@ -970,10 +1034,30 @@
           ]
         },
         {
+          "path": "src/hast/structured-clone.lil",
+          "graphPath": "src/graph/remark-rehype/hast/structured-clone.lil",
+          "sha256": "a5dfbee9c82ac59ccbda7fafd55217d0dd90cbf0d3d13a9818e3a211fec8a259",
+          "graphSha256": "fbca49e7ded9f5f5f6a34579673fa041f5bc7da8cd0d0a913a1423e385c7734c",
+          "upstream": [
+            {
+              "path": "@ungap/structured-clone@1.4.0/esm/index.js",
+              "sha256": "7ddb0560a1215343ca695210f659fb348ec5d93d0b0e76bbc5959f88cdc2036b"
+            },
+            {
+              "path": "@ungap/structured-clone@1.4.0/esm/serialize.js",
+              "sha256": "913596ce0a90bade01473863f1f9895bd7e0d4e505f21b73bb206dc1d763a88f"
+            },
+            {
+              "path": "@ungap/structured-clone@1.4.0/esm/deserialize.js",
+              "sha256": "6b114d6e4acfa158885fcb8d0e0dda1f8daa8a6ba54acd5ccae59806eca1089f"
+            }
+          ]
+        },
+        {
           "path": "src/hast/types.lil",
           "graphPath": "src/graph/remark-rehype/hast/types.lil",
-          "sha256": "8cedef100ce0b759088a08c4ecf6c9e63dde6ee699cac217fd585ac1add5ff7d",
-          "graphSha256": "3665faa603c8afc4f9b50dffc6364984b1a78b7a888f1b4b5080ebbc1616c513",
+          "sha256": "6323ae0c126df16614bf8a6473e3256058a0485abc22879fe2a0f6554c717aea",
+          "graphSha256": "c60a9a36c9b5eab799e754bbbda7603323ac4948fff9e997bd555966c4a6cd67",
           "upstream": [
             {
               "path": "mdast-util-to-hast@13.2.1/lib/state.js",
@@ -998,7 +1082,8 @@
         "remark-parse/src/micromark/character-entities.lil",
         "remark-rehype/src/entry.lil",
         "remark-rehype/src/hast/convert.lil",
-        "remark-rehype/src/hast/types.lil"
+        "remark-rehype/src/hast/types.lil",
+        "remark-rehype/src/hast/structured-clone.lil"
       ]
     }
   ]

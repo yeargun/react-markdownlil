@@ -15,4 +15,3 @@ export extern JsValue Array;
 export extern JsValue Math;
 export extern JsValue Promise;
 export extern JsValue encodeURIComponent;
-export extern JsValue structuredClone;

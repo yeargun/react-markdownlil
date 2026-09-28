@@ -25,7 +25,7 @@ const definitions = [
     env: "UNIFIEDLIL_ROOT",
     sibling: "../unifiedlil",
     packageName: "@itslil/unified",
-    packageVersion: "11.0.6",
+    packageVersion: "11.0.7",
     upstream: {
       repository: "https://github.com/unifiedjs/unified.git",
       tag: "11.0.5",
@@ -38,7 +38,7 @@ const definitions = [
     env: "REMARK_PARSELIL_ROOT",
     sibling: "../remark-parselil",
     packageName: "@itslil/remark-parse",
-    packageVersion: "11.0.2",
+    packageVersion: "11.0.3",
     upstream: {
       repository: "https://github.com/remarkjs/remark.git",
       tag: "remark-parse@11.0.0",
@@ -51,7 +51,7 @@ const definitions = [
     env: "REMARK_REHYPELIL_ROOT",
     sibling: "../remark-rehypelil",
     packageName: "@itslil/remark-rehype",
-    packageVersion: "11.1.4",
+    packageVersion: "11.1.6",
     upstream: {
       repository: "https://github.com/remarkjs/remark-rehype.git",
       tag: "11.1.2",
@@ -142,10 +142,24 @@ extern JsValue Map;`
   }
   if (id === "remark-rehype" && path === "src/hast/types.lil") {
     const before = `extern JsValue Object;
-extern JsValue String;
-extern JsValue structuredClone;`
-    const after = 'import { Object, String, structuredClone } from "../../../host.lil";'
+extern JsValue String;`
+    const after = 'import { Object, String } from "../../../host.lil";'
     if (!source.includes(before)) throw new Error("remark-rehype host source no longer matches the audited graph wiring")
+    return source.replace(before, after)
+  }
+  if (id === "remark-rehype" && path === "src/hast/structured-clone.lil") {
+    // @ungap/structured-clone (the sibling's port): the globals the host table has come from it.
+    const before = `extern JsValue Error;
+extern JsValue JSON;
+extern JsValue Map;
+extern JsValue Object;
+extern JsValue Reflect;
+extern JsValue RegExp;
+extern JsValue Symbol;
+extern JsValue TypeError;
+extern JsValue globalThis;`
+    const after = 'import { Error, JSON, Map, Object, Reflect, RegExp, Symbol, TypeError, globalThis } from "../../../host.lil";'
+    if (!source.startsWith(before)) throw new Error("remark-rehype structured-clone source no longer matches the audited graph wiring")
     return source.replace(before, after)
   }
   return source
@@ -157,6 +171,10 @@ function upstreamFiles(id, path) {
     if (path === "src/extend.lil") return ["extend@3.0.2/index.js"]
     if (path === "src/plain.lil") return ["is-plain-obj@4.1.0/index.js"]
     if (path === "src/trough.lil") return ["trough@2.2.0/lib/index.js"]
+    if (path === "src/vfile-imports.lil") return ["vfile@6.0.3/lib/minpath.js", "vfile@6.0.3/lib/minproc.js", "vfile@6.0.3/lib/minurl.js"]
+    if (path === "src/browser/vfile-imports.lil") {
+      return ["vfile@6.0.3/lib/minpath.browser.js", "vfile@6.0.3/lib/minproc.browser.js", "vfile@6.0.3/lib/minurl.browser.js"]
+    }
     if (path === "src/vfile.lil") {
       return [
         "vfile@6.0.3/lib/index.js",
@@ -170,6 +188,13 @@ function upstreamFiles(id, path) {
   if (id === "remark-rehype") {
     if (path === "src/entry.lil") return ["remark-rehype@11.1.2/lib/index.js"]
     if (path === "src/hast/entry.lil") return ["mdast-util-to-hast@13.2.1/lib/index.js"]
+    if (path === "src/hast/structured-clone.lil") {
+      return [
+        "@ungap/structured-clone@1.4.0/esm/index.js",
+        "@ungap/structured-clone@1.4.0/esm/serialize.js",
+        "@ungap/structured-clone@1.4.0/esm/deserialize.js",
+      ]
+    }
     if (path === "src/hast/types.lil") {
       return [
         "mdast-util-to-hast@13.2.1/lib/state.js",
@@ -213,13 +238,13 @@ function upstreamFiles(id, path) {
   if (path === "src/micromark/character-entities.lil") return ["character-entities@2.0.2/index.js"]
   if (path === "src/micromark/decode-named.lil") return ["decode-named-character-reference@1.3.0/index.js"]
   const name = path.slice(path.lastIndexOf("/") + 1).replace(/\.lil$/u, ".js")
-  if (path.includes("/micromark/core/")) return [`micromark-core-commonmark@2.0.3/dev/lib/${name}`]
-  if (path.includes("/micromark/initialize/")) return [`micromark@4.0.2/dev/lib/initialize/${name}`]
+  if (path.includes("/micromark/core/")) return [`micromark-core-commonmark@2.0.4/dev/lib/${name}`]
+  if (path.includes("/micromark/initialize/")) return [`micromark@4.0.3/dev/lib/initialize/${name}`]
   if (path.includes("/micromark/symbol/")) return [`micromark-util-symbol@2.0.1/lib/${name}`]
   const utility = {
     "factory-destination.lil": "micromark-factory-destination@2.0.1/dev/index.js",
     "factory-label.lil": "micromark-factory-label@2.0.1/dev/index.js",
-    "factory-space.lil": "micromark-factory-space@2.0.1/dev/index.js",
+    "factory-space.lil": "micromark-factory-space@2.1.0/dev/index.js",
     "factory-title.lil": "micromark-factory-title@2.0.1/dev/index.js",
     "factory-whitespace.lil": "micromark-factory-whitespace@2.0.1/dev/index.js",
     "splice-buffer.lil": "micromark-util-subtokenize@2.1.0/dev/lib/splice-buffer.js",
@@ -230,13 +255,14 @@ function upstreamFiles(id, path) {
     "util-combine-extensions.lil": "micromark-util-combine-extensions@2.0.1/index.js",
     "util-decode-numeric.lil": "micromark-util-decode-numeric-character-reference@2.0.2/index.js",
     "util-decode-string.lil": "micromark-util-decode-string@2.0.1/index.js",
+    "util-edit-map.lil": "micromark-util-edit-map@1.0.0/dev/index.js",
     "util-html-tag-name.lil": "micromark-util-html-tag-name@2.0.1/index.js",
     "util-normalize-identifier.lil": "micromark-util-normalize-identifier@2.0.1/index.js",
     "util-resolve-all.lil": "micromark-util-resolve-all@2.0.1/index.js",
   }[path.slice(path.lastIndexOf("/") + 1)]
   if (utility) return [utility]
-  if (path === "src/micromark/host.lil") return ["micromark@4.0.2/dev/lib/create-tokenizer.js"]
-  return [`micromark@4.0.2/dev/lib/${name}`]
+  if (path === "src/micromark/host.lil") return ["micromark@4.0.3/dev/lib/create-tokenizer.js"]
+  return [`micromark@4.0.3/dev/lib/${name}`]
 }
 
 function siblingRoot(definition) {
@@ -327,6 +353,7 @@ function makeLock() {
           "remark-rehype/src/entry.lil",
           "remark-rehype/src/hast/convert.lil",
           "remark-rehype/src/hast/types.lil",
+          "remark-rehype/src/hast/structured-clone.lil",
         ],
       },
     ],

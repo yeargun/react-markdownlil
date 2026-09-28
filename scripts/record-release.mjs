@@ -44,11 +44,14 @@ const compilerWritten =
 const cjsWritten =
   "compiler (the build adds a license banner, the React requires, the `development` flag, and module.exports in place of the export clause)"
 const deliveredFiles = [
-  ["dist/react-markdown.browser.js", "ESM, `browser` condition: named references decoded by the document", compilerWritten],
-  ["dist/react-markdown.esm.js", "ESM (npm import, Node): named references from the entity table", compilerWritten],
-  ["dist/react-markdown.cjs", "CommonJS (npm require)", cjsWritten],
-  ["dist/react-markdown.development.js", "ESM, `development` condition (devlop assertions on)", compilerWritten],
-  ["dist/react-markdown.development.cjs", "CommonJS, `development` condition", cjsWritten],
+  ["dist/react-markdown.browser.js", "ESM, `browser` condition: named references decoded by the document, vfile's own path shims", compilerWritten],
+  ["dist/react-markdown.worker.js", "ESM for runtimes without `node` or `browser` (edge-light, react-native, worker, workerd, convex): the entity table and vfile's own path shims", compilerWritten],
+  ["dist/react-markdown.esm.js", "ESM, `node` condition (Node, Deno, Bun): the entity table, and node:path, node:process and node:url as upstream's vfile imports them", compilerWritten],
+  ["dist/react-markdown.cjs", "CommonJS, `node` with `require`", cjsWritten],
+  ["dist/react-markdown.development.js", "ESM, `development` with `node` (devlop assertions on)", compilerWritten],
+  ["dist/react-markdown.development.cjs", "CommonJS, `development` with `node` and `require`", cjsWritten],
+  ["dist/react-markdown.browser.development.js", "ESM, `development` with `browser`: the browser program with devlop assertions on", compilerWritten],
+  ["dist/react-markdown.worker.development.js", "ESM, `development` with a worker condition: the worker program with devlop assertions on", compilerWritten],
   ["dist/react-markdown.closed.js", "`./closed` export: no builtin or callback assumptions", compilerWritten],
 ]
 
@@ -195,6 +198,7 @@ results.size = [
   row("itslil-closed", "@itslil/react-markdown · closed", closed,
     "dist/react-markdown.closed.js, the `./closed` export: the Node program without the builtin and callback assumptions."),
 ]
+const graphModules = JSON.parse(readFileSync(resolve(root, "source-graph.lock.json"), "utf8")).packages.flatMap(({ files }) => files).length
 const codecs = report.tools.codec
 results.codec = `lilscript-codec: zlib ${codecs.gzip9.libraryVersion} gzip-${codecs.gzip9.level} / Google Brotli ${codecs.brotli11.libraryVersion} quality ${codecs.brotli11.quality}, lgwin ${codecs.brotli11.lgwin}`
 results.node = process.version
@@ -202,7 +206,7 @@ results.runtime = `Node ${process.version}`
 results.warmupDiscard = 3
 results.comparison =
   `Official rows bundle react-markdown@10.1.0 and its runtime dependencies for the browser with esbuild ${report.tools.esbuild} (React external), then minify with Terser ${report.tools.terser}, Oxc or esbuild; one row is the same graph built from react-markdown's pinned Git source. ` +
-  "LilScript rows are the delivered files, written by the compiler from one 69-module source graph with no minifier after it. The strongest bar is the baseline."
+  `LilScript rows are the delivered files, written by the compiler from one ${graphModules}-module source graph with no minifier after it. The strongest bar is the baseline.`
 results.spec = { total: official.total, pass: official.pass, label: "official react-markdown tests" }
 results.throughput = [
   { id: "official", name: "react-markdown@10.1.0", documentMs: round(officialMs, 3) },

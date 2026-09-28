@@ -47,16 +47,19 @@ real-app test below. LilScript ports of the plugins exist too
 earlier 4.0.2 and 7.0.2 builds have the differences listed under *Known
 differences*.
 
-The processor uses the exact LilScript sources from `@itslil/unified@11.0.6`,
-`@itslil/remark-parse@11.0.2`, and `@itslil/remark-rehype@11.1.4`. They are
+The processor uses the exact LilScript sources from `@itslil/unified@11.0.7`,
+`@itslil/remark-parse@11.0.3`, and `@itslil/remark-rehype@11.1.6`. They are
 hash-locked in `source-graph.lock.json` and compiled with this package as one
 static LilScript graph, before code generation and optimization.
 HAST-to-JSX conversion, property schemas, inline-style parsing, tree traversal,
-VFile behavior, and development assertions are implemented in the shipped
+VFile behavior, @ungap/structured-clone (with its fallback for runtimes that have
+no `structuredClone`), and development assertions are implemented in the shipped
 LilScript source rather than delegated to their JavaScript packages.
 The processor and renderer share one in-graph VFile constructor. Runtime plugin
 functions remain dynamic unified boundaries. React and `react/jsx-runtime` are
-the only runtime imports in the ESM and CJS artifacts.
+the only runtime imports of the browser and worker builds; the Node build also
+imports `node:path`, `node:process` and `node:url`, as upstream's vfile does under
+the `node` condition.
 
 <!-- real-app:start -->
 <!-- Written by real-app/scripts/summarize.mjs from real-app/results; do not edit by hand. -->
@@ -64,9 +67,9 @@ the only runtime imports in the ESM and CJS artifacts.
 
 The same React app, built with Vite once per markdown stack and driven by Playwright ([`real-app/`](real-app/)).
 
-- **−4.3 KB** JavaScript the app ships, Brotli-11 (react-markdown alone)
-- **−13.2%** render time, react-markdown's README, warm (Chromium)
-- **−13.1%** main-thread time streaming a 10 KB answer (Chromium)
+- **−3.1 KB** JavaScript the app ships, Brotli-11 (react-markdown alone)
+- **−12.4%** render time, react-markdown's README, warm (Chromium)
+- **−7.5%** main-thread time streaming a 10 KB answer (Chromium)
 - **0** differences in 1,354 CommonMark and GFM spec examples and 2,125 named references, Chromium and Firefox
 
 ### What the app ships
@@ -77,13 +80,13 @@ All JavaScript of the app, React 19.2.0 included: Vite 8.3.1 production build (R
 |---|---:|---:|---:|---:|---:|
 | App without markdown (baseline) | 193,483 | 60,172 | 51,950 | — | — |
 | react-markdown 10.1.0 | 310,588 | 94,972 | 82,134 | 30,184 | — |
-| @itslil/react-markdown | 282,260 | 89,957 | 77,787 | 25,837 | −4,347 B (−14.4% of what markdown adds) |
+| @itslil/react-markdown | 285,625 | 91,318 | 79,001 | 27,051 | −3,133 B (−10.4% of what markdown adds) |
 | react-markdown + remark-gfm 4.0.1 | 348,442 | 105,566 | 90,991 | 39,041 | — |
-| @itslil/react-markdown + remark-gfm (npm) | 323,962 | 101,823 | 88,056 | 36,106 | −2,935 B (−7.5% of what markdown adds) |
-| @itslil/react-markdown + @itslil/remark-gfm 4.0.2 | 315,577 | 100,769 | 87,288 | 35,338 | −3,703 B (−9.5% of what markdown adds) |
+| @itslil/react-markdown + remark-gfm (npm) | 327,385 | 103,204 | 89,252 | 37,302 | −1,739 B (−4.5% of what markdown adds) |
+| @itslil/react-markdown + @itslil/remark-gfm 4.0.3 | 317,909 | 101,777 | 88,171 | 36,221 | −2,820 B (−7.2% of what markdown adds) |
 | react-markdown + remark-gfm, remark-math, rehype-katex | 627,629 | 187,225 | 157,237 | 105,287 | — |
-| @itslil/react-markdown + the same npm plugins | 621,258 | 189,231 | 158,491 | 106,541 | +1,254 B (+1.2% of what markdown adds) |
-| @itslil/react-markdown + @itslil/remark-gfm, remark-math, rehype-katex (4.0.2, 6.0.1, 7.0.2) | 613,103 | 188,470 | 158,544 | 106,594 | +1,307 B (+1.2% of what markdown adds) |
+| @itslil/react-markdown + the same npm plugins | 624,659 | 190,652 | 159,620 | 107,670 | +2,383 B (+2.3% of what markdown adds) |
+| @itslil/react-markdown + @itslil/remark-gfm, remark-math, rehype-katex (4.0.3, 6.0.2, 7.0.3) | 617,612 | 190,385 | 159,757 | 107,807 | +2,520 B (+2.4% of what markdown adds) |
 
 ### Time to markdown on screen (Chromium)
 
@@ -91,12 +94,12 @@ A fresh browser context per load; the app fetches react-markdown's README and re
 
 | Stack | desktop, upstream | desktop, @itslil | Δ | mobile, upstream | mobile, @itslil | Δ |
 |---|---:|---:|---:|---:|---:|---:|
-| App without markdown | 60.7 ms | — | — | 877 ms | — | — |
-| react-markdown alone | 144.8 ms | 145.8 ms | +1 ms (faster in 9/12) | 1320 ms | 1306 ms | −14 ms (faster in 7/12) |
-| + remark-gfm (npm), drop-in | 161.4 ms | 161.5 ms | +0 ms (faster in 7/12) | 1408 ms | 1407 ms | −1 ms (faster in 9/12) |
-| + @itslil/remark-gfm 4.0.2 | 161.4 ms | 167.5 ms | +6 ms (faster in 5/12) | 1408 ms | 1422 ms | +14 ms (faster in 6/12) |
-| + gfm, math, KaTeX (npm), drop-in | 187.6 ms | 194.3 ms | +7 ms (faster in 4/12) | 1873 ms | 1868 ms | −6 ms (faster in 7/12) |
-| + @itslil gfm, math, KaTeX (npm builds) | 187.6 ms | 196.1 ms | +8 ms (faster in 2/12) | 1873 ms | 1889 ms | +15 ms (faster in 2/12) |
+| App without markdown | 64.7 ms | — | — | 884 ms | — | — |
+| react-markdown alone | 149.8 ms | 151.6 ms | +2 ms (faster in 8/12) | 1341 ms | 1330 ms | −11 ms (faster in 7/12) |
+| + remark-gfm (npm), drop-in | 164.2 ms | 164.8 ms | +1 ms (faster in 6/12) | 1436 ms | 1432 ms | −4 ms (faster in 6/12) |
+| + @itslil/remark-gfm 4.0.3 | 164.2 ms | 169.1 ms | +5 ms (faster in 6/12) | 1436 ms | 1439 ms | +3 ms (faster in 5/12) |
+| + gfm, math, KaTeX (npm), drop-in | 191.4 ms | 204.3 ms | +13 ms (faster in 3/12) | 1877 ms | 1890 ms | +14 ms (faster in 5/12) |
+| + @itslil gfm, math, KaTeX (npm builds) | 191.4 ms | 214.4 ms | +23 ms (faster in 2/12) | 1877 ms | 1902 ms | +25 ms (faster in 5/12) |
 
 ### Rendering, react-markdown alone (Chromium)
 
@@ -104,13 +107,13 @@ Warm medians on 5 fresh pages per variant, variants interleaved round by round. 
 
 | Document | pipeline, upstream | pipeline, @itslil | Δ | mount, upstream | mount, @itslil | Δ |
 |---|---:|---:|---:|---:|---:|---:|
-| short reply (307 B) | 0.29 ms | 0.29 ms | −3.4% | 0.41 ms | 0.35 ms | −12.3% |
-| chat answer (3.3 KB) | 1.53 ms | 1.38 ms | −9.3% | 1.71 ms | 1.55 ms | −9.2% |
-| remark-gfm's README (15 KB) | 10.7 ms | 9.59 ms | −10.5% | 11.1 ms | 10.1 ms | −9.7% |
-| react-markdown's README (26 KB) | 17.0 ms | 14.7 ms | −13.2% | 17.9 ms | 16.2 ms | −9.2% |
-| unified's README (49 KB) | 31.9 ms | 27.5 ms | −13.8% | 34.7 ms | 31.9 ms | −7.9% |
-| CommonMark spec (205 KB) | 107 ms | 97.6 ms | −8.5% | 109 ms | 99.2 ms | −8.7% |
-| chat history, 40 messages | — | — | — | 7.72 ms | 7.27 ms | −5.9% |
+| short reply (307 B) | 0.30 ms | 0.29 ms | −3.3% | 0.40 ms | 0.38 ms | −6.8% |
+| chat answer (3.3 KB) | 1.52 ms | 1.44 ms | −5.6% | 1.71 ms | 1.69 ms | −1.0% |
+| remark-gfm's README (15 KB) | 10.7 ms | 9.59 ms | −10.2% | 11.0 ms | 9.94 ms | −9.6% |
+| react-markdown's README (26 KB) | 16.9 ms | 14.8 ms | −12.4% | 18.6 ms | 17.0 ms | −8.8% |
+| unified's README (49 KB) | 32.3 ms | 29.3 ms | −9.1% | 34.1 ms | 31.3 ms | −8.4% |
+| CommonMark spec (205 KB) | 110 ms | 100.0 ms | −8.7% | 110 ms | 103 ms | −6.4% |
+| chat history, 40 messages | — | — | — | 7.48 ms | 7.80 ms | +4.3% |
 
 ### Rendering at 4× CPU slowdown (Chromium)
 
@@ -118,13 +121,13 @@ The same, with the CPU slowed four times (a mid-range phone).
 
 | Document | pipeline, upstream | pipeline, @itslil | Δ | mount, upstream | mount, @itslil | Δ |
 |---|---:|---:|---:|---:|---:|---:|
-| short reply (307 B) | 1.40 ms | 1.37 ms | −2.5% | 1.73 ms | 1.92 ms | +11.3% |
-| chat answer (3.3 KB) | 9.28 ms | 8.09 ms | −12.8% | 7.68 ms | 7.35 ms | −4.4% |
-| remark-gfm's README (15 KB) | 43.4 ms | 39.2 ms | −9.7% | 50.9 ms | 45.4 ms | −10.7% |
-| react-markdown's README (26 KB) | 69.0 ms | 62.6 ms | −9.2% | 75.3 ms | 67.9 ms | −9.7% |
-| unified's README (49 KB) | 135 ms | 138 ms | +1.9% | 156 ms | 142 ms | −9.3% |
-| CommonMark spec (205 KB) | 463 ms | 406 ms | −12.3% | 473 ms | 433 ms | −8.4% |
-| chat history, 40 messages | — | — | — | 40.4 ms | 33.3 ms | −17.7% |
+| short reply (307 B) | 1.61 ms | 1.44 ms | −10.9% | 1.76 ms | 2.14 ms | +21.6% |
+| chat answer (3.3 KB) | 10.3 ms | 9.40 ms | −8.5% | 8.59 ms | 8.04 ms | −6.3% |
+| remark-gfm's README (15 KB) | 48.5 ms | 45.0 ms | −7.4% | 54.6 ms | 52.3 ms | −4.1% |
+| react-markdown's README (26 KB) | 78.9 ms | 74.2 ms | −6.0% | 83.7 ms | 81.3 ms | −2.9% |
+| unified's README (49 KB) | 162 ms | 158 ms | −2.1% | 171 ms | 176 ms | +2.6% |
+| CommonMark spec (205 KB) | 497 ms | 450 ms | −9.4% | 508 ms | 474 ms | −6.6% |
+| chat history, 40 messages | — | — | — | 39.6 ms | 40.4 ms | +2.1% |
 
 ### Rendering with plugins (Chromium)
 
@@ -132,18 +135,18 @@ Pipeline only, warm medians. The npm plugins on both sides, then the @itslil plu
 
 | Stack | document | upstream | @itslil | Δ |
 |---|---:|---:|---:|---:|
-| + remark-gfm (npm), drop-in | chat answer (3.3 KB) | 2.76 ms | 2.69 ms | −2.5% |
-| + remark-gfm (npm), drop-in | react-markdown's README (26 KB) | 23.2 ms | 20.8 ms | −10.3% |
-| + remark-gfm (npm), drop-in | CommonMark spec (205 KB) | 154 ms | 140 ms | −9.7% |
-| + @itslil/remark-gfm 4.0.2 | chat answer (3.3 KB) | 2.76 ms | 3.14 ms | +13.8% |
-| + @itslil/remark-gfm 4.0.2 | react-markdown's README (26 KB) | 23.2 ms | 23.8 ms | +2.7% |
-| + @itslil/remark-gfm 4.0.2 | CommonMark spec (205 KB) | 154 ms | 176 ms | +13.8% |
-| + gfm, math, KaTeX (npm), drop-in | chat answer (3.3 KB) | 2.93 ms | 2.86 ms | −2.6% |
-| + gfm, math, KaTeX (npm), drop-in | react-markdown's README (26 KB) | 23.9 ms | 22.3 ms | −7.0% |
-| + gfm, math, KaTeX (npm), drop-in | math notes (2 KB, 20 formulas) | 21.7 ms | 16.6 ms | −23.7% |
-| + @itslil gfm, math, KaTeX (npm builds) | chat answer (3.3 KB) | 2.93 ms | 3.09 ms | +5.5% |
-| + @itslil gfm, math, KaTeX (npm builds) | react-markdown's README (26 KB) | 23.9 ms | 23.9 ms | −0.0% |
-| + @itslil gfm, math, KaTeX (npm builds) | math notes (2 KB, 20 formulas) | 21.7 ms | 8.27 ms | −61.9% |
+| + remark-gfm (npm), drop-in | chat answer (3.3 KB) | 2.76 ms | 2.87 ms | +4.0% |
+| + remark-gfm (npm), drop-in | react-markdown's README (26 KB) | 23.7 ms | 22.1 ms | −6.8% |
+| + remark-gfm (npm), drop-in | CommonMark spec (205 KB) | 154 ms | 151 ms | −2.4% |
+| + @itslil/remark-gfm 4.0.3 | chat answer (3.3 KB) | 2.76 ms | 2.57 ms | −7.0% |
+| + @itslil/remark-gfm 4.0.3 | react-markdown's README (26 KB) | 23.7 ms | 20.9 ms | −11.7% |
+| + @itslil/remark-gfm 4.0.3 | CommonMark spec (205 KB) | 154 ms | 150 ms | −2.5% |
+| + gfm, math, KaTeX (npm), drop-in | chat answer (3.3 KB) | 3.00 ms | 2.79 ms | −7.0% |
+| + gfm, math, KaTeX (npm), drop-in | react-markdown's README (26 KB) | 26.1 ms | 23.2 ms | −10.9% |
+| + gfm, math, KaTeX (npm), drop-in | math notes (2 KB, 20 formulas) | 23.0 ms | 16.8 ms | −26.7% |
+| + @itslil gfm, math, KaTeX (npm builds) | chat answer (3.3 KB) | 3.00 ms | 2.55 ms | −14.9% |
+| + @itslil gfm, math, KaTeX (npm builds) | react-markdown's README (26 KB) | 26.1 ms | 21.3 ms | −18.5% |
+| + @itslil gfm, math, KaTeX (npm builds) | math notes (2 KB, 20 formulas) | 23.0 ms | 16.8 ms | −26.8% |
 
 ### Streaming an answer, as a chat UI does (Chromium)
 
@@ -151,12 +154,12 @@ The growing message is re-rendered after every 12 characters (flushSync, so each
 
 | Stack | stream | upstream, total | @itslil, total | Δ | p95 per update (upstream / @itslil) |
 |---|---:|---:|---:|---:|---:|
-| react-markdown alone | chat answer, 3.3 KB · 277 updates | 225 ms | 210 ms | −6.7% | 1.57 / 1.41 ms |
-| react-markdown alone | long answer, 10 KB · 834 updates | 3660 ms | 3181 ms | −13.1% | 7.60 / 6.63 ms |
-| react-markdown alone | chat answer, 3.3 KB · 277 updates · 4× CPU | 1009 ms | 905 ms | −10.3% | 7.04 / 6.45 ms |
-| + remark-gfm (npm), drop-in | long answer, 10 KB · 834 updates | 5346 ms | 4855 ms | −9.2% | 11.91 / 10.52 ms |
-| + @itslil/remark-gfm 4.0.2 | long answer, 10 KB · 834 updates | 5346 ms | 5711 ms | +6.8% | 11.91 / 12.57 ms |
-| + gfm, math, KaTeX (npm), drop-in | long answer, 10 KB · 834 updates | 5595 ms | 5525 ms | −1.3% | 12.30 / 12.09 ms |
+| react-markdown alone | chat answer, 3.3 KB · 277 updates | 226 ms | 224 ms | −1.1% | 1.58 / 1.47 ms |
+| react-markdown alone | long answer, 10 KB · 834 updates | 3613 ms | 3343 ms | −7.5% | 7.58 / 7.21 ms |
+| react-markdown alone | chat answer, 3.3 KB · 277 updates · 4× CPU | 1124 ms | 1034 ms | −7.9% | 7.94 / 7.08 ms |
+| + remark-gfm (npm), drop-in | long answer, 10 KB · 834 updates | 5544 ms | 5228 ms | −5.7% | 12.52 / 11.66 ms |
+| + @itslil/remark-gfm 4.0.3 | long answer, 10 KB · 834 updates | 5544 ms | 5050 ms | −8.9% | 12.52 / 11.25 ms |
+| + gfm, math, KaTeX (npm), drop-in | long answer, 10 KB · 834 updates | 5908 ms | 5744 ms | −2.8% | 13.19 / 12.70 ms |
 
 ### Where the time goes (Chromium)
 
@@ -164,12 +167,12 @@ Timing plugins at both ends of the unified pipeline split one render: parse (mic
 
 | Stack | document | parse | mdast → hast | hast → React | allocated per render |
 |---|---:|---:|---:|---:|---:|
-| react-markdown | react-markdown's README (26 KB) | 14.7 ms | 1.16 ms | 1.21 ms | 13.5 MB |
-| @itslil/react-markdown | react-markdown's README (26 KB) | 14.4 ms | 0.48 ms | 0.42 ms | 11.8 MB |
-| react-markdown | CommonMark spec (205 KB) | 89.5 ms | 4.99 ms | 6.66 ms |  |
-| @itslil/react-markdown | CommonMark spec (205 KB) | 90.1 ms | 1.89 ms | 2.18 ms |  |
-| react-markdown + remark-gfm | react-markdown's README (26 KB) | 21.6 ms | 1.18 ms | 1.25 ms | 17.2 MB |
-| @itslil/react-markdown + remark-gfm | react-markdown's README (26 KB) | 22.4 ms | 0.50 ms | 0.46 ms | 15.3 MB |
+| react-markdown | react-markdown's README (26 KB) | 18.3 ms | 1.32 ms | 1.32 ms | 13.6 MB |
+| @itslil/react-markdown | react-markdown's README (26 KB) | 16.9 ms | 0.58 ms | 0.44 ms | 12.2 MB |
+| react-markdown | CommonMark spec (205 KB) | 101 ms | 5.53 ms | 7.07 ms |  |
+| @itslil/react-markdown | CommonMark spec (205 KB) | 98.9 ms | 2.34 ms | 2.34 ms |  |
+| react-markdown + remark-gfm | react-markdown's README (26 KB) | 23.2 ms | 1.23 ms | 1.30 ms | 17.2 MB |
+| @itslil/react-markdown + remark-gfm | react-markdown's README (26 KB) | 23.7 ms | 0.63 ms | 0.51 ms | 15.6 MB |
 
 ### Firefox 153.0
 
@@ -177,13 +180,13 @@ The same app and harness in Firefox (no CPU throttling; Firefox has no DevTools 
 
 | Measure | upstream | @itslil | Δ |
 |---|---:|---:|---:|
-| Markdown on screen, desktop load | 244.7 ms | 240.7 ms | −4 ms (faster in 13/20) |
-| Pipeline, chat answer (3.3 KB) | 2.53 ms | 2.36 ms | −6.7% |
-| Pipeline, react-markdown's README (26 KB) | 28.0 ms | 26.1 ms | −6.8% |
-| Pipeline, CommonMark spec (205 KB) | 189 ms | 174 ms | −7.8% |
-| Pipeline + remark-gfm, react-markdown's README (26 KB) | 36.1 ms | 34.5 ms | −4.3% |
-| Streaming the 10 KB answer, total | 5550 ms | 5199 ms | −6.3% |
-| Streaming with remark-gfm, total | 7516 ms | 7144 ms | −5.0% |
+| Markdown on screen, desktop load | 270.3 ms | 278.9 ms | +9 ms (faster in 3/8) |
+| Pipeline, chat answer (3.3 KB) | 2.60 ms | 2.48 ms | −4.6% |
+| Pipeline, react-markdown's README (26 KB) | 30.3 ms | 29.6 ms | −2.3% |
+| Pipeline, CommonMark spec (205 KB) | 205 ms | 188 ms | −8.6% |
+| Pipeline + remark-gfm, react-markdown's README (26 KB) | 38.8 ms | 36.1 ms | −6.9% |
+| Streaming the 10 KB answer, total | 5937 ms | 5752 ms | −3.1% |
+| Streaming with remark-gfm, total | 8530 ms | 7444 ms | −12.7% |
 
 ### Same output
 
@@ -196,32 +199,29 @@ Each case is rendered by react-markdown and by @itslil/react-markdown in the sam
 | Named character references | 2,125 names in text, links, titles and code | 1 × 2 browsers | 0 differ |
 | Real documents (READMEs, CommonMark spec, chat, math) | 7 documents | 7 × 2 browsers | 0 differ |
 | Named references through the Node builds (SSR, then hydration) | 2,125 names | Node | 0 differ |
-| Seeded fuzz, browser | 3,000 documents | 2 browsers | 52 differ, all explained below |
-| Seeded fuzz with Unicode spaces, Node | 20,000 documents | Node | 2,232 differ, all explained below |
+| Seeded fuzz, browser | 3,000 documents | 2 browsers | 0 differ |
+| Seeded fuzz with Unicode spaces, Node | 20,000 documents | Node | 0 differ |
 | MarkdownHooks with an async plugin | fallback, then the result | 2 browsers | same |
-| @itslil/remark-gfm 4.0.2 (npm), under either component | GFM spec | 2 browsers | 1 example differs |
+| @itslil/remark-gfm 4.0.3 (npm), under either component | 702 examples | 2 browsers | 0 differ |
 
 ### Where it runs without a DOM
 
-Each package bundled with the export conditions of the runtime, then run where there is no document. Worker and edge runtimes resolve the build with the entity table, as upstream's decode-named-character-reference does; the browser build decodes through the document.
+Each package bundled with the export conditions of the runtime, then run where there is no document; the edge row renders under a process whose cwd throws, as Next.js's edge sandbox has. Upstream resolves decode-named-character-reference's table and vfile's shims in worker and edge runtimes and node:path, node:process and node:url under node; the port resolves the build made of the same pair.
 
 | Runtime (conditions) | react-markdown | @itslil/react-markdown | file resolved |
 |---|---:|---:|---:|
-| Node (import) | renders | renders | dist/react-markdown.esm.js |
-| Cloudflare Workers (workerd, worker, browser) | renders | renders | dist/react-markdown.esm.js |
-| Deno | renders | renders | dist/react-markdown.esm.js |
-| React Native (Metro) | renders | renders | dist/react-markdown.esm.js |
+| Node (node, import) | renders | renders | dist/react-markdown.esm.js |
+| Cloudflare Workers (workerd, worker, browser) | renders | renders | dist/react-markdown.worker.js |
+| Next.js and Vercel edge (edge-light, browser), with the edge process | renders | renders | dist/react-markdown.worker.js |
+| Deno (deno, node) | renders | renders | dist/react-markdown.esm.js |
+| React Native (Metro) | renders | renders | dist/react-markdown.worker.js |
 
 ### Known differences
 
-Every fuzz difference (2,284 of 23,000 documents) has one of the first two causes; none is left unexplained.
+None in behavior: every case above renders the same (1,354 spec examples, 23,000 fuzz documents, 2,125 named references twice, 5 runtimes). What differs is below.
 
-- **A Unicode space in a code-fence language.** ```js title="a" with a non-breaking (or other Unicode) space gives class="language-js title=…" where upstream gives language-js: the port splits the info string at ASCII whitespace, upstream at JavaScript's \s. Only the class differs (2,242 fuzz documents).
-- **micromark-core-commonmark 2.0.4 (published 2026-09-26).** Emphasis next to an underscore or an escaped asterisk (a**_b_**c, foo*_bar_*baz, \**x**) follows 2.0.3, which this package's source graph pins; a fresh install of react-markdown resolves 2.0.4 (42 fuzz documents, 6 of them with the code-fence difference as well).
-- **One module, not tree-shakeable.** An app that imports only defaultUrlTransform ships 29,034 B Brotli with the port and 264 B with upstream.
-- **KaTeX stacks ship a little more.** With npm rehype-katex the app is +1,254 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.
-- **Earlier @itslil plugin builds.** @itslil/remark-gfm 4.0.2 links an e-mail address right after a slash (GFM extensions example 19), and @itslil/rehype-katex 7.0.2 bundles an older KaTeX port that drops the &lt;mspace> of \quad; @itslil/remark-gfm 4.0.3 and @itslil/rehype-katex 7.0.3 match upstream, and the npm plugins work unchanged with @itslil/react-markdown.
-- **Next.js edge runtime.** A page with runtime = "edge" fails at request time: the compiled VFile calls process.cwd(), which that runtime replaces with a function that throws, where upstream's vfile uses its browser shim. Plain React apps, server rendering with react-dom/server, Cloudflare Workers, Deno and React Native are not affected.
+- **Size, not behavior: one module, not tree-shakeable.** An app that imports only defaultUrlTransform ships 30,246 B Brotli with the port and 264 B with upstream.
+- **Size, not behavior: KaTeX stacks ship a little more.** With npm rehype-katex the app is +2,383 B Brotli: rehype-katex's hastscript brings property-information, which the port also carries compiled in.
 - **Not measured: Safari/WebKit.** Playwright's WebKit needs system libraries the measuring host does not have.
 
 Measured 2026-09-28 on an Azure Standard_B8als_v2 (8 vCPU, burstable) with Playwright 1.62.1: Chromium 151.0.7922.34, Firefox 153.0; React 19.2.0, Vite 8.3.1; react-markdown 10.1.0 against @itslil/react-markdown packed from this repository, plugins from npm. Reproduce: cd real-app && npm run setup && npm run build && npm run correctness && npm run fuzz && npm run edge && npm run perf && npm run report.
@@ -234,32 +234,39 @@ adds only a license banner, the React imports, the `development` flag and, for
 CommonJS, `module.exports` in place of the export clause. No minifier runs after
 the compiler.
 
-| File | Condition | Brotli-11 | gzip-9 | raw |
+| File | Conditions | Brotli-11 | gzip-9 | raw |
 |---|---|---:|---:|---:|
-| `dist/react-markdown.browser.js` | `browser` | 27,250 | 30,919 | 95,307 |
-| `dist/react-markdown.esm.js` | `import` (Node), `worker`, `deno`, `react-native` | 35,953 | 41,885 | 115,843 |
-| `dist/react-markdown.cjs` | `require` | 35,934 | 41,908 | 115,903 |
-| `dist/react-markdown.closed.js` | `./closed` | 39,417 | 46,347 | 136,925 |
+| `dist/react-markdown.browser.js` | `browser` | 28,473 | 32,339 | 98,862 |
+| `dist/react-markdown.worker.js` | `edge-light`, `react-native`, `worker`, `workerd`, `convex`, any runtime without `node` | 37,059 | 43,222 | 119,255 |
+| `dist/react-markdown.esm.js` | `node` (Node, Deno, Bun) | 36,399 | 42,483 | 117,324 |
+| `dist/react-markdown.cjs` | `node` with `require` | 36,412 | 42,505 | 117,375 |
+| `dist/react-markdown.closed.js` | `./closed` | 39,877 | 46,823 | 136,666 |
 
-The browser build decodes named character references through the document, as
-upstream's browser graph does (`decode-named-character-reference`'s
-`index.dom.js`); the Node builds carry the 2,125-entry entity table, as
-upstream's Node graph does. Worker and edge runtimes (Cloudflare Workers,
-Next.js edge, Deno, React Native) resolve the table build, as upstream's do:
-they have no document. The bars are upstream's browser graph (esbuild,
-React external) minified:
+Upstream's graph resolves two condition maps, and the package resolves the same
+pair. decode-named-character-reference decodes named character references
+through the document under `browser` (`index.dom.js`) and with its 2,125-entry
+table everywhere else; vfile imports `node:path`, `node:process` and `node:url`
+under `node` and its own small shims everywhere else. So the browser build is the
+document and the shims, the worker build is the table and the shims (Cloudflare
+Workers, Next.js and Vercel edge, React Native, web workers), and the Node build
+is the table and the Node modules. Under `development` each is the same program
+with devlop's assertions on (`*.development.js`, `*.development.cjs`).
+`test/environments.test.mjs` bundles upstream and this package with each
+runtime's conditions and compares what a plugin sees of the file: the working
+directory, every path getter and setter, file URLs and the errors they throw.
+The bars are upstream's browser graph (esbuild, React external) minified:
 
 | Official browser graph | Brotli-11 | gzip-9 | raw |
 |---|---:|---:|---:|
-| Git source (`44d2e4a`) + Terser 5.51.2, passes 3 (strongest) | 30,950 | 34,789 | 117,068 |
-| npm package + Terser 5.51.2 | 31,082 | 34,924 | 117,674 |
-| npm package + Oxc (Vite 8.2.1) | 31,413 | 35,166 | 116,998 |
-| npm package + esbuild 0.28.1 | 32,530 | 36,331 | 118,006 |
+| Git source (`44d2e4a`) + Terser 5.51.2, passes 3 (strongest) | 31,280 | 35,092 | 117,688 |
+| npm package + Terser 5.51.2 | 31,405 | 35,248 | 118,297 |
+| npm package + Oxc (Vite 8.2.1) | 31,725 | 35,470 | 117,592 |
+| npm package + esbuild 0.28.1 | 32,786 | 36,663 | 118,575 |
 
-The browser build is 3,700 B (12.0%) smaller in Brotli-11 than the strongest bar,
-3,870 B in gzip-9 and 21,691 B raw. The three compiles of one build take about
-23.3 s on this Azure B8als_v2 host (shared, 1-minute load 8.5), 6.2 s of it for
-the browser build. `npm run record:release` re-measures everything the site
+The browser build is 2,807 B (9.0%) smaller in Brotli-11 than the strongest bar,
+2,753 B in gzip-9 and 18,730 B raw. The four compiles of one build take about
+23.5 s on this Azure B8als_v2 host (shared, 1-minute load 2.1), 7.0 s of it for the
+browser build. `npm run record:release` re-measures everything the site
 shows (`site/results.json`).
 
 Every library of the stack (unified, micromark, mdast-util-from-markdown,

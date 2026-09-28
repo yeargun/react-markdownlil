@@ -1,0 +1,35 @@
+// vfile's imports under the `node` condition: node:path (#minpath), node:process
+// (#minproc) and node:url's fileURLToPath (#minurl). The build imports the three for
+// the Node program as `minpathNode`, `minprocNode` and `urlToPathNode`. Every other
+// build swaps in src/browser/vfile-imports.lil, vfile's own shims.
+extern JsValue minpathNode;
+extern JsValue minprocNode;
+extern JsValue urlToPathNode;
+
+export JsValue basename(JsValue path, JsValue extname) {
+  return JS.invoke(minpathNode, "basename", path, extname);
+}
+
+export JsValue dirname(JsValue path) {
+  return JS.invoke(minpathNode, "dirname", path);
+}
+
+export JsValue extname(JsValue path) {
+  return JS.invoke(minpathNode, "extname", path);
+}
+
+export JsValue join(JsValue left, JsValue right) {
+  return JS.invoke(minpathNode, "join", left, right);
+}
+
+export JsValue sep() {
+  return JS.get(minpathNode, "sep");
+}
+
+export JsValue urlToPath(JsValue value) {
+  return JS.call(urlToPathNode, JS.undefined(), value);
+}
+
+export JsValue cwd() {
+  return JS.invoke(minprocNode, "cwd");
+}

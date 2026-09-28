@@ -18,13 +18,21 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const lilscriptRoot = process.env.LILSCRIPT_ROOT ?? resolve(root, "..", "lilscript")
 const dist = resolve(root, "dist")
 const file = "react-markdown"
-const banner = "/*! @itslil/react-markdown 10.1.0 | LilScript reimplementation of react-markdown | MIT */\n"
+const { version } = JSON.parse(readFileSync(resolve(root, "package.json"), "utf8"))
+const banner = `/*! @itslil/react-markdown ${version} | LilScript reimplementation of react-markdown | MIT */\n`
 const imports = `import {Fragment, jsx, jsxs} from 'react/jsx-runtime';
 import {useEffect, useState} from 'react';
 `
 
 // CommonJS reads the same two host modules the ESM imports.
 const requires = `const{Fragment,jsx,jsxs}=require("react/jsx-runtime"),{useEffect,useState}=require("react");`
+// The Node program (the `node` condition) also binds what vfile imports under `node`
+// (src/vfile-imports.lil): node:path, node:process and node:url's fileURLToPath.
+const nodeImports = `import minpathNode from 'node:path';
+import minprocNode from 'node:process';
+import {fileURLToPath as urlToPathNode} from 'node:url';
+`
+const nodeRequires = `const minpathNode=require("node:path"),minprocNode=require("node:process"),{fileURLToPath:urlToPathNode}=require("node:url");`
 const publicApi = ["MarkdownAsync", "MarkdownHooks", "default", "defaultUrlTransform"]
 
 function compilerPath() {
@@ -88,17 +96,24 @@ function compileIfRequested() {
   // The browser build (the `browser` export condition) decodes named
   // character references through the document, as upstream's browser graph
   // does (decode-named-character-reference's `index.dom.js`), so the entity
-  // table stays out. The locked graph is untouched: its decoder module is
-  // swapped in a staging copy of the source.
-  const staging = resolve(root, ".tmp", "browser-src")
-  rmSync(staging, { recursive: true, force: true })
-  cpSync(resolve(root, "src"), staging, { recursive: true })
-  cpSync(
-    resolve(root, "src", "browser", "decode-named.lil"),
-    resolve(staging, "graph", "remark-parse", "micromark", "decode-named.lil"),
-  )
-  compileLil(compiler, "lilscript.toml", `${file}.browser.raw.js`, staging)
-  rmSync(staging, { recursive: true, force: true })
+  // table stays out, and takes vfile's non-Node working directory (`/`). The
+  // worker build (edge-light, react-native, worker, workerd) keeps the table,
+  // as decode-named-character-reference routes those conditions, with the same
+  // working directory. The locked graph is untouched: the modules are swapped
+  // in a staging copy of the source.
+  const staged = (name, swaps) => {
+    const staging = resolve(root, ".tmp", `${name}-src`)
+    rmSync(staging, { recursive: true, force: true })
+    cpSync(resolve(root, "src"), staging, { recursive: true })
+    for (const [from, to] of swaps) cpSync(resolve(root, "src", from), resolve(staging, to))
+    compileLil(compiler, "lilscript.toml", `${file}.${name}.raw.js`, staging)
+    rmSync(staging, { recursive: true, force: true })
+  }
+  // @itslil/unified's vfile imports its path, process and URL functions from
+  // vfile-imports.lil (the Node binding); its browser/vfile-imports.lil holds vfile's shims.
+  const shims = ["graph/unified/browser/vfile-imports.lil", "graph/unified/vfile-imports.lil"]
+  staged("browser", [["browser/decode-named.lil", "graph/remark-parse/micromark/decode-named.lil"], shims])
+  staged("worker", [shims])
 }
 
 compileIfRequested()
@@ -143,31 +158,39 @@ function takeCompiled(name) {
 const flag = (development) => `const development=${development};\n`
 const raw = takeCompiled(`${file}.raw.js`)
 const main = splitExports(raw, `${file}.raw.js`)
-writeFileSync(resolve(dist, `${file}.esm.js`), `${banner}${imports}${flag(false)}${raw}\n`)
-writeFileSync(resolve(dist, `${file}.development.js`), `${banner}${imports}${flag(true)}${raw}\n`)
+writeFileSync(resolve(dist, `${file}.esm.js`), `${banner}${imports}${nodeImports}${flag(false)}${raw}\n`)
+writeFileSync(resolve(dist, `${file}.development.js`), `${banner}${imports}${nodeImports}${flag(true)}${raw}\n`)
 // CommonJS keeps the shape the earlier esbuild CJS build had: the named exports
 // plus `default`, with a non-enumerable `__esModule` marker for interop.
 const exportsObject = `module.exports=Object.defineProperty(${objectOf(main.bindings)},"__esModule",{value:!0});\n`
-writeFileSync(resolve(dist, `${file}.cjs`), `${banner}"use strict";${requires}${flag(false)}${main.body}${exportsObject}`)
+writeFileSync(resolve(dist, `${file}.cjs`), `${banner}"use strict";${requires}${nodeRequires}${flag(false)}${main.body}${exportsObject}`)
 writeFileSync(
   resolve(dist, `${file}.development.cjs`),
-  `${banner}"use strict";${requires}${flag(true)}${main.body}${exportsObject}`,
+  `${banner}"use strict";${requires}${nodeRequires}${flag(true)}${main.body}${exportsObject}`,
 )
-const browserRawPath = resolve(dist, `${file}.browser.raw.js`)
-if (existsSync(browserRawPath)) {
-  const browser = takeCompiled(`${file}.browser.raw.js`)
-  splitExports(browser, `${file}.browser.raw.js`)
-  writeFileSync(resolve(dist, `${file}.browser.js`), `${banner}${imports}${flag(false)}${browser}\n`)
-  unlinkSync(browserRawPath)
+// The browser and worker programs, each with its development file (the same
+// program with the flag on), for the `development` condition in those runtimes.
+for (const name of ["browser", "worker"]) {
+  const rawPath = resolve(dist, `${file}.${name}.raw.js`)
+  if (!existsSync(rawPath)) continue
+  const program = takeCompiled(`${file}.${name}.raw.js`)
+  splitExports(program, `${file}.${name}.raw.js`)
+  // vfile's shims only: no path to a Node module may survive in these programs.
+  if (/\b(?:minpathNode|minprocNode|urlToPathNode)\b/.test(program)) {
+    throw new Error(`${file}.${name}.raw.js: the ${name} program still reads a Node module binding`)
+  }
+  writeFileSync(resolve(dist, `${file}.${name}.js`), `${banner}${imports}${flag(false)}${program}\n`)
+  writeFileSync(resolve(dist, `${file}.${name}.development.js`), `${banner}${imports}${flag(true)}${program}\n`)
+  unlinkSync(rawPath)
 }
 const closedRawPath = resolve(dist, `${file}.closed.raw.js`)
 if (existsSync(closedRawPath)) {
   const closed = takeCompiled(`${file}.closed.raw.js`)
   splitExports(closed, `${file}.closed.raw.js`)
-  writeFileSync(resolve(dist, `${file}.closed.js`), `${banner}${imports}${flag(false)}${closed}\n`)
+  writeFileSync(resolve(dist, `${file}.closed.js`), `${banner}${imports}${nodeImports}${flag(false)}${closed}\n`)
   unlinkSync(closedRawPath)
 }
 
 console.log(
-  `wrote dist/${file}.esm.js, dist/${file}.browser.js, dist/${file}.development.js, dist/${file}.cjs, dist/${file}.development.cjs, dist/${file}.closed.js`,
+  `wrote dist/${file}.esm.js, dist/${file}.browser.js, dist/${file}.worker.js, dist/${file}.development.js, dist/${file}.browser.development.js, dist/${file}.worker.development.js, dist/${file}.cjs, dist/${file}.development.cjs, dist/${file}.closed.js`,
 )

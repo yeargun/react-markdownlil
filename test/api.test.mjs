@@ -48,8 +48,17 @@ test("CommonJS export", () => {
   )
 })
 
+// Each program imports React and nothing else of the graph; the Node program also imports
+// the three Node modules upstream's vfile imports under `node` (node:path, node:process and
+// node:url), where the browser and worker programs carry vfile's shims.
 test("runtime helpers are compiled from LilScript", () => {
-  const source = readFileSync(new URL("../dist/react-markdown.esm.js", import.meta.url), "utf8")
+  const programs = {
+    "react-markdown.esm.js": ["node:path", "node:process", "node:url", "react", "react/jsx-runtime"],
+    "react-markdown.browser.js": ["react", "react/jsx-runtime"],
+    "react-markdown.worker.js": ["react", "react/jsx-runtime"],
+  }
+  for (const [file, imports] of Object.entries(programs)) {
+  const source = readFileSync(new URL(`../dist/${file}`, import.meta.url), "utf8")
   for (const dependency of [
     "@itslil/unified",
     "@itslil/remark-parse",
@@ -65,6 +74,8 @@ test("runtime helpers are compiled from LilScript", () => {
   }
   assert.deepEqual(
     [...source.matchAll(/from ['\"]([^'\"]+)['\"]/g)].map((match) => match[1]).sort(),
-    ["react", "react/jsx-runtime"],
+    imports,
+    file,
   )
+  }
 })

@@ -3,11 +3,13 @@ import test from "node:test"
 
 import {build} from "esbuild"
 
-test("browser graph is pure LilScript with React external", async () => {
+// The programs a bundler for the web resolves (`browser`, and the worker conditions):
+// one module each, React external, nothing else to bundle.
+for (const program of ["browser", "worker"]) test(`${program} graph is pure LilScript with React external`, async () => {
   const result = await build({
     bundle: true,
     conditions: ["browser", "import"],
-    entryPoints: [new URL("../dist/react-markdown.esm.js", import.meta.url).pathname],
+    entryPoints: [new URL(`../dist/react-markdown.${program}.js`, import.meta.url).pathname],
     external: ["react", "react/jsx-runtime"],
     format: "esm",
     legalComments: "none",

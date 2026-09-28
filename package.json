@@ -1,6 +1,6 @@
 {
   "name": "@itslil/react-markdown",
-  "version": "10.1.0",
+  "version": "10.1.1",
   "description": "react-markdown reimplemented in LilScript",
   "keywords": [
     "react-markdown",
@@ -30,44 +30,33 @@
     ".": {
       "types": "./index.d.ts",
       "development": {
-        "import": "./dist/react-markdown.development.js",
-        "require": "./dist/react-markdown.development.cjs",
-        "default": "./dist/react-markdown.esm.js"
+        "node": {
+          "import": "./dist/react-markdown.development.js",
+          "require": "./dist/react-markdown.development.cjs",
+          "default": "./dist/react-markdown.development.js"
+        },
+        "convex": "./dist/react-markdown.worker.development.js",
+        "deno": "./dist/react-markdown.worker.development.js",
+        "edge-light": "./dist/react-markdown.worker.development.js",
+        "react-native": "./dist/react-markdown.worker.development.js",
+        "worker": "./dist/react-markdown.worker.development.js",
+        "workerd": "./dist/react-markdown.worker.development.js",
+        "browser": "./dist/react-markdown.browser.development.js",
+        "default": "./dist/react-markdown.worker.development.js"
       },
-      "convex": {
+      "node": {
         "import": "./dist/react-markdown.esm.js",
         "require": "./dist/react-markdown.cjs",
         "default": "./dist/react-markdown.esm.js"
       },
-      "deno": {
-        "import": "./dist/react-markdown.esm.js",
-        "require": "./dist/react-markdown.cjs",
-        "default": "./dist/react-markdown.esm.js"
-      },
-      "edge-light": {
-        "import": "./dist/react-markdown.esm.js",
-        "require": "./dist/react-markdown.cjs",
-        "default": "./dist/react-markdown.esm.js"
-      },
-      "react-native": {
-        "import": "./dist/react-markdown.esm.js",
-        "require": "./dist/react-markdown.cjs",
-        "default": "./dist/react-markdown.esm.js"
-      },
-      "worker": {
-        "import": "./dist/react-markdown.esm.js",
-        "require": "./dist/react-markdown.cjs",
-        "default": "./dist/react-markdown.esm.js"
-      },
-      "workerd": {
-        "import": "./dist/react-markdown.esm.js",
-        "require": "./dist/react-markdown.cjs",
-        "default": "./dist/react-markdown.esm.js"
-      },
+      "convex": "./dist/react-markdown.worker.js",
+      "deno": "./dist/react-markdown.worker.js",
+      "edge-light": "./dist/react-markdown.worker.js",
+      "react-native": "./dist/react-markdown.worker.js",
+      "worker": "./dist/react-markdown.worker.js",
+      "workerd": "./dist/react-markdown.worker.js",
       "browser": "./dist/react-markdown.browser.js",
-      "import": "./dist/react-markdown.esm.js",
-      "require": "./dist/react-markdown.cjs",
-      "default": "./dist/react-markdown.esm.js"
+      "default": "./dist/react-markdown.worker.js"
     },
     "./closed": "./dist/react-markdown.closed.js",
     "./dist/*": "./dist/*",
@@ -78,6 +67,9 @@
     "src",
     "dist/react-markdown.esm.js",
     "dist/react-markdown.browser.js",
+    "dist/react-markdown.browser.development.js",
+    "dist/react-markdown.worker.js",
+    "dist/react-markdown.worker.development.js",
     "dist/react-markdown.development.js",
     "dist/react-markdown.cjs",
     "dist/react-markdown.development.cjs",
@@ -119,11 +111,11 @@
     "react": ">=18"
   },
   "devDependencies": {
-    "@itslil/katex": "0.16.22",
-    "@itslil/rehype-katex": "7.0.2",
-    "@itslil/remark-breaks": "4.0.1",
-    "@itslil/remark-gfm": "4.0.2",
-    "@itslil/remark-math": "6.0.1",
+    "@itslil/katex": "0.16.24",
+    "@itslil/rehype-katex": "7.0.3",
+    "@itslil/remark-breaks": "4.0.2",
+    "@itslil/remark-gfm": "4.0.3",
+    "@itslil/remark-math": "6.0.2",
     "@testing-library/react": "^16.0.0",
     "concat-stream": "^2.0.0",
     "esbuild": "0.28.1",
