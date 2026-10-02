@@ -119,6 +119,12 @@ extern JsValue encodeURIComponent;`
     if (!source.includes(before)) throw new Error("remark-parse host source no longer matches the audited graph wiring")
     return source.replace(before, after)
   }
+  if (id === "remark-parse" && path === "src/micromark/decode-named.lil") {
+    const declaration = "export JsValue decodeNamedCharacterReference(string value) {"
+    if (!source.includes(declaration)) throw new Error("remark-parse decoder no longer matches the audited conditional wiring")
+    return 'import {BROWSER, decodeNamedCharacterReference as decodeBrowser} from "../../../browser/decode-named.lil";\n' +
+      source.replace(declaration, declaration + "\n  if (BROWSER) return decodeBrowser(value);")
+  }
   if (id === "remark-parse" && path === "src/micromark/character-entities.lil") {
     // The table as an object literal (upstream's form) reads no host global.
     if (source.startsWith("export JsValue characterEntities = object {")) return source
@@ -152,6 +158,11 @@ extern JsValue structuredClone;`
 }
 
 function upstreamFiles(id, path) {
+  if (path === "src/browser.lil" || path === "src/index.lil") {
+    if (id === "unified") return ["unified@11.0.5/index.js"]
+    if (id === "remark-parse") return ["remark-parse@11.0.0/index.js"]
+    if (id === "remark-rehype") return ["remark-rehype@11.1.2/index.js"]
+  }
   if (id === "unified") {
     if (path === "src/entry.lil") return ["unified@11.0.5/lib/index.js"]
     if (path === "src/extend.lil") return ["extend@3.0.2/index.js"]
@@ -317,6 +328,7 @@ function makeLock() {
       }
     }),
     transforms: [
+      {kind: "configured-browser-decoder", description: "BROWSER selects the native DOM decoder without copying or changing the checked graph during a build.", paths: ["remark-parse/src/micromark/decode-named.lil"]},
       {
         kind: "host-import",
         description: "Share one host binding table across the linked graph; algorithm bodies remain byte-identical and the entity table uses the equivalent dynamic JSON.parse call.",

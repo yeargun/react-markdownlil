@@ -2,9 +2,12 @@
 [policy]
 version = 3
 [javascript]
+# Plain-data reads must not run getters; disable for effectful accessor integrations.
+assume_pure_property_reads = true
+assume_unconstructed_callbacks = true
 priority = "size-first"
 # Assumes unpatched platform builtins; disable when consumers replace them.
-assume_pristine_builtins = false
+assume_pristine_builtins = true
 # Remove debugLog instrumentation; ordinary print and host console effects remain.
 strip_debug = true
 
@@ -23,11 +26,11 @@ pool_strings = true
 # A checked define removes development assertions only in production.
 [defines]
 development = false
-BROWSER = false
+BROWSER = true
 
 [delivery]
 mode = "single"
 directory = "."
-entry_names = "react-markdown.closed.js"
+entry_names = "react-markdown.browser.js"
 [delivery.entries]
-index = "src/index.lil"
+index = "../src/index.lil"

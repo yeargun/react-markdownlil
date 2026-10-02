@@ -5,9 +5,9 @@
     {
       "id": "unified",
       "package": "@itslil/unified@11.0.6",
-      "siblingRevision": "7e15633a71a5eaec8ad9f9cf5ef2f5dc8128453b",
-      "sourceSha256": "066761813ad8539b8f8069a5e1f2ff7e34bc61e3de80da6fe36144aeab6afbb4",
-      "graphSha256": "5b9a5806848b020b48fea9a3109552555d64c53a84adbada325e69a8e913b35c",
+      "siblingRevision": "27efba1bee7dbed4a902de5de8080259d8928b9b",
+      "sourceSha256": "dd6cf41bb1c3690528dfbb267753e3b4f2fe9edb0874e857a14cf5a9a8ee8463",
+      "graphSha256": "2ffe8c6d5a6dc1aec95c1e20f93c1f966aa49f2ecf8e3ed8b98d13f9be83edd4",
       "upstream": {
         "repository": "https://github.com/unifiedjs/unified.git",
         "tag": "11.0.5",
@@ -15,6 +15,18 @@
         "tree": "82877c0fca91f41bda24de546f79a40d2cfaeae1"
       },
       "files": [
+        {
+          "path": "src/browser.lil",
+          "graphPath": "src/graph/unified/browser.lil",
+          "sha256": "e7aec62e6d00b9a4d48be7c60ab2e89aff27f0980a996064fa3a7c9d710f2b6a",
+          "graphSha256": "e7aec62e6d00b9a4d48be7c60ab2e89aff27f0980a996064fa3a7c9d710f2b6a",
+          "upstream": [
+            {
+              "path": "unified@11.0.5/index.js",
+              "sha256": "12a98242be891512cbdec8bce2ec1a9147d9d89b2802165560411c5fe5037508"
+            }
+          ]
+        },
         {
           "path": "src/entry.lil",
           "graphPath": "src/graph/unified/entry.lil",
@@ -58,8 +70,8 @@
           "graphSha256": "04a636b7c62fda30c4a61ff9bedf1ff640583b332107843c0a79ec186aa4aab7",
           "upstream": [
             {
-              "path": "unified@11.0.5/lib/callable-instance.js",
-              "sha256": "28c9baa7aea87597c4eca19a2e2b3342d3017347fabf7d513278787b5a950c58"
+              "path": "unified@11.0.5/index.js",
+              "sha256": "12a98242be891512cbdec8bce2ec1a9147d9d89b2802165560411c5fe5037508"
             }
           ]
         },
@@ -112,9 +124,9 @@
     {
       "id": "remark-parse",
       "package": "@itslil/remark-parse@11.0.2",
-      "siblingRevision": "fd629cecf4ca76501d1c6a21ce450570c1326063",
-      "sourceSha256": "07051b93cbe51a2c1b98f923860132147794041ee91fb5eed0d9094458182112",
-      "graphSha256": "53e969fc5f5bf32ec641887604119f1f20d6c5219a2696aec1deb328032a36b1",
+      "siblingRevision": "7427ba75895709836943bc4b089e460660de20a7",
+      "sourceSha256": "8ce9e20791a1f068193d10e5e23e8ee3e911f9103853961c544a86e2555217b0",
+      "graphSha256": "c63e10ae799da479f89f2857b8f14ab7f629b67bc3faa1d3776ea6ed1780e1a2",
       "upstream": {
         "repository": "https://github.com/remarkjs/remark.git",
         "tag": "remark-parse@11.0.0",
@@ -122,6 +134,18 @@
         "tree": "a0b5bef5d96f49e4aecdd29dc53cda36a785cc30"
       },
       "files": [
+        {
+          "path": "src/browser.lil",
+          "graphPath": "src/graph/remark-parse/browser.lil",
+          "sha256": "29215bc9ba5f6a47a3ab1a01761920857d4b7f0c0dd6cc28af705cdcdd7a74c7",
+          "graphSha256": "29215bc9ba5f6a47a3ab1a01761920857d4b7f0c0dd6cc28af705cdcdd7a74c7",
+          "upstream": [
+            {
+              "path": "remark-parse@11.0.0/index.js",
+              "sha256": "0cf2ebbaae90578f4a838505ebc3d7fd1d8339484c7f13be1a3d4d09427c2dc9"
+            }
+          ]
+        },
         {
           "path": "src/entry.lil",
           "graphPath": "src/graph/remark-parse/entry.lil",
@@ -450,7 +474,7 @@
           "path": "src/micromark/decode-named.lil",
           "graphPath": "src/graph/remark-parse/micromark/decode-named.lil",
           "sha256": "e4150b19e19a214e7ccfb5d6762bdce62fde30b8cc907642d911f9ea87b9e6e8",
-          "graphSha256": "e4150b19e19a214e7ccfb5d6762bdce62fde30b8cc907642d911f9ea87b9e6e8",
+          "graphSha256": "659ecad35175a328c51b0022014c4c4d78fcafcbff9e89d3bd03c0a77c0d967f",
           "upstream": [
             {
               "path": "decode-named-character-reference@1.3.0/index.js",
@@ -823,9 +847,9 @@
     {
       "id": "remark-rehype",
       "package": "@itslil/remark-rehype@11.1.4",
-      "siblingRevision": "b5ae9f79546d0bfccfc61a89e0c1aafe355ab18b",
-      "sourceSha256": "cca4c2779b67e727743e4b6d9b2f6225df3f653451c9f59f2290e510fd65946a",
-      "graphSha256": "acbb0cf4396fb2271e2c070a11f250e8287f27dbebdec641815333c1b0f2f8fa",
+      "siblingRevision": "aa10df0b2a39593eedb8a08c0a97e7566cd2394a",
+      "sourceSha256": "9dc41878489543f83543f121e2e567fad164c6c84e191b69609cf2a617fb575b",
+      "graphSha256": "d8e043e93cd0e046d9bb7ce0a6d6f0a914d7a099e289f3575de73697e590ecb9",
       "upstream": {
         "repository": "https://github.com/remarkjs/remark-rehype.git",
         "tag": "11.1.2",
@@ -833,6 +857,18 @@
         "tree": "1d50e825c043998a400d0bec47f7f1b50d7c99f7"
       },
       "files": [
+        {
+          "path": "src/browser.lil",
+          "graphPath": "src/graph/remark-rehype/browser.lil",
+          "sha256": "29215bc9ba5f6a47a3ab1a01761920857d4b7f0c0dd6cc28af705cdcdd7a74c7",
+          "graphSha256": "29215bc9ba5f6a47a3ab1a01761920857d4b7f0c0dd6cc28af705cdcdd7a74c7",
+          "upstream": [
+            {
+              "path": "remark-rehype@11.1.2/index.js",
+              "sha256": "995628e8b0f98e9f185dfec8570bed3d8c72a291eaf8d28c7b63495f29a85ed5"
+            }
+          ]
+        },
         {
           "path": "src/entry.lil",
           "graphPath": "src/graph/remark-rehype/entry.lil",
@@ -989,6 +1025,13 @@
     }
   ],
   "transforms": [
+    {
+      "kind": "configured-browser-decoder",
+      "description": "BROWSER selects the native DOM decoder without copying or changing the checked graph during a build.",
+      "paths": [
+        "remark-parse/src/micromark/decode-named.lil"
+      ]
+    },
     {
       "kind": "host-import",
       "description": "Share one host binding table across the linked graph; algorithm bodies remain byte-identical and the entity table uses the equivalent dynamic JSON.parse call.",

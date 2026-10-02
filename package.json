@@ -58,7 +58,15 @@
     "NOTICE.md",
     "README.md"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/react-markdown.browser.js",
+    "./dist/react-markdown.cjs",
+    "./dist/react-markdown.closed.js",
+    "./dist/react-markdown.development.cjs",
+    "./dist/react-markdown.development.js",
+    "./dist/react-markdown.esm.js",
+    "./dist/react-markdown.raw.js"
+  ],
   "engines": {
     "node": ">=18"
   },

@@ -1,7 +1,9 @@
+import {BROWSER, decodeNamedCharacterReference as decodeBrowser} from "../../../browser/decode-named.lil";
 import { characterEntities } from "./character-entities.lil";
 import { hasOwn } from "./host.lil";
 
 export JsValue decodeNamedCharacterReference(string value) {
+  if (BROWSER) return decodeBrowser(value);
   if (hasOwn(characterEntities, value)) {
     return characterEntities[value];
   }
