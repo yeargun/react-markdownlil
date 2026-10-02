@@ -1,1 +1,214 @@
-{"pin":"unified@11.0.5","package":"@itslil/unified","file":"unified","lilExport":"unified","officialExport":"unified","node":"v24.11.1","codec":"lilscript-codec: zlib 1.3.1 gzip-9 / Google Brotli 1.1.0 quality 11, lgwin 22","runtime":"Node v24.11.1","warmupDiscard":3,"comparison":"Official rows are one esbuild 0.28.1 browser ESM bundle of unified@11.0.5 built from its pinned Git source, with its runtime graph, then pinned Terser 5.51.2 (3 passes, mangle on/off), esbuild minify or Oxc (Vite 8). LilScript directly composes the pure-Lil VFile; the ESM row is dist/unified.esm.js exactly as the compiler wrote it (plus a license banner), with no post-minifier. Closed is the same source built with lilscript.closed.toml; the one compiler renames no properties, so it differs from the library file only through its optimizer settings.","spec":{"total":224,"pass":224,"label":"runtime checks"},"play":{"kind":"unified","sample":"# hi\nfrom @itslil/unified","samples":[{"label":"heading","value":"# unified\nplugins run in order"}]},"size":[{"id":"official","name":"Official unified@11.0.5 graph","raw":55557,"gzip9":11899,"brotli11":10420,"note":"esbuild 0.28.1 bundle of unified@11.0.5 built from its pinned Git source, plus runtime deps","diagnostic":false,"measuredAt":"2026-09-28T13:12:32Z","artifactSha256":"d866422f192cea2437f02ff79256ffe912570c7a6b7a8da8da828dd50e5e41b0"},{"id":"official-terser-mangle","name":"Official · Terser mangle on","raw":13378,"gzip9":4790,"brotli11":4339,"note":"Terser 5.51.2 of that graph, 3 passes, module: true, mangle: true","measuredAt":"2026-09-28T13:12:32Z","artifactSha256":"a1f96b9bec8a50d871af7be7ff5671c5e4b9e7a594777533907ba457d90a4e2e","baseline":true},{"id":"official-terser-nomangle","name":"Official · Terser mangle off","raw":20513,"gzip9":5973,"brotli11":5434,"note":"Terser 5.51.2 of that graph, 3 passes, module: true, mangle: false","measuredAt":"2026-09-28T13:12:32Z","artifactSha256":"95531e9be0b90e01de4b49bb078e7659872059ef77c0164b0093426084987ad9"},{"id":"official-esbuild","name":"Official · esbuild minify","raw":13779,"gzip9":5034,"brotli11":4612,"note":"esbuild 0.28.1 --minify of that graph","measuredAt":"2026-09-28T13:12:32Z","artifactSha256":"e3db50a262303535d2c942be4cf590d29cc876941ce60d5ad0dde1c28018c653"},{"id":"official-oxc","name":"Official · Oxc minify","note":"Vite 8 (Oxc) minify of that graph, mangle on","raw":13452,"gzip9":4843,"brotli11":4411,"measuredAt":"2026-09-28T13:12:32Z","artifactSha256":"907210b4ab180758c94f68a41fc1355809ed2aa39130d71fa88413500ccc51cc"},{"id":"itslil","name":"@itslil/unified · library","raw":12031,"gzip9":4606,"brotli11":4157,"note":"dist/unified.esm.js as shipped: compiler-written, directly composed pure-Lil VFile, no post-minifier","primary":true,"measuredAt":"2026-09-28T13:12:32Z","artifactSha256":"27a5f1cec2153f14ae8945a8d95fa34d4955b18c6b11c3c6566a88539cf67b33"},{"id":"itslil-closed","name":"@itslil/unified · closed","raw":12197,"gzip9":4601,"brotli11":4164,"note":"dist/unified.closed.js: lilscript.closed.toml; compiler-written, no post-minifier","measuredAt":"2026-09-28T13:12:32Z","artifactSha256":"3261bef5eecb438665ec2254df1700071ccde4d159d1dba6c0a3f7d54d1d2953"}],"throughput":[{"id":"official","name":"unified@11.0.5","documentMs":0.053709039999994275},{"id":"itslil","name":"@itslil/unified","documentMs":0.05780191999998351}],"throughputWorkload":"processSync of the playground pipeline (parser, one transformer, compiler) over a 400-line document, 25 documents per sample, the two lanes alternating; both produce the same output","delivered":[{"file":"dist/unified.esm.js","role":"ESM for every runtime without `node` (browsers, workers, edge): vfile's own path shims","writtenBy":"compiler","compilerWritten":true,"sha256":"27a5f1cec2153f14ae8945a8d95fa34d4955b18c6b11c3c6566a88539cf67b33","raw":12031,"gzip9":4606,"brotli11":4157},{"file":"dist/unified.node.js","role":"ESM, `node` condition: node:path, node:process and node:url, as vfile imports them","writtenBy":"compiler","compilerWritten":true,"sha256":"9171bcefb2a53720fd454f0e6fd0180c38b3f3f7309c414782b60cf1499d7ca5","raw":10247,"gzip9":3837,"brotli11":3489},{"file":"dist/unified.closed.js","role":"closed-world ESM (the library file under the closed settings)","writtenBy":"compiler","compilerWritten":true,"sha256":"3261bef5eecb438665ec2254df1700071ccde4d159d1dba6c0a3f7d54d1d2953","raw":12197,"gzip9":4601,"brotli11":4164},{"file":"dist/vfile.esm.js","role":"@itslil/unified/vfile ESM, every runtime without `node`","writtenBy":"compiler","compilerWritten":true,"sha256":"a6ede03b9f8a948ad9b2a555fd0ba6cb7c7557704beced889ab27e37893d6786","raw":6449,"gzip9":2651,"brotli11":2383},{"file":"dist/vfile.node.js","role":"@itslil/unified/vfile ESM, `node` condition","writtenBy":"compiler","compilerWritten":true,"sha256":"790953e6764c4396d2c62267516589d9ca8260a51c33cbba7cee429a73b53e00","raw":4584,"gzip9":1851,"brotli11":1673},{"file":"dist/unified.cjs","role":"CommonJS (`node` with `require`)","writtenBy":"post-processed by esbuild (format conversion of the compiler's ESM, not minified), not compiler-written","compilerWritten":false,"sha256":"d924206189670ea97cadc0fe7c82d2ea63e8a3e8e06fdf829e9770847cef623c","raw":16149,"gzip9":5014,"brotli11":4466},{"file":"dist/unified.umd.js","role":"UMD / IIFE (unpkg, jsdelivr)","writtenBy":"post-processed by esbuild (format conversion of the compiler's ESM, not minified), not compiler-written","compilerWritten":false,"sha256":"1e20a7eb0a46daf06257096a1824352cf8641670f37a43745470fff0fbb4cc42","raw":19620,"gzip9":5768,"brotli11":5112},{"file":"dist/vfile.cjs","role":"@itslil/unified/vfile CommonJS","writtenBy":"post-processed by esbuild (format conversion of the compiler's ESM, not minified), not compiler-written","compilerWritten":false,"sha256":"2f7b4f45071b3b9ee38b940068497f82bea200db95e76e84f518f4a962d735b1","raw":7938,"gzip9":2686,"brotli11":2407}],"compiler":{"revision":"24968659","binarySha256":"47048e41164027e92d3bf1d1840d8d83e04c60532c031ceb3346222e194b3041","codecSha256":"85329d361ef3339d4ff7b7ca1f00065d561340eb4fc98a2799af327134a3a3f0","compileWallMs":[1371.4,1399.6,1396.5],"invocations":[{"source":"src/index.lil","config":"lilscript.toml","wallMs":[174.8,188,174.6]},{"source":"src/vfile.lil","config":"lilscript.toml","wallMs":[84.4,84.3,88.4]},{"source":"default:src/index.lil","config":"lilscript.toml","wallMs":[441.4,460.4,466.5]},{"source":"default:src/index.lil","config":"lilscript.closed.toml","wallMs":[415.2,410.8,408.9]},{"source":"default:src/vfile.lil","config":"lilscript.toml","wallMs":[255.5,256,258.1]}],"timingScope":"wall time of the build's 5 compiler invocations in three clean source builds (node scripts/build.mjs --compile), recorded by the page-refresh compiler wrapper; the whole package build took 1.72 / 1.72 / 1.72 s","host":{"instanceClass":"Standard_B8als_v2","cpus":8,"loadAverage1m":2.1},"date":"2026-09-28"},"sizeMeasuredAt":"2026-09-28T13:12:32Z"}
+{
+  "file": "unified",
+  "lilExport": "unified",
+  "officialExport": "unified",
+  "play": {
+    "kind": "unified",
+    "sample": "# hi\nfrom @itslil/unified",
+    "samples": [
+      {
+        "label": "heading",
+        "value": "# unified\nplugins run in order"
+      }
+    ]
+  },
+  "package": "@itslil/unified",
+  "pin": "unified@11.0.5",
+  "objectiveComparison": {
+    "schemaVersion": 4,
+    "name": "unifiedlil",
+    "package": "@itslil/unified",
+    "measuredAt": "2026-10-03T02:05:48.520868+03:00",
+    "compiler": {
+      "baseRevision": "f7d29bd9",
+      "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "hasLocalSourceChanges": true
+    },
+    "upstream": {
+      "package": "unified",
+      "version": "11.0.5",
+      "external": [],
+      "sharedExports": [
+        "unified"
+      ],
+      "excludedExports": [],
+      "additionalExports": [],
+      "resolution": {
+        "platform": "neutral",
+        "conditions": [
+          "production"
+        ],
+        "mainFields": [
+          "module",
+          "main"
+        ],
+        "target": "es2020",
+        "defines": {
+          "process.env.NODE_ENV": "production"
+        }
+      }
+    },
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "machine": {
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "logicalCpus": 8,
+      "memoryGiB": 15.6,
+      "os": "Linux-7.0.0-1014-azure-x86_64-with-glibc2.39",
+      "node": "v20.19.0"
+    },
+    "objectives": [
+      {
+        "objective": "raw",
+        "metric": "raw",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/lilscript-raw.mjs",
+          "sizes": {
+            "raw": 11696,
+            "gzip9": 4622,
+            "brotli11": 4178
+          },
+          "sha256": "5f604f45812719edca887d2f2d1b0517e4789194683560183603609890c394b2",
+          "buildSeconds": 4.173396864000097,
+          "config": "./comparison-artifacts/lilscript-raw.toml",
+          "configSha256": "9757cbbd3817b15ecbf6c0d4009f9db586dddc826753bd3e30948e3a0056426b"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 13394,
+            "gzip9": 4801,
+            "brotli11": 4348
+          },
+          "sha256": "5f1e9b00fcef09bbcdec585c03a98404fd7c7e2ed2a7775b3f741370efadf412",
+          "buildSeconds": 0.3837841960000005
+        },
+        "ratio": 0.8732268179781992
+      },
+      {
+        "objective": "gzip",
+        "metric": "gzip9",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/lilscript-gzip.mjs",
+          "sizes": {
+            "raw": 12187,
+            "gzip9": 4490,
+            "brotli11": 4099
+          },
+          "sha256": "c2cd686ef41122d2dc9671fba660182d758f57faa8c91e6e2a93df234fe3f13b",
+          "buildSeconds": 3.3715597549999075,
+          "config": "./comparison-artifacts/lilscript-gzip.toml",
+          "configSha256": "d9826c63247abe81cd3a62718a23462e331f7222d2348f2b5d2031af843e59e3"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 13394,
+            "gzip9": 4801,
+            "brotli11": 4348
+          },
+          "sha256": "5f1e9b00fcef09bbcdec585c03a98404fd7c7e2ed2a7775b3f741370efadf412",
+          "buildSeconds": 0.3837841960000005
+        },
+        "ratio": 0.9352218287856696
+      },
+      {
+        "objective": "brotli",
+        "metric": "brotli11",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/lilscript-brotli.mjs",
+          "sizes": {
+            "raw": 12248,
+            "gzip9": 4503,
+            "brotli11": 4085
+          },
+          "sha256": "2b4297e06ece98ed41bdf538b4e839ffc0712d372bb877b9d3826d60262db539",
+          "buildSeconds": 6.878012219000084,
+          "config": "./comparison-artifacts/lilscript-brotli.toml",
+          "configSha256": "754f2542a25b0c319b94ececf3f6715927d75fec29ba7b8e83ce2e54d4b1f5fc"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 13394,
+            "gzip9": 4801,
+            "brotli11": 4348
+          },
+          "sha256": "5f1e9b00fcef09bbcdec585c03a98404fd7c7e2ed2a7775b3f741370efadf412",
+          "buildSeconds": 0.3837841960000005
+        },
+        "ratio": 0.9395124195032198
+      }
+    ],
+    "minifiers": [
+      {
+        "tool": "Terser",
+        "version": "5.51.2",
+        "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-terser.mjs",
+        "sizes": {
+          "raw": 13394,
+          "gzip9": 4801,
+          "brotli11": 4348
+        },
+        "sha256": "5f1e9b00fcef09bbcdec585c03a98404fd7c7e2ed2a7775b3f741370efadf412",
+        "buildSeconds": 0.3837841960000005
+      },
+      {
+        "tool": "esbuild",
+        "version": "0.28.1",
+        "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-esbuild.mjs",
+        "sizes": {
+          "raw": 13796,
+          "gzip9": 5046,
+          "brotli11": 4617
+        },
+        "sha256": "2970578b5ddf4622b925b584891b8af49728bf191e0adb3a86f12a4a5d6ca550",
+        "buildSeconds": 0.06324301000000014
+      },
+      {
+        "tool": "Oxc",
+        "version": "via Vite 8.2.1",
+        "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-oxc.mjs",
+        "sizes": {
+          "raw": 13468,
+          "gzip9": 4851,
+          "brotli11": 4434
+        },
+        "sha256": "258d7d55d71f77a9e493865a8c9550ec9c83bb8af72028ff2b4a8c9ca6973aff",
+        "buildSeconds": 0.1830535030000001
+      }
+    ],
+    "validation": {
+      "checks": 585,
+      "objectives": [
+        {
+          "objective": "raw",
+          "checks": 195,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "gzip",
+          "checks": 195,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "brotli",
+          "checks": 195,
+          "suite": "upstream-derived/API"
+        }
+      ],
+      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+    },
+    "linksBase": "https://yeargun.github.io/unifiedlil/"
+  },
+  "spec": {
+    "pass": 585,
+    "total": 585,
+    "label": "current main-entry checks"
+  }
+}

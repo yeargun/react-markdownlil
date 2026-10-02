@@ -227,51 +227,9 @@ None in behavior: every case above renders the same (1,354 spec examples, 23,000
 Measured 2026-09-28 on an Azure Standard_B8als_v2 (8 vCPU, burstable) with Playwright 1.62.1: Chromium 151.0.7922.34, Firefox 153.0; React 19.2.0, Vite 8.3.1; react-markdown 10.1.0 against @itslil/react-markdown packed from this repository, plugins from npm. Reproduce: cd real-app && npm run setup && npm run build && npm run correctness && npm run fuzz && npm run edge && npm run perf && npm run report.
 <!-- real-app:end -->
 
-## Builds and sizes
+## Comparison with the original
 
-Every file in `dist/` is written by the LilScript compiler (`24968659`); the build
-adds only a license banner, the React imports, the `development` flag and, for
-CommonJS, `module.exports` in place of the export clause. No minifier runs after
-the compiler.
-
-| File | Conditions | Brotli-11 | gzip-9 | raw |
-|---|---|---:|---:|---:|
-| `dist/react-markdown.browser.js` | `browser` | 28,426 | 32,365 | 98,814 |
-| `dist/react-markdown.worker.js` | `edge-light`, `react-native`, `worker`, `workerd`, `convex`, any runtime without `node` | 37,130 | 43,327 | 119,596 |
-| `dist/react-markdown.esm.js` | `node` (Node, Deno, Bun) | 36,441 | 42,524 | 117,540 |
-| `dist/react-markdown.cjs` | `node` with `require` | 36,492 | 42,548 | 117,591 |
-| `dist/react-markdown.closed.js` | `./closed` | 39,878 | 46,905 | 136,897 |
-
-Upstream's graph resolves two condition maps, and the package resolves the same
-pair. decode-named-character-reference decodes named character references
-through the document under `browser` (`index.dom.js`) and with its 2,125-entry
-table everywhere else; vfile imports `node:path`, `node:process` and `node:url`
-under `node` and its own small shims everywhere else. So the browser build is the
-document and the shims, the worker build is the table and the shims (Cloudflare
-Workers, Next.js and Vercel edge, React Native, web workers), and the Node build
-is the table and the Node modules. Under `development` each is the same program
-with devlop's assertions on (`*.development.js`, `*.development.cjs`).
-`test/environments.test.mjs` bundles upstream and this package with each
-runtime's conditions and compares what a plugin sees of the file: the working
-directory, every path getter and setter, file URLs and the errors they throw.
-The bars are upstream's browser graph (esbuild, React external) minified:
-
-| Official browser graph | Brotli-11 | gzip-9 | raw |
-|---|---:|---:|---:|
-| Git source (`44d2e4a`) + Terser 5.51.2, passes 3 (strongest) | 31,280 | 35,092 | 117,688 |
-| npm package + Terser 5.51.2 | 31,460 | 35,330 | 118,496 |
-| npm package + Oxc (Vite 8.2.1) | 31,833 | 35,548 | 117,790 |
-| npm package + esbuild 0.28.1 | 32,870 | 36,764 | 118,772 |
-
-The browser build is 2,854 B (9.1%) smaller in Brotli-11 than the strongest bar,
-2,727 B in gzip-9 and 18,874 B raw. The four compiles of one build take about
-24.2 s on this Azure B8als_v2 host (shared, 1-minute load 2.3), 7.2 s of it for the
-browser build. `npm run record:release` re-measures everything the site
-shows (`site/results.json`).
-
-Every library of the stack (unified, micromark, mdast-util-from-markdown,
-remark-parse, mdast-util-to-hast, remark-rehype and the plugins) is compared with
-its original on the site: [the stack table](https://yeargun.github.io/react-markdownlil/#stack).
+See [COMPARISON.md](COMPARISON.md) for current raw-, gzip- and Brotli-objective builds, minified upstream comparisons, build times and validation.
 
 ## Source graph
 
