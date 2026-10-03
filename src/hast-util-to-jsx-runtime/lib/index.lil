@@ -1,3 +1,5 @@
+import {Fragment, jsx, jsxs} from "../../react.lil";
+export {Fragment, jsx, jsxs};
 // hast-util-to-jsx-runtime@2.3.6 `toJsxRuntime(tree, options)` for the options react-markdown passes:
 // {Fragment, components, ignoreInvalidStyle: true, jsx, jsxs, passKeys: true, passNode: true} (production
 // `create`, React attribute and DOM style casing, table-cell `align` moved to `style`).
@@ -6,9 +8,9 @@ import { PropertyInfo, find, html, reactName, svg } from "../../property-informa
 import { styleToJs } from "../../style-to-js/index.lil";
 import { createVFileMessage } from "../../vfile/lib/index.lil";
 
-export extern JsValue Fragment;
-export extern JsValue jsx;
-export extern JsValue jsxs;
+
+
+
 extern JsValue Number;
 extern JsValue RegExp;
 extern JsValue String;

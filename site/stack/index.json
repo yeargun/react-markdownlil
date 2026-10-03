@@ -19,7 +19,7 @@
       "site": "https://yeargun.github.io/micromarklil/",
       "npm": "https://www.npmjs.com/package/@itslil/micromark",
       "package": "@itslil/micromark",
-      "pin": "micromark@4.0.2",
+      "pin": "micromark@4.0.3",
       "spec": {
         "pass": 2082,
         "total": 2082,
@@ -73,8 +73,8 @@
       "package": "@itslil/remark-parse",
       "pin": "remark-parse@11.0.0",
       "spec": {
-        "pass": 2094,
-        "total": 2094,
+        "pass": 2082,
+        "total": 2082,
         "label": "current main-entry checks"
       }
     },

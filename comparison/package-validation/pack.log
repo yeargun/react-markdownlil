@@ -1,0 +1,32 @@
+
+> @itslil/react-markdown@10.1.1 check:pack
+> node scripts/check-pack.mjs && node scripts/check-local-graph.mjs && npm run check:graph
+
+npm pack: 106 files, 477132 bytes packed, 1500714 bytes unpacked
+
+up to date, audited 33 packages in 1s
+
+20 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+up to date, audited 33 packages in 546ms
+
+20 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+added 32 packages, and audited 33 packages in 674ms
+
+20 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+local tarball graph: reproducible lock, ESM and CJS load
+
+> @itslil/react-markdown@10.1.1 check:graph
+> node scripts/source-graph.mjs --require-siblings
+
+source graph: 77 LilScript modules match pinned sibling and upstream mappings

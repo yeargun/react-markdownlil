@@ -8,9 +8,6 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const artifacts = [
   "dist/react-markdown.esm.js",
   "dist/react-markdown.browser.js",
-  "dist/react-markdown.browser.development.js",
-  "dist/react-markdown.worker.js",
-  "dist/react-markdown.worker.development.js",
   "dist/react-markdown.development.js",
   "dist/react-markdown.cjs",
   "dist/react-markdown.development.cjs",
@@ -33,19 +30,10 @@ const first = build()
 const second = build()
 if (JSON.stringify(first) !== JSON.stringify(second)) throw new Error("two clean graph builds produced different artifacts")
 
-// React is the only import of the browser and worker programs; the Node program also
-// imports what upstream's vfile imports under `node`.
-const expectedImports = {
-  "dist/react-markdown.esm.js": ["node:path", "node:process", "node:url", "react", "react/jsx-runtime"],
-  "dist/react-markdown.browser.js": ["react", "react/jsx-runtime"],
-  "dist/react-markdown.worker.js": ["react", "react/jsx-runtime"],
-}
-for (const [path, expected] of Object.entries(expectedImports)) {
-  const source = readFileSync(resolve(root, path), "utf8")
-  const imports = Array.from(source.matchAll(/from\s*["']([^"']+)["']/gu), (match) => match[1]).sort()
-  if (JSON.stringify(imports) !== JSON.stringify(expected)) {
-    throw new Error(`${path} has unexpected imports: ${imports.join(", ")}`)
-  }
+const esm = readFileSync(resolve(root, artifacts[0]), "utf8")
+const imports = Array.from(esm.matchAll(/from\s*["']([^"']+)["']/gu), (match) => match[1]).sort()
+if (JSON.stringify(imports) !== JSON.stringify(["react", "react/jsx-runtime"])) {
+  throw new Error(`standalone ESM has unexpected imports: ${imports.join(", ")}`)
 }
 
 console.log(JSON.stringify({reproducible: true, artifacts: first}, null, 2))

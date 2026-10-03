@@ -2,9 +2,11 @@
 // decode-named-character-reference@1.3.0's `index.dom.js`: the document's
 // own HTML parser decodes a named reference, so the 2,125-entry table stays
 // out of the bundle. Node and the development build keep the table.
+export define bool BROWSER = false;
 extern JsValue document;
 
-JsValue element = JS.invoke(document, "createElement", "i");
+// The module is also checked for server builds; never read document there.
+JsValue element = if (BROWSER) { JS.invoke(document, "createElement", "i") } else { JS.undefined() };
 
 export JsValue decodeNamedCharacterReference(string value) {
   string characterReference = "&" + value + ";";

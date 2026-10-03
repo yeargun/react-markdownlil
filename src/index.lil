@@ -1,3 +1,4 @@
+import "./react.lil";
 import { Markdown, MarkdownAsync, MarkdownHooks, defaultUrlTransform } from "./lib/index.lil";
 import { Object } from "./host.lil";
 

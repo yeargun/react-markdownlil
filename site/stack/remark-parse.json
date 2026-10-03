@@ -12,7 +12,7 @@
     "schemaVersion": 4,
     "name": "remark-parselil",
     "package": "@itslil/remark-parse",
-    "measuredAt": "2026-10-03T02:05:48.531985+03:00",
+    "measuredAt": "2026-10-03T18:02:15.340009+03:00",
     "compiler": {
       "baseRevision": "f7d29bd9",
       "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
@@ -39,10 +39,11 @@
         "target": "es2020",
         "defines": {
           "process.env.NODE_ENV": "production"
-        }
+        },
+        "css": "excluded; measured JavaScript only"
       }
     },
-    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions. Package Node, browser and development variants are tested separately.",
     "machine": {
       "cpu": "AMD EPYC 7763 64-Core Processor",
       "logicalCpus": 8,
@@ -57,28 +58,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/lilscript-raw.mjs",
           "sizes": {
-            "raw": 64590,
-            "gzip9": 26491,
-            "brotli11": 22331
+            "raw": 73380,
+            "gzip9": 28151,
+            "brotli11": 23994
           },
-          "sha256": "6de699f04f6080fe633efcfe7add4e9fa134dd8a27095c6634002080bcfd24b0",
-          "buildSeconds": 13.590127907998976,
+          "sha256": "1318a6d0c7fa9b227bd61571d623ab888dbda70454e5e9fe72d782828df7f5ef",
+          "buildSeconds": 58.74289637200127,
           "config": "./comparison-artifacts/lilscript-raw.toml",
-          "configSha256": "3ac2556291f6a453915fa6fe750e341e247e43866777b993735424ac5b9fa1af"
+          "configSha256": "1d20fc600168996586f49f009506c9cc06e4c1f3dd296b8f3edda7910945ea8e"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 84339,
-            "gzip9": 26914,
-            "brotli11": 23171
+            "raw": 84959,
+            "gzip9": 27233,
+            "brotli11": 23499
           },
-          "sha256": "0cd92077892bccae682bcf4de96cc539fcfaac6b398ccc64f5e5b5d9b43b8bc8",
-          "buildSeconds": 0.96142108
+          "sha256": "3bb7aee39868255df5bdf1d1c4d420ef36f758246fbf28fab2643f4e1950f54f",
+          "buildSeconds": 1.2653215980000005
         },
-        "ratio": 0.7658378686017145
+        "ratio": 0.8637107310585106
       },
       {
         "objective": "gzip",
@@ -86,28 +87,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/lilscript-gzip.mjs",
           "sizes": {
-            "raw": 66632,
-            "gzip9": 26179,
-            "brotli11": 22144
+            "raw": 77260,
+            "gzip9": 27228,
+            "brotli11": 23246
           },
-          "sha256": "a32f5cd8c667a84cdc39d71ce04af18952b92b486c5495504330cec99a62265e",
-          "buildSeconds": 12.237285213999712,
+          "sha256": "8eaad55a3ca6dfa992c60e317ac5c9713300bd76e0c20238af71ffc843747251",
+          "buildSeconds": 57.185582924008486,
           "config": "./comparison-artifacts/lilscript-gzip.toml",
-          "configSha256": "c207b956112756a405974f1cfb204df6fa0bf726e722b01b3ee99b3ca990be2e"
+          "configSha256": "6945714dadb3e07bcaade819d2b1ac80e32e34e3c6e8c78d94d22aabd3fcd2d3"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 84339,
-            "gzip9": 26914,
-            "brotli11": 23171
+            "raw": 84959,
+            "gzip9": 27233,
+            "brotli11": 23499
           },
-          "sha256": "0cd92077892bccae682bcf4de96cc539fcfaac6b398ccc64f5e5b5d9b43b8bc8",
-          "buildSeconds": 0.96142108
+          "sha256": "3bb7aee39868255df5bdf1d1c4d420ef36f758246fbf28fab2643f4e1950f54f",
+          "buildSeconds": 1.2653215980000005
         },
-        "ratio": 0.9726907928958907
+        "ratio": 0.9998163992215326
       },
       {
         "objective": "brotli",
@@ -115,28 +116,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/lilscript-brotli.mjs",
           "sizes": {
-            "raw": 66554,
-            "gzip9": 26257,
-            "brotli11": 22158
+            "raw": 77131,
+            "gzip9": 27352,
+            "brotli11": 23215
           },
-          "sha256": "99e7a049b3f63ab999ba0ec8f1fdab601b24b778f1717a48465770b831b28875",
-          "buildSeconds": 31.074116779996984,
+          "sha256": "f33b9b67ce3c789654b99da19e063705e11be8a72cd076fea36982d7ba8d2f9a",
+          "buildSeconds": 159.55043754600047,
           "config": "./comparison-artifacts/lilscript-brotli.toml",
-          "configSha256": "797b0b226ddb06569f530eebad20707974a43c9248eb9ea90050db6096d8bdde"
+          "configSha256": "614f7d475cff3b1c66ba6921ed797d52214955056a40952a2805b752b666155f"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 84339,
-            "gzip9": 26914,
-            "brotli11": 23171
+            "raw": 84959,
+            "gzip9": 27233,
+            "brotli11": 23499
           },
-          "sha256": "0cd92077892bccae682bcf4de96cc539fcfaac6b398ccc64f5e5b5d9b43b8bc8",
-          "buildSeconds": 0.96142108
+          "sha256": "3bb7aee39868255df5bdf1d1c4d420ef36f758246fbf28fab2643f4e1950f54f",
+          "buildSeconds": 1.2653215980000005
         },
-        "ratio": 0.9562815588451081
+        "ratio": 0.9879143793352909
       }
     ],
     "minifiers": [
@@ -145,64 +146,127 @@
         "version": "5.51.2",
         "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/original-terser.mjs",
         "sizes": {
-          "raw": 84339,
-          "gzip9": 26914,
-          "brotli11": 23171
+          "raw": 84959,
+          "gzip9": 27233,
+          "brotli11": 23499
         },
-        "sha256": "0cd92077892bccae682bcf4de96cc539fcfaac6b398ccc64f5e5b5d9b43b8bc8",
-        "buildSeconds": 0.96142108
+        "sha256": "3bb7aee39868255df5bdf1d1c4d420ef36f758246fbf28fab2643f4e1950f54f",
+        "buildSeconds": 1.2653215980000005
       },
       {
         "tool": "esbuild",
         "version": "0.28.1",
         "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/original-esbuild.mjs",
         "sizes": {
-          "raw": 92727,
-          "gzip9": 28102,
-          "brotli11": 24279
+          "raw": 93338,
+          "gzip9": 28463,
+          "brotli11": 24586
         },
-        "sha256": "2ab41b6f9e1f9a57c2390edbe2ff8aa3b6f472e9fe006d7fa1264147f2c2d755",
-        "buildSeconds": 0.08345304800000031
+        "sha256": "9291ac75ed84261553e082e25f383f8a95da7e5ca161b7de84ae61925f915304",
+        "buildSeconds": 0.10986299400000007
       },
       {
         "tool": "Oxc",
         "version": "via Vite 8.2.1",
         "artifact": "https://yeargun.github.io/remark-parselil/comparison-artifacts/original-oxc.mjs",
         "sizes": {
-          "raw": 84436,
-          "gzip9": 27112,
-          "brotli11": 23339
+          "raw": 85025,
+          "gzip9": 27408,
+          "brotli11": 23643
         },
-        "sha256": "6c8adf459427ebbab0aa2fcf042496f65ae5d34eb52669e87fda63b60951d108",
-        "buildSeconds": 0.20229888200000004
+        "sha256": "ab1f194c1b17fb2f019077b50640954a92684c26a9eeed5dcbe7855584e46afa",
+        "buildSeconds": 0.20511436700000013
       }
     ],
     "validation": {
-      "checks": 2094,
-      "objectives": [
+      "checks": 2082,
+      "runs": [
         {
           "objective": "raw",
-          "checks": 698,
-          "suite": "differential, upstream-derived/API"
+          "suite": "differential",
+          "checks": 694,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/raw",
+            "remark-parselil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/raw/remark-parselil/dist/index.mjs",
+          "ok": true
         },
         {
           "objective": "gzip",
-          "checks": 698,
-          "suite": "differential, upstream-derived/API"
+          "suite": "differential",
+          "checks": 694,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/gzip",
+            "remark-parselil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/gzip/remark-parselil/dist/index.mjs",
+          "ok": true
         },
         {
           "objective": "brotli",
-          "checks": 698,
-          "suite": "differential, upstream-derived/API"
+          "suite": "differential",
+          "checks": 694,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/brotli",
+            "remark-parselil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/brotli/remark-parselil/dist/index.mjs",
+          "ok": true
         }
       ],
-      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+      "ok": true,
+      "scope": "Current independent main-entry builds; package-format tests are recorded separately."
+    },
+    "originalValidation": {
+      "checks": 2082,
+      "runs": [
+        {
+          "minifier": "terser",
+          "checks": 694,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-terser",
+            "remark-parselil"
+          ]
+        },
+        {
+          "minifier": "esbuild",
+          "checks": 694,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-esbuild",
+            "remark-parselil"
+          ]
+        },
+        {
+          "minifier": "oxc",
+          "checks": 694,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-oxc",
+            "remark-parselil"
+          ]
+        }
+      ]
     },
     "linksBase": "https://yeargun.github.io/remark-parselil/"
   },
   "spec": {
-    "pass": 2094,
-    "total": 2094,
+    "pass": 2082,
+    "total": 2082,
     "label": "current main-entry checks"
   }
 }

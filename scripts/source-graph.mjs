@@ -119,6 +119,12 @@ extern JsValue encodeURIComponent;`
     if (!source.includes(before)) throw new Error("remark-parse host source no longer matches the audited graph wiring")
     return source.replace(before, after)
   }
+  if (id === "remark-parse" && path === "src/micromark/decode-named.lil") {
+    const declaration = "export JsValue decodeNamedCharacterReference(string value) {"
+    if (!source.includes(declaration)) throw new Error("remark-parse decoder no longer matches the audited conditional wiring")
+    return 'import {BROWSER, decodeNamedCharacterReference as decodeBrowser} from "../../../browser/decode-named.lil";\n' +
+      source.replace(declaration, declaration + "\n  if (BROWSER) return decodeBrowser(value);")
+  }
   if (id === "remark-parse" && path === "src/micromark/character-entities.lil") {
     // The table as an object literal (upstream's form) reads no host global.
     if (source.startsWith("export JsValue characterEntities = object {")) return source
@@ -231,7 +237,7 @@ function upstreamFiles(id, path) {
     ]
   }
 
-  if (path === "src/entry.lil") return ["remark-parse@11.0.0/lib/index.js"]
+  if (path === "src/entry.lil" || path === "src/browser.lil") return ["remark-parse@11.0.0/lib/index.js"]
   if (path === "src/from-markdown.lil") return ["mdast-util-from-markdown@2.0.3/dev/lib/index.js"]
   if (path === "src/to-string.lil") return ["mdast-util-to-string@4.0.0/lib/index.js"]
   if (path === "src/stringify-position.lil") return ["unist-util-stringify-position@4.0.0/lib/index.js"]

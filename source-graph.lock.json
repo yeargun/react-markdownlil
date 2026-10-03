@@ -5,9 +5,9 @@
     {
       "id": "unified",
       "package": "@itslil/unified@11.0.7",
-      "siblingRevision": "0b16ca8ea46375803aa3fc5a7ae6af93bcc6b9d4",
-      "sourceSha256": "e9ff8415f08e5bfe5e3b99b6ce63fd6e5c40e1450ff7c18746cb8b4fa4b8bd30",
-      "graphSha256": "a12eb13d67054c7650cdbb5cf82ce048c54fd0fe9b2838a1f383d3ea945a3c5f",
+      "siblingRevision": "f33ed3419b3e502146143523f334ebe56f3e6860",
+      "sourceSha256": "8b70d5517c06bfb75158f6d406f4b86bf3b5adb2ee8c70dfc20a693859120d5b",
+      "graphSha256": "ca3387da7eff1bfe8eeb066c3f3379a526ff30ab1fc6db633735d16892649df0",
       "upstream": {
         "repository": "https://github.com/unifiedjs/unified.git",
         "tag": "11.0.5",
@@ -32,6 +32,18 @@
             {
               "path": "vfile@6.0.3/lib/minurl.browser.js",
               "sha256": "c0fdbff8069606f5eef2ccb588abe8f06a7597bcf1894bd1a9ba155b1ebafc1f"
+            }
+          ]
+        },
+        {
+          "path": "src/browser.lil",
+          "graphPath": "src/graph/unified/browser.lil",
+          "sha256": "e7aec62e6d00b9a4d48be7c60ab2e89aff27f0980a996064fa3a7c9d710f2b6a",
+          "graphSha256": "e7aec62e6d00b9a4d48be7c60ab2e89aff27f0980a996064fa3a7c9d710f2b6a",
+          "upstream": [
+            {
+              "path": "unified@11.0.5/lib/callable-instance.js",
+              "sha256": "28c9baa7aea87597c4eca19a2e2b3342d3017347fabf7d513278787b5a950c58"
             }
           ]
         },
@@ -110,8 +122,8 @@
         {
           "path": "src/vfile-imports.lil",
           "graphPath": "src/graph/unified/vfile-imports.lil",
-          "sha256": "3b61b2a37ac0feac08c5af6c1910d6d2ca9f0a8bde7deb21607651d1965aa180",
-          "graphSha256": "3b61b2a37ac0feac08c5af6c1910d6d2ca9f0a8bde7deb21607651d1965aa180",
+          "sha256": "17515fa203f6b6981aa3d6d3024ee2204605ca241493f833f523e2e8ca260b50",
+          "graphSha256": "17515fa203f6b6981aa3d6d3024ee2204605ca241493f833f523e2e8ca260b50",
           "upstream": [
             {
               "path": "vfile@6.0.3/lib/minpath.js",
@@ -152,9 +164,9 @@
     {
       "id": "remark-parse",
       "package": "@itslil/remark-parse@11.0.3",
-      "siblingRevision": "083ba3684ab4cc9c92dfa59cf1cda978774f96cf",
-      "sourceSha256": "361b15a286cfad3f6d2759e2c6252f02e0b398deaa898802fd54709a2428c2c7",
-      "graphSha256": "64abbdbc23ed17f49e801306e9cfcf8b7d4ac25a5f97eacdc419d3893054cccd",
+      "siblingRevision": "76a2fefba3d6da8c068278e55945f31fa0f37067",
+      "sourceSha256": "0904ccffbc02b1e53cdced06e21c8192f4f7cd8295acbc807c0ac3c3276d2988",
+      "graphSha256": "dfa50877968565fad588b11df3962ea30fb782457aaf3d5c7479d65e7524795a",
       "upstream": {
         "repository": "https://github.com/remarkjs/remark.git",
         "tag": "remark-parse@11.0.0",
@@ -162,6 +174,18 @@
         "tree": "a0b5bef5d96f49e4aecdd29dc53cda36a785cc30"
       },
       "files": [
+        {
+          "path": "src/browser.lil",
+          "graphPath": "src/graph/remark-parse/browser.lil",
+          "sha256": "29215bc9ba5f6a47a3ab1a01761920857d4b7f0c0dd6cc28af705cdcdd7a74c7",
+          "graphSha256": "29215bc9ba5f6a47a3ab1a01761920857d4b7f0c0dd6cc28af705cdcdd7a74c7",
+          "upstream": [
+            {
+              "path": "remark-parse@11.0.0/lib/index.js",
+              "sha256": "9d5a9a197d1d91a1abbf47b8cf67e1ee0decbfc9471d94c4a2ee712ff73b90c8"
+            }
+          ]
+        },
         {
           "path": "src/entry.lil",
           "graphPath": "src/graph/remark-parse/entry.lil",
@@ -502,7 +526,7 @@
           "path": "src/micromark/decode-named.lil",
           "graphPath": "src/graph/remark-parse/micromark/decode-named.lil",
           "sha256": "e4150b19e19a214e7ccfb5d6762bdce62fde30b8cc907642d911f9ea87b9e6e8",
-          "graphSha256": "e4150b19e19a214e7ccfb5d6762bdce62fde30b8cc907642d911f9ea87b9e6e8",
+          "graphSha256": "659ecad35175a328c51b0022014c4c4d78fcafcbff9e89d3bd03c0a77c0d967f",
           "upstream": [
             {
               "path": "decode-named-character-reference@1.3.0/index.js",
@@ -887,9 +911,9 @@
     {
       "id": "remark-rehype",
       "package": "@itslil/remark-rehype@11.1.6",
-      "siblingRevision": "2bd9529f4c7c761ea861c0d70ecab533cd38acbb",
-      "sourceSha256": "7a936e663cd07aae4c4cf595543acfbe2d2c98cd39827880bbd96f93bcbdc72f",
-      "graphSha256": "65d4aeef944f0c1fe3e51742272a97656624bd439e345b691b01c23660e9b2cc",
+      "siblingRevision": "39c4be60340ba3b7251a4cec1f2aa7609dc1aada",
+      "sourceSha256": "f6e6d7c2e3c77ebc47675daacc9f3df18e2df491b00afe8cf033010586663831",
+      "graphSha256": "f4eb793cebb0cc654c64af9c4cd24a19c165511b30bf9ac2118fade735e9552e",
       "upstream": {
         "repository": "https://github.com/remarkjs/remark-rehype.git",
         "tag": "11.1.2",
@@ -897,6 +921,118 @@
         "tree": "1d50e825c043998a400d0bec47f7f1b50d7c99f7"
       },
       "files": [
+        {
+          "path": "src/browser.lil",
+          "graphPath": "src/graph/remark-rehype/browser.lil",
+          "sha256": "29215bc9ba5f6a47a3ab1a01761920857d4b7f0c0dd6cc28af705cdcdd7a74c7",
+          "graphSha256": "29215bc9ba5f6a47a3ab1a01761920857d4b7f0c0dd6cc28af705cdcdd7a74c7",
+          "upstream": [
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/state.js",
+              "sha256": "3efa2af554f55b9d6b9fde660f40886669976e73bdea09c4884fabf6a65e2803"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/footer.js",
+              "sha256": "40a9dbaa5cf1e3f3ff993bbdd7e9d8666cb620b3dabd4276af5212d1f95fe7d7"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/index.js",
+              "sha256": "4de11cfac2c9486f6633a60f180e7fb772d48d005a6168b50d41c7de062098aa"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/blockquote.js",
+              "sha256": "9744b0434bd3f70716b1208a8e580ce01cdc3b99736ddac44aafe32503a05b60"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/break.js",
+              "sha256": "bbd9617fec60951f0a0d46477cfa1a3355375f6a655adb13f11a6fd9d8aee47d"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/code.js",
+              "sha256": "60d18f00c0f40917ad26a2e112f5dd0be66e7ab1088832932ec14aa69df8eb29"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/delete.js",
+              "sha256": "20a3aa0fca3e1cb6c80e4103392168c945c97477573d13bd123f92cfea071672"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/emphasis.js",
+              "sha256": "d40b9afbcd5a1ab9f598d5ff439e73cbfa8f1cc9708115e439c030ffc5bf1edf"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/footnote-reference.js",
+              "sha256": "f5c49df607b90b1a1e89b754cfdd3290f49e5ca42b5af9ea9a01f1af1ccacae8"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/heading.js",
+              "sha256": "c54a67319a4ac1d9d25eb8a8fb73f094b2ffac385d11f64ef748d8e0a0c0aec3"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/html.js",
+              "sha256": "18af5a6b0d9eebad977bb78e60b247d4cde445bb1cc5c275f1bea61e1151b14a"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/image-reference.js",
+              "sha256": "79c616d913f42ecb997b008a3147a3a208c08c18dfd01c573976656f370b425c"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/image.js",
+              "sha256": "06c2c63d11c4ef7b0fe8f082ec2fe47ffd5bf00e7a2a2d4756515951dccad50e"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/inline-code.js",
+              "sha256": "99e74e1891add9c61f640f859308e3f907c90eb4e92c381b1f29fab2e16c19a1"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/link-reference.js",
+              "sha256": "c1dcf7f39f12ab58603197504f6707372bf936fc113aaa7625910faff37063b5"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/link.js",
+              "sha256": "ac8d90073fee56d692f964775332dce0ffda38b07f86f1b412212f21f1d19d1e"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/list-item.js",
+              "sha256": "0da607553981392d7ce7c1bc49f74bb4eb643ee517e959fac6dbd276d7b80488"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/list.js",
+              "sha256": "f6b70088d06ca8c101c07c6dff2363c7962a5aeecd7a2b26005848b2e14100d8"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/paragraph.js",
+              "sha256": "a77301efe0f60029bd39935a64c456556f945f22c780e2c93f610a4711ab68d7"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/root.js",
+              "sha256": "aeba8659e5c4dca7c269f4ded5c39688876f3f76057b5f2459eadd956bf44a86"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/strong.js",
+              "sha256": "3dba3cfd6954bc3c52653ba74c50771e3b776b561c901f542f28e07eb6591191"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/table-cell.js",
+              "sha256": "6faa2956741b11b277e7d2189f5bb97786a13462e39e412aeaefa65325588f8f"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/table-row.js",
+              "sha256": "bec1dca051d327477166c745be7d7a51fe97ef182b57e889f17e7b57bd7ecee3"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/table.js",
+              "sha256": "f12e3d16638a2159b08e6f0cb816c34d3c2ede3ab592235621bb60cda3d0d128"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/text.js",
+              "sha256": "66aa96a1369887fe40759b200f80b609316e8cc66da424e2832400aad41eebeb"
+            },
+            {
+              "path": "mdast-util-to-hast@13.2.1/lib/handlers/thematic-break.js",
+              "sha256": "bf3cfab49b184da92b8e53ddf86e13625da8d5055db3a9abc904daff1312aa56"
+            }
+          ]
+        },
         {
           "path": "src/entry.lil",
           "graphPath": "src/graph/remark-rehype/entry.lil",

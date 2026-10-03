@@ -17,12 +17,12 @@
     ]
   },
   "package": "@itslil/micromark",
-  "pin": "micromark@4.0.2",
+  "pin": "micromark@4.0.3",
   "objectiveComparison": {
     "schemaVersion": 4,
     "name": "micromarklil",
     "package": "@itslil/micromark",
-    "measuredAt": "2026-10-03T02:05:48.432870+03:00",
+    "measuredAt": "2026-10-03T18:02:15.198554+03:00",
     "compiler": {
       "baseRevision": "f7d29bd9",
       "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
@@ -30,7 +30,7 @@
     },
     "upstream": {
       "package": "micromark",
-      "version": "4.0.2",
+      "version": "4.0.3",
       "external": [],
       "sharedExports": [
         "compile",
@@ -53,10 +53,11 @@
         "target": "es2020",
         "defines": {
           "process.env.NODE_ENV": "production"
-        }
+        },
+        "css": "excluded; measured JavaScript only"
       }
     },
-    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions. Package Node, browser and development variants are tested separately.",
     "machine": {
       "cpu": "AMD EPYC 7763 64-Core Processor",
       "logicalCpus": 8,
@@ -71,28 +72,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/lilscript-raw.mjs",
           "sizes": {
-            "raw": 63806,
-            "gzip9": 25949,
-            "brotli11": 22043
+            "raw": 72238,
+            "gzip9": 27548,
+            "brotli11": 23685
           },
-          "sha256": "0841fe43cd374a23219b71fab0adb3514f18204399573cba3948a02231a3dd8f",
-          "buildSeconds": 14.191141559000243,
+          "sha256": "063ec6abcd2bd8559350d13e12af2ff26aae923d23b5c05f6c3b4c01ac64b96d",
+          "buildSeconds": 70.33382455199899,
           "config": "./comparison-artifacts/lilscript-raw.toml",
-          "configSha256": "dadd062bb55040582a6f09184238bbcfa89412fe24a25679956aaee91e5dfa54"
+          "configSha256": "ff261ac5084fada5463c2e57538ee5a05ffb54201ebbd52eedfe6f840196b4c8"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 81191,
-            "gzip9": 26278,
-            "brotli11": 22696
+            "raw": 81809,
+            "gzip9": 26621,
+            "brotli11": 23008
           },
-          "sha256": "4ca5e777f4bd6cd2418940c0315da7f8a57bc0ff097ebc18f695e08fbcd33935",
-          "buildSeconds": 1.0063230939999999
+          "sha256": "d52333a9148d3224f69548231024f274634f1a4ac25ca18669063c924625d4b7",
+          "buildSeconds": 1.275336618
         },
-        "ratio": 0.7858752817430503
+        "ratio": 0.8830079820068697
       },
       {
         "objective": "gzip",
@@ -100,28 +101,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/lilscript-gzip.mjs",
           "sizes": {
-            "raw": 65567,
-            "gzip9": 25706,
-            "brotli11": 21809
+            "raw": 74315,
+            "gzip9": 27195,
+            "brotli11": 23179
           },
-          "sha256": "837dffe430346930087733e77a6d9ec3eb66c3121d145efdfa3f3dc4707dc439",
-          "buildSeconds": 10.784984976002306,
+          "sha256": "8c6dc1a46c42716f72e51b4b3869779cf6c48b101a40eddec5104ba91ddb62e4",
+          "buildSeconds": 80.27126713600592,
           "config": "./comparison-artifacts/lilscript-gzip.toml",
-          "configSha256": "67de588cf8aebfbfcb3704c20212827abf1d1b985f8e692568c0f6a35612f271"
+          "configSha256": "661783f5dbec84e6bfa121cf49f5ca90c47625c9ff198cf0062b3c325da20067"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 81191,
-            "gzip9": 26278,
-            "brotli11": 22696
+            "raw": 81809,
+            "gzip9": 26621,
+            "brotli11": 23008
           },
-          "sha256": "4ca5e777f4bd6cd2418940c0315da7f8a57bc0ff097ebc18f695e08fbcd33935",
-          "buildSeconds": 1.0063230939999999
+          "sha256": "d52333a9148d3224f69548231024f274634f1a4ac25ca18669063c924625d4b7",
+          "buildSeconds": 1.275336618
         },
-        "ratio": 0.9782327422178247
+        "ratio": 1.0215619247962135
       },
       {
         "objective": "brotli",
@@ -129,28 +130,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/lilscript-brotli.mjs",
           "sizes": {
-            "raw": 65693,
-            "gzip9": 25788,
-            "brotli11": 21866
+            "raw": 76293,
+            "gzip9": 26972,
+            "brotli11": 22898
           },
-          "sha256": "36cf34eddb7e45b0521d736ff4630c895d0221a9fdfc7ced99132fe24511ccbc",
-          "buildSeconds": 32.97800814799848,
+          "sha256": "7b4f3f344feec961fad293c8d118c83866ec79d13c07b48419a19b2318eb19f0",
+          "buildSeconds": 225.0941664349957,
           "config": "./comparison-artifacts/lilscript-brotli.toml",
-          "configSha256": "946f28179789bdc6617eefe5a94aafb9296d1ce4b1dafe6d66496c4fc6c28d08"
+          "configSha256": "a4ca75f85f9a1251c65dc17e483f0ce825a23a653d2dadb57a42594aec1ca93b"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 81191,
-            "gzip9": 26278,
-            "brotli11": 22696
+            "raw": 81809,
+            "gzip9": 26621,
+            "brotli11": 23008
           },
-          "sha256": "4ca5e777f4bd6cd2418940c0315da7f8a57bc0ff097ebc18f695e08fbcd33935",
-          "buildSeconds": 1.0063230939999999
+          "sha256": "d52333a9148d3224f69548231024f274634f1a4ac25ca18669063c924625d4b7",
+          "buildSeconds": 1.275336618
         },
-        "ratio": 0.9634296792386323
+        "ratio": 0.9952190542420027
       }
     ],
     "minifiers": [
@@ -159,58 +160,121 @@
         "version": "5.51.2",
         "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-terser.mjs",
         "sizes": {
-          "raw": 81191,
-          "gzip9": 26278,
-          "brotli11": 22696
+          "raw": 81809,
+          "gzip9": 26621,
+          "brotli11": 23008
         },
-        "sha256": "4ca5e777f4bd6cd2418940c0315da7f8a57bc0ff097ebc18f695e08fbcd33935",
-        "buildSeconds": 1.0063230939999999
+        "sha256": "d52333a9148d3224f69548231024f274634f1a4ac25ca18669063c924625d4b7",
+        "buildSeconds": 1.275336618
       },
       {
         "tool": "esbuild",
         "version": "0.28.1",
         "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-esbuild.mjs",
         "sizes": {
-          "raw": 89438,
-          "gzip9": 27365,
-          "brotli11": 23718
+          "raw": 90049,
+          "gzip9": 27746,
+          "brotli11": 24073
         },
-        "sha256": "9a82a91c57b53cff9b9fd3bec7830ce65752891bc66391e22460207a7c34af32",
-        "buildSeconds": 0.08146525400000018
+        "sha256": "2411d12883b6fb85589c84c0bc3cc74f287271b78144dd1f3583fb6038691101",
+        "buildSeconds": 0.08591934599999967
       },
       {
         "tool": "Oxc",
         "version": "via Vite 8.2.1",
         "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-oxc.mjs",
         "sizes": {
-          "raw": 81293,
-          "gzip9": 26529,
-          "brotli11": 22920
+          "raw": 81881,
+          "gzip9": 26838,
+          "brotli11": 23221
         },
-        "sha256": "31147b2b723a1a51a85273a8d21e8447049a05124a8ddabc15c48aa55673a39e",
-        "buildSeconds": 0.1959722179999999
+        "sha256": "52d60662d73105240e87c4277fc166346d97c170e3f49d1de9106d8f6ed4539c",
+        "buildSeconds": 0.19821016599999985
       }
     ],
     "validation": {
       "checks": 2082,
-      "objectives": [
+      "runs": [
         {
           "objective": "raw",
+          "suite": "differential",
           "checks": 694,
-          "suite": "differential"
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/raw",
+            "micromarklil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/raw/micromarklil/dist/index.mjs",
+          "ok": true
         },
         {
           "objective": "gzip",
+          "suite": "differential",
           "checks": 694,
-          "suite": "differential"
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/gzip",
+            "micromarklil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/gzip/micromarklil/dist/index.mjs",
+          "ok": true
         },
         {
           "objective": "brotli",
+          "suite": "differential",
           "checks": 694,
-          "suite": "differential"
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/brotli",
+            "micromarklil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/brotli/micromarklil/dist/index.mjs",
+          "ok": true
         }
       ],
-      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+      "ok": true,
+      "scope": "Current independent main-entry builds; package-format tests are recorded separately."
+    },
+    "originalValidation": {
+      "checks": 2082,
+      "runs": [
+        {
+          "minifier": "terser",
+          "checks": 694,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-terser",
+            "micromarklil"
+          ]
+        },
+        {
+          "minifier": "esbuild",
+          "checks": 694,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-esbuild",
+            "micromarklil"
+          ]
+        },
+        {
+          "minifier": "oxc",
+          "checks": 694,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-oxc",
+            "micromarklil"
+          ]
+        }
+      ]
     },
     "linksBase": "https://yeargun.github.io/micromarklil/"
   },

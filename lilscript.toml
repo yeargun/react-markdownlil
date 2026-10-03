@@ -1,21 +1,56 @@
-# reusable ESM — host-visible names stay
+# Compiler-owned delivery; no JavaScript post-minifier or export rewriting.
+[policy]
+version = 3
+
+[policy.tactics]
+# Permit one-time constant-table decoding for smaller downloads.
+# Runtime reads must not acquire recurring reconstruction work.
+startup-reconstruction = "on"
+recurring-reconstruction = "off"
+string-array-packing = "off"
+
 [javascript]
+# Plain-data reads must not run getters; disable for effectful accessor integrations.
 assume_pure_property_reads = true
-# micromark's state functions and this layer's callbacks are called, never
-# constructed; React reads a component's prototype only to test for a class,
-# which an arrow answers the same way. Measured (b79): -146 Brotli.
 assume_unconstructed_callbacks = true
 priority = "size-first"
-optimization_level = 13
-cost_model = "brotli"
-# The graph and this layer call standard builtins the way upstream does; an
-# environment that replaces them breaks upstream too. Measured on the browser
-# build (b79): 29,681 -> 27,394 Brotli.
+# Assumes unpatched platform builtins; disable when consumers replace them.
 assume_pristine_builtins = true
-strip_console = true
-candidate_search = "production"
+# Remove debugLog instrumentation; ordinary print and host console effects remain.
+strip_debug = true
 
+# Preserved effort setting. 13 favors size; 14/15 allow more expensive marginal searches.
+[effort]
+level = 13
+
+# Optimize the delivered files for this codec, independently of raw/gzip objectives.
+[objective]
+codecs = "brotli"
 [mangle]
 identifiers = true
 properties = true
 pool_strings = true
+
+# A checked define removes development assertions only in production.
+[defines]
+development = false
+BROWSER = false
+
+[delivery]
+mode = "single"
+directory = "."
+entry_names = "react-markdown.esm.js"
+[delivery.entries]
+index = ".tmp/conditions/node/index.lil"
+
+[[delivery.also]]
+name = "cjs"
+format = "cjs"
+es_module_marker = "always"
+entry_names = "react-markdown.cjs"
+
+[policy.resources]
+logical_work = 2000000000
+
+[execution]
+jobs = 1

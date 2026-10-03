@@ -3,13 +3,11 @@ import test from "node:test"
 
 import {build} from "esbuild"
 
-// The programs a bundler for the web resolves (`browser`, and the worker conditions):
-// one module each, React external, nothing else to bundle.
-for (const program of ["browser", "worker"]) test(`${program} graph is pure LilScript with React external`, async () => {
+test("browser graph is pure LilScript with React external", async () => {
   const result = await build({
     bundle: true,
     conditions: ["browser", "import"],
-    entryPoints: [new URL(`../dist/react-markdown.${program}.js`, import.meta.url).pathname],
+    entryPoints: ["@itslil/react-markdown"],
     external: ["react", "react/jsx-runtime"],
     format: "esm",
     legalComments: "none",
@@ -20,6 +18,8 @@ for (const program of ["browser", "worker"]) test(`${program} graph is pure LilS
   const inputs = Object.keys(result.metafile.inputs)
   assert.equal(result.outputFiles.length, 1)
   assert.equal(inputs.length, 1)
+  assert.ok(inputs[0].endsWith("dist/react-markdown.browser.js"))
+  assert.deepEqual(result.metafile.outputs[Object.keys(result.metafile.outputs)[0]].imports.map(item => item.path).sort(), ["react", "react/jsx-runtime"])
   for (const dependency of [
     "node_modules/vfile/",
     "node_modules/hast-util-to-jsx-runtime/",

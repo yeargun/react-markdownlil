@@ -1,0 +1,681 @@
+
+> @itslil/react-markdown@10.1.1 test
+> node --conditions development --experimental-loader=./test/load-jsx.js --no-warnings --test test/*.test.mjs test/official/test.jsx && npm run check:types
+
+TAP version 13
+# Subtest: public api
+ok 1 - public api
+  ---
+  duration_ms: 111.255224
+  ...
+# Subtest: CommonJS export
+ok 2 - CommonJS export
+  ---
+  duration_ms: 26.656578
+  ...
+# Subtest: runtime helpers are compiled from LilScript
+ok 3 - runtime helpers are compiled from LilScript
+  ---
+  duration_ms: 1.911472
+  ...
+# Subtest: browser graph is pure LilScript with React external
+ok 4 - browser graph is pure LilScript with React external
+  ---
+  duration_ms: 94.528473
+  ...
+# Subtest: production CommonJS matches the ES module
+ok 5 - production CommonJS matches the ES module
+  ---
+  duration_ms: 73.841695
+  ...
+# Subtest: the browser build decodes references through the document as the table does
+ok 6 - the browser build decodes references through the document as the table does
+  ---
+  duration_ms: 60.161048
+  ...
+# Subtest: matches react-markdown@10.1.0 across the core markdown corpus
+ok 7 - matches react-markdown@10.1.0 across the core markdown corpus
+  ---
+  duration_ms: 113.231639
+  ...
+# Subtest: matches react-markdown@10.1.0 for filtering and transformed properties
+ok 8 - matches react-markdown@10.1.0 for filtering and transformed properties
+  ---
+  duration_ms: 10.455822
+  ...
+# Subtest: matches dynamic plugin identity, option merging, order, and VFile sharing
+ok 9 - matches dynamic plugin identity, option merging, order, and VFile sharing
+  ---
+  duration_ms: 2.459899
+  ...
+# Subtest: matches option getter evaluation order
+ok 10 - matches option getter evaluation order
+  ---
+  duration_ms: 1.174371
+  ...
+# Subtest: matches async plugin boundaries
+ok 11 - matches async plugin boundaries
+  ---
+  duration_ms: 1.693704
+  ...
+# Subtest: matches passed-through MDX and development error details
+ok 12 - matches passed-through MDX and development error details
+  ---
+  duration_ms: 3.671239
+  ...
+# Subtest: the pipeline's file behaves as upstream's under each runtime's conditions
+ok 13 - the pipeline's file behaves as upstream's under each runtime's conditions
+  ---
+  duration_ms: 2481.102143
+  ...
+# Subtest: hProperties clone as upstream's, without a native structuredClone (the polyfill)
+ok 14 - hProperties clone as upstream's, without a native structuredClone (the polyfill)
+  ---
+  duration_ms: 263.57815
+  ...
+# Subtest: hProperties clone as upstream's, with the native structuredClone
+ok 15 - hProperties clone as upstream's, with the native structuredClone
+  ---
+  duration_ms: 254.181199
+  ...
+# Subtest: react-markdown (core)
+    # Subtest: should expose the public api
+    ok 1 - should expose the public api
+      ---
+      duration_ms: 30.38403
+      ...
+    1..1
+ok 16 - react-markdown (core)
+  ---
+  duration_ms: 31.636867
+  ...
+# Subtest: Markdown
+    # Subtest: should work
+    ok 1 - should work
+      ---
+      duration_ms: 17.464665
+      ...
+    # Subtest: should throw w/ `source`
+    ok 2 - should throw w/ `source`
+      ---
+      duration_ms: 1.676351
+      ...
+    # Subtest: should throw w/ non-string children (number)
+    ok 3 - should throw w/ non-string children (number)
+      ---
+      duration_ms: 0.509044
+      ...
+    # Subtest: should throw w/ non-string children (boolean)
+    ok 4 - should throw w/ non-string children (boolean)
+      ---
+      duration_ms: 0.526206
+      ...
+    # Subtest: should support `null` as children
+    ok 5 - should support `null` as children
+      ---
+      duration_ms: 0.956272
+      ...
+    # Subtest: should support `undefined` as children
+    ok 6 - should support `undefined` as children
+      ---
+      duration_ms: 0.96607
+      ...
+    # Subtest: should warn w/ `allowDangerousHtml`
+    ok 7 - should warn w/ `allowDangerousHtml`
+      ---
+      duration_ms: 1.114899
+      ...
+    # Subtest: should support a block quote
+    ok 8 - should support a block quote
+      ---
+      duration_ms: 3.263495
+      ...
+    # Subtest: should support a break
+    ok 9 - should support a break
+      ---
+      duration_ms: 2.739934
+      ...
+    # Subtest: should support a code (block, flow; indented)
+    ok 10 - should support a code (block, flow; indented)
+      ---
+      duration_ms: 1.412317
+      ...
+    # Subtest: should support a code (block, flow; fenced)
+    ok 11 - should support a code (block, flow; fenced)
+      ---
+      duration_ms: 2.514962
+      ...
+    # Subtest: should support a delete (GFM)
+    ok 12 - should support a delete (GFM)
+      ---
+      duration_ms: 5.193381
+      ...
+    # Subtest: should support an emphasis
+    ok 13 - should support an emphasis
+      ---
+      duration_ms: 2.374911
+      ...
+    # Subtest: should support a footnote (GFM)
+    ok 14 - should support a footnote (GFM)
+      ---
+      duration_ms: 5.735967
+      ...
+    # Subtest: should support a heading
+    ok 15 - should support a heading
+      ---
+      duration_ms: 1.374325
+      ...
+    # Subtest: should support an html (default)
+    ok 16 - should support an html (default)
+      ---
+      duration_ms: 2.260716
+      ...
+    # Subtest: should support an html (w/ `rehype-raw`)
+    ok 17 - should support an html (w/ `rehype-raw`)
+      ---
+      duration_ms: 5.883625
+      ...
+    # Subtest: should support an image
+    ok 18 - should support an image
+      ---
+      duration_ms: 2.066122
+      ...
+    # Subtest: should support an image w/ a title
+    ok 19 - should support an image w/ a title
+      ---
+      duration_ms: 1.240875
+      ...
+    # Subtest: should support an image reference / definition
+    ok 20 - should support an image reference / definition
+      ---
+      duration_ms: 1.583547
+      ...
+    # Subtest: should support code (text, inline)
+    ok 21 - should support code (text, inline)
+      ---
+      duration_ms: 0.916397
+      ...
+    # Subtest: should support a link
+    ok 22 - should support a link
+      ---
+      duration_ms: 1.261193
+      ...
+    # Subtest: should support a link w/ a title
+    ok 23 - should support a link w/ a title
+      ---
+      duration_ms: 0.918681
+      ...
+    # Subtest: should support a link reference / definition
+    ok 24 - should support a link reference / definition
+      ---
+      duration_ms: 0.915395
+      ...
+    # Subtest: should support prototype poluting identifiers
+    ok 25 - should support prototype poluting identifiers
+      ---
+      duration_ms: 1.712739
+      ...
+    # Subtest: should support duplicate definitions
+    ok 26 - should support duplicate definitions
+      ---
+      duration_ms: 1.410683
+      ...
+    # Subtest: should support a list (unordered) / list item
+    ok 27 - should support a list (unordered) / list item
+      ---
+      duration_ms: 1.631497
+      ...
+    # Subtest: should support a list (ordered) / list item
+    ok 28 - should support a list (ordered) / list item
+      ---
+      duration_ms: 1.27506
+      ...
+    # Subtest: should support a paragraph
+    ok 29 - should support a paragraph
+      ---
+      duration_ms: 0.670286
+      ...
+    # Subtest: should support a strong
+    ok 30 - should support a strong
+      ---
+      duration_ms: 0.962885
+      ...
+    # Subtest: should support a table (GFM)
+    ok 31 - should support a table (GFM)
+      ---
+      duration_ms: 2.636541
+      ...
+    # Subtest: should support a table (GFM; w/ align)
+    ok 32 - should support a table (GFM; w/ align)
+      ---
+      duration_ms: 1.898227
+      ...
+    # Subtest: should support a thematic break
+    ok 33 - should support a thematic break
+      ---
+      duration_ms: 0.548188
+      ...
+    # Subtest: should support ab absolute path
+    ok 34 - should support ab absolute path
+      ---
+      duration_ms: 0.848751
+      ...
+    # Subtest: should support an absolute URL
+    ok 35 - should support an absolute URL
+      ---
+      duration_ms: 0.772588
+      ...
+    # Subtest: should support a URL w/ uppercase protocol
+    ok 36 - should support a URL w/ uppercase protocol
+      ---
+      duration_ms: 0.738864
+      ...
+    # Subtest: should make a `javascript:` URL safe
+    ok 37 - should make a `javascript:` URL safe
+      ---
+      duration_ms: 0.717604
+      ...
+    # Subtest: should make a `vbscript:` URL safe
+    ok 38 - should make a `vbscript:` URL safe
+      ---
+      duration_ms: 0.770884
+      ...
+    # Subtest: should make a `VBSCRIPT:` URL safe
+    ok 39 - should make a `VBSCRIPT:` URL safe
+      ---
+      duration_ms: 0.698028
+      ...
+    # Subtest: should make a `file:` URL safe
+    ok 40 - should make a `file:` URL safe
+      ---
+      duration_ms: 0.862356
+      ...
+    # Subtest: should allow an empty URL
+    ok 41 - should allow an empty URL
+      ---
+      duration_ms: 0.588883
+      ...
+    # Subtest: should support search (`?`) in a URL
+    ok 42 - should support search (`?`) in a URL
+      ---
+      duration_ms: 0.737322
+      ...
+    # Subtest: should support hash (`&`) in a URL
+    ok 43 - should support hash (`&`) in a URL
+      ---
+      duration_ms: 1.000414
+      ...
+    # Subtest: should support hash (`\#`) in a URL
+    ok 44 - should support hash (`\#`) in a URL
+      ---
+      duration_ms: 0.629649
+      ...
+    # Subtest: should support `urlTransform` (`href` on `a`)
+    ok 45 - should support `urlTransform` (`href` on `a`)
+      ---
+      duration_ms: 0.775574
+      ...
+    # Subtest: should support `urlTransform` w/ empty URLs
+    ok 46 - should support `urlTransform` w/ empty URLs
+      ---
+      duration_ms: 0.674704
+      ...
+    # Subtest: should support `urlTransform` (`src` on `img`)
+    ok 47 - should support `urlTransform` (`src` on `img`)
+      ---
+      duration_ms: 0.77395
+      ...
+    # Subtest: should support `skipHtml`
+    ok 48 - should support `skipHtml`
+      ---
+      duration_ms: 0.55472
+      ...
+    # Subtest: should support `allowedElements` (drop unlisted nodes)
+    ok 49 - should support `allowedElements` (drop unlisted nodes)
+      ---
+      duration_ms: 1.144275
+      ...
+    # Subtest: should support `allowedElements` as a function
+    ok 50 - should support `allowedElements` as a function
+      ---
+      duration_ms: 1.369446
+      ...
+    # Subtest: should support `disallowedElements`
+    ok 51 - should support `disallowedElements`
+      ---
+      duration_ms: 1.356592
+      ...
+    # Subtest: should fail for both `allowedElements` and `disallowedElements`
+    ok 52 - should fail for both `allowedElements` and `disallowedElements`
+      ---
+      duration_ms: 0.755035
+      ...
+    # Subtest: should support `unwrapDisallowed` w/ `allowedElements`
+    ok 53 - should support `unwrapDisallowed` w/ `allowedElements`
+      ---
+      duration_ms: 0.786414
+      ...
+    # Subtest: should support `unwrapDisallowed` w/ `disallowedElements`
+    ok 54 - should support `unwrapDisallowed` w/ `disallowedElements`
+      ---
+      duration_ms: 6.016163
+      ...
+    # Subtest: should support `remarkRehypeOptions`
+    ok 55 - should support `remarkRehypeOptions`
+      ---
+      duration_ms: 1.853223
+      ...
+    # Subtest: should support `components`
+    ok 56 - should support `components`
+      ---
+      duration_ms: 0.538209
+      ...
+    # Subtest: should support `components` as functions
+    ok 57 - should support `components` as functions
+      ---
+      duration_ms: 0.56575
+      ...
+    # Subtest: should fail on an invalid component
+    ok 58 - should fail on an invalid component
+      ---
+      duration_ms: 0.534051
+      ...
+    # Subtest: should support `components` (headings)
+    ok 59 - should support `components` (headings)
+      ---
+      duration_ms: 1.202614
+      ...
+    # Subtest: should support `components` (code)
+    ok 60 - should support `components` (code)
+      ---
+      duration_ms: 1.109059
+      ...
+    # Subtest: should support `components` (li)
+    ok 61 - should support `components` (li)
+      ---
+      duration_ms: 2.175537
+      ...
+    # Subtest: should support `components` (ol)
+    ok 62 - should support `components` (ol)
+      ---
+      duration_ms: 0.687018
+      ...
+    # Subtest: should support `components` (ul)
+    ok 63 - should support `components` (ul)
+      ---
+      duration_ms: 0.726872
+      ...
+    # Subtest: should support `components` (tr)
+    ok 64 - should support `components` (tr)
+      ---
+      duration_ms: 1.141619
+      ...
+    # Subtest: should support `components` (td, th)
+    ok 65 - should support `components` (td, th)
+      ---
+      duration_ms: 1.427455
+      ...
+    # Subtest: should pass `node` to components
+    ok 66 - should pass `node` to components
+      ---
+      duration_ms: 1.006647
+      ...
+    # Subtest: should support plugins (`remark-gfm`)
+    ok 67 - should support plugins (`remark-gfm`)
+      ---
+      duration_ms: 1.099601
+      ...
+    # Subtest: should support plugins (`remark-toc`)
+    ok 68 - should support plugins (`remark-toc`)
+      ---
+      duration_ms: 2.543696
+      ...
+    # Subtest: should support aria properties
+    ok 69 - should support aria properties
+      ---
+      duration_ms: 0.636122
+      ...
+    # Subtest: should support data properties
+    ok 70 - should support data properties
+      ---
+      duration_ms: 0.564488
+      ...
+    # Subtest: should support comma separated properties
+    ok 71 - should support comma separated properties
+      ---
+      duration_ms: 0.601347
+      ...
+    # Subtest: should support `style` properties
+    ok 72 - should support `style` properties
+      ---
+      duration_ms: 1.117514
+      ...
+    # Subtest: should support `style` properties w/ vendor prefixes
+    ok 73 - should support `style` properties w/ vendor prefixes
+      ---
+      duration_ms: 0.673051
+      ...
+    # Subtest: should support broken `style` properties
+    ok 74 - should support broken `style` properties
+      ---
+      duration_ms: 0.549429
+      ...
+    # Subtest: should support SVG elements
+    ok 75 - should support SVG elements
+      ---
+      duration_ms: 1.218323
+      ...
+    # Subtest: should support comments (ignore them)
+    ok 76 - should support comments (ignore them)
+      ---
+      duration_ms: 0.493144
+      ...
+    # Subtest: should support table cells w/ style
+    ok 77 - should support table cells w/ style
+      ---
+      duration_ms: 1.155655
+      ...
+    # Subtest: should not fail on a plugin replacing `root`
+    ok 78 - should not fail on a plugin replacing `root`
+      ---
+      duration_ms: 0.448911
+      ...
+    1..78
+ok 17 - Markdown
+  ---
+  duration_ms: 133.018446
+  ...
+# Subtest: MarkdownAsync
+    # Subtest: should support `MarkdownAsync` (1)
+    ok 1 - should support `MarkdownAsync` (1)
+      ---
+      duration_ms: 1.01921
+      ...
+    # Subtest: should support `MarkdownAsync` (2)
+    ok 2 - should support `MarkdownAsync` (2)
+      ---
+      duration_ms: 7.513779
+      ...
+    # Subtest: should support async plugins w/ `MarkdownAsync` (`rehype-starry-night`)
+    ok 3 - should support async plugins w/ `MarkdownAsync` (`rehype-starry-night`)
+      ---
+      duration_ms: 314.167739
+      ...
+    1..3
+ok 18 - MarkdownAsync
+  ---
+  duration_ms: 323.414927
+  ...
+# Subtest: MarkdownHooks
+    # Subtest: should support `MarkdownHooks`
+    ok 1 - should support `MarkdownHooks`
+      ---
+      duration_ms: 24.950551
+      ...
+    # Subtest: should support async plugins w/ `MarkdownHooks` (`rehype-starry-night`)
+    ok 2 - should support async plugins w/ `MarkdownHooks` (`rehype-starry-night`)
+      ---
+      duration_ms: 95.65246
+      ...
+# Note: the below error (`Error: rejected`) is expected.
+    # Subtest: should support `fallback`
+    ok 3 - should support `fallback`
+      ---
+      duration_ms: 7.969062
+      ...
+# Error: rejected
+#     at TestContext.<anonymous> (file:///home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/ports/react-markdownlil/test/official/test.jsx:1065:19)
+#     at Test.runInAsyncScope (node:async_hooks:206:9)
+#     at Test.run (node:internal/test_runner/test:796:25)
+#     at Test.start (node:internal/test_runner/test:702:17)
+#     at TestContext.test (node:internal/test_runner/test:292:20)
+#     at TestContext.<anonymous> (file:///home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/ports/react-markdownlil/test/official/test.jsx:1058:11)
+#     at async Test.run (node:internal/test_runner/test:797:9)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:526:7) {
+#   [stack]: 'Error: rejected\\n' +
+#     '    at TestContext.<anonymous> (file:///home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/ports/react-markdownlil/test/official/test.jsx:1065:19)\\n' +
+#     '    at Test.runInAsyncScope (node:async_hooks:206:9)\\n' +
+#     '    at Test.run (node:internal/test_runner/test:796:25)\\n' +
+#     '    at Test.start (node:internal/test_runner/test:702:17)\\n' +
+#     '    at TestContext.test (node:internal/test_runner/test:292:20)\\n' +
+#     '    at TestContext.<anonymous> (file:///home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/ports/react-markdownlil/test/official/test.jsx:1058:11)\\n' +
+#     '    at async Test.run (node:internal/test_runner/test:797:9)\\n' +
+#     '    at async Test.processPendingSubtests (node:internal/test_runner/test:526:7)',
+#   [message]: 'rejected'
+# }
+# The above error occurred in the <MarkdownHooks> component.
+# React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
+# Note: the above error (`Error: rejected`) was expected.
+    # Subtest: should support plugins that error
+    ok 4 - should support plugins that error
+      ---
+      duration_ms: 12.351604
+      ...
+    # Subtest: should support rerenders
+    ok 5 - should support rerenders
+      ---
+      duration_ms: 5.595014
+      ...
+    1..5
+ok 19 - MarkdownHooks
+  ---
+  duration_ms: 147.391267
+  ...
+# Subtest: defaultUrlTransform preserves its string-only runtime contract
+ok 20 - defaultUrlTransform preserves its string-only runtime contract
+  ---
+  duration_ms: 2.111296
+  ...
+# Subtest: development assertions preserve devlop error details
+ok 21 - development assertions preserve devlop error details
+  ---
+  duration_ms: 0.952505
+  ...
+# Subtest: production assertions are no-ops
+ok 22 - production assertions are no-ops
+  ---
+  duration_ms: 192.865792
+  ...
+# Subtest: MarkdownAsync is async even when setup fails synchronously
+ok 23 - MarkdownAsync is async even when setup fails synchronously
+  ---
+  duration_ms: 0.890849
+  ...
+# Subtest: plugins share one in-graph VFile identity
+ok 24 - plugins share one in-graph VFile identity
+  ---
+  duration_ms: 32.361311
+  ...
+# Subtest: VFile metadata and diagnostics match the upstream contract
+ok 25 - VFile metadata and diagnostics match the upstream contract
+  ---
+  duration_ms: 2.569705
+  ...
+# Subtest: local GFM, breaks, math, and KaTeX plugins compose
+ok 26 - local GFM, breaks, math, and KaTeX plugins compose
+  ---
+  duration_ms: 53.975978
+  ...
+# Subtest: remarkRehypeOptions uses object-spread coercion
+ok 27 - remarkRehypeOptions uses object-spread coercion
+  ---
+  duration_ms: 4.630827
+  ...
+# Subtest: does not repair malformed element properties
+ok 28 - does not repair malformed element properties
+  ---
+  duration_ms: 1.780626
+  ...
+# Subtest: preserves failures and nonmatches for malformed tree nodes
+ok 29 - preserves failures and nonmatches for malformed tree nodes
+  ---
+  duration_ms: 1.927692
+  ...
+# Subtest: raw nodes are replaced with indexed assignment
+ok 30 - raw nodes are replaced with indexed assignment
+  ---
+  duration_ms: 1.641525
+  ...
+# Subtest: URL properties use String coercion
+ok 31 - URL properties use String coercion
+  ---
+  duration_ms: 1.129196
+  ...
+# Subtest: URL processing preserves properties getter access
+ok 32 - URL processing preserves properties getter access
+  ---
+  duration_ms: 0.998732
+  ...
+# Subtest: supports valid complex styles and ignores an entirely invalid style
+ok 33 - supports valid complex styles and ignores an entirely invalid style
+  ---
+  duration_ms: 2.656027
+  ...
+# Subtest: supports passed-through MDX JSX element attributes
+ok 34 - supports passed-through MDX JSX element attributes
+  ---
+  duration_ms: 1.330183
+  ...
+# Subtest: matches upstream JSX conversion for styles and property schemas
+ok 35 - matches upstream JSX conversion for styles and property schemas
+  ---
+  duration_ms: 5.58221
+  ...
+# Subtest: matches every upstream HTML and SVG property record
+ok 36 - matches every upstream HTML and SVG property record
+  ---
+  duration_ms: 39.711887
+  ...
+# Subtest: matches upstream MDX attributes and missing-evaluater errors
+ok 37 - matches upstream MDX attributes and missing-evaluater errors
+  ---
+  duration_ms: 15.218015
+  ...
+# Subtest: three independently targeted builds have current artifact and config hashes
+ok 38 - three independently targeted builds have current artifact and config hashes
+  ---
+  duration_ms: 13.943835
+  ...
+# Subtest: public comparison describes current versus original and distinguishes build stages
+ok 39 - public comparison describes current versus original and distinguishes build stages
+  ---
+  duration_ms: 5.010138
+  ...
+# Subtest: built Pages artifact contains the current data and measured downloads
+ok 40 - built Pages artifact contains the current data and measured downloads
+  ---
+  duration_ms: 1.416294
+  ...
+1..40
+# tests 127
+# suites 0
+# pass 127
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4429.380789
+
+> @itslil/react-markdown@10.1.1 check:types
+> tsc --noEmit --strict --preserveSymlinks --module node16 --moduleResolution node16 --target es2022 test/types.ts
+

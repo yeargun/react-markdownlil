@@ -18,7 +18,7 @@
     "schemaVersion": 4,
     "name": "unifiedlil",
     "package": "@itslil/unified",
-    "measuredAt": "2026-10-03T02:05:48.520868+03:00",
+    "measuredAt": "2026-10-03T18:02:15.444350+03:00",
     "compiler": {
       "baseRevision": "f7d29bd9",
       "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
@@ -45,10 +45,11 @@
         "target": "es2020",
         "defines": {
           "process.env.NODE_ENV": "production"
-        }
+        },
+        "css": "excluded; measured JavaScript only"
       }
     },
-    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "scope": "Portable unified processor main entry. Original bundling preserves runtime names required by upstream VFile constructor-name checks; all minifier lanes pass the same 195 checks. Node and browser package variants are tested separately.",
     "machine": {
       "cpu": "AMD EPYC 7763 64-Core Processor",
       "logicalCpus": 8,
@@ -63,28 +64,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/lilscript-raw.mjs",
           "sizes": {
-            "raw": 11696,
-            "gzip9": 4622,
-            "brotli11": 4178
+            "raw": 11667,
+            "gzip9": 4580,
+            "brotli11": 4139
           },
-          "sha256": "5f604f45812719edca887d2f2d1b0517e4789194683560183603609890c394b2",
-          "buildSeconds": 4.173396864000097,
+          "sha256": "0d709918d46bf24fa4ad75e0c11dae06d20f0a37a681e34dd83463d0df2cdcf7",
+          "buildSeconds": 4.273918672988657,
           "config": "./comparison-artifacts/lilscript-raw.toml",
-          "configSha256": "9757cbbd3817b15ecbf6c0d4009f9db586dddc826753bd3e30948e3a0056426b"
+          "configSha256": "e2df4c3a7ce56901789ae088bcdb6ea1ec499d8e57cf89d1c7365cfffd593506"
         },
         "original": {
-          "tool": "Terser",
-          "version": "5.51.2",
-          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-terser.mjs",
+          "tool": "Oxc",
+          "version": "via Vite 8.2.1",
+          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-oxc.mjs",
           "sizes": {
-            "raw": 13394,
-            "gzip9": 4801,
-            "brotli11": 4348
+            "raw": 14375,
+            "gzip9": 5264,
+            "brotli11": 4799
           },
-          "sha256": "5f1e9b00fcef09bbcdec585c03a98404fd7c7e2ed2a7775b3f741370efadf412",
-          "buildSeconds": 0.3837841960000005
+          "sha256": "66979ab85cd0fa5ef71f4f8d7e7353bc682beeed2d897e196e920ecf1814be43",
+          "buildSeconds": 0.18543344700000006
         },
-        "ratio": 0.8732268179781992
+        "ratio": 0.8116173913043478
       },
       {
         "objective": "gzip",
@@ -92,28 +93,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/lilscript-gzip.mjs",
           "sizes": {
-            "raw": 12187,
-            "gzip9": 4490,
-            "brotli11": 4099
+            "raw": 12104,
+            "gzip9": 4457,
+            "brotli11": 4065
           },
-          "sha256": "c2cd686ef41122d2dc9671fba660182d758f57faa8c91e6e2a93df234fe3f13b",
-          "buildSeconds": 3.3715597549999075,
+          "sha256": "cff6e76c13d73198bc5bd0a2f01df72ae9032d36070d6f15a87d18c8c4cabbcb",
+          "buildSeconds": 3.97267293400364,
           "config": "./comparison-artifacts/lilscript-gzip.toml",
-          "configSha256": "d9826c63247abe81cd3a62718a23462e331f7222d2348f2b5d2031af843e59e3"
+          "configSha256": "5b50814d0e7b0d0d055c95d38fa47b71b3c7e8b3dbf7e7aa09548d90b36094b3"
         },
         "original": {
-          "tool": "Terser",
-          "version": "5.51.2",
-          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-terser.mjs",
+          "tool": "Oxc",
+          "version": "via Vite 8.2.1",
+          "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-oxc.mjs",
           "sizes": {
-            "raw": 13394,
-            "gzip9": 4801,
-            "brotli11": 4348
+            "raw": 14375,
+            "gzip9": 5264,
+            "brotli11": 4799
           },
-          "sha256": "5f1e9b00fcef09bbcdec585c03a98404fd7c7e2ed2a7775b3f741370efadf412",
-          "buildSeconds": 0.3837841960000005
+          "sha256": "66979ab85cd0fa5ef71f4f8d7e7353bc682beeed2d897e196e920ecf1814be43",
+          "buildSeconds": 0.18543344700000006
         },
-        "ratio": 0.9352218287856696
+        "ratio": 0.84669452887538
       },
       {
         "objective": "brotli",
@@ -121,28 +122,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/lilscript-brotli.mjs",
           "sizes": {
-            "raw": 12248,
-            "gzip9": 4503,
-            "brotli11": 4085
+            "raw": 12033,
+            "gzip9": 4461,
+            "brotli11": 4041
           },
-          "sha256": "2b4297e06ece98ed41bdf538b4e839ffc0712d372bb877b9d3826d60262db539",
-          "buildSeconds": 6.878012219000084,
+          "sha256": "447e5510e4c7ce9273974d8fe80363d6224672eb1fefc378c71f277d8df3f94e",
+          "buildSeconds": 10.233320856990758,
           "config": "./comparison-artifacts/lilscript-brotli.toml",
-          "configSha256": "754f2542a25b0c319b94ececf3f6715927d75fec29ba7b8e83ce2e54d4b1f5fc"
+          "configSha256": "17c832d9358bf26e79b26a8e5dfdc7a4fb26c61a615b9f7a225198b6a101ca1e"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 13394,
-            "gzip9": 4801,
-            "brotli11": 4348
+            "raw": 14520,
+            "gzip9": 5267,
+            "brotli11": 4791
           },
-          "sha256": "5f1e9b00fcef09bbcdec585c03a98404fd7c7e2ed2a7775b3f741370efadf412",
-          "buildSeconds": 0.3837841960000005
+          "sha256": "f4e7c58b9e7719b087185b1b983ce99113c46a12b79569ad354027989b148bd4",
+          "buildSeconds": 0.37951158399999996
         },
-        "ratio": 0.9395124195032198
+        "ratio": 0.8434564809016907
       }
     ],
     "minifiers": [
@@ -151,58 +152,139 @@
         "version": "5.51.2",
         "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-terser.mjs",
         "sizes": {
-          "raw": 13394,
-          "gzip9": 4801,
-          "brotli11": 4348
+          "raw": 14520,
+          "gzip9": 5267,
+          "brotli11": 4791
         },
-        "sha256": "5f1e9b00fcef09bbcdec585c03a98404fd7c7e2ed2a7775b3f741370efadf412",
-        "buildSeconds": 0.3837841960000005
+        "sha256": "f4e7c58b9e7719b087185b1b983ce99113c46a12b79569ad354027989b148bd4",
+        "buildSeconds": 0.37951158399999996
       },
       {
         "tool": "esbuild",
         "version": "0.28.1",
         "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-esbuild.mjs",
         "sizes": {
-          "raw": 13796,
-          "gzip9": 5046,
-          "brotli11": 4617
+          "raw": 15752,
+          "gzip9": 5741,
+          "brotli11": 5236
         },
-        "sha256": "2970578b5ddf4622b925b584891b8af49728bf191e0adb3a86f12a4a5d6ca550",
-        "buildSeconds": 0.06324301000000014
+        "sha256": "f75df620a9baa4edc61c7db2aa7d450375d9844cefb0b145564e4fa76b23dc13",
+        "buildSeconds": 0.06950748099999998
       },
       {
         "tool": "Oxc",
         "version": "via Vite 8.2.1",
         "artifact": "https://yeargun.github.io/unifiedlil/comparison-artifacts/original-oxc.mjs",
         "sizes": {
-          "raw": 13468,
-          "gzip9": 4851,
-          "brotli11": 4434
+          "raw": 14375,
+          "gzip9": 5264,
+          "brotli11": 4799
         },
-        "sha256": "258d7d55d71f77a9e493865a8c9550ec9c83bb8af72028ff2b4a8c9ca6973aff",
-        "buildSeconds": 0.1830535030000001
+        "sha256": "66979ab85cd0fa5ef71f4f8d7e7353bc682beeed2d897e196e920ecf1814be43",
+        "buildSeconds": 0.18543344700000006
       }
     ],
     "validation": {
       "checks": 585,
-      "objectives": [
+      "runs": [
         {
           "objective": "raw",
+          "suite": "official",
           "checks": 195,
-          "suite": "upstream-derived/API"
+          "command": [
+            "node",
+            "--no-warnings",
+            "--experimental-loader",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/redirect-loader.mjs",
+            "--test-concurrency=1",
+            "--test",
+            "test/official/index.js"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/raw/unifiedlil/dist/index.mjs",
+          "ok": true
         },
         {
           "objective": "gzip",
+          "suite": "official",
           "checks": 195,
-          "suite": "upstream-derived/API"
+          "command": [
+            "node",
+            "--no-warnings",
+            "--experimental-loader",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/redirect-loader.mjs",
+            "--test-concurrency=1",
+            "--test",
+            "test/official/index.js"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/gzip/unifiedlil/dist/index.mjs",
+          "ok": true
         },
         {
           "objective": "brotli",
+          "suite": "official",
           "checks": 195,
-          "suite": "upstream-derived/API"
+          "command": [
+            "node",
+            "--no-warnings",
+            "--experimental-loader",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/redirect-loader.mjs",
+            "--test-concurrency=1",
+            "--test",
+            "test/official/index.js"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/brotli/unifiedlil/dist/index.mjs",
+          "ok": true
         }
       ],
-      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+      "ok": true,
+      "scope": "Current independent main-entry builds; package-format tests are recorded separately."
+    },
+    "originalValidation": {
+      "checks": 585,
+      "runs": [
+        {
+          "minifier": "terser",
+          "checks": 195,
+          "ok": true,
+          "command": [
+            "node",
+            "--no-warnings",
+            "--experimental-loader",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/redirect-loader.mjs",
+            "--test-concurrency=1",
+            "--test",
+            "test/official/index.js"
+          ]
+        },
+        {
+          "minifier": "esbuild",
+          "checks": 195,
+          "ok": true,
+          "command": [
+            "node",
+            "--no-warnings",
+            "--experimental-loader",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/redirect-loader.mjs",
+            "--test-concurrency=1",
+            "--test",
+            "test/official/index.js"
+          ]
+        },
+        {
+          "minifier": "oxc",
+          "checks": 195,
+          "ok": true,
+          "command": [
+            "node",
+            "--no-warnings",
+            "--experimental-loader",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/redirect-loader.mjs",
+            "--test-concurrency=1",
+            "--test",
+            "test/official/index.js"
+          ]
+        }
+      ]
     },
     "linksBase": "https://yeargun.github.io/unifiedlil/"
   },

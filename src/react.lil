@@ -1,0 +1,8 @@
+// Match the public package's React dependency initialization order in every format.
+import extern {Fragment, jsx, jsxs} from "react/jsx-runtime";
+import extern {useState, useEffect} from "react";
+export extern JsValue Fragment;
+export extern JsValue jsx;
+export extern JsValue jsxs;
+export extern JsValue useState;
+export extern JsValue useEffect;

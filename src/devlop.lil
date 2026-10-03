@@ -2,10 +2,10 @@
 // production does nothing. Every caller passes a message.
 import { Error, Object } from "./host.lil";
 
-extern JsValue development;
+define bool development = false;
 
 export void unreachable(string message) {
-  if (development.truthy()) {
+  if (development) {
     throw JS.invoke(Object, "assign", JS.construct(Error, message), object {
       name: "Assertion",
       code: "ERR_ASSERTION",

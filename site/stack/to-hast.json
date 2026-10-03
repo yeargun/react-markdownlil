@@ -12,7 +12,7 @@
     "schemaVersion": 4,
     "name": "mdast-util-to-hastlil",
     "package": "@itslil/mdast-util-to-hast",
-    "measuredAt": "2026-10-03T02:05:48.422679+03:00",
+    "measuredAt": "2026-10-03T18:02:15.164955+03:00",
     "compiler": {
       "baseRevision": "f7d29bd9",
       "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
@@ -42,10 +42,11 @@
         "target": "es2020",
         "defines": {
           "process.env.NODE_ENV": "production"
-        }
+        },
+        "css": "excluded; measured JavaScript only"
       }
     },
-    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions. Package Node, browser and development variants are tested separately.",
     "machine": {
       "cpu": "AMD EPYC 7763 64-Core Processor",
       "logicalCpus": 8,
@@ -60,28 +61,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/lilscript-raw.mjs",
           "sizes": {
-            "raw": 13458,
-            "gzip9": 5127,
-            "brotli11": 4575
+            "raw": 17373,
+            "gzip9": 6326,
+            "brotli11": 5627
           },
-          "sha256": "83b85128179e9c42b4374c1c8cc7a8bcfde9db7a259bdb4657a1d08ddccb5ca0",
-          "buildSeconds": 15.945053780000308,
+          "sha256": "4a21cb64d5983fd59a1b2f98aa8a431945dc42aff71e46648041400042a88b76",
+          "buildSeconds": 89.56511131599837,
           "config": "./comparison-artifacts/lilscript-raw.toml",
-          "configSha256": "f03e96c0269beb83d6faf1b0251d26dab67120b9a42b7d98822f6a9d9cd657ae"
+          "configSha256": "5564cbc82a0c82ad3eaeb4f683960a949fbc90389cd31355eadb38328eae595c"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 16709,
-            "gzip9": 5385,
-            "brotli11": 4857
+            "raw": 16904,
+            "gzip9": 5472,
+            "brotli11": 4947
           },
-          "sha256": "9e8f4b17637a246caead4975d9481d096bba4b7a4bcbfb9d30a59c54c561845b",
-          "buildSeconds": 0.44958391699999994
+          "sha256": "e000431d102d112511a6faada43fdcb3a3eef22a4d8c4960e3319c13e3f5711e",
+          "buildSeconds": 0.7779409869999999
         },
-        "ratio": 0.8054341971392662
+        "ratio": 1.0277449124467581
       },
       {
         "objective": "gzip",
@@ -89,28 +90,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/lilscript-gzip.mjs",
           "sizes": {
-            "raw": 14406,
-            "gzip9": 4875,
-            "brotli11": 4379
+            "raw": 18116,
+            "gzip9": 6018,
+            "brotli11": 5442
           },
-          "sha256": "d815e28097c56ba75f6bbdf6a69bf9ea367a8ad99f887315f902e70883050688",
-          "buildSeconds": 13.53950619600073,
+          "sha256": "86d32adeaa52ef29118616476b3f153de601bd9bb89e85210e9ebae562bbef7b",
+          "buildSeconds": 57.14282882200496,
           "config": "./comparison-artifacts/lilscript-gzip.toml",
-          "configSha256": "031c63747f9b2a51263f106a640f9d57e0a484927d8ee9e2edd94c86b0b13819"
+          "configSha256": "eb9fe9be82c99fd9c14e2c9bd5ec8e6a039a9b502a29f21ce081d6413b7d58f9"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 16709,
-            "gzip9": 5385,
-            "brotli11": 4857
+            "raw": 16904,
+            "gzip9": 5472,
+            "brotli11": 4947
           },
-          "sha256": "9e8f4b17637a246caead4975d9481d096bba4b7a4bcbfb9d30a59c54c561845b",
-          "buildSeconds": 0.44958391699999994
+          "sha256": "e000431d102d112511a6faada43fdcb3a3eef22a4d8c4960e3319c13e3f5711e",
+          "buildSeconds": 0.7779409869999999
         },
-        "ratio": 0.9052924791086351
+        "ratio": 1.099780701754386
       },
       {
         "objective": "brotli",
@@ -118,28 +119,28 @@
         "lilscript": {
           "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/lilscript-brotli.mjs",
           "sizes": {
-            "raw": 14639,
-            "gzip9": 4992,
-            "brotli11": 4426
+            "raw": 18174,
+            "gzip9": 6032,
+            "brotli11": 5369
           },
-          "sha256": "2acde280e93895ff996f803ce02c0b9bcc42859e9dfbe765b379d6a159f18c2d",
-          "buildSeconds": 28.16636952799672,
+          "sha256": "37ffcb47820dfff07d2bb3f2c743b78b59332e037c20abd0bdef967475c9cff4",
+          "buildSeconds": 159.61651305299893,
           "config": "./comparison-artifacts/lilscript-brotli.toml",
-          "configSha256": "b88aadb3b819f41733572d3a05e9ca1d03af35052db39e26c674de6b6e0ea22b"
+          "configSha256": "b56dc19dde637fb2a298bc16f5899cea1bed75d383a84c7d4abf93686fba5b06"
         },
         "original": {
           "tool": "Terser",
           "version": "5.51.2",
           "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/original-terser.mjs",
           "sizes": {
-            "raw": 16709,
-            "gzip9": 5385,
-            "brotli11": 4857
+            "raw": 16904,
+            "gzip9": 5472,
+            "brotli11": 4947
           },
-          "sha256": "9e8f4b17637a246caead4975d9481d096bba4b7a4bcbfb9d30a59c54c561845b",
-          "buildSeconds": 0.44958391699999994
+          "sha256": "e000431d102d112511a6faada43fdcb3a3eef22a4d8c4960e3319c13e3f5711e",
+          "buildSeconds": 0.7779409869999999
         },
-        "ratio": 0.9112620959439983
+        "ratio": 1.0853042247826965
       }
     ],
     "minifiers": [
@@ -148,58 +149,121 @@
         "version": "5.51.2",
         "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/original-terser.mjs",
         "sizes": {
-          "raw": 16709,
-          "gzip9": 5385,
-          "brotli11": 4857
+          "raw": 16904,
+          "gzip9": 5472,
+          "brotli11": 4947
         },
-        "sha256": "9e8f4b17637a246caead4975d9481d096bba4b7a4bcbfb9d30a59c54c561845b",
-        "buildSeconds": 0.44958391699999994
+        "sha256": "e000431d102d112511a6faada43fdcb3a3eef22a4d8c4960e3319c13e3f5711e",
+        "buildSeconds": 0.7779409869999999
       },
       {
         "tool": "esbuild",
         "version": "0.28.1",
         "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/original-esbuild.mjs",
         "sizes": {
-          "raw": 17289,
-          "gzip9": 5765,
-          "brotli11": 5245
+          "raw": 17489,
+          "gzip9": 5863,
+          "brotli11": 5336
         },
-        "sha256": "488562853166d60b0a6d81f37cbc47e0b365550ce4021a87aedbf209e848aa96",
-        "buildSeconds": 0.06588857800000006
+        "sha256": "68d53a0e96754de6ab3d6d6962dfae7d8dc16a4b895ad551a9a309fd622b9a55",
+        "buildSeconds": 0.11455103699999995
       },
       {
         "tool": "Oxc",
         "version": "via Vite 8.2.1",
         "artifact": "https://yeargun.github.io/mdast-util-to-hastlil/comparison-artifacts/original-oxc.mjs",
         "sizes": {
-          "raw": 16729,
-          "gzip9": 5510,
-          "brotli11": 5008
+          "raw": 16927,
+          "gzip9": 5601,
+          "brotli11": 5088
         },
-        "sha256": "a509cffba99116f0c1b1d4a75d277b0d743dd729cc6a86a41031804a547067b3",
-        "buildSeconds": 0.18429803400000014
+        "sha256": "9bbe30b13e6867c2a811b8d4aece3609898c001dfd28cf725eaf86871aa0d694",
+        "buildSeconds": 0.3437777710000001
       }
     ],
     "validation": {
       "checks": 1980,
-      "objectives": [
+      "runs": [
         {
           "objective": "raw",
+          "suite": "differential",
           "checks": 660,
-          "suite": "differential"
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/raw",
+            "mdast-util-to-hastlil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/raw/mdast-util-to-hastlil/dist/index.mjs",
+          "ok": true
         },
         {
           "objective": "gzip",
+          "suite": "differential",
           "checks": 660,
-          "suite": "differential"
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/gzip",
+            "mdast-util-to-hastlil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/gzip/mdast-util-to-hastlil/dist/index.mjs",
+          "ok": true
         },
         {
           "objective": "brotli",
+          "suite": "differential",
           "checks": 660,
-          "suite": "differential"
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/brotli",
+            "mdast-util-to-hastlil"
+          ],
+          "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/brotli/mdast-util-to-hastlil/dist/index.mjs",
+          "ok": true
         }
       ],
-      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+      "ok": true,
+      "scope": "Current independent main-entry builds; package-format tests are recorded separately."
+    },
+    "originalValidation": {
+      "checks": 1980,
+      "runs": [
+        {
+          "minifier": "terser",
+          "checks": 660,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-terser",
+            "mdast-util-to-hastlil"
+          ]
+        },
+        {
+          "minifier": "esbuild",
+          "checks": 660,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-esbuild",
+            "mdast-util-to-hastlil"
+          ]
+        },
+        {
+          "minifier": "oxc",
+          "checks": 660,
+          "ok": true,
+          "command": [
+            "node",
+            "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
+            "validation/original-oxc",
+            "mdast-util-to-hastlil"
+          ]
+        }
+      ]
     },
     "linksBase": "https://yeargun.github.io/mdast-util-to-hastlil/"
   },

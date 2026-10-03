@@ -1,13 +1,39 @@
-# closed LilScript world: no builtin or callback assumptions (the `./closed` export)
+# Compiler-owned delivery; no JavaScript post-minifier or export rewriting.
+[policy]
+version = 3
 [javascript]
 priority = "size-first"
-optimization_level = 13
-cost_model = "brotli"
+# Assumes unpatched platform builtins; disable when consumers replace them.
 assume_pristine_builtins = false
-strip_console = true
-candidate_search = "production"
+# Remove debugLog instrumentation; ordinary print and host console effects remain.
+strip_debug = true
 
+# Preserved effort setting. 13 favors size; 14/15 allow more expensive marginal searches.
+[effort]
+level = 13
+
+# Optimize the delivered files for this codec, independently of raw/gzip objectives.
+[objective]
+codecs = "brotli"
 [mangle]
 identifiers = true
 properties = true
 pool_strings = true
+
+# A checked define removes development assertions only in production.
+[defines]
+development = false
+BROWSER = false
+
+[delivery]
+mode = "single"
+directory = "."
+entry_names = "react-markdown.closed.js"
+[delivery.entries]
+index = "src/index.lil"
+
+[policy.resources]
+logical_work = 2000000000
+
+[execution]
+jobs = 1

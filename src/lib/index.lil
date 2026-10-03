@@ -1,3 +1,5 @@
+import {useState, useEffect} from "../react.lil";
+export {useState, useEffect};
 // react-markdown@10.1.0 `lib/index.js`. Every read of `options` happens in upstream's order (the getter
 // trace is part of the behaviour: createProcessor, createFile, then post).
 import { Object, RegExp, String } from "../host.lil";
@@ -10,8 +12,8 @@ import { urlAttributes } from "../urls.lil";
 import { visit } from "../unist-util-visit/lib/index.lil";
 import { VFile } from "../vfile/lib/index.lil";
 
-export extern JsValue useState;
-export extern JsValue useEffect;
+
+
 
 JsValue[] emptyPlugins = [];
 JsValue emptyRemarkRehypeOptions = object { allowDangerousHtml: true };
