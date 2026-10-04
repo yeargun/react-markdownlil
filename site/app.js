@@ -1,6 +1,8 @@
 import {renderComparison} from './objective-comparison.js';
 const currentComparison=await fetch('./comparison.json').then(response=>{if(!response.ok)throw Error('Comparison could not load');return response.json()});
 renderComparison(currentComparison);
+import {renderPerformance} from './performance.js';
+fetch('./performance.json').then(response=>response.ok?response.json():null).then(renderPerformance).catch(error=>console.error('Speed results could not load',error));
 import { renderCompiler } from "./compiler.js"
 
 const data = await fetch("./results.json").then((response) => {

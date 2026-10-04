@@ -4,13 +4,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="react-markdownlil: current LilScript raw, gzip and Brotli objective builds versus minified upstream, with build times and live examples." name="description"/>
+<meta content="react-markdownlil: current LilScript raw, gzip and Brotli objective builds versus minified upstream, render speed in Chromium and Firefox (and Node), build times and live examples." name="description"/>
 <meta content="#c9a227" name="theme-color"/>
 <title>itslil/react-markdown — react-markdown@10.1.0 through LilScript</title>
 <link href="./styles.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" rel="stylesheet"/>
 <script src="./app.js" type="module"></script>
-<link href="./objective-comparison.css" rel="stylesheet"/></head>
+<link href="./objective-comparison.css" rel="stylesheet"/><link href="./performance.css" rel="stylesheet"/></head>
 <body>
 <div aria-hidden="true" class="progress"></div>
 <header class="nav shell">
@@ -20,7 +20,7 @@
 </a>
 <nav aria-label="Main navigation">
 <a href="#stack">stack</a>
-<a href="#compiler">build time</a>
+<a href="#speed">speed</a>
 <a href="#compiler">build time</a>
 <a href="#lab">playground</a>
 <a href="#evidence">size</a>
@@ -58,6 +58,7 @@
 <div><strong id="hero-raw">—</strong><span>raw vs minified original</span></div>
 <div><strong id="hero-spec">—</strong><span>current artifact checks</span></div>
 </div>
+<p class="score-speed" id="hero-speed"></p>
 <p class="score-note">Raw, gzip and Brotli each use a separate LilScript compilation targeting that objective. The original uses the same export and dependency boundary, then a JavaScript minifier.</p>
 </div>
 </section>
@@ -91,7 +92,7 @@
 <div id="playground-root"></div>
 </div>
 </section>
-<section class="objective-section shell" id="evidence"><p class="eyebrow">Current library · original minified</p><h2>Three objectives.<br/>Measured separately.</h2><div id="compression-comparison"></div></section><section class="objective-section shell" id="compiler"><p class="eyebrow">Same machine · sequential builds</p><h2>Build time.</h2><div id="objective-build-times"></div></section>
+<section class="objective-section shell" id="evidence"><p class="eyebrow">Current library · original minified</p><h2>Three objectives.<br/>Measured separately.</h2><div id="compression-comparison"></div></section><section class="objective-section shell" id="speed"><p class="eyebrow">Same input · identical HTML · fresh runtime per lane</p><h2>Render speed.<br/>Measured, not assumed.</h2><div id="speed-comparison"></div></section><section class="objective-section shell" id="compiler"><p class="eyebrow">Same machine · sequential builds</p><h2>Build time.</h2><div id="objective-build-times"></div></section>
 <section class="closing shell">
 <p class="eyebrow">Install the stack</p>
 <h2>Plugins from<br/>the same scope.</h2>

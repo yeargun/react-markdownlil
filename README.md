@@ -21,6 +21,10 @@ The repository download contains the checked build of this checkout. npm publica
 
 [Current raw, gzip and Brotli results and build times](COMPARISON.md) compare three independently targeted LilScript compilations with the smallest recorded original result for each codec from Terser, esbuild and Oxc. Exact bytes, configuration hashes, source inputs and commands are downloadable from the comparison page. Package formats and browser application bundles have different boundaries from the standalone comparison entries.
 
+## Speed
+
+[Render speed](https://yeargun.github.io/react-markdownlil/#speed) is measured against the original on identical input, and every build must produce byte-identical HTML before it is timed. Each build runs in its own fresh browser context. There are five documents, from a chat reply to 222 KB of READMEs, with and without remark-gfm, remark-math and rehype-katex. Against the original, the browser entry renders 10–25% faster in Chromium 151 and 2–19% faster in Firefox 153, and the package loads faster in both. The page also covers Node server rendering, and anyone can run the same harness in their own browser from it. `bench/run-all.sh` reruns everything; `bench/browser.mjs` and `bench/node.mjs` define the method.
+
 ## Compatibility and scope
 
 The public exports are Markdown (default), MarkdownAsync, MarkdownHooks and defaultUrlTransform. Conditional exports select Node path/process/URL behavior, browser entity decoding, or a DOM-free worker build. Production and development entries preserve their respective assertion behavior. Standard remark and rehype plugins remain supported. The current package is checked against the upstream React test suite, TypeScript declarations, CommonMark cases and named-entity data; the comparison artifacts use the portable production entry with React external.

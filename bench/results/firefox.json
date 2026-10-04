@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "runtime": "Firefox 153.0 (headless)",
+  "measuredAt": "2026-10-04T10:09:34.481Z",
+  "machine": {
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logicalCpus": 8
+  },
+  "method": "Each lane runs in its own fresh browser context; lanes are interleaved and the order rotates every round (7 rounds, 1000 ms of samples per document). A sample is a batch of renderToString calls sized to about 25 ms; a round reports the median sample. Cold start is 25 fresh contexts per lane: evaluating the already-downloaded package and rendering the chat document once. Every lane must produce byte-identical HTML for every document before anything is timed.",
+  "lanes": {
+    "original-browser": {
+      "side": "original",
+      "pair": "browser",
+      "module": "./original-browser.mjs",
+      "plugins": "./plugins-original.mjs"
+    },
+    "lil-browser": {
+      "side": "lilscript",
+      "pair": "browser",
+      "module": "./lil-browser.mjs",
+      "plugins": "./plugins-lil.mjs"
+    },
+    "original-portable": {
+      "side": "original",
+      "pair": "portable",
+      "module": "./original-portable.mjs",
+      "plugins": "./plugins-original.mjs"
+    },
+    "lil-portable": {
+      "side": "lilscript",
+      "pair": "portable",
+      "module": "./lil-portable.mjs",
+      "plugins": "./plugins-lil.mjs"
+    }
+  },
+  "docs": {
+    "chat": {
+      "plugins": []
+    },
+    "readme": {
+      "plugins": []
+    },
+    "large": {
+      "plugins": []
+    },
+    "gfm": {
+      "plugins": [
+        "gfm"
+      ]
+    },
+    "math": {
+      "plugins": [
+        "gfm",
+        "math",
+        "katex"
+      ]
+    }
+  },
+  "steady": {
+    "original-browser": {
+      "chat": {
+        "median": 1.375,
+        "min": 1.375,
+        "max": 1.4285714285714286,
+        "runs": 7
+      },
+      "readme": {
+        "median": 31,
+        "min": 30,
+        "max": 32,
+        "runs": 7
+      },
+      "large": {
+        "median": 392,
+        "min": 374,
+        "max": 426,
+        "runs": 7
+      },
+      "gfm": {
+        "median": 25,
+        "min": 23,
+        "max": 26,
+        "runs": 7
+      },
+      "math": {
+        "median": 21,
+        "min": 21,
+        "max": 22,
+        "runs": 7
+      }
+    },
+    "lil-browser": {
+      "chat": {
+        "median": 1.1111111111111112,
+        "min": 1.1111111111111112,
+        "max": 1.125,
+        "runs": 7
+      },
+      "readme": {
+        "median": 30,
+        "min": 29,
+        "max": 31,
+        "runs": 7
+      },
+      "large": {
+        "median": 376,
+        "min": 364,
+        "max": 432,
+        "runs": 7
+      },
+      "gfm": {
+        "median": 24.5,
+        "min": 21,
+        "max": 26,
+        "runs": 7
+      },
+      "math": {
+        "median": 19,
+        "min": 18,
+        "max": 19,
+        "runs": 7
+      }
+    },
+    "original-portable": {
+      "chat": {
+        "median": 1.375,
+        "min": 1.375,
+        "max": 1.5714285714285714,
+        "runs": 7
+      },
+      "readme": {
+        "median": 31,
+        "min": 31,
+        "max": 32,
+        "runs": 7
+      },
+      "large": {
+        "median": 394,
+        "min": 381,
+        "max": 418,
+        "runs": 7
+      },
+      "gfm": {
+        "median": 25.5,
+        "min": 24,
+        "max": 26,
+        "runs": 7
+      },
+      "math": {
+        "median": 21,
+        "min": 20,
+        "max": 22,
+        "runs": 7
+      }
+    },
+    "lil-portable": {
+      "chat": {
+        "median": 1.1111111111111112,
+        "min": 1.1111111111111112,
+        "max": 1.125,
+        "runs": 7
+      },
+      "readme": {
+        "median": 30,
+        "min": 29,
+        "max": 30,
+        "runs": 7
+      },
+      "large": {
+        "median": 375,
+        "min": 355,
+        "max": 430,
+        "runs": 7
+      },
+      "gfm": {
+        "median": 21,
+        "min": 20,
+        "max": 25,
+        "runs": 7
+      },
+      "math": {
+        "median": 18,
+        "min": 17,
+        "max": 19,
+        "runs": 7
+      }
+    }
+  },
+  "cold": {
+    "original-browser": {
+      "importMs": {
+        "median": 18,
+        "min": 17,
+        "max": 23,
+        "runs": 25
+      },
+      "firstRenderMs": {
+        "median": 15,
+        "min": 13,
+        "max": 16,
+        "runs": 25
+      }
+    },
+    "lil-browser": {
+      "importMs": {
+        "median": 16,
+        "min": 14,
+        "max": 21,
+        "runs": 25
+      },
+      "firstRenderMs": {
+        "median": 15,
+        "min": 14,
+        "max": 16,
+        "runs": 25
+      }
+    },
+    "original-portable": {
+      "importMs": {
+        "median": 20,
+        "min": 19,
+        "max": 24,
+        "runs": 25
+      },
+      "firstRenderMs": {
+        "median": 15,
+        "min": 14,
+        "max": 18,
+        "runs": 25
+      }
+    },
+    "lil-portable": {
+      "importMs": {
+        "median": 18,
+        "min": 17,
+        "max": 22,
+        "runs": 25
+      },
+      "firstRenderMs": {
+        "median": 14,
+        "min": 13,
+        "max": 18,
+        "runs": 25
+      }
+    }
+  }
+}

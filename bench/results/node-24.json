@@ -1,0 +1,294 @@
+{
+  "schemaVersion": 1,
+  "runtime": "Node v24.11.1",
+  "measuredAt": "2026-10-04T09:50:45.868Z",
+  "machine": {
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logicalCpus": 8
+  },
+  "method": "Each lane runs in its own fresh Node process; lanes are interleaved and the order rotates every round (5 rounds, 1000 ms of samples per document). A sample is a batch of renderToString calls sized to about 25 ms; a round reports the median sample. Cold start is 15 fresh processes per lane: importing the package alone (React is already loaded) and rendering the chat document once. Every lane must produce byte-identical HTML for every document before anything is timed.",
+  "lanes": {
+    "original-npm": {
+      "side": "original",
+      "pair": "reference",
+      "label": "react-markdown@10.1.0 as installed from npm (unbundled)"
+    },
+    "original-node": {
+      "side": "original",
+      "pair": "node",
+      "label": "react-markdown@10.1.0 bundled for Node (node conditions, Terser)"
+    },
+    "lil-node": {
+      "side": "lilscript",
+      "pair": "node",
+      "label": "@itslil/react-markdown Node entry (dist/react-markdown.esm.js)"
+    },
+    "original-portable": {
+      "side": "original",
+      "pair": "portable",
+      "label": "react-markdown@10.1.0 portable bundle (Terser), as in the size comparison"
+    },
+    "lil-portable": {
+      "side": "lilscript",
+      "pair": "portable",
+      "label": "@itslil/react-markdown portable Brotli build, as in the size comparison"
+    }
+  },
+  "docs": {
+    "chat": {
+      "plugins": []
+    },
+    "readme": {
+      "plugins": []
+    },
+    "large": {
+      "plugins": []
+    },
+    "gfm": {
+      "plugins": [
+        "gfm"
+      ]
+    },
+    "math": {
+      "plugins": [
+        "gfm",
+        "math",
+        "katex"
+      ]
+    }
+  },
+  "steady": {
+    "original-npm": {
+      "chat": {
+        "median": 1.3909990000000032,
+        "min": 1.3659100769230883,
+        "max": 1.4198028333333355,
+        "runs": 5
+      },
+      "readme": {
+        "median": 26.767033999999967,
+        "min": 24.654845999999907,
+        "max": 27.20169799999985,
+        "runs": 5
+      },
+      "large": {
+        "median": 310.8906900000002,
+        "min": 302.91707099999985,
+        "max": 322.5114520000002,
+        "runs": 5
+      },
+      "gfm": {
+        "median": 21.074558000000252,
+        "min": 20.740050999999767,
+        "max": 22.554861999999957,
+        "runs": 5
+      },
+      "math": {
+        "median": 36.97054399999979,
+        "min": 34.48448599999938,
+        "max": 39.013300999999956,
+        "runs": 5
+      }
+    },
+    "original-node": {
+      "chat": {
+        "median": 1.3936120833333423,
+        "min": 1.3773499999999974,
+        "max": 1.5540248000000019,
+        "runs": 5
+      },
+      "readme": {
+        "median": 26.624857999999676,
+        "min": 24.615182999999888,
+        "max": 30.693732000000182,
+        "runs": 5
+      },
+      "large": {
+        "median": 308.345863,
+        "min": 296.5901530000001,
+        "max": 315.42128,
+        "runs": 5
+      },
+      "gfm": {
+        "median": 21.542113999999856,
+        "min": 20.772672000000057,
+        "max": 22.94750699999986,
+        "runs": 5
+      },
+      "math": {
+        "median": 37.43599499999982,
+        "min": 33.39748799999961,
+        "max": 37.65054700000019,
+        "runs": 5
+      }
+    },
+    "lil-node": {
+      "chat": {
+        "median": 1.2011265999999978,
+        "min": 1.1827297142857074,
+        "max": 1.245621499999989,
+        "runs": 5
+      },
+      "readme": {
+        "median": 22.878869000000122,
+        "min": 21.603579999999965,
+        "max": 27.16087299999981,
+        "runs": 5
+      },
+      "large": {
+        "median": 290.94479500000034,
+        "min": 277.81169599999976,
+        "max": 295.206322,
+        "runs": 5
+      },
+      "gfm": {
+        "median": 19.966591999999764,
+        "min": 18.263159999999516,
+        "max": 20.71996300000046,
+        "runs": 5
+      },
+      "math": {
+        "median": 29.46035099999972,
+        "min": 28.17920099999992,
+        "max": 32.029553999999735,
+        "runs": 5
+      }
+    },
+    "original-portable": {
+      "chat": {
+        "median": 1.417112230769231,
+        "min": 1.374532999999995,
+        "max": 1.4257548333333336,
+        "runs": 5
+      },
+      "readme": {
+        "median": 26.159355000000232,
+        "min": 25.433356000000003,
+        "max": 26.586295999999948,
+        "runs": 5
+      },
+      "large": {
+        "median": 317.895301,
+        "min": 296.311318,
+        "max": 349.672513,
+        "runs": 5
+      },
+      "gfm": {
+        "median": 21.946812999999565,
+        "min": 20.342697000000044,
+        "max": 23.66103800000019,
+        "runs": 5
+      },
+      "math": {
+        "median": 35.39688000000024,
+        "min": 34.882502000000386,
+        "max": 38.28410299999996,
+        "runs": 5
+      }
+    },
+    "lil-portable": {
+      "chat": {
+        "median": 1.2011779999999947,
+        "min": 1.1907762857142967,
+        "max": 1.2158482142857079,
+        "runs": 5
+      },
+      "readme": {
+        "median": 24.13185700000031,
+        "min": 21.64684999999986,
+        "max": 25.010933000000023,
+        "runs": 5
+      },
+      "large": {
+        "median": 289.1938269999996,
+        "min": 277.8410100000001,
+        "max": 306.7436910000006,
+        "runs": 5
+      },
+      "gfm": {
+        "median": 18.875119000000268,
+        "min": 18.295180000000073,
+        "max": 19.39382099999966,
+        "runs": 5
+      },
+      "math": {
+        "median": 28.790846999999303,
+        "min": 26.34953200000018,
+        "max": 28.976958999999624,
+        "runs": 5
+      }
+    }
+  },
+  "cold": {
+    "original-npm": {
+      "importMs": {
+        "median": 72.63880599999999,
+        "min": 69.796059,
+        "max": 76.16776899999999,
+        "runs": 15
+      },
+      "firstRenderMs": {
+        "median": 25.211881000000005,
+        "min": 24.431568000000013,
+        "max": 27.357289999999992,
+        "runs": 15
+      }
+    },
+    "original-node": {
+      "importMs": {
+        "median": 15.377574000000003,
+        "min": 14.919455999999997,
+        "max": 16.778727999999994,
+        "runs": 15
+      },
+      "firstRenderMs": {
+        "median": 24.680965,
+        "min": 23.862932999999998,
+        "max": 26.31942500000001,
+        "runs": 15
+      }
+    },
+    "lil-node": {
+      "importMs": {
+        "median": 13.971739,
+        "min": 13.587859999999992,
+        "max": 15.721478000000005,
+        "runs": 15
+      },
+      "firstRenderMs": {
+        "median": 24.694209999999998,
+        "min": 24.00257400000001,
+        "max": 28.155976999999993,
+        "runs": 15
+      }
+    },
+    "original-portable": {
+      "importMs": {
+        "median": 12.574360999999996,
+        "min": 12.202104000000006,
+        "max": 13.542124999999999,
+        "runs": 15
+      },
+      "firstRenderMs": {
+        "median": 23.66298900000001,
+        "min": 23.244354,
+        "max": 24.720109000000008,
+        "runs": 15
+      }
+    },
+    "lil-portable": {
+      "importMs": {
+        "median": 10.524409999999996,
+        "min": 10.101638000000001,
+        "max": 11.526388000000004,
+        "runs": 15
+      },
+      "firstRenderMs": {
+        "median": 24.462426000000008,
+        "min": 23.511845000000008,
+        "max": 29.168994999999995,
+        "runs": 15
+      }
+    }
+  }
+}

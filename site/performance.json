@@ -1,0 +1,978 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-04T10:09:34.729Z",
+  "summary": {
+    "geomeanRatio": 0.8694527983198773,
+    "slowestRatio": 0.98,
+    "fastestRatio": 0.7514705881476402,
+    "cells": 40
+  },
+  "corpus": {
+    "chat": {
+      "bytes": 1177,
+      "sha256": "0d69aaf7d264aee4"
+    },
+    "readme": {
+      "bytes": 26330,
+      "sha256": "b57882cd2b30ef3d"
+    },
+    "large": {
+      "bytes": 226982,
+      "sha256": "e89332259a577de4"
+    },
+    "gfm": {
+      "bytes": 15546,
+      "sha256": "22ac117c9fced0ea"
+    },
+    "math": {
+      "bytes": 1506,
+      "sha256": "b59aab71877ceded"
+    }
+  },
+  "artifacts": {
+    "original-browser": "dc716572aabd85b2",
+    "lil-browser": "44685f448d5a5f2f",
+    "original-portable": "a90329d7a3459aba",
+    "lil-portable": "d3c98ae602957fd3"
+  },
+  "runtimes": [
+    {
+      "id": "node-20",
+      "runtime": "Node v20.19.0",
+      "measuredAt": "2026-10-04T09:47:26.534Z",
+      "machine": {
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "logicalCpus": 8
+      },
+      "method": "Each lane runs in its own fresh Node process; lanes are interleaved and the order rotates every round (5 rounds, 1000 ms of samples per document). A sample is a batch of renderToString calls sized to about 25 ms; a round reports the median sample. Cold start is 15 fresh processes per lane: importing the package alone (React is already loaded) and rendering the chat document once. Every lane must produce byte-identical HTML for every document before anything is timed.",
+      "lanes": {
+        "original-npm": {
+          "side": "original",
+          "pair": "reference",
+          "label": "react-markdown@10.1.0 as installed from npm (unbundled)"
+        },
+        "original-node": {
+          "side": "original",
+          "pair": "node",
+          "label": "react-markdown@10.1.0 bundled for Node (node conditions, Terser)"
+        },
+        "lil-node": {
+          "side": "lilscript",
+          "pair": "node",
+          "label": "@itslil/react-markdown Node entry (dist/react-markdown.esm.js)"
+        },
+        "original-portable": {
+          "side": "original",
+          "pair": "portable",
+          "label": "react-markdown@10.1.0 portable bundle (Terser), as in the size comparison"
+        },
+        "lil-portable": {
+          "side": "lilscript",
+          "pair": "portable",
+          "label": "@itslil/react-markdown portable Brotli build, as in the size comparison"
+        }
+      },
+      "docs": {
+        "chat": {
+          "plugins": []
+        },
+        "readme": {
+          "plugins": []
+        },
+        "large": {
+          "plugins": []
+        },
+        "gfm": {
+          "plugins": [
+            "gfm"
+          ]
+        },
+        "math": {
+          "plugins": [
+            "gfm",
+            "math",
+            "katex"
+          ]
+        }
+      },
+      "pairs": {
+        "node": {
+          "original": "original-node",
+          "lilscript": "lil-node",
+          "docs": {
+            "chat": {
+              "originalMs": 1.5937613000000055,
+              "lilscriptMs": 1.4409310000000004,
+              "ratio": 0.9041071583304197,
+              "originalRange": [
+                1.552348700000016,
+                1.6123801999999956
+              ],
+              "lilscriptRange": [
+                1.40096844444444,
+                1.5231941000000007
+              ]
+            },
+            "readme": {
+              "originalMs": 34.543936999999914,
+              "lilscriptMs": 31.193397000000004,
+              "ratio": 0.9030064233848065,
+              "originalRange": [
+                33.020080000000235,
+                35.337422999999944
+              ],
+              "lilscriptRange": [
+                30.882466000000022,
+                31.84663300000011
+              ]
+            },
+            "large": {
+              "originalMs": 367.61285199999975,
+              "lilscriptMs": 344.5523540000004,
+              "ratio": 0.9372696088438187,
+              "originalRange": [
+                349.80842500000017,
+                408.0555800000002
+              ],
+              "lilscriptRange": [
+                323.9240109999996,
+                359.46122600000035
+              ]
+            },
+            "gfm": {
+              "originalMs": 25.574249000000236,
+              "lilscriptMs": 22.565050000000156,
+              "ratio": 0.8823348048265248,
+              "originalRange": [
+                24.838520000000244,
+                26.024481999999807
+              ],
+              "lilscriptRange": [
+                21.811910000000353,
+                23.342497999999978
+              ]
+            },
+            "math": {
+              "originalMs": 45.540860999999495,
+              "lilscriptMs": 36.23958399999992,
+              "ratio": 0.795759746395667,
+              "originalRange": [
+                41.827765,
+                49.24693500000012
+              ],
+              "lilscriptRange": [
+                31.574862000000394,
+                40.287836999999854
+              ]
+            }
+          },
+          "cold": {
+            "importMs": {
+              "originalMs": 18.090947000000007,
+              "lilscriptMs": 16.394638999999998,
+              "ratio": 0.906234427639415
+            },
+            "firstRenderMs": {
+              "originalMs": 26.003722999999994,
+              "lilscriptMs": 26.28372800000001,
+              "ratio": 1.0107678811991658
+            }
+          }
+        },
+        "portable": {
+          "original": "original-portable",
+          "lilscript": "lil-portable",
+          "docs": {
+            "chat": {
+              "originalMs": 1.6045354999999972,
+              "lilscriptMs": 1.43045675,
+              "ratio": 0.8915083212555923,
+              "originalRange": [
+                1.58020088888889,
+                1.7631011249999915
+              ],
+              "lilscriptRange": [
+                1.3907341666666564,
+                1.4558027999999923
+              ]
+            },
+            "readme": {
+              "originalMs": 32.91402799999969,
+              "lilscriptMs": 31.869284000000334,
+              "ratio": 0.968258397301012,
+              "originalRange": [
+                31.664130999999998,
+                35.81496700000025
+              ],
+              "lilscriptRange": [
+                30.8777869999999,
+                32.398587000000134
+              ]
+            },
+            "large": {
+              "originalMs": 371.5188969999999,
+              "lilscriptMs": 344.90416300000015,
+              "ratio": 0.9283623680654937,
+              "originalRange": [
+                347.3244530000002,
+                457.28657599999997
+              ],
+              "lilscriptRange": [
+                336.1958770000001,
+                359.42103700000007
+              ]
+            },
+            "gfm": {
+              "originalMs": 25.353235999999924,
+              "lilscriptMs": 21.646318999999494,
+              "ratio": 0.8537891967715505,
+              "originalRange": [
+                25.08842899999945,
+                27.07104100000015
+              ],
+              "lilscriptRange": [
+                21.16268299999956,
+                22.248098000000027
+              ]
+            },
+            "math": {
+              "originalMs": 44.253138999999464,
+              "lilscriptMs": 33.37485300000026,
+              "ratio": 0.754180466158585,
+              "originalRange": [
+                42.01152100000036,
+                52.56861099999969
+              ],
+              "lilscriptRange": [
+                31.85279300000002,
+                34.10837999999967
+              ]
+            }
+          },
+          "cold": {
+            "importMs": {
+              "originalMs": 14.179238000000005,
+              "lilscriptMs": 12.596192000000002,
+              "ratio": 0.8883546492413765
+            },
+            "firstRenderMs": {
+              "originalMs": 25.427132999999998,
+              "lilscriptMs": 25.580150000000003,
+              "ratio": 1.0060178628868621
+            }
+          }
+        }
+      },
+      "reference": {
+        "lane": "original-npm",
+        "steady": {
+          "chat": 1.5930167272727287,
+          "readme": 31.751252999999906,
+          "large": 380.94989099999975,
+          "gfm": 25.754785999999513,
+          "math": 43.58326299999953
+        },
+        "cold": {
+          "importMs": 81.52169800000001,
+          "firstRenderMs": 26.31856400000001
+        }
+      }
+    },
+    {
+      "id": "node-24",
+      "runtime": "Node v24.11.1",
+      "measuredAt": "2026-10-04T09:50:45.868Z",
+      "machine": {
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "logicalCpus": 8
+      },
+      "method": "Each lane runs in its own fresh Node process; lanes are interleaved and the order rotates every round (5 rounds, 1000 ms of samples per document). A sample is a batch of renderToString calls sized to about 25 ms; a round reports the median sample. Cold start is 15 fresh processes per lane: importing the package alone (React is already loaded) and rendering the chat document once. Every lane must produce byte-identical HTML for every document before anything is timed.",
+      "lanes": {
+        "original-npm": {
+          "side": "original",
+          "pair": "reference",
+          "label": "react-markdown@10.1.0 as installed from npm (unbundled)"
+        },
+        "original-node": {
+          "side": "original",
+          "pair": "node",
+          "label": "react-markdown@10.1.0 bundled for Node (node conditions, Terser)"
+        },
+        "lil-node": {
+          "side": "lilscript",
+          "pair": "node",
+          "label": "@itslil/react-markdown Node entry (dist/react-markdown.esm.js)"
+        },
+        "original-portable": {
+          "side": "original",
+          "pair": "portable",
+          "label": "react-markdown@10.1.0 portable bundle (Terser), as in the size comparison"
+        },
+        "lil-portable": {
+          "side": "lilscript",
+          "pair": "portable",
+          "label": "@itslil/react-markdown portable Brotli build, as in the size comparison"
+        }
+      },
+      "docs": {
+        "chat": {
+          "plugins": []
+        },
+        "readme": {
+          "plugins": []
+        },
+        "large": {
+          "plugins": []
+        },
+        "gfm": {
+          "plugins": [
+            "gfm"
+          ]
+        },
+        "math": {
+          "plugins": [
+            "gfm",
+            "math",
+            "katex"
+          ]
+        }
+      },
+      "pairs": {
+        "node": {
+          "original": "original-node",
+          "lilscript": "lil-node",
+          "docs": {
+            "chat": {
+              "originalMs": 1.3936120833333423,
+              "lilscriptMs": 1.2011265999999978,
+              "ratio": 0.8618801561529635,
+              "originalRange": [
+                1.3773499999999974,
+                1.5540248000000019
+              ],
+              "lilscriptRange": [
+                1.1827297142857074,
+                1.245621499999989
+              ]
+            },
+            "readme": {
+              "originalMs": 26.624857999999676,
+              "lilscriptMs": 22.878869000000122,
+              "ratio": 0.8593048270905482,
+              "originalRange": [
+                24.615182999999888,
+                30.693732000000182
+              ],
+              "lilscriptRange": [
+                21.603579999999965,
+                27.16087299999981
+              ]
+            },
+            "large": {
+              "originalMs": 308.345863,
+              "lilscriptMs": 290.94479500000034,
+              "ratio": 0.9435663970623803,
+              "originalRange": [
+                296.5901530000001,
+                315.42128
+              ],
+              "lilscriptRange": [
+                277.81169599999976,
+                295.206322
+              ]
+            },
+            "gfm": {
+              "originalMs": 21.542113999999856,
+              "lilscriptMs": 19.966591999999764,
+              "ratio": 0.926863166725415,
+              "originalRange": [
+                20.772672000000057,
+                22.94750699999986
+              ],
+              "lilscriptRange": [
+                18.263159999999516,
+                20.71996300000046
+              ]
+            },
+            "math": {
+              "originalMs": 37.43599499999982,
+              "lilscriptMs": 29.46035099999972,
+              "ratio": 0.7869525305791888,
+              "originalRange": [
+                33.39748799999961,
+                37.65054700000019
+              ],
+              "lilscriptRange": [
+                28.17920099999992,
+                32.029553999999735
+              ]
+            }
+          },
+          "cold": {
+            "importMs": {
+              "originalMs": 15.377574000000003,
+              "lilscriptMs": 13.971739,
+              "ratio": 0.9085788824687169
+            },
+            "firstRenderMs": {
+              "originalMs": 24.680965,
+              "lilscriptMs": 24.694209999999998,
+              "ratio": 1.0005366483846965
+            }
+          }
+        },
+        "portable": {
+          "original": "original-portable",
+          "lilscript": "lil-portable",
+          "docs": {
+            "chat": {
+              "originalMs": 1.417112230769231,
+              "lilscriptMs": 1.2011779999999947,
+              "ratio": 0.8476237618441669,
+              "originalRange": [
+                1.374532999999995,
+                1.4257548333333336
+              ],
+              "lilscriptRange": [
+                1.1907762857142967,
+                1.2158482142857079
+              ]
+            },
+            "readme": {
+              "originalMs": 26.159355000000232,
+              "lilscriptMs": 24.13185700000031,
+              "ratio": 0.9224943428459951,
+              "originalRange": [
+                25.433356000000003,
+                26.586295999999948
+              ],
+              "lilscriptRange": [
+                21.64684999999986,
+                25.010933000000023
+              ]
+            },
+            "large": {
+              "originalMs": 317.895301,
+              "lilscriptMs": 289.1938269999996,
+              "ratio": 0.9097140665190253,
+              "originalRange": [
+                296.311318,
+                349.672513
+              ],
+              "lilscriptRange": [
+                277.8410100000001,
+                306.7436910000006
+              ]
+            },
+            "gfm": {
+              "originalMs": 21.946812999999565,
+              "lilscriptMs": 18.875119000000268,
+              "ratio": 0.8600391774423303,
+              "originalRange": [
+                20.342697000000044,
+                23.66103800000019
+              ],
+              "lilscriptRange": [
+                18.295180000000073,
+                19.39382099999966
+              ]
+            },
+            "math": {
+              "originalMs": 35.39688000000024,
+              "lilscriptMs": 28.790846999999303,
+              "ratio": 0.8133724497752093,
+              "originalRange": [
+                34.882502000000386,
+                38.28410299999996
+              ],
+              "lilscriptRange": [
+                26.34953200000018,
+                28.976958999999624
+              ]
+            }
+          },
+          "cold": {
+            "importMs": {
+              "originalMs": 12.574360999999996,
+              "lilscriptMs": 10.524409999999996,
+              "ratio": 0.8369737436359589
+            },
+            "firstRenderMs": {
+              "originalMs": 23.66298900000001,
+              "lilscriptMs": 24.462426000000008,
+              "ratio": 1.0337842780554898
+            }
+          }
+        }
+      },
+      "reference": {
+        "lane": "original-npm",
+        "steady": {
+          "chat": 1.3909990000000032,
+          "readme": 26.767033999999967,
+          "large": 310.8906900000002,
+          "gfm": 21.074558000000252,
+          "math": 36.97054399999979
+        },
+        "cold": {
+          "importMs": 72.63880599999999,
+          "firstRenderMs": 25.211881000000005
+        }
+      }
+    },
+    {
+      "id": "chromium",
+      "runtime": "Chromium 151.0.7922.34 (headless)",
+      "measuredAt": "2026-10-04T10:05:22.350Z",
+      "machine": {
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "logicalCpus": 8
+      },
+      "method": "Each lane runs in its own fresh browser context; lanes are interleaved and the order rotates every round (7 rounds, 1000 ms of samples per document). A sample is a batch of renderToString calls sized to about 25 ms; a round reports the median sample. Cold start is 25 fresh contexts per lane: evaluating the already-downloaded package and rendering the chat document once. Every lane must produce byte-identical HTML for every document before anything is timed.",
+      "lanes": {
+        "original-browser": {
+          "side": "original",
+          "pair": "browser",
+          "module": "./original-browser.mjs",
+          "plugins": "./plugins-original.mjs"
+        },
+        "lil-browser": {
+          "side": "lilscript",
+          "pair": "browser",
+          "module": "./lil-browser.mjs",
+          "plugins": "./plugins-lil.mjs"
+        },
+        "original-portable": {
+          "side": "original",
+          "pair": "portable",
+          "module": "./original-portable.mjs",
+          "plugins": "./plugins-original.mjs"
+        },
+        "lil-portable": {
+          "side": "lilscript",
+          "pair": "portable",
+          "module": "./lil-portable.mjs",
+          "plugins": "./plugins-lil.mjs"
+        }
+      },
+      "docs": {
+        "chat": {
+          "plugins": []
+        },
+        "readme": {
+          "plugins": []
+        },
+        "large": {
+          "plugins": []
+        },
+        "gfm": {
+          "plugins": [
+            "gfm"
+          ]
+        },
+        "math": {
+          "plugins": [
+            "gfm",
+            "math",
+            "katex"
+          ]
+        }
+      },
+      "pairs": {
+        "browser": {
+          "original": "original-browser",
+          "lilscript": "lil-browser",
+          "docs": {
+            "chat": {
+              "originalMs": 0.7750000009934107,
+              "lilscriptMs": 0.6307692321447226,
+              "ratio": 0.8138957823692772,
+              "originalRange": [
+                0.758333332836628,
+                0.8090909069234674
+              ],
+              "lilscriptRange": [
+                0.6153846153846154,
+                0.7083333333333334
+              ]
+            },
+            "readme": {
+              "originalMs": 16.799999982118607,
+              "lilscriptMs": 15.100000023841858,
+              "ratio": 0.8988095261853467,
+              "originalRange": [
+                16.5,
+                18
+              ],
+              "lilscriptRange": [
+                14.599999994039536,
+                17.099999994039536
+              ]
+            },
+            "large": {
+              "originalMs": 186,
+              "lilscriptMs": 151.19999998807907,
+              "ratio": 0.8129032257423606,
+              "originalRange": [
+                173.95000000298023,
+                195.25000001490116
+              ],
+              "lilscriptRange": [
+                149.5,
+                168.75
+              ]
+            },
+            "gfm": {
+              "originalMs": 15.75,
+              "lilscriptMs": 13.650000005960464,
+              "ratio": 0.8666666670451089,
+              "originalRange": [
+                14.650000005960464,
+                16.400000005960464
+              ],
+              "lilscriptRange": [
+                13,
+                14.099999994039536
+              ]
+            },
+            "math": {
+              "originalMs": 17,
+              "lilscriptMs": 12.774999998509884,
+              "ratio": 0.7514705881476402,
+              "originalRange": [
+                16.650000005960464,
+                17.299999982118607
+              ],
+              "lilscriptRange": [
+                12.649999991059303,
+                13.099999994039536
+              ]
+            }
+          },
+          "cold": {
+            "importMs": {
+              "originalMs": 10.5,
+              "lilscriptMs": 8.900000005960464,
+              "ratio": 0.8476190481867109
+            },
+            "firstRenderMs": {
+              "originalMs": 19.700000017881393,
+              "lilscriptMs": 20.5,
+              "ratio": 1.0406091361112924
+            }
+          }
+        },
+        "portable": {
+          "original": "original-portable",
+          "lilscript": "lil-portable",
+          "docs": {
+            "chat": {
+              "originalMs": 0.7583333340783913,
+              "lilscriptMs": 0.6230769249109122,
+              "ratio": 0.8216399001741663,
+              "originalRange": [
+                0.75,
+                0.7833333338300387
+              ],
+              "lilscriptRange": [
+                0.607692308150805,
+                0.6708333330849806
+              ]
+            },
+            "readme": {
+              "originalMs": 17.5,
+              "lilscriptMs": 15.049999997019768,
+              "ratio": 0.859999999829701,
+              "originalRange": [
+                16.5,
+                18
+              ],
+              "lilscriptRange": [
+                14.599999994039536,
+                18.099999994039536
+              ]
+            },
+            "large": {
+              "originalMs": 177.65000000596046,
+              "lilscriptMs": 153.7999999821186,
+              "ratio": 0.8657472557104327,
+              "originalRange": [
+                174.30000001192093,
+                181.8500000089407
+              ],
+              "lilscriptRange": [
+                150.19999998807907,
+                160.75
+              ]
+            },
+            "gfm": {
+              "originalMs": 15.700000002980232,
+              "lilscriptMs": 13.25,
+              "ratio": 0.8439490444257858,
+              "originalRange": [
+                14.950000002980232,
+                16.149999991059303
+              ],
+              "lilscriptRange": [
+                12.074999995529652,
+                13.549999997019768
+              ]
+            },
+            "math": {
+              "originalMs": 16.80000001192093,
+              "lilscriptMs": 12.700000017881393,
+              "ratio": 0.7559523814803416,
+              "originalRange": [
+                16.599999994039536,
+                19.350000008940697
+              ],
+              "lilscriptRange": [
+                12.62500000745058,
+                13.399999998509884
+              ]
+            }
+          },
+          "cold": {
+            "importMs": {
+              "originalMs": 12.099999994039536,
+              "lilscriptMs": 10.699999988079071,
+              "ratio": 0.8842975201115616
+            },
+            "firstRenderMs": {
+              "originalMs": 19.299999982118607,
+              "lilscriptMs": 17.900000005960464,
+              "ratio": 0.9274611410644954
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "firefox",
+      "runtime": "Firefox 153.0 (headless)",
+      "measuredAt": "2026-10-04T10:09:34.481Z",
+      "machine": {
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "logicalCpus": 8
+      },
+      "method": "Each lane runs in its own fresh browser context; lanes are interleaved and the order rotates every round (7 rounds, 1000 ms of samples per document). A sample is a batch of renderToString calls sized to about 25 ms; a round reports the median sample. Cold start is 25 fresh contexts per lane: evaluating the already-downloaded package and rendering the chat document once. Every lane must produce byte-identical HTML for every document before anything is timed.",
+      "lanes": {
+        "original-browser": {
+          "side": "original",
+          "pair": "browser",
+          "module": "./original-browser.mjs",
+          "plugins": "./plugins-original.mjs"
+        },
+        "lil-browser": {
+          "side": "lilscript",
+          "pair": "browser",
+          "module": "./lil-browser.mjs",
+          "plugins": "./plugins-lil.mjs"
+        },
+        "original-portable": {
+          "side": "original",
+          "pair": "portable",
+          "module": "./original-portable.mjs",
+          "plugins": "./plugins-original.mjs"
+        },
+        "lil-portable": {
+          "side": "lilscript",
+          "pair": "portable",
+          "module": "./lil-portable.mjs",
+          "plugins": "./plugins-lil.mjs"
+        }
+      },
+      "docs": {
+        "chat": {
+          "plugins": []
+        },
+        "readme": {
+          "plugins": []
+        },
+        "large": {
+          "plugins": []
+        },
+        "gfm": {
+          "plugins": [
+            "gfm"
+          ]
+        },
+        "math": {
+          "plugins": [
+            "gfm",
+            "math",
+            "katex"
+          ]
+        }
+      },
+      "pairs": {
+        "browser": {
+          "original": "original-browser",
+          "lilscript": "lil-browser",
+          "docs": {
+            "chat": {
+              "originalMs": 1.375,
+              "lilscriptMs": 1.1111111111111112,
+              "ratio": 0.8080808080808081,
+              "originalRange": [
+                1.375,
+                1.4285714285714286
+              ],
+              "lilscriptRange": [
+                1.1111111111111112,
+                1.125
+              ]
+            },
+            "readme": {
+              "originalMs": 31,
+              "lilscriptMs": 30,
+              "ratio": 0.967741935483871,
+              "originalRange": [
+                30,
+                32
+              ],
+              "lilscriptRange": [
+                29,
+                31
+              ]
+            },
+            "large": {
+              "originalMs": 392,
+              "lilscriptMs": 376,
+              "ratio": 0.9591836734693877,
+              "originalRange": [
+                374,
+                426
+              ],
+              "lilscriptRange": [
+                364,
+                432
+              ]
+            },
+            "gfm": {
+              "originalMs": 25,
+              "lilscriptMs": 24.5,
+              "ratio": 0.98,
+              "originalRange": [
+                23,
+                26
+              ],
+              "lilscriptRange": [
+                21,
+                26
+              ]
+            },
+            "math": {
+              "originalMs": 21,
+              "lilscriptMs": 19,
+              "ratio": 0.9047619047619048,
+              "originalRange": [
+                21,
+                22
+              ],
+              "lilscriptRange": [
+                18,
+                19
+              ]
+            }
+          },
+          "cold": {
+            "importMs": {
+              "originalMs": 18,
+              "lilscriptMs": 16,
+              "ratio": 0.8888888888888888
+            },
+            "firstRenderMs": {
+              "originalMs": 15,
+              "lilscriptMs": 15,
+              "ratio": 1
+            }
+          }
+        },
+        "portable": {
+          "original": "original-portable",
+          "lilscript": "lil-portable",
+          "docs": {
+            "chat": {
+              "originalMs": 1.375,
+              "lilscriptMs": 1.1111111111111112,
+              "ratio": 0.8080808080808081,
+              "originalRange": [
+                1.375,
+                1.5714285714285714
+              ],
+              "lilscriptRange": [
+                1.1111111111111112,
+                1.125
+              ]
+            },
+            "readme": {
+              "originalMs": 31,
+              "lilscriptMs": 30,
+              "ratio": 0.967741935483871,
+              "originalRange": [
+                31,
+                32
+              ],
+              "lilscriptRange": [
+                29,
+                30
+              ]
+            },
+            "large": {
+              "originalMs": 394,
+              "lilscriptMs": 375,
+              "ratio": 0.9517766497461929,
+              "originalRange": [
+                381,
+                418
+              ],
+              "lilscriptRange": [
+                355,
+                430
+              ]
+            },
+            "gfm": {
+              "originalMs": 25.5,
+              "lilscriptMs": 21,
+              "ratio": 0.8235294117647058,
+              "originalRange": [
+                24,
+                26
+              ],
+              "lilscriptRange": [
+                20,
+                25
+              ]
+            },
+            "math": {
+              "originalMs": 21,
+              "lilscriptMs": 18,
+              "ratio": 0.8571428571428571,
+              "originalRange": [
+                20,
+                22
+              ],
+              "lilscriptRange": [
+                17,
+                19
+              ]
+            }
+          },
+          "cold": {
+            "importMs": {
+              "originalMs": 20,
+              "lilscriptMs": 18,
+              "ratio": 0.9
+            },
+            "firstRenderMs": {
+              "originalMs": 15,
+              "lilscriptMs": 14,
+              "ratio": 0.9333333333333333
+            }
+          }
+        }
+      }
+    }
+  ]
+}

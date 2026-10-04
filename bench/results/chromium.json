@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "runtime": "Chromium 151.0.7922.34 (headless)",
+  "measuredAt": "2026-10-04T10:05:22.350Z",
+  "machine": {
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logicalCpus": 8
+  },
+  "method": "Each lane runs in its own fresh browser context; lanes are interleaved and the order rotates every round (7 rounds, 1000 ms of samples per document). A sample is a batch of renderToString calls sized to about 25 ms; a round reports the median sample. Cold start is 25 fresh contexts per lane: evaluating the already-downloaded package and rendering the chat document once. Every lane must produce byte-identical HTML for every document before anything is timed.",
+  "lanes": {
+    "original-browser": {
+      "side": "original",
+      "pair": "browser",
+      "module": "./original-browser.mjs",
+      "plugins": "./plugins-original.mjs"
+    },
+    "lil-browser": {
+      "side": "lilscript",
+      "pair": "browser",
+      "module": "./lil-browser.mjs",
+      "plugins": "./plugins-lil.mjs"
+    },
+    "original-portable": {
+      "side": "original",
+      "pair": "portable",
+      "module": "./original-portable.mjs",
+      "plugins": "./plugins-original.mjs"
+    },
+    "lil-portable": {
+      "side": "lilscript",
+      "pair": "portable",
+      "module": "./lil-portable.mjs",
+      "plugins": "./plugins-lil.mjs"
+    }
+  },
+  "docs": {
+    "chat": {
+      "plugins": []
+    },
+    "readme": {
+      "plugins": []
+    },
+    "large": {
+      "plugins": []
+    },
+    "gfm": {
+      "plugins": [
+        "gfm"
+      ]
+    },
+    "math": {
+      "plugins": [
+        "gfm",
+        "math",
+        "katex"
+      ]
+    }
+  },
+  "steady": {
+    "original-browser": {
+      "chat": {
+        "median": 0.7750000009934107,
+        "min": 0.758333332836628,
+        "max": 0.8090909069234674,
+        "runs": 7
+      },
+      "readme": {
+        "median": 16.799999982118607,
+        "min": 16.5,
+        "max": 18,
+        "runs": 7
+      },
+      "large": {
+        "median": 186,
+        "min": 173.95000000298023,
+        "max": 195.25000001490116,
+        "runs": 7
+      },
+      "gfm": {
+        "median": 15.75,
+        "min": 14.650000005960464,
+        "max": 16.400000005960464,
+        "runs": 7
+      },
+      "math": {
+        "median": 17,
+        "min": 16.650000005960464,
+        "max": 17.299999982118607,
+        "runs": 7
+      }
+    },
+    "lil-browser": {
+      "chat": {
+        "median": 0.6307692321447226,
+        "min": 0.6153846153846154,
+        "max": 0.7083333333333334,
+        "runs": 7
+      },
+      "readme": {
+        "median": 15.100000023841858,
+        "min": 14.599999994039536,
+        "max": 17.099999994039536,
+        "runs": 7
+      },
+      "large": {
+        "median": 151.19999998807907,
+        "min": 149.5,
+        "max": 168.75,
+        "runs": 7
+      },
+      "gfm": {
+        "median": 13.650000005960464,
+        "min": 13,
+        "max": 14.099999994039536,
+        "runs": 7
+      },
+      "math": {
+        "median": 12.774999998509884,
+        "min": 12.649999991059303,
+        "max": 13.099999994039536,
+        "runs": 7
+      }
+    },
+    "original-portable": {
+      "chat": {
+        "median": 0.7583333340783913,
+        "min": 0.75,
+        "max": 0.7833333338300387,
+        "runs": 7
+      },
+      "readme": {
+        "median": 17.5,
+        "min": 16.5,
+        "max": 18,
+        "runs": 7
+      },
+      "large": {
+        "median": 177.65000000596046,
+        "min": 174.30000001192093,
+        "max": 181.8500000089407,
+        "runs": 7
+      },
+      "gfm": {
+        "median": 15.700000002980232,
+        "min": 14.950000002980232,
+        "max": 16.149999991059303,
+        "runs": 7
+      },
+      "math": {
+        "median": 16.80000001192093,
+        "min": 16.599999994039536,
+        "max": 19.350000008940697,
+        "runs": 7
+      }
+    },
+    "lil-portable": {
+      "chat": {
+        "median": 0.6230769249109122,
+        "min": 0.607692308150805,
+        "max": 0.6708333330849806,
+        "runs": 7
+      },
+      "readme": {
+        "median": 15.049999997019768,
+        "min": 14.599999994039536,
+        "max": 18.099999994039536,
+        "runs": 7
+      },
+      "large": {
+        "median": 153.7999999821186,
+        "min": 150.19999998807907,
+        "max": 160.75,
+        "runs": 7
+      },
+      "gfm": {
+        "median": 13.25,
+        "min": 12.074999995529652,
+        "max": 13.549999997019768,
+        "runs": 7
+      },
+      "math": {
+        "median": 12.700000017881393,
+        "min": 12.62500000745058,
+        "max": 13.399999998509884,
+        "runs": 7
+      }
+    }
+  },
+  "cold": {
+    "original-browser": {
+      "importMs": {
+        "median": 10.5,
+        "min": 10.200000017881393,
+        "max": 11.900000005960464,
+        "runs": 25
+      },
+      "firstRenderMs": {
+        "median": 19.700000017881393,
+        "min": 19,
+        "max": 22.5,
+        "runs": 25
+      }
+    },
+    "lil-browser": {
+      "importMs": {
+        "median": 8.900000005960464,
+        "min": 8.699999988079071,
+        "max": 10.599999994039536,
+        "runs": 25
+      },
+      "firstRenderMs": {
+        "median": 20.5,
+        "min": 17.19999998807907,
+        "max": 23.200000017881393,
+        "runs": 25
+      }
+    },
+    "original-portable": {
+      "importMs": {
+        "median": 12.099999994039536,
+        "min": 11.699999988079071,
+        "max": 12.800000011920929,
+        "runs": 25
+      },
+      "firstRenderMs": {
+        "median": 19.299999982118607,
+        "min": 15.900000005960464,
+        "max": 20,
+        "runs": 25
+      }
+    },
+    "lil-portable": {
+      "importMs": {
+        "median": 10.699999988079071,
+        "min": 10.099999994039536,
+        "max": 12,
+        "runs": 25
+      },
+      "firstRenderMs": {
+        "median": 17.900000005960464,
+        "min": 16.5,
+        "max": 23.099999994039536,
+        "runs": 25
+      }
+    }
+  }
+}

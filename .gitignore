@@ -5,3 +5,7 @@ _site/
 *.tgz
 .tmp/
 dist/*.raw.js
+bench/.prof/
+bench/.tmp/
+bench/.run-all.log
+bench/.tmp/
