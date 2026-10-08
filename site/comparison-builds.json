@@ -1,0 +1,1119 @@
+{
+  "compiler": {
+    "baseRevision": "f7d29bd9",
+    "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+    "hasLocalSourceChanges": true
+  },
+  "machine": {
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logicalCpus": 8,
+    "memoryGiB": 15.6,
+    "os": "Linux-7.0.0-1014-azure-x86_64-with-glibc2.39",
+    "node": "v20.19.0"
+  },
+  "lilscript": [
+    {
+      "library": "react-markdownlil",
+      "objective": "raw",
+      "command": [
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/bin/lilscript",
+        "--config",
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/configs/react-markdownlil-raw.toml",
+        "--target",
+        "js-module",
+        "--mode",
+        "production",
+        "--jobs",
+        "1",
+        "--out-dir",
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/artifacts/react-markdownlil/raw",
+        "--explain",
+        "json",
+        "--cache",
+        "off",
+        "--logical-work",
+        "2000000000"
+      ],
+      "wallSeconds": 13.290119542001776,
+      "returncode": 0,
+      "compilerSha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "configSha256": "b6d32992131e1cc590125861f023475e00059a7f91df28c24836a03cecbd31a9",
+      "measuredAt": "2026-10-02T22:59:30.931420+00:00",
+      "outputSha256": "cf6ce41d5e1acc917df541be2f056aee4e5f78ae9c4454483dc863a166c0cb5d",
+      "raw": 109743
+    },
+    {
+      "library": "react-markdownlil",
+      "objective": "gzip",
+      "command": [
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/bin/lilscript",
+        "--config",
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/configs/react-markdownlil-gzip.toml",
+        "--target",
+        "js-module",
+        "--mode",
+        "production",
+        "--jobs",
+        "1",
+        "--out-dir",
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/artifacts/react-markdownlil/gzip",
+        "--explain",
+        "json",
+        "--cache",
+        "off",
+        "--logical-work",
+        "2000000000"
+      ],
+      "wallSeconds": 9.83312843800013,
+      "returncode": 0,
+      "compilerSha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "configSha256": "ef0c9d92acc114376397c676359a8760d7009513ddcddcbaa5da8136039833d9",
+      "measuredAt": "2026-10-02T22:51:50.213520+00:00",
+      "outputSha256": "4501141bce79bba372a28a2742c7d0a5866baa1b86eb7a6f4d97cb179e238c8d",
+      "raw": 108757
+    },
+    {
+      "library": "react-markdownlil",
+      "objective": "brotli",
+      "command": [
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/bin/lilscript",
+        "--config",
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/configs/react-markdownlil-brotli.toml",
+        "--target",
+        "js-module",
+        "--mode",
+        "production",
+        "--jobs",
+        "1",
+        "--out-dir",
+        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/artifacts/react-markdownlil/brotli",
+        "--explain",
+        "json",
+        "--cache",
+        "off",
+        "--logical-work",
+        "2000000000"
+      ],
+      "wallSeconds": 29.92224242299926,
+      "returncode": 0,
+      "compilerSha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "configSha256": "b535c680964344edbd42e1ea2d0c07d665df2541f4b21255ac0805612872e1db",
+      "measuredAt": "2026-10-02T22:52:20.149562+00:00",
+      "outputSha256": "1a7db894b5db4450fa63e850897c35d8e011f5f8eb48a4b0a22127122ba8e03c",
+      "raw": 108931
+    }
+  ],
+  "upstream": {
+    "name": "react-markdownlil",
+    "package": "react-markdown",
+    "version": "10.1.0",
+    "resolveDir": "/home/azureuser/react-markdownlil",
+    "output": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream/react-markdownlil",
+    "entry": "export {MarkdownAsync,MarkdownHooks,default,defaultUrlTransform} from \"react-markdown\";",
+    "external": [
+      "react/jsx-runtime",
+      "react"
+    ],
+    "sharedExports": [
+      "MarkdownAsync",
+      "MarkdownHooks",
+      "default",
+      "defaultUrlTransform"
+    ],
+    "excludedExports": [],
+    "additionalExports": [],
+    "resolution": {
+      "platform": "neutral",
+      "conditions": [
+        "production"
+      ],
+      "mainFields": [
+        "module",
+        "main"
+      ],
+      "target": "es2020",
+      "defines": {
+        "process.env.NODE_ENV": "production"
+      }
+    },
+    "minifiers": [
+      {
+        "tool": "Terser",
+        "version": "5.51.2",
+        "esbuild": "0.28.1",
+        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream/react-markdownlil/terser.mjs",
+        "sha256": "1a6551f68f8b6c3e2cfcb9816af507ca5e6e80db0040f9e001453b9679593a12",
+        "raw": 145510,
+        "imports": [
+          {
+            "path": "react/jsx-runtime",
+            "kind": "import-statement",
+            "external": true
+          },
+          {
+            "path": "react",
+            "kind": "import-statement",
+            "external": true
+          }
+        ],
+        "wallSeconds": 1.606491036999998,
+        "command": [
+          "/home/azureuser/.nvm/versions/node/v20.19.0/bin/node",
+          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream.mjs",
+          "child",
+          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream/react-markdownlil/job.json",
+          "Terser"
+        ]
+      },
+      {
+        "tool": "esbuild",
+        "version": "0.28.1",
+        "esbuild": "0.28.1",
+        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream/react-markdownlil/esbuild.mjs",
+        "sha256": "4cf9b8de5b71a2101ba8e5a8ab186eccbb20e9ea5894b649a9b13f71dfe31319",
+        "raw": 155000,
+        "imports": [
+          {
+            "path": "react/jsx-runtime",
+            "kind": "import-statement",
+            "external": true
+          },
+          {
+            "path": "react",
+            "kind": "import-statement",
+            "external": true
+          }
+        ],
+        "wallSeconds": 0.10890855600000214,
+        "command": [
+          "/home/azureuser/.nvm/versions/node/v20.19.0/bin/node",
+          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream.mjs",
+          "child",
+          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream/react-markdownlil/job.json",
+          "esbuild"
+        ]
+      },
+      {
+        "tool": "Oxc",
+        "version": "via Vite 8.2.1",
+        "esbuild": "0.28.1",
+        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream/react-markdownlil/oxc.mjs",
+        "sha256": "71ad30c6cfd49d92aeee4d4e746396f8e93903231445c4cc69cef7de241ff478",
+        "raw": 145617,
+        "imports": [
+          {
+            "path": "react/jsx-runtime",
+            "kind": "import-statement",
+            "external": true
+          },
+          {
+            "path": "react",
+            "kind": "import-statement",
+            "external": true
+          }
+        ],
+        "wallSeconds": 0.22274940399999832,
+        "command": [
+          "/home/azureuser/.nvm/versions/node/v20.19.0/bin/node",
+          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream.mjs",
+          "child",
+          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-pages/upstream/react-markdownlil/job.json",
+          "Oxc"
+        ]
+      }
+    ]
+  },
+  "sourceInputs": {
+    "root": 0,
+    "entries": [
+      {
+        "name": "index",
+        "module": 0
+      }
+    ],
+    "modules": [
+      {
+        "path": "/home/azureuser/react-markdownlil/src/index.lil",
+        "bytes": 417,
+        "sha256": "01911e7b3868caa0ede6418bfb5171db4709ddf552fbae33907e7f0fbbbba29c",
+        "dependencies": [
+          1,
+          2,
+          3
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/react.lil",
+        "bytes": 349,
+        "sha256": "3e0c040b099922525ca1e83f6e8ba26df80f683bf68dd4c0466760a8273c1719",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/lib/index.lil",
+        "bytes": 9101,
+        "sha256": "ac765363f8e27d809e0fdc2234f21cd83b7c46b696ec040c987b9b8e42f197f0",
+        "dependencies": [
+          1,
+          3,
+          4,
+          5,
+          11,
+          70,
+          73,
+          78,
+          79,
+          77
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/host.lil",
+        "bytes": 631,
+        "sha256": "f3f32a2cf4c11b6338585b13ed6925ead9c02da347427b5423ffd317fdf4a564",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/devlop.lil",
+        "bytes": 537,
+        "sha256": "5b84663ecd183b1de6faa9b1698bf7fe317df9f43b6f1c1f9b536c2ed39afd5b",
+        "dependencies": [
+          3
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/unified/entry.lil",
+        "bytes": 12498,
+        "sha256": "baa802c68e7c54ef57c3023187f6a52ef16c186a234314010f4b18f71b263782",
+        "dependencies": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/unified/host.lil",
+        "bytes": 2208,
+        "sha256": "2d58906ffe8a4c8952e0eb832945fb27d258cff702f227de4b9579d6542cd540",
+        "dependencies": [
+          3
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/unified/plain.lil",
+        "bytes": 1307,
+        "sha256": "8a52a7e342eebf815c188da089eba5acaad37b604d13111a471f7437ed1d4249",
+        "dependencies": [
+          6
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/unified/extend.lil",
+        "bytes": 1592,
+        "sha256": "4055d2d1d1a84eb61b897c2f6d706c2c17d283df4d520a0620d18b753f340b12",
+        "dependencies": [
+          6,
+          7
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/unified/trough.lil",
+        "bytes": 3312,
+        "sha256": "9759f1e87e4d67fcd65b85963c2cbb6b5b206ac0212d4045bfb2c04125067eff",
+        "dependencies": [
+          6
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/unified/vfile.lil",
+        "bytes": 19095,
+        "sha256": "044d55ffc6d6d3506521dfb940667253cd6393add8f77ed689aac98e42271195",
+        "dependencies": [
+          6
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/entry.lil",
+        "bytes": 922,
+        "sha256": "b9fd3fe9132173c317426f247b2b1b64a29bbb90a0748e8af7002f700b75e5e2",
+        "dependencies": [
+          12,
+          13
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/from-markdown.lil",
+        "bytes": 23031,
+        "sha256": "78894f1bafbd7b1717b28b6f4ffa140cca0fcec02c92e7b6951a5c33ca551bae",
+        "dependencies": [
+          13,
+          14,
+          64,
+          65,
+          66,
+          67,
+          50,
+          39,
+          25,
+          68,
+          69
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/host.lil",
+        "bytes": 9500,
+        "sha256": "ba98ab9f1dc8d9dc1bed4fb4278280da8b4e3724276594f59b4a4fd29efc849e",
+        "dependencies": [
+          3
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/parse.lil",
+        "bytes": 1180,
+        "sha256": "b036c2932912ef350c629c126601292bda49caab2a0152d77988dcb979481d83",
+        "dependencies": [
+          15,
+          17,
+          20,
+          22,
+          23,
+          30,
+          31
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-combine-extensions.lil",
+        "bytes": 1615,
+        "sha256": "45dda94d1f191795642dac1e553985170a046717ad685685a9c61453a1768cfd",
+        "dependencies": [
+          13,
+          16
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-chunked.lil",
+        "bytes": 1226,
+        "sha256": "da747a8e78fa84b0a467616f68d83384737e53ad1b016e83f9fb803d2edf8e54",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/create-tokenizer.lil",
+        "bytes": 11638,
+        "sha256": "d587bd8a701c469fb05407a1b988231862430bc2d1cbaa0198218a705d41e690",
+        "dependencies": [
+          13,
+          18,
+          16,
+          19
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-character.lil",
+        "bytes": 1611,
+        "sha256": "634af98913dfb47ab2fcdf6fd17e2b4733bc26608f78609e110ce0d33bdf4a15",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-resolve-all.lil",
+        "bytes": 432,
+        "sha256": "d7df6ed1af3b6b922a3f3150f0fc8f94cf4f38852f32819513c56a5a0c546a74",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/initialize/content.lil",
+        "bytes": 1869,
+        "sha256": "3f4959b21c63be2570bbc74960af330e4b6a9646fbb348cef55300baabff2d45",
+        "dependencies": [
+          13,
+          21,
+          18
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/factory-space.lil",
+        "bytes": 903,
+        "sha256": "a5932f5e1b06d6517cdc43a5b0a12cfc9a6b875e94d9c937213f5192fb3b50ba",
+        "dependencies": [
+          18
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/initialize/document.lil",
+        "bytes": 8336,
+        "sha256": "d74de0315b97b124e43f302f64eb4cfd2cc1466dafd00639d20b818a84958856",
+        "dependencies": [
+          13,
+          21,
+          18,
+          16
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/initialize/flow.lil",
+        "bytes": 1333,
+        "sha256": "4ed3a38963b8557e3d1cf818ad7ba0f9bcd3f90c2268f91962891ec3fb14f1e7",
+        "dependencies": [
+          13,
+          21,
+          24,
+          26
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/blank-line.lil",
+        "bytes": 855,
+        "sha256": "115d2dcacdf715b02efce52caac3960d5b855939a68dc0a20817491e8b1194b0",
+        "dependencies": [
+          21,
+          18,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/symbol/types.lil",
+        "bytes": 10985,
+        "sha256": "6ae172165319ad71396ca532ec544326d82d9625f8ee46090d02a587e40c1aa8",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/content.lil",
+        "bytes": 3353,
+        "sha256": "05cc704bd51c0eaf8b9740bd243bbd92842e77a0c6d0372834c76d42ca6a7620",
+        "dependencies": [
+          21,
+          18,
+          27,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-subtokenize.lil",
+        "bytes": 6388,
+        "sha256": "2b22576838b22844e1b6d793a4ee542deb73a396ae594b53ce1d9550ff0fe69a",
+        "dependencies": [
+          13,
+          16,
+          28
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/splice-buffer.lil",
+        "bytes": 4341,
+        "sha256": "9fcce40f739a2119a7bb0b44ad7ec6c69344173854feedef3e528d168102f512",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/symbol/constants.lil",
+        "bytes": 2986,
+        "sha256": "c89476d798ffe1eb1f9843219c41cd1d19849707ceb9fc18d5583b5ae2470188",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/initialize/text.lil",
+        "bytes": 5354,
+        "sha256": "85651ec8148ff18619ca4e46f5e5e4ea5c810c537b6e69d807fc824e4a1f1905",
+        "dependencies": [
+          13
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/constructs.lil",
+        "bytes": 2829,
+        "sha256": "74cb525c1651cc300f78f4770c648d3593c4e2dc3f4a45351e459b29be14d84a",
+        "dependencies": [
+          32,
+          35,
+          36,
+          37,
+          38,
+          42,
+          43,
+          44,
+          45,
+          52,
+          53,
+          54,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          63,
+          62,
+          30
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/attention.lil",
+        "bytes": 6546,
+        "sha256": "35d47c10695c713c471cc468088ac8cf975ce0d48e7dff237d951112a09f5632",
+        "dependencies": [
+          16,
+          33,
+          19,
+          34,
+          29,
+          25,
+          13
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-classify-character.lil",
+        "bytes": 574,
+        "sha256": "80373b35201103ddfd5b5a942d97e1ab492fee40858c395d9e9113d2255d4477",
+        "dependencies": [
+          18,
+          29
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/symbol/codes.lil",
+        "bytes": 6185,
+        "sha256": "762a3e62e1500ba78d71f8218fcb2e7e357ea3795d21bb5e81b8d4287f513c19",
+        "dependencies": [
+          13
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/autolink.lil",
+        "bytes": 4541,
+        "sha256": "97e7eb8b4b33f23df8600b7d811b5cfbbb8df23bfc01dfa25fb528a085d55703",
+        "dependencies": [
+          18,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/block-quote.lil",
+        "bytes": 2637,
+        "sha256": "eae45318d2972f4be0fd616cb243d59dd366cb61209b13796d651cfc8297ab49",
+        "dependencies": [
+          21,
+          18,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/character-escape.lil",
+        "bytes": 1021,
+        "sha256": "20193c0809adfe18e77d04a7a782ad437d912f3de997a402930af8e46031c6ab",
+        "dependencies": [
+          18,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/character-reference.lil",
+        "bytes": 3258,
+        "sha256": "b355201b60833cf854ca7328b4cd1a9d405ae491b4d1b5a70178313c8c16c71a",
+        "dependencies": [
+          39,
+          18,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/decode-named.lil",
+        "bytes": 413,
+        "sha256": "659ecad35175a328c51b0022014c4c4d78fcafcbff9e89d3bd03c0a77c0d967f",
+        "dependencies": [
+          40,
+          41,
+          13
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/browser/decode-named.lil",
+        "bytes": 1292,
+        "sha256": "fa8c0cdaf1a6e4e4f1d371c71049b6cd6de293cf1088b52b52d10e09a7882e8e",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/character-entities.lil",
+        "bytes": 37271,
+        "sha256": "c8b6618cbfd0fdf86d5c36b8a4ed1e4ee141a25088251142a20fe599fca210b3",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/code-fenced.lil",
+        "bytes": 9309,
+        "sha256": "3f4bb3f8b531e3729291c8dcdeab6d6a8e6fc2449eafac161d818f2ddbb27a1e",
+        "dependencies": [
+          21,
+          18,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/code-indented.lil",
+        "bytes": 3348,
+        "sha256": "fb8705076d7529695e7da77e235cd90de1af56c92b7ec746de3af9499a2f8be8",
+        "dependencies": [
+          21,
+          18,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/code-text.lil",
+        "bytes": 4856,
+        "sha256": "d35e0cdd7e33ae98579152b3114a826ff43fe69b3802b9e9db7c58fae8ee4388",
+        "dependencies": [
+          18,
+          34,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/definition.lil",
+        "bytes": 4776,
+        "sha256": "38becb049d8509a9239480090acf683d90d24ad4ef4e8b35f14e92c326788011",
+        "dependencies": [
+          46,
+          47,
+          21,
+          48,
+          49,
+          18,
+          50,
+          34,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/factory-destination.lil",
+        "bytes": 4413,
+        "sha256": "5be6c3c02bacd604c1501b85b6785602ed8b447a85679f85e6ee7351964bb161",
+        "dependencies": [
+          18,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/factory-label.lil",
+        "bytes": 2994,
+        "sha256": "6376115906bbfbce66d13f0a50ff3b921922135b18b6e66d290eb0b54221f21d",
+        "dependencies": [
+          18,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/factory-title.lil",
+        "bytes": 2913,
+        "sha256": "f22c5e3e9919b86b7f2e0cc8b38f6cc1182e88917c9f3fcb61cbdba56404a07c",
+        "dependencies": [
+          21,
+          18,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/factory-whitespace.lil",
+        "bytes": 841,
+        "sha256": "e63b322526936f7e746978a4a3e6d56b315dcd01bde6732cf9d94bfb93845d36",
+        "dependencies": [
+          21,
+          18,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-normalize-identifier.lil",
+        "bytes": 348,
+        "sha256": "9c605bcd8454ea59378864ba8abfb67315008fbdea73f96e9fb09e76594fe20e",
+        "dependencies": [
+          51
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/symbol/values.lil",
+        "bytes": 3599,
+        "sha256": "1aabedd9c760c573fd1ea24d07ae9d35d207bbe61a0ecc62985f0953fc73c3e9",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/hard-break-escape.lil",
+        "bytes": 763,
+        "sha256": "92b8a9e28270f61184e6572a8e0640c33f7fbd163c24dde1255d7211e7ca0b2a",
+        "dependencies": [
+          18,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/heading-atx.lil",
+        "bytes": 4166,
+        "sha256": "9d2fd673aab15d904d2b876aa66e7c92ac30c14f8b838ea34b58d4af0f9d269c",
+        "dependencies": [
+          21,
+          18,
+          16,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/html-flow.lil",
+        "bytes": 16559,
+        "sha256": "ba2daf14d7cd5c29ab123ce10374c26fb784770eebf8348ce73bb5a58c3a67ef",
+        "dependencies": [
+          18,
+          55,
+          34,
+          34,
+          29,
+          25,
+          24
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-html-tag-name.lil",
+        "bytes": 475,
+        "sha256": "db2a6d54b5cbdbc8273a776f7b609fb2ed9b90f87242c1d26801ef11771b0380",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/html-text.lil",
+        "bytes": 12529,
+        "sha256": "1e386a681a07b86327fc72dd7735683e86367f0a183a817976a302c0b3da26fa",
+        "dependencies": [
+          21,
+          18,
+          34,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/label-end.lil",
+        "bytes": 11956,
+        "sha256": "4192d0a356f2953a56f695f038c3920ab20305956b310d7061b4cd8bc5274f1d",
+        "dependencies": [
+          46,
+          47,
+          48,
+          49,
+          18,
+          16,
+          50,
+          19,
+          34,
+          29,
+          25,
+          13
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/label-start-image.lil",
+        "bytes": 1387,
+        "sha256": "e4a9ba23857880369a5b7912a5316c41173094574b6b5b6721447a399a7e7673",
+        "dependencies": [
+          34,
+          25,
+          57
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/label-start-link.lil",
+        "bytes": 1006,
+        "sha256": "e350229f5af2055c3a065af25bacaa22765e13f1fb9c137df624cfac1b89d002",
+        "dependencies": [
+          34,
+          25,
+          57
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/line-ending.lil",
+        "bytes": 577,
+        "sha256": "a448ed6a6485a776f3e67941bebef001cdbe486f23bdfd4664842178973d39be",
+        "dependencies": [
+          21,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/list.lil",
+        "bytes": 8247,
+        "sha256": "3a8e976a8a6ccdc8330f26561caa457040ecf0c2d86773551abc505180ef4119",
+        "dependencies": [
+          21,
+          18,
+          34,
+          29,
+          25,
+          24,
+          62
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/thematic-break.lil",
+        "bytes": 1755,
+        "sha256": "5776bda5a2850218bd3c4c9fdc796d46c8979b2deac17c7e19376c6816a54313",
+        "dependencies": [
+          21,
+          18,
+          29,
+          25
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/core/setext-underline.lil",
+        "bytes": 3858,
+        "sha256": "4e4ca3c5448dd4955789148a6f77ee089c20d55702db91657a92f0641bc6752b",
+        "dependencies": [
+          21,
+          18,
+          25,
+          13
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/postprocess.lil",
+        "bytes": 156,
+        "sha256": "0ea578b00bed09960e8f9c2d06f962b9e626fec4a528beaba4be30f2c5c50b31",
+        "dependencies": [
+          27
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/preprocess.lil",
+        "bytes": 2259,
+        "sha256": "ce28b92f70b3bd54428324b0f6695ca162aa5df1d2e0f431fde1f8ef4638e9b8",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-decode-numeric.lil",
+        "bytes": 563,
+        "sha256": "03d27ae0446af7f4aa870de13c4c41b65bf53f7a12731c8ee96694f34f95f4fc",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/micromark/util-decode-string.lil",
+        "bytes": 946,
+        "sha256": "df8465926f8b05577467dfc4fb4ed42f28b71574e541002cfc2395275c5fc907",
+        "dependencies": [
+          39,
+          66
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/stringify-position.lil",
+        "bytes": 556,
+        "sha256": "4a625ab59ab7059b489f26d9089f6f69530cb5a56044eaf1ad71f4de8d1b0663",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-parse/to-string.lil",
+        "bytes": 719,
+        "sha256": "d1d84463da85bc5a419f8755e502fcfa8a26c60e2dddd6c737e7b2c9d9884a93",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-rehype/entry.lil",
+        "bytes": 2110,
+        "sha256": "f1148b4e518295f6716ddd5016ed7dca1b5f8d57f94abe3a2833eff31b46c6e9",
+        "dependencies": [
+          71,
+          72,
+          3
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-rehype/hast/convert.lil",
+        "bytes": 31139,
+        "sha256": "74927a0f56b910d012112d12baed5fe6d0b7872f9b07564e27695a83a65dd004",
+        "dependencies": [
+          72,
+          3
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/graph/remark-rehype/hast/types.lil",
+        "bytes": 10252,
+        "sha256": "3665faa603c8afc4f9b50dffc6364984b1a78b7a888f1b4b5080ebbc1616c513",
+        "dependencies": [
+          3
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/hast-util-to-jsx-runtime/lib/index.lil",
+        "bytes": 8850,
+        "sha256": "217afa8052890784c3c19710864ccfdcf85951de5417174305e7a6d5bc804e99",
+        "dependencies": [
+          1,
+          3,
+          74,
+          76,
+          77
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/property-information/lib/find.lil",
+        "bytes": 5459,
+        "sha256": "7dee4cb41ca32f38d78b73a81a70130d43d81c617535d59cb72a2c4263de522b",
+        "dependencies": [
+          75
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/property-information/lib/schema-data.lil",
+        "bytes": 7025,
+        "sha256": "bf43212b8e7c59649b8e058650d7b0a1b9a890e8d0a036e7c20b307617dc5f01",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/style-to-js/index.lil",
+        "bytes": 2963,
+        "sha256": "1ae3eb885ccaf2d09f6e2ea6c7bba3fbbe38395e7a476c94d445250040a64168",
+        "dependencies": [
+          74
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/vfile/lib/index.lil",
+        "bytes": 114,
+        "sha256": "a709bb8ccbc323a2201c1984002a677e95a03d11d6944d5861569548cc34f6f3",
+        "dependencies": [
+          10
+        ],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/urls.lil",
+        "bytes": 558,
+        "sha256": "66ed99cbc5ca518ede253ff66d4343fbf7f788db2ecc2bb9e60411dec69999df",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      },
+      {
+        "path": "/home/azureuser/react-markdownlil/src/unist-util-visit/lib/index.lil",
+        "bytes": 894,
+        "sha256": "364ca7f55efe9c1b523065beb47eeb02fa6e57d7306fd6db1e880ebc95c574ae",
+        "dependencies": [],
+        "dynamic_dependencies": []
+      }
+    ],
+    "host_modules": [],
+    "host_reserved": []
+  },
+  "validation": {
+    "checks": 2895,
+    "objectives": [
+      {
+        "objective": "raw",
+        "checks": 965,
+        "suite": "differential"
+      },
+      {
+        "objective": "gzip",
+        "checks": 965,
+        "suite": "differential"
+      },
+      {
+        "objective": "brotli",
+        "checks": 965,
+        "suite": "differential"
+      }
+    ],
+    "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+  },
+  "workLimit": 2000000000,
+  "timingScope": "One sequential fresh-output build per objective/minifier. Upstream timing is ESM bundling and minification, not original-repository source compilation."
+}

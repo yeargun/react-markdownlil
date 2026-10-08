@@ -1,1 +1,214 @@
-{"pin":"remark-breaks@4.0.0","package":"@itslil/remark-breaks","file":"remark-breaks","lilExport":"default","officialExport":"default","node":"v22.21.1","codec":"lilscript-codec gzip-9 / brotli-11","runtime":"Node v22.21.1","warmupDiscard":3,"comparison":"Official rows are an esbuild bundle of remark-breaks@4.0.0 plus its runtime graph, then Terser or esbuild. LilScript is the compiled npm file. Closed is extern_fields=false.","spec":{"total":20,"pass":20,"label":"tests passing"},"play":{"kind":"md-plugin","sample":"line\nwith a break","samples":[{"label":"softbreak","value":"line\nwith a break"}]},"size":[{"id":"official","name":"Official remark-breaks@4.0.0 graph","raw":8981,"gzip9":2647,"brotli11":2335,"note":"esbuild bundle of the published package plus runtime deps","diagnostic":false},{"id":"official-terser-mangle","name":"Official · Terser mangle on","raw":2988,"gzip9":1284,"brotli11":1173,"note":"Terser compress of that graph, mangle: true","baseline":true},{"id":"official-terser-nomangle","name":"Official · Terser mangle off","raw":4633,"gzip9":1627,"brotli11":1456,"note":"Terser compress of that graph, mangle: false"},{"id":"official-esbuild","name":"Official · esbuild minify","raw":3085,"gzip9":1375,"brotli11":1261,"note":"esbuild minify of that graph"},{"id":"itslil","name":"@itslil/remark-breaks · library","raw":2746,"gzip9":1261,"brotli11":1131,"note":"LilScript js-module, extern_fields true. The npm ESM.","primary":true},{"id":"itslil-closed","name":"@itslil/remark-breaks · closed","raw":3039,"gzip9":1386,"brotli11":1241,"note":"Same source, extern_fields false; diagnostic only"}],"throughput":[{"id":"official","name":"remark-breaks@4.0.0","documentMs":0.20466699999997218},{"id":"itslil","name":"@itslil/remark-breaks","documentMs":0.0946669999993901}]}
+{
+  "file": "remark-breaks",
+  "lilExport": "default",
+  "officialExport": "default",
+  "play": {
+    "kind": "md-plugin",
+    "sample": "line\nwith a break",
+    "samples": [
+      {
+        "label": "softbreak",
+        "value": "line\nwith a break"
+      }
+    ]
+  },
+  "package": "@itslil/remark-breaks",
+  "pin": "remark-breaks@4.0.0",
+  "objectiveComparison": {
+    "schemaVersion": 4,
+    "name": "remark-breakslil",
+    "package": "@itslil/remark-breaks",
+    "measuredAt": "2026-10-03T02:05:48.660082+03:00",
+    "compiler": {
+      "baseRevision": "f7d29bd9",
+      "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "hasLocalSourceChanges": true
+    },
+    "upstream": {
+      "package": "remark-breaks",
+      "version": "4.0.0",
+      "external": [],
+      "sharedExports": [
+        "default"
+      ],
+      "excludedExports": [],
+      "additionalExports": [],
+      "resolution": {
+        "platform": "neutral",
+        "conditions": [
+          "production"
+        ],
+        "mainFields": [
+          "module",
+          "main"
+        ],
+        "target": "es2020",
+        "defines": {
+          "process.env.NODE_ENV": "production"
+        }
+      }
+    },
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "machine": {
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "logicalCpus": 8,
+      "memoryGiB": 15.6,
+      "os": "Linux-7.0.0-1014-azure-x86_64-with-glibc2.39",
+      "node": "v20.19.0"
+    },
+    "objectives": [
+      {
+        "objective": "raw",
+        "metric": "raw",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/lilscript-raw.mjs",
+          "sizes": {
+            "raw": 2566,
+            "gzip9": 1245,
+            "brotli11": 1127
+          },
+          "sha256": "25f8a8db84b955ca3242eee15a9decf62bd51d8d9380da45c6ce33bbc9502881",
+          "buildSeconds": 3.0203019350010436,
+          "config": "./comparison-artifacts/lilscript-raw.toml",
+          "configSha256": "a18bc2879bb24e9260cf3b0782466a29770df6f37d70cb8514c40251b2f8da9a"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 2988,
+            "gzip9": 1284,
+            "brotli11": 1173
+          },
+          "sha256": "d3f71fe7392cc6572bd62ce5b72b24d8acc0297f06eb195e53b72145c11bb13f",
+          "buildSeconds": 0.21148787999999877
+        },
+        "ratio": 0.8587684069611781
+      },
+      {
+        "objective": "gzip",
+        "metric": "gzip9",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/lilscript-gzip.mjs",
+          "sizes": {
+            "raw": 2695,
+            "gzip9": 1186,
+            "brotli11": 1080
+          },
+          "sha256": "a3a86c131a070044bffd9d01cc6344cf31e8f0925598657b41466f28e5cf5102",
+          "buildSeconds": 8.784742130002996,
+          "config": "./comparison-artifacts/lilscript-gzip.toml",
+          "configSha256": "3b99bad2d5e415a3096527a2f51d8327076f186a0669de9449a83f49562d3b5f"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 2988,
+            "gzip9": 1284,
+            "brotli11": 1173
+          },
+          "sha256": "d3f71fe7392cc6572bd62ce5b72b24d8acc0297f06eb195e53b72145c11bb13f",
+          "buildSeconds": 0.21148787999999877
+        },
+        "ratio": 0.9236760124610592
+      },
+      {
+        "objective": "brotli",
+        "metric": "brotli11",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/lilscript-brotli.mjs",
+          "sizes": {
+            "raw": 2711,
+            "gzip9": 1202,
+            "brotli11": 1067
+          },
+          "sha256": "cb8080c2d484f23bc720ecfd52246f7aaa7e5de58a56a04f1114bb628b1a7e8f",
+          "buildSeconds": 12.388806432998535,
+          "config": "./comparison-artifacts/lilscript-brotli.toml",
+          "configSha256": "fd6c092ab594398b8cd54e17dff4887aefef2d20d6c33796773f5954f98f2b5f"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 2988,
+            "gzip9": 1284,
+            "brotli11": 1173
+          },
+          "sha256": "d3f71fe7392cc6572bd62ce5b72b24d8acc0297f06eb195e53b72145c11bb13f",
+          "buildSeconds": 0.21148787999999877
+        },
+        "ratio": 0.9096334185848253
+      }
+    ],
+    "minifiers": [
+      {
+        "tool": "Terser",
+        "version": "5.51.2",
+        "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/original-terser.mjs",
+        "sizes": {
+          "raw": 2988,
+          "gzip9": 1284,
+          "brotli11": 1173
+        },
+        "sha256": "d3f71fe7392cc6572bd62ce5b72b24d8acc0297f06eb195e53b72145c11bb13f",
+        "buildSeconds": 0.21148787999999877
+      },
+      {
+        "tool": "esbuild",
+        "version": "0.28.1",
+        "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/original-esbuild.mjs",
+        "sizes": {
+          "raw": 3085,
+          "gzip9": 1375,
+          "brotli11": 1261
+        },
+        "sha256": "3bf868388e6b0220bccef6b259384c6a2a55459afa10a7e860f09aa38a741d7b",
+        "buildSeconds": 0.059081632999999786
+      },
+      {
+        "tool": "Oxc",
+        "version": "via Vite 8.2.1",
+        "artifact": "https://yeargun.github.io/remark-breakslil/comparison-artifacts/original-oxc.mjs",
+        "sizes": {
+          "raw": 3004,
+          "gzip9": 1307,
+          "brotli11": 1200
+        },
+        "sha256": "a9c979c6d6d064c36798414ab0b552f1318fd19fbf13d192c2072b9a9a2f33d6",
+        "buildSeconds": 0.17395871100000113
+      }
+    ],
+    "validation": {
+      "checks": 42,
+      "objectives": [
+        {
+          "objective": "raw",
+          "checks": 14,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "gzip",
+          "checks": 14,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "brotli",
+          "checks": 14,
+          "suite": "upstream-derived/API"
+        }
+      ],
+      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+    },
+    "linksBase": "https://yeargun.github.io/remark-breakslil/"
+  },
+  "spec": {
+    "pass": 42,
+    "total": 42,
+    "label": "current main-entry checks"
+  }
+}

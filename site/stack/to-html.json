@@ -1,1 +1,208 @@
-{"pin":"hast-util-to-html@9.0.5","package":"@itslil/hast-util-to-html","file":"to-html","lilExport":"toHtml","officialExport":"toHtml","node":"v22.21.1","codec":"lilscript-codec gzip-9 / brotli-11","runtime":"Node v22.21.1","warmupDiscard":3,"comparison":"Official rows are an esbuild bundle of hast-util-to-html@9.0.5 plus its runtime graph, then Terser or esbuild. LilScript is the compiled npm file. Closed is extern_fields=false.","spec":{"total":455,"pass":455,"label":"official and package suites"},"play":{"kind":"json-html","sample":"{\n  \"type\": \"root\",\n  \"children\": [\n    {\n      \"type\": \"element\",\n      \"tagName\": \"h1\",\n      \"properties\": {},\n      \"children\": [\n        {\n          \"type\": \"text\",\n          \"value\": \"hast\"\n        }\n      ]\n    }\n  ]\n}"},"size":[{"id":"official","name":"Official hast-util-to-html@9.0.5 graph","raw":58318,"gzip9":14569,"brotli11":12817,"note":"esbuild bundle of the published package plus runtime deps","diagnostic":false},{"id":"official-terser-mangle","name":"Official · Terser mangle on","raw":31835,"gzip9":11221,"brotli11":9833,"note":"Terser compress of that graph, mangle: true","baseline":true},{"id":"official-terser-nomangle","name":"Official · Terser mangle off","raw":39665,"gzip9":12304,"brotli11":10796,"note":"Terser compress of that graph, mangle: false"},{"id":"official-esbuild","name":"Official · esbuild minify","raw":32747,"gzip9":11217,"brotli11":10008,"note":"esbuild minify of that graph"},{"id":"itslil","name":"@itslil/hast-util-to-html · library","raw":30291,"gzip9":10082,"brotli11":8825,"note":"LilScript js-module, extern_fields true. The npm ESM.","primary":true},{"id":"itslil-closed","name":"@itslil/hast-util-to-html · closed","raw":29875,"gzip9":9914,"brotli11":8664,"note":"Same source, extern_fields false; diagnostic only"}],"throughput":[{"id":"official","name":"hast-util-to-html@9.0.5","documentMs":0.04966699999931734},{"id":"itslil","name":"@itslil/hast-util-to-html","documentMs":0.01912499999980355}]}
+{
+  "file": "to-html",
+  "lilExport": "toHtml",
+  "officialExport": "toHtml",
+  "play": {
+    "kind": "json-html",
+    "sample": "{\n  \"type\": \"root\",\n  \"children\": [\n    {\n      \"type\": \"element\",\n      \"tagName\": \"h1\",\n      \"properties\": {},\n      \"children\": [\n        {\n          \"type\": \"text\",\n          \"value\": \"hast\"\n        }\n      ]\n    }\n  ]\n}"
+  },
+  "package": "@itslil/hast-util-to-html",
+  "pin": "hast-util-to-html@9.0.5",
+  "objectiveComparison": {
+    "schemaVersion": 4,
+    "name": "hast-util-to-htmllil",
+    "package": "@itslil/hast-util-to-html",
+    "measuredAt": "2026-10-03T02:05:48.582342+03:00",
+    "compiler": {
+      "baseRevision": "f7d29bd9",
+      "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "hasLocalSourceChanges": true
+    },
+    "upstream": {
+      "package": "hast-util-to-html",
+      "version": "9.0.5",
+      "external": [],
+      "sharedExports": [
+        "toHtml"
+      ],
+      "excludedExports": [],
+      "additionalExports": [],
+      "resolution": {
+        "platform": "neutral",
+        "conditions": [
+          "production"
+        ],
+        "mainFields": [
+          "module",
+          "main"
+        ],
+        "target": "es2020",
+        "defines": {
+          "process.env.NODE_ENV": "production"
+        }
+      }
+    },
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "machine": {
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "logicalCpus": 8,
+      "memoryGiB": 15.6,
+      "os": "Linux-7.0.0-1014-azure-x86_64-with-glibc2.39",
+      "node": "v20.19.0"
+    },
+    "objectives": [
+      {
+        "objective": "raw",
+        "metric": "raw",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/lilscript-raw.mjs",
+          "sizes": {
+            "raw": 28483,
+            "gzip9": 9563,
+            "brotli11": 8426
+          },
+          "sha256": "2e8670faab051703d9f7e1dfe94ae1644ea9ed6dac5f5ddb40f63a8fbd7c866e",
+          "buildSeconds": 14.340898262998962,
+          "config": "./comparison-artifacts/lilscript-raw.toml",
+          "configSha256": "70720000086e1ba481c77cb8ae05aa51444e17c3a33df4cb27e01717e738b742"
+        },
+        "original": {
+          "tool": "Oxc",
+          "version": "via Vite 8.2.1",
+          "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/original-oxc.mjs",
+          "sizes": {
+            "raw": 31627,
+            "gzip9": 11279,
+            "brotli11": 9936
+          },
+          "sha256": "da5023625032c214c8a3e0ff058cb8403de02fdcc9581e64afb88dc88a84de74",
+          "buildSeconds": 0.18287516800000048
+        },
+        "ratio": 0.9005912669554494
+      },
+      {
+        "objective": "gzip",
+        "metric": "gzip9",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/lilscript-gzip.mjs",
+          "sizes": {
+            "raw": 29071,
+            "gzip9": 9274,
+            "brotli11": 8250
+          },
+          "sha256": "7861f27e16751b12badc122c259c007c8ecaf62deee85d32e9fa2ffa7083defb",
+          "buildSeconds": 12.537916223998764,
+          "config": "./comparison-artifacts/lilscript-gzip.toml",
+          "configSha256": "98a82510d2208c09d32b14ab72b649ac43da673688891e73cd4858865394a94c"
+        },
+        "original": {
+          "tool": "esbuild",
+          "version": "0.28.1",
+          "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/original-esbuild.mjs",
+          "sizes": {
+            "raw": 32747,
+            "gzip9": 11217,
+            "brotli11": 10008
+          },
+          "sha256": "5e4cd7ddeafe4ea53d5a32a6bfa9bc74a398730bc412df5750c4693f802cdf3b",
+          "buildSeconds": 0.06875263300000006
+        },
+        "ratio": 0.8267807791744674
+      },
+      {
+        "objective": "brotli",
+        "metric": "brotli11",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/lilscript-brotli.mjs",
+          "sizes": {
+            "raw": 29062,
+            "gzip9": 9326,
+            "brotli11": 8235
+          },
+          "sha256": "385f2ec1ec828880a4646588ba06b10377d1473c1a72ae534cfcb1e66920a568",
+          "buildSeconds": 52.00934511300147,
+          "config": "./comparison-artifacts/lilscript-brotli.toml",
+          "configSha256": "b957a4b59f4ba14fadb428175fa192111113bf4ea02d067b06ef41137db49d7c"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 31835,
+            "gzip9": 11221,
+            "brotli11": 9833
+          },
+          "sha256": "2f8453e73dd7b8b773053bd39eeb82ee22b0137631825ab0f463622f75fde00d",
+          "buildSeconds": 0.43759797900000014
+        },
+        "ratio": 0.8374860164751348
+      }
+    ],
+    "minifiers": [
+      {
+        "tool": "Terser",
+        "version": "5.51.2",
+        "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/original-terser.mjs",
+        "sizes": {
+          "raw": 31835,
+          "gzip9": 11221,
+          "brotli11": 9833
+        },
+        "sha256": "2f8453e73dd7b8b773053bd39eeb82ee22b0137631825ab0f463622f75fde00d",
+        "buildSeconds": 0.43759797900000014
+      },
+      {
+        "tool": "esbuild",
+        "version": "0.28.1",
+        "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/original-esbuild.mjs",
+        "sizes": {
+          "raw": 32747,
+          "gzip9": 11217,
+          "brotli11": 10008
+        },
+        "sha256": "5e4cd7ddeafe4ea53d5a32a6bfa9bc74a398730bc412df5750c4693f802cdf3b",
+        "buildSeconds": 0.06875263300000006
+      },
+      {
+        "tool": "Oxc",
+        "version": "via Vite 8.2.1",
+        "artifact": "https://yeargun.github.io/hast-util-to-htmllil/comparison-artifacts/original-oxc.mjs",
+        "sizes": {
+          "raw": 31627,
+          "gzip9": 11279,
+          "brotli11": 9936
+        },
+        "sha256": "da5023625032c214c8a3e0ff058cb8403de02fdcc9581e64afb88dc88a84de74",
+        "buildSeconds": 0.18287516800000048
+      }
+    ],
+    "validation": {
+      "checks": 1143,
+      "objectives": [
+        {
+          "objective": "raw",
+          "checks": 381,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "gzip",
+          "checks": 381,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "brotli",
+          "checks": 381,
+          "suite": "upstream-derived/API"
+        }
+      ],
+      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+    },
+    "linksBase": "https://yeargun.github.io/hast-util-to-htmllil/"
+  },
+  "spec": {
+    "pass": 1143,
+    "total": 1143,
+    "label": "current main-entry checks"
+  }
+}

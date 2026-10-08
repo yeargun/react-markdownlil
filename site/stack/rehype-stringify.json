@@ -1,1 +1,208 @@
-{"pin":"rehype-stringify@10.0.1","package":"@itslil/rehype-stringify","file":"rehype-stringify","lilExport":"default","officialExport":"default","node":"v22.21.1","codec":"lilscript-codec gzip-9 / brotli-11","runtime":"Node v22.21.1","warmupDiscard":3,"comparison":"Official rows are an esbuild bundle of rehype-stringify@10.0.1 plus its runtime graph, then Terser or esbuild. LilScript is the compiled npm file. Closed is extern_fields=false.","spec":{"total":10,"pass":10,"label":"API and parity tests"},"play":{"kind":"json-html","sample":"{\n  \"type\": \"root\",\n  \"children\": [\n    {\n      \"type\": \"element\",\n      \"tagName\": \"h1\",\n      \"properties\": {},\n      \"children\": [\n        {\n          \"type\": \"text\",\n          \"value\": \"rehype-stringify\"\n        }\n      ]\n    }\n  ]\n}"},"size":[{"id":"official","name":"Official rehype-stringify@10.0.1 graph","raw":58600,"gzip9":14649,"brotli11":12904,"note":"esbuild bundle of the published package plus runtime deps","diagnostic":false},{"id":"official-terser-mangle","name":"Official · Terser mangle on","raw":31928,"gzip9":11255,"brotli11":9875,"note":"Terser compress of that graph, mangle: true","baseline":true},{"id":"official-terser-nomangle","name":"Official · Terser mangle off","raw":39818,"gzip9":12352,"brotli11":10833,"note":"Terser compress of that graph, mangle: false"},{"id":"official-esbuild","name":"Official · esbuild minify","raw":32850,"gzip9":11260,"brotli11":10073,"note":"esbuild minify of that graph"},{"id":"itslil","name":"@itslil/rehype-stringify · library","raw":30604,"gzip9":10388,"brotli11":9092,"note":"LilScript js-module, extern_fields true. The npm ESM.","primary":true},{"id":"itslil-closed","name":"@itslil/rehype-stringify · closed","raw":30179,"gzip9":10215,"brotli11":8932,"note":"Same source, extern_fields false; diagnostic only"}],"throughput":[{"id":"official","name":"rehype-stringify@10.0.1","documentMs":0.11058300000058807},{"id":"itslil","name":"@itslil/rehype-stringify","documentMs":0.04070899999987887}]}
+{
+  "file": "rehype-stringify",
+  "lilExport": "default",
+  "officialExport": "default",
+  "play": {
+    "kind": "json-html",
+    "sample": "{\n  \"type\": \"root\",\n  \"children\": [\n    {\n      \"type\": \"element\",\n      \"tagName\": \"h1\",\n      \"properties\": {},\n      \"children\": [\n        {\n          \"type\": \"text\",\n          \"value\": \"rehype-stringify\"\n        }\n      ]\n    }\n  ]\n}"
+  },
+  "package": "@itslil/rehype-stringify",
+  "pin": "rehype-stringify@10.0.1",
+  "objectiveComparison": {
+    "schemaVersion": 4,
+    "name": "rehype-stringifylil",
+    "package": "@itslil/rehype-stringify",
+    "measuredAt": "2026-10-03T02:05:48.595274+03:00",
+    "compiler": {
+      "baseRevision": "f7d29bd9",
+      "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "hasLocalSourceChanges": true
+    },
+    "upstream": {
+      "package": "rehype-stringify",
+      "version": "10.0.1",
+      "external": [],
+      "sharedExports": [
+        "default"
+      ],
+      "excludedExports": [],
+      "additionalExports": [],
+      "resolution": {
+        "platform": "neutral",
+        "conditions": [
+          "production"
+        ],
+        "mainFields": [
+          "module",
+          "main"
+        ],
+        "target": "es2020",
+        "defines": {
+          "process.env.NODE_ENV": "production"
+        }
+      }
+    },
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "machine": {
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "logicalCpus": 8,
+      "memoryGiB": 15.6,
+      "os": "Linux-7.0.0-1014-azure-x86_64-with-glibc2.39",
+      "node": "v20.19.0"
+    },
+    "objectives": [
+      {
+        "objective": "raw",
+        "metric": "raw",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/lilscript-raw.mjs",
+          "sizes": {
+            "raw": 28743,
+            "gzip9": 9694,
+            "brotli11": 8531
+          },
+          "sha256": "8eeb3773604989b704524ebec3adcf37b62bae8540a4a3c59a83559f583db348",
+          "buildSeconds": 14.591420001001097,
+          "config": "./comparison-artifacts/lilscript-raw.toml",
+          "configSha256": "e1651fff5f4d2cc2c3938bdc0bc973f5d11ff689806aebce68a4e9c791663bbd"
+        },
+        "original": {
+          "tool": "Oxc",
+          "version": "via Vite 8.2.1",
+          "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/original-oxc.mjs",
+          "sizes": {
+            "raw": 31728,
+            "gzip9": 11325,
+            "brotli11": 9944
+          },
+          "sha256": "c056c040456be69819527f322c38630bd25a04fcc1b8c145955880b88a579e38",
+          "buildSeconds": 0.18394483199999923
+        },
+        "ratio": 0.9059190620272315
+      },
+      {
+        "objective": "gzip",
+        "metric": "gzip9",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/lilscript-gzip.mjs",
+          "sizes": {
+            "raw": 29356,
+            "gzip9": 9396,
+            "brotli11": 8369
+          },
+          "sha256": "d13b74f0056cde53b20190054999cb6339716953c31e95bc6638cc50fb50727f",
+          "buildSeconds": 12.687207017999754,
+          "config": "./comparison-artifacts/lilscript-gzip.toml",
+          "configSha256": "c887a57b81e3b4faa6e4ee16fed3ca156631d6760615f5c966b3592d84dd2dc6"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 31928,
+            "gzip9": 11255,
+            "brotli11": 9875
+          },
+          "sha256": "cca2f60d6f4f35c3e1298a8fe380b777febe251242cc8305830df7177d1656ce",
+          "buildSeconds": 0.3911943399999991
+        },
+        "ratio": 0.8348289649044869
+      },
+      {
+        "objective": "brotli",
+        "metric": "brotli11",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/lilscript-brotli.mjs",
+          "sizes": {
+            "raw": 29538,
+            "gzip9": 9526,
+            "brotli11": 8433
+          },
+          "sha256": "278b5592b25ca531dfabe70f3d5d99c851ec68042c1651edce1c819fc83b6943",
+          "buildSeconds": 49.05504892599856,
+          "config": "./comparison-artifacts/lilscript-brotli.toml",
+          "configSha256": "64d414d587df4b1813d550afe9cdedb12c478b583f528c100e12d405236f8949"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 31928,
+            "gzip9": 11255,
+            "brotli11": 9875
+          },
+          "sha256": "cca2f60d6f4f35c3e1298a8fe380b777febe251242cc8305830df7177d1656ce",
+          "buildSeconds": 0.3911943399999991
+        },
+        "ratio": 0.8539746835443038
+      }
+    ],
+    "minifiers": [
+      {
+        "tool": "Terser",
+        "version": "5.51.2",
+        "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/original-terser.mjs",
+        "sizes": {
+          "raw": 31928,
+          "gzip9": 11255,
+          "brotli11": 9875
+        },
+        "sha256": "cca2f60d6f4f35c3e1298a8fe380b777febe251242cc8305830df7177d1656ce",
+        "buildSeconds": 0.3911943399999991
+      },
+      {
+        "tool": "esbuild",
+        "version": "0.28.1",
+        "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/original-esbuild.mjs",
+        "sizes": {
+          "raw": 32850,
+          "gzip9": 11260,
+          "brotli11": 10073
+        },
+        "sha256": "411d33a8830d938f56ca5df6526944f044fbf6540328cf05d250563129d32545",
+        "buildSeconds": 0.06770083200000045
+      },
+      {
+        "tool": "Oxc",
+        "version": "via Vite 8.2.1",
+        "artifact": "https://yeargun.github.io/rehype-stringifylil/comparison-artifacts/original-oxc.mjs",
+        "sizes": {
+          "raw": 31728,
+          "gzip9": 11325,
+          "brotli11": 9944
+        },
+        "sha256": "c056c040456be69819527f322c38630bd25a04fcc1b8c145955880b88a579e38",
+        "buildSeconds": 0.18394483199999923
+      }
+    ],
+    "validation": {
+      "checks": 24,
+      "objectives": [
+        {
+          "objective": "raw",
+          "checks": 8,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "gzip",
+          "checks": 8,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "brotli",
+          "checks": 8,
+          "suite": "upstream-derived/API"
+        }
+      ],
+      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+    },
+    "linksBase": "https://yeargun.github.io/rehype-stringifylil/"
+  },
+  "spec": {
+    "pass": 24,
+    "total": 24,
+    "label": "current main-entry checks"
+  }
+}

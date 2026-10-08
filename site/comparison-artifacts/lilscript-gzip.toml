@@ -1,14 +1,6 @@
 # Compiler-owned delivery; no JavaScript post-minifier or export rewriting.
 [policy]
 version = 3
-
-[policy.tactics]
-# Permit one-time constant-table decoding for smaller downloads.
-# Runtime reads must not acquire recurring reconstruction work.
-startup-reconstruction = "on"
-recurring-reconstruction = "off"
-string-array-packing = "off"
-
 [javascript]
 # Plain-data reads must not run getters; disable for effectful accessor integrations.
 assume_pure_property_reads = true
@@ -25,7 +17,7 @@ level = 13
 
 # Optimize the delivered files for this codec, independently of raw/gzip objectives.
 [objective]
-codecs = "brotli"
+codecs = "gzip"
 [mangle]
 identifiers = true
 properties = true
@@ -36,15 +28,17 @@ pool_strings = true
 development = false
 BROWSER = false
 
+
 [delivery]
 mode = "single"
-directory = "."
-entry_names = "react-markdown.esm.js"
+host_modules = "embed"
+entry_names = "index.mjs"
 [delivery.entries]
-index = "src/index.lil"
+index = "/home/azureuser/react-markdownlil/src/index.lil"
+[execution]
+jobs = 1
 
-[[delivery.also]]
-name = "cjs"
-format = "cjs"
-es_module_marker = "always"
-entry_names = "react-markdown.cjs"
+[policy.tactics]
+startup-reconstruction = "on"
+recurring-reconstruction = "off"
+string-array-packing = "off"

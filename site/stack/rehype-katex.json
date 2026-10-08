@@ -1,1 +1,213 @@
-{"pin":"rehype-katex@7.0.1","package":"@itslil/rehype-katex","file":"rehype-katex","lilExport":"default","officialExport":"default","node":"v20.19.0","codec":"Node zlib gzip-9 / brotli-11","runtime":"Sizes/tests: Node v20.19.0; throughput: Node v22.21.1","warmupDiscard":3,"comparison":"Official and LilScript rows are esbuild bundles including their shared runtime dependencies. Closed is extern_fields=false.","spec":{"total":63,"pass":63,"label":"official + parity suite"},"play":{"kind":"tex-hast","sample":"x^2 + \\frac{1}{2}"},"size":[{"id":"official","name":"Official rehype-katex@7.0.1 graph","raw":898046,"gzip9":186731,"brotli11":149397,"note":"esbuild bundle of the published package plus runtime deps","diagnostic":false},{"id":"official-terser-mangle","name":"Official · Terser mangle on","raw":474237,"gzip9":139471,"brotli11":113063,"note":"Terser compress of that graph, mangle: true","baseline":true},{"id":"official-terser-nomangle","name":"Official · Terser mangle off","raw":599298,"gzip9":153279,"brotli11":124308,"note":"Terser compress of that graph, mangle: false"},{"id":"official-esbuild","name":"Official · esbuild minify","raw":498860,"gzip9":141322,"brotli11":115830,"note":"esbuild minify of that graph"},{"id":"itslil","name":"@itslil/rehype-katex · library","raw":2363,"gzip9":1067,"brotli11":936,"note":"Browser ESM graph including the shared KaTeX and HAST runtimes.","primary":true},{"id":"itslil-closed","name":"@itslil/rehype-katex · closed","raw":2364,"gzip9":1068,"brotli11":950,"note":"Same runtime graph, extern_fields false; diagnostic only"}],"throughput":[{"id":"official","name":"rehype-katex@7.0.1","documentMs":3.862375000000611},{"id":"itslil","name":"@itslil/rehype-katex","documentMs":0.10804099999950267}]}
+{
+  "file": "rehype-katex",
+  "lilExport": "default",
+  "officialExport": "default",
+  "play": {
+    "kind": "tex-hast",
+    "sample": "x^2 + \\frac{1}{2}"
+  },
+  "package": "@itslil/rehype-katex",
+  "pin": "rehype-katex@7.0.1",
+  "objectiveComparison": {
+    "schemaVersion": 4,
+    "name": "rehype-katexlil",
+    "package": "@itslil/rehype-katex",
+    "measuredAt": "2026-10-03T02:05:48.705889+03:00",
+    "compiler": {
+      "baseRevision": "f7d29bd9",
+      "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "hasLocalSourceChanges": true
+    },
+    "upstream": {
+      "package": "rehype-katex",
+      "version": "7.0.1",
+      "external": [
+        "katex",
+        "hast-util-from-html-isomorphic",
+        "hast-util-to-text",
+        "unist-util-visit-parents"
+      ],
+      "sharedExports": [
+        "default"
+      ],
+      "excludedExports": [],
+      "additionalExports": [],
+      "resolution": {
+        "platform": "neutral",
+        "conditions": [
+          "production"
+        ],
+        "mainFields": [
+          "module",
+          "main"
+        ],
+        "target": "es2020",
+        "defines": {
+          "process.env.NODE_ENV": "production"
+        }
+      }
+    },
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "machine": {
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "logicalCpus": 8,
+      "memoryGiB": 15.6,
+      "os": "Linux-7.0.0-1014-azure-x86_64-with-glibc2.39",
+      "node": "v20.19.0"
+    },
+    "objectives": [
+      {
+        "objective": "raw",
+        "metric": "raw",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/lilscript-raw.mjs",
+          "sizes": {
+            "raw": 1503,
+            "gzip9": 895,
+            "brotli11": 761
+          },
+          "sha256": "d4970cc85b87d36f9c67504bd1823dc539d9f3227a666078da437e525013ddd3",
+          "buildSeconds": 0.4647026340026059,
+          "config": "./comparison-artifacts/lilscript-raw.toml",
+          "configSha256": "e5d5ae643657bef3624a124f55c96cf9cc507ebe72fbf57fbc246228ee940ee6"
+        },
+        "original": {
+          "tool": "Oxc",
+          "version": "via Vite 8.2.1",
+          "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/original-oxc.mjs",
+          "sizes": {
+            "raw": 1246,
+            "gzip9": 700,
+            "brotli11": 613
+          },
+          "sha256": "956a5c60208c5007f948e45f0b08ea1d21a2f61d8fc5807804c3a51be6461765",
+          "buildSeconds": 0.17197762799999874
+        },
+        "ratio": 1.2062600321027288
+      },
+      {
+        "objective": "gzip",
+        "metric": "gzip9",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/lilscript-gzip.mjs",
+          "sizes": {
+            "raw": 1515,
+            "gzip9": 847,
+            "brotli11": 734
+          },
+          "sha256": "4ee5be7e65cfaaeae928af42a1985ec801a9dd638d3c3ef483e472d7d01f3aaf",
+          "buildSeconds": 0.6149077139998553,
+          "config": "./comparison-artifacts/lilscript-gzip.toml",
+          "configSha256": "477829228a8c673a76dc10d1f67853fe8d84cebfe7285fa097d071901163f4c1"
+        },
+        "original": {
+          "tool": "Oxc",
+          "version": "via Vite 8.2.1",
+          "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/original-oxc.mjs",
+          "sizes": {
+            "raw": 1246,
+            "gzip9": 700,
+            "brotli11": 613
+          },
+          "sha256": "956a5c60208c5007f948e45f0b08ea1d21a2f61d8fc5807804c3a51be6461765",
+          "buildSeconds": 0.17197762799999874
+        },
+        "ratio": 1.21
+      },
+      {
+        "objective": "brotli",
+        "metric": "brotli11",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/lilscript-brotli.mjs",
+          "sizes": {
+            "raw": 1517,
+            "gzip9": 850,
+            "brotli11": 729
+          },
+          "sha256": "1c4573d24c3a4b89e5247ab98b2a9e8e362b6215288c4d486450b3db17d03a8e",
+          "buildSeconds": 1.867154522002238,
+          "config": "./comparison-artifacts/lilscript-brotli.toml",
+          "configSha256": "e95707e207d00ac39dfc7573cf3f4f8c37aa400bcd20044829de81f4fc136221"
+        },
+        "original": {
+          "tool": "Oxc",
+          "version": "via Vite 8.2.1",
+          "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/original-oxc.mjs",
+          "sizes": {
+            "raw": 1246,
+            "gzip9": 700,
+            "brotli11": 613
+          },
+          "sha256": "956a5c60208c5007f948e45f0b08ea1d21a2f61d8fc5807804c3a51be6461765",
+          "buildSeconds": 0.17197762799999874
+        },
+        "ratio": 1.1892332789559543
+      }
+    ],
+    "minifiers": [
+      {
+        "tool": "Terser",
+        "version": "5.51.2",
+        "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/original-terser.mjs",
+        "sizes": {
+          "raw": 1264,
+          "gzip9": 707,
+          "brotli11": 625
+        },
+        "sha256": "c7e8791a88e1257b16f49f82d0a77838bfb78476996dba86363a47a18bae207b",
+        "buildSeconds": 0.14039886800000023
+      },
+      {
+        "tool": "esbuild",
+        "version": "0.28.1",
+        "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/original-esbuild.mjs",
+        "sizes": {
+          "raw": 1265,
+          "gzip9": 713,
+          "brotli11": 637
+        },
+        "sha256": "32c36c0737b762b01e53588f8fd7de9ccc8a8c14cd637bc5102bf496f92f7783",
+        "buildSeconds": 0.055585471999998845
+      },
+      {
+        "tool": "Oxc",
+        "version": "via Vite 8.2.1",
+        "artifact": "https://yeargun.github.io/rehype-katexlil/comparison-artifacts/original-oxc.mjs",
+        "sizes": {
+          "raw": 1246,
+          "gzip9": 700,
+          "brotli11": 613
+        },
+        "sha256": "956a5c60208c5007f948e45f0b08ea1d21a2f61d8fc5807804c3a51be6461765",
+        "buildSeconds": 0.17197762799999874
+      }
+    ],
+    "validation": {
+      "checks": 33,
+      "objectives": [
+        {
+          "objective": "raw",
+          "checks": 11,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "gzip",
+          "checks": 11,
+          "suite": "upstream-derived/API"
+        },
+        {
+          "objective": "brotli",
+          "checks": 11,
+          "suite": "upstream-derived/API"
+        }
+      ],
+      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+    },
+    "linksBase": "https://yeargun.github.io/rehype-katexlil/"
+  },
+  "spec": {
+    "pass": 33,
+    "total": 33,
+    "label": "current main-entry checks"
+  }
+}

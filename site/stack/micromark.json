@@ -1,1 +1,222 @@
-{"pin":"micromark@4.0.2","package":"@itslil/micromark","file":"micromark","lilExport":"micromark","officialExport":"micromark","node":"v24.11.1","codec":"lilscript-codec gzip-9 / brotli-11","runtime":"Node v24.11.1","warmupDiscard":3,"comparison":"Two official graphs are measured. The Node graph is an esbuild bundle of micromark@4.0.2 and its runtime dependencies as Node resolves them, then Terser or esbuild; it decodes named character references from the character-entities table, as @itslil/micromark does, and its Terser file is the bar. The browser graph is the same package as browsers resolve it: it decodes named references through the DOM and ships no entity table, so it is smaller than any file that carries the table. LilScript rows are the files the compiler wrote: the npm ESM is the compiler's output plus a license banner, and no minifier runs after the compiler. Closed is the same source under lilscript.closed.toml.","spec":{"total":1963,"pass":1963,"label":"runtime checks","official":{"total":1927,"pass":1927}},"play":{"kind":"md-html","sample":"# Lab\n\nA [link](https://example.com \"t\") with **bold**, *em*, and `code`.\n\n- [x] tasks\n- item\n\n| a | b |\n| --- | --- |\n| 1 | 2 |\n\n```js\nconsole.log(1)\n```\n\n> quote\n\nhttps://yeargun.github.io/\n","samples":[{"label":"GFM","value":"# Lab\n\nA [link](https://example.com \"t\") with **bold**, *em*, and `code`.\n\n- [x] tasks\n- item\n\n| a | b |\n| --- | --- |\n| 1 | 2 |\n\n```js\nconsole.log(1)\n```\n\n> quote\n\nhttps://yeargun.github.io/\n"},{"label":"code","value":"Paragraph with `code` and **bold**.\n\n```js\nconsole.log(1)\n```\n"}]},"size":[{"id":"official","name":"Official micromark@4.0.2 graph · Node","raw":177687,"gzip9":36130,"brotli11":30386,"note":"esbuild bundle of the published package plus its runtime dependencies as Node resolves them: named character references decode through the character-entities table, as they do in @itslil/micromark","diagnostic":false},{"id":"official-terser-mangle","name":"Official · Node graph · Terser mangle on","raw":81191,"gzip9":26278,"brotli11":22696,"note":"Terser compress of the Node graph, mangle: true. The like-for-like bar: both files carry the entity table","baseline":true},{"id":"official-terser-nomangle","name":"Official · Node graph · Terser mangle off","raw":115509,"gzip9":29677,"brotli11":25709,"note":"Terser compress of the Node graph, mangle: false"},{"id":"official-esbuild","name":"Official · Node graph · esbuild minify","raw":89438,"gzip9":27365,"brotli11":23718,"note":"esbuild minify of the Node graph"},{"id":"official-browser-terser","name":"Official · browser graph · Terser mangle on","raw":52581,"gzip9":14469,"brotli11":12945,"note":"The graph as browsers resolve it, built from the pinned Git source (micromark 3fae155): decode-named-character-reference/index.dom.js decodes named references through the DOM, so no entity table ships. esbuild bundle, then Terser 5.51.2 (3 passes, mangle). Recorded 2026-09-10; site/esm-comparison/original.js, re-measured with this codec","artifactSha256":"1c7541fdc1ebeab8d25a3c0ae3d39904c1db8ca1d7c4d94293c88ba257d96d23","browserBar":true},{"id":"official-browser-esbuild","name":"Official · browser graph · esbuild minify","raw":53815,"gzip9":15495,"brotli11":13851,"note":"esbuild minify of the same browser graph (recorded 2026-09-10)","artifactSha256":"4c8ec11ab0f2c7f48bc22d73a98f9a72c6de954b993e7591547d4f65d82a7dd2"},{"id":"itslil","name":"@itslil/micromark · library","raw":71138,"gzip9":26054,"brotli11":22066,"note":"The npm ESM: the compiler's own output for src/index.lil with lilscript.toml, plus a license banner. No minifier runs after the compiler.","primary":true},{"id":"itslil-closed","name":"@itslil/micromark · closed","raw":73603,"gzip9":26155,"brotli11":22094,"note":"Same source, compiled with lilscript.closed.toml (dist/micromark.closed.js)"}],"throughput":[{"id":"official","name":"micromark@4.0.2","documentMs":37.61},{"id":"itslil","name":"@itslil/micromark","documentMs":38.13}],"previousRelease":{"label":"previous release","commit":"900d8b0","date":"2026-09-02","compiler":"the old compiler route (deleted 2026-09-24)","measuredWith":"the same lilscript-codec, on the dist files committed at 900d8b0 (unchanged through 2d673ff)","note":"The npm ESM was an esbuild re-bundle of the old compiler's output, and the CommonJS and browser files were esbuild reprints of it. The page of 2026-09-10 showed 25,864 B for a comparison build (compiler 4dc4e33) that never shipped in dist.","files":{"dist/micromark.esm.js":{"raw":87117,"gzip9":30563,"brotli11":26097},"dist/micromark.cjs":{"raw":87867,"gzip9":30821,"brotli11":26392},"dist/micromark.umd.js":{"raw":87956,"gzip9":30875,"brotli11":26422},"dist/micromark.closed.js":{"raw":93773,"gzip9":32682,"brotli11":27720},"dist/micromark.stream.js":{"raw":85723,"gzip9":30170,"brotli11":25715},"dist/micromark.stream.cjs":{"raw":92163,"gzip9":31398,"brotli11":26661}}},"delivered":[{"path":"dist/micromark.esm.js","condition":"import","writtenBy":"compiler","wrapper":"license banner","raw":71138,"gzip9":26054,"brotli11":22066},{"path":"dist/micromark.cjs","condition":"require","writtenBy":"compiler","wrapper":"license banner, CommonJS export object","raw":71160,"gzip9":26069,"brotli11":22034},{"path":"dist/micromark.umd.js","condition":"browser script (unpkg, jsdelivr)","writtenBy":"compiler","wrapper":"license banner, function scope, global `micromark`","raw":71143,"gzip9":26056,"brotli11":22077},{"path":"dist/micromark.closed.js","condition":"./closed","writtenBy":"compiler","wrapper":"none","raw":73603,"gzip9":26155,"brotli11":22094},{"path":"dist/micromark.stream.js","condition":"./stream import","writtenBy":"compiler","wrapper":"license banner, node:events import","raw":71885,"gzip9":26345,"brotli11":22321},{"path":"dist/micromark.stream.cjs","condition":"./stream require","writtenBy":"compiler","wrapper":"license banner, node:events require, CommonJS export object","raw":71908,"gzip9":26363,"brotli11":22364}],"throughputDocument":"the CommonMark spec's 652 examples as one document (15469 characters)","compiler":{"revision":"aa2052f0","binarySha256":"13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9","codecSha256":"125776830df72bbaf9704fee3c38bb0bf29bfc6bcceb5bc8707a0507a128d7b9","compileWallMs":[606.7,623.3,623.2],"buildCompileWallMs":[1971.8,1987.9,1987.6],"invocations":[{"source":"src/index.lil","config":"lilscript.toml","output":"micromark.raw.js"},{"source":"src/index.lil","config":"lilscript.closed.toml","output":"micromark.closed.js"},{"source":"src/stream.lil","config":"lilscript.toml","output":"micromark.stream.raw.js"},{"source":"test/support.lil","config":"lilscript.toml","output":"micromark.test.js"}],"compileScope":"wall time of the compiler process for src/index.lil with lilscript.toml, the shipped ESM","buildScope":"wall time of all 4 compiler processes of one clean build","date":"2026-09-24"},"perfLead":"same work as the official graph · repeated runs on this host differ by up to ±10%, so read this as parity"}
+{
+  "file": "micromark",
+  "lilExport": "micromark",
+  "officialExport": "micromark",
+  "play": {
+    "kind": "md-html",
+    "sample": "# Lab\n\nA [link](https://example.com \"t\") with **bold**, *em*, and `code`.\n\n- [x] tasks\n- item\n\n| a | b |\n| --- | --- |\n| 1 | 2 |\n\n```js\nconsole.log(1)\n```\n\n> quote\n\nhttps://yeargun.github.io/\n",
+    "samples": [
+      {
+        "label": "GFM",
+        "value": "# Lab\n\nA [link](https://example.com \"t\") with **bold**, *em*, and `code`.\n\n- [x] tasks\n- item\n\n| a | b |\n| --- | --- |\n| 1 | 2 |\n\n```js\nconsole.log(1)\n```\n\n> quote\n\nhttps://yeargun.github.io/\n"
+      },
+      {
+        "label": "code",
+        "value": "Paragraph with `code` and **bold**.\n\n```js\nconsole.log(1)\n```\n"
+      }
+    ]
+  },
+  "package": "@itslil/micromark",
+  "pin": "micromark@4.0.2",
+  "objectiveComparison": {
+    "schemaVersion": 4,
+    "name": "micromarklil",
+    "package": "@itslil/micromark",
+    "measuredAt": "2026-10-03T02:05:48.432870+03:00",
+    "compiler": {
+      "baseRevision": "f7d29bd9",
+      "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
+      "hasLocalSourceChanges": true
+    },
+    "upstream": {
+      "package": "micromark",
+      "version": "4.0.2",
+      "external": [],
+      "sharedExports": [
+        "compile",
+        "micromark",
+        "parse",
+        "postprocess",
+        "preprocess"
+      ],
+      "excludedExports": [],
+      "additionalExports": [],
+      "resolution": {
+        "platform": "neutral",
+        "conditions": [
+          "production"
+        ],
+        "mainFields": [
+          "module",
+          "main"
+        ],
+        "target": "es2020",
+        "defines": {
+          "process.env.NODE_ENV": "production"
+        }
+      }
+    },
+    "scope": "Portable main-entry ESM with matching shared named exports and external imports. The original uses production/default package conditions, keeping data-based entity decoding rather than relying on the DOM.",
+    "machine": {
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "logicalCpus": 8,
+      "memoryGiB": 15.6,
+      "os": "Linux-7.0.0-1014-azure-x86_64-with-glibc2.39",
+      "node": "v20.19.0"
+    },
+    "objectives": [
+      {
+        "objective": "raw",
+        "metric": "raw",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/lilscript-raw.mjs",
+          "sizes": {
+            "raw": 63806,
+            "gzip9": 25949,
+            "brotli11": 22043
+          },
+          "sha256": "0841fe43cd374a23219b71fab0adb3514f18204399573cba3948a02231a3dd8f",
+          "buildSeconds": 14.191141559000243,
+          "config": "./comparison-artifacts/lilscript-raw.toml",
+          "configSha256": "dadd062bb55040582a6f09184238bbcfa89412fe24a25679956aaee91e5dfa54"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 81191,
+            "gzip9": 26278,
+            "brotli11": 22696
+          },
+          "sha256": "4ca5e777f4bd6cd2418940c0315da7f8a57bc0ff097ebc18f695e08fbcd33935",
+          "buildSeconds": 1.0063230939999999
+        },
+        "ratio": 0.7858752817430503
+      },
+      {
+        "objective": "gzip",
+        "metric": "gzip9",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/lilscript-gzip.mjs",
+          "sizes": {
+            "raw": 65567,
+            "gzip9": 25706,
+            "brotli11": 21809
+          },
+          "sha256": "837dffe430346930087733e77a6d9ec3eb66c3121d145efdfa3f3dc4707dc439",
+          "buildSeconds": 10.784984976002306,
+          "config": "./comparison-artifacts/lilscript-gzip.toml",
+          "configSha256": "67de588cf8aebfbfcb3704c20212827abf1d1b985f8e692568c0f6a35612f271"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 81191,
+            "gzip9": 26278,
+            "brotli11": 22696
+          },
+          "sha256": "4ca5e777f4bd6cd2418940c0315da7f8a57bc0ff097ebc18f695e08fbcd33935",
+          "buildSeconds": 1.0063230939999999
+        },
+        "ratio": 0.9782327422178247
+      },
+      {
+        "objective": "brotli",
+        "metric": "brotli11",
+        "lilscript": {
+          "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/lilscript-brotli.mjs",
+          "sizes": {
+            "raw": 65693,
+            "gzip9": 25788,
+            "brotli11": 21866
+          },
+          "sha256": "36cf34eddb7e45b0521d736ff4630c895d0221a9fdfc7ced99132fe24511ccbc",
+          "buildSeconds": 32.97800814799848,
+          "config": "./comparison-artifacts/lilscript-brotli.toml",
+          "configSha256": "946f28179789bdc6617eefe5a94aafb9296d1ce4b1dafe6d66496c4fc6c28d08"
+        },
+        "original": {
+          "tool": "Terser",
+          "version": "5.51.2",
+          "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-terser.mjs",
+          "sizes": {
+            "raw": 81191,
+            "gzip9": 26278,
+            "brotli11": 22696
+          },
+          "sha256": "4ca5e777f4bd6cd2418940c0315da7f8a57bc0ff097ebc18f695e08fbcd33935",
+          "buildSeconds": 1.0063230939999999
+        },
+        "ratio": 0.9634296792386323
+      }
+    ],
+    "minifiers": [
+      {
+        "tool": "Terser",
+        "version": "5.51.2",
+        "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-terser.mjs",
+        "sizes": {
+          "raw": 81191,
+          "gzip9": 26278,
+          "brotli11": 22696
+        },
+        "sha256": "4ca5e777f4bd6cd2418940c0315da7f8a57bc0ff097ebc18f695e08fbcd33935",
+        "buildSeconds": 1.0063230939999999
+      },
+      {
+        "tool": "esbuild",
+        "version": "0.28.1",
+        "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-esbuild.mjs",
+        "sizes": {
+          "raw": 89438,
+          "gzip9": 27365,
+          "brotli11": 23718
+        },
+        "sha256": "9a82a91c57b53cff9b9fd3bec7830ce65752891bc66391e22460207a7c34af32",
+        "buildSeconds": 0.08146525400000018
+      },
+      {
+        "tool": "Oxc",
+        "version": "via Vite 8.2.1",
+        "artifact": "https://yeargun.github.io/micromarklil/comparison-artifacts/original-oxc.mjs",
+        "sizes": {
+          "raw": 81293,
+          "gzip9": 26529,
+          "brotli11": 22920
+        },
+        "sha256": "31147b2b723a1a51a85273a8d21e8447049a05124a8ddabc15c48aa55673a39e",
+        "buildSeconds": 0.1959722179999999
+      }
+    ],
+    "validation": {
+      "checks": 2082,
+      "objectives": [
+        {
+          "objective": "raw",
+          "checks": 694,
+          "suite": "differential"
+        },
+        {
+          "objective": "gzip",
+          "checks": 694,
+          "suite": "differential"
+        },
+        {
+          "objective": "brotli",
+          "checks": 694,
+          "suite": "differential"
+        }
+      ],
+      "scope": "Main ESM entry; selected corpora and API checks, not all package formats or complete upstream equivalence."
+    },
+    "linksBase": "https://yeargun.github.io/micromarklil/"
+  },
+  "spec": {
+    "pass": 2082,
+    "total": 2082,
+    "label": "current main-entry checks"
+  }
+}
